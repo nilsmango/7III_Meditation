@@ -8,17 +8,16 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var meditationManager: MeditationManager
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            TimerView(meditationManager: meditationManager)
         }
         .padding()
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(meditationManager: MeditationManager())
 }

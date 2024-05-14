@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct MeditationApp: App {
+    @StateObject private var meditationManager = MeditationManager()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(meditationManager: meditationManager)
         }
     }
 }
