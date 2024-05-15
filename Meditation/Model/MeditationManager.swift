@@ -65,10 +65,9 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
         meditationTimer.timerStatus = .preparing
         
         // already set timeLeft to the time to get it smooth in the view
-        meditationTimer.timeLeft = dateToDateFormatted(from: meditationTimer.startDate, to: meditationTimer.targetDate)
+        meditationTimer.timeLeft = dateToDateFormatted(from: meditationTimer.startDate.addingTimeInterval(1), to: meditationTimer.targetDate)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + Double(meditationTimer.preparationTime)) {
-            self.meditationTimer.timerStatus = .running
                 
             // Start timer and update timeLeft and everything.
             self.timer = Timer.scheduledTimer(withTimeInterval: 1.0 , repeats: true, block: { timer in
