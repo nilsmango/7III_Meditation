@@ -9,6 +9,7 @@ import Foundation
 
 /// the meditation timer
 struct MeditationTimer: Codable {
+    var startDate: Date
     var targetDate: Date
     var timerInMinutes: Int
     var timerStatus: TimerStatus
@@ -21,6 +22,8 @@ struct MeditationTimer: Codable {
     var intervalTime: Int
     var timerSound: TimerSound
     var intervalSound: TimerSound
+    
+    var timeLeft: String
 }
 
 enum TimerStatus: String, CaseIterable, Identifiable, Codable {

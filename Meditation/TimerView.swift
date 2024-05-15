@@ -13,10 +13,6 @@ struct TimerView: View {
     // Notifications
     private let notificationCenter = UNUserNotificationCenter.current()
     
-    // View Timer
-    @State private var currentDate = Date()
-    
-    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
         VStack {
@@ -25,39 +21,27 @@ struct TimerView: View {
             switch meditationManager.meditationTimer.timerStatus {
             case .running:
                 Text("Running")
-                Text(dateToDateFormatted(from: currentDate, to: meditationManager.meditationTimer.targetDate))
+                Text(meditationManager.meditationTimer.timeLeft)
                     .monospacedDigit()
-                    .onReceive(timer) { input in
-                        currentDate = input
-                        if currentDate >= meditationManager.meditationTimer.targetDate {
-                            // TODO: make alarm
-                            meditationManager.meditationTimer.timerStatus = .alarm
-//                            fileManager.alarm(for: dirTimer)
-//                            withAnimation(.linear(duration: 4)) {
-//                                numberOfShakes = 33
-//                            }
-//                            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-//                                numberOfShakes = 0
-//                            }
-                        }
-                    }
+                    
                 
                 HStack {
                     Button(action: {
-                        // TODO: stop the timer, stop the notification, make the new timerInMinutes to be the new time, have a resume button instead of pause,
-                        meditationManager.meditationTimer.timerStatus = .paused
+                        withAnimation {
+                            meditationManager.pauseMeditation()
+                        }
                     }, label: {
                         Label("Pause", systemImage: "pause")
                     })
                     .buttonStyle(.bordered)
                     
-                    Button(action: {
-                        // TODO: stop the notification
+                    Button(role: .destructive, action: {
+                        
                         withAnimation {
-                            meditationManager.meditationTimer.timerStatus = .stopped
+                            meditationManager.stopMeditation()
                         }
                     }, label: {
-                        Label("Stop", systemImage: "stop")
+                        Label("Stop", systemImage: "xmark")
                     })
                     .buttonStyle(.bordered)
                 }
@@ -74,7 +58,7 @@ struct TimerView: View {
                         }
                     }
                     .onAppear {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                             withAnimation {
                                 meditationManager.meditationTimer.timerStatus = .stopped
                             }
@@ -95,9 +79,8 @@ struct TimerView: View {
                 Button(action: {
                     
                     withAnimation {
-                        meditationManager.startTimer()
+                        meditationManager.startMeditation()
                     }
-                    
                     
                 }, label: {
                     Label("Begin Meditation", systemImage: "infinity")
@@ -105,18 +88,34 @@ struct TimerView: View {
                 .buttonStyle(.bordered)
                 
             case .paused:
-                Text("paused")
+                Text("Running")
+                Text(meditationManager.meditationTimer.timeLeft)
+                    .monospacedDigit()
+                
+                HStack {
+                    Button(action: {
+                        withAnimation {
+                            meditationManager.startMeditation()
+                        }
+                    }, label: {
+                        Label("Resume", systemImage: "arrow.clockwise")
+                    })
+                    .buttonStyle(.bordered)
+                    
+                    Button(role: .destructive, action: {
+                        
+                        withAnimation {
+                            // reseting the timer
+                            meditationManager.meditationTimer.timerStatus = .alarm
+                        }
+                    }, label: {
+                        Label("Stop", systemImage: "xmark")
+                    })
+                    .buttonStyle(.bordered)
+                }
             case .preparing:
                 Text(meditationManager.koanFunc())
                     .padding()
-                    .onAppear {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + Double(meditationManager.meditationTimer.preparationTime)) {
-                            currentDate = .now
-                            withAnimation {
-                                meditationManager.meditationTimer.timerStatus = .running
-                            }
-                        }
-                    }
             }
             
             Spacer(minLength: 0)

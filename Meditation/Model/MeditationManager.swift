@@ -24,7 +24,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
             if let loadedData = try? JSONDecoder().decode(MeditationTimer.self, from: meditationTimerData) {
                 return loadedData
             } else {
-                return MeditationTimer(targetDate: Date.distantFuture, timerInMinutes: 12, timerStatus: .stopped, preparationTime: 3, intervalActive: false, intervalTime: 60, timerSound: .kitchenTimer, intervalSound: .kitchenTimer)
+                return MeditationTimer(startDate: Date.distantPast, targetDate: Date.distantPast, timerInMinutes: 12, timerStatus: .stopped, preparationTime: 3, intervalActive: false, intervalTime: 60, timerSound: .kitchenTimer, intervalSound: .kitchenTimer, timeLeft: "12:00")
             }
         }
         set {
@@ -33,9 +33,14 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
             }
         }
     }
-        
+    
+    let timerNotificationIdentifier = "Meditation Timer Notification"
+    
+    var timer = Timer()
+    
     /// starting the meditation timer
-    func startTimer() {
+    func startMeditation() {
+        meditationTimer.startDate = Date.now.addingTimeInterval(Double(meditationTimer.preparationTime))
         meditationTimer.targetDate = Date.now.addingTimeInterval(Double(meditationTimer.preparationTime + meditationTimer.timerInMinutes * 60))
         
         // add a notification for the timer
@@ -43,13 +48,13 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
         content.title = "Welcome Back!"
         content.body = "Your meditation is now complete."
         
-        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "Kitchen Timer Normal.caf"))
+        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: meditationTimer.intervalSound.rawNotificationSound))
         
         let targetDate = meditationTimer.targetDate
         let triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: targetDate)
         let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
         
-        let request = UNNotificationRequest(identifier: "Meditation Timer Notification", content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: timerNotificationIdentifier, content: content, trigger: trigger)
         
         notificationCenter.add(request) { error in
             if let error = error {
@@ -58,6 +63,66 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
         }
         
         meditationTimer.timerStatus = .preparing
+        
+        // already set timeLeft to the time to get it smooth in the view
+        meditationTimer.timeLeft = dateToDateFormatted(from: meditationTimer.startDate, to: meditationTimer.targetDate)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + Double(meditationTimer.preparationTime)) {
+            self.meditationTimer.timerStatus = .running
+                
+            // Start timer and update timeLeft and everything.
+            self.timer = Timer.scheduledTimer(withTimeInterval: 1.0 , repeats: true, block: { timer in
+                let currentDate = Date.now
+                
+                if currentDate >= self.meditationTimer.targetDate {
+                    self.endMeditation()
+                    
+                } else {
+                    // update timeLeft string
+                    self.meditationTimer.timeLeft = dateToDateFormatted(from: currentDate, to: self.meditationTimer.targetDate)
+                }
+            })
+            }
+    }
+    
+    func stopMeditation() {
+        timer.invalidate()
+        
+        meditationTimer.timerStatus = .alarm
+        
+        
+        // stop  notification
+        notificationCenter.removePendingNotificationRequests(withIdentifiers: [timerNotificationIdentifier])
+        
+        meditationTimer.targetDate = Date()
+        // TODO: save meditation session
+    }
+    
+    func pauseMeditation() {
+        
+        timer.invalidate()
+        
+        meditationTimer.timerStatus = .paused
+        
+        // stop  notification
+        notificationCenter.removePendingNotificationRequests(withIdentifiers: [timerNotificationIdentifier])
+        
+        let currentDate = Date()
+        
+        // update the minutes to meditate (rounded up)
+        let minutesLeftToMeditate = Int(ceil(meditationTimer.targetDate.timeIntervalSince(currentDate) / 60))
+        meditationTimer.timerInMinutes = minutesLeftToMeditate
+        
+        meditationTimer.targetDate = currentDate
+        // TODO: save meditation session
+    }
+    
+    func endMeditation() {
+        
+        timer.invalidate()
+        meditationTimer.timerStatus = .alarm
+        
+        // TODO: save meditation session!
     }
     
     /// returns a random koan
@@ -75,6 +140,8 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
         // Play a sound
         completionHandler([.sound])
     }
+    
+
     
     // Handle notification when the user taps on it
 //    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
@@ -118,7 +185,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
                     NSLog(" Display not allowed")
                 }
                 if success == true {
-                    print("dont worry everything is good\(success)")
+                    print("don't worry everything is good\(success)")
                     NSLog(" Integrated SuccessFully")
                 }
             }
@@ -132,7 +199,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
             if let mindfulType = HKObjectType.categoryType(forIdentifier: .mindfulSession) {
                 
                 // we create our new object we want to push in Health app
-                let mindfulSample = HKCategorySample(type:mindfulType, value: 0, start: meditationTimer.targetDate.addingTimeInterval(-Double(meditationTimer.timerInMinutes * 60)), end: meditationTimer.targetDate)
+                let mindfulSample = HKCategorySample(type:mindfulType, value: 0, start: meditationTimer.startDate, end: meditationTimer.targetDate)
                 
                 // at the end, we save it
                 healthStore.save(mindfulSample, withCompletion: { (success, error) -> Void in
