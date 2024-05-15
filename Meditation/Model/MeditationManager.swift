@@ -33,14 +33,10 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
             }
         }
     }
-    
-    
-    // Preparation time in seconds
-    @AppStorage("preparationTime") var preparationTime = 3
         
     /// starting the meditation timer
     func startTimer() {
-        meditationTimer.targetDate = Date.now.addingTimeInterval(Double(preparationTime + meditationTimer.timerInMinutes * 60))
+        meditationTimer.targetDate = Date.now.addingTimeInterval(Double(meditationTimer.preparationTime + meditationTimer.timerInMinutes * 60))
         
         // add a notification for the timer
         let content = UNMutableNotificationContent()
@@ -60,13 +56,13 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
                 print("Error: \(error)")
             }
         }
-//        withAnimation {
-            meditationTimer.timerStatus = .preparing
-//        }
+        
+        meditationTimer.timerStatus = .preparing
     }
     
+    /// returns a random koan
     func koanFunc() -> String {
-        let koanArray: [String] = ["Love is the way.", "Have a great flight.", "What is the sound of one hand clapping?", "May all beings be happy and free from suffering.", "You miss 100% of the shots you don’t take. – Wayne Gretzky — Michael Scott", "Let it be.", "Don't panic.", "Be here now.", "Know your self.", "If you meet the Buddha, kill him."]
+        let koanArray: [String] = ["Love is the way.", "Have a great flight.", "What is the sound of one hand clapping?", "May all beings be happy and free from suffering.", "You miss 100% of the shots you don’t take.\n– Wayne Gretzky\n- Michael Scott", "Let it be.", "Don't panic.", "Be here now.", "Know your self.", "If you meet the Buddha, kill him."]
         return koanArray.randomElement() ?? "If you meet the Buddha, kill him."
     }
     
@@ -76,8 +72,8 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
     
     // This method will be called when the app is in the foreground
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        // Show an banner and play a sound
-        completionHandler([.banner, .sound])
+        // Play a sound
+        completionHandler([.sound])
     }
     
     // Handle notification when the user taps on it

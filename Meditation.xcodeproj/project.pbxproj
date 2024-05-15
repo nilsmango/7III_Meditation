@@ -16,6 +16,7 @@
 		78385D212BF3DFEE00581057 /* MeditationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78385D202BF3DFEE00581057 /* MeditationManager.swift */; };
 		78385D232BF3E11B00581057 /* MeditationSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78385D222BF3E11B00581057 /* MeditationSession.swift */; };
 		7879BDF02BF4A43E001994D2 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7879BDEF2BF4A43E001994D2 /* Helpers.swift */; };
+		7879BDF12BF4BDE4001994D2 /* Kitchen Timer Normal.caf in Resources */ = {isa = PBXBuildFile; fileRef = 78385D242BF3E4F100581057 /* Kitchen Timer Normal.caf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -160,6 +161,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7879BDF12BF4BDE4001994D2 /* Kitchen Timer Normal.caf in Resources */,
 				78385D132BF3647500581057 /* Preview Assets.xcassets in Resources */,
 				78385D0F2BF3647500581057 /* Assets.xcassets in Resources */,
 			);

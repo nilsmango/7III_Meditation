@@ -20,7 +20,7 @@ struct TimerView: View {
     
     var body: some View {
         VStack {
-            Spacer()
+            Spacer(minLength: 0)
             
             switch meditationManager.meditationTimer.timerStatus {
             case .running:
@@ -63,7 +63,16 @@ struct TimerView: View {
                 }
                 
             case .alarm:
-                Text("Welcome Back!")
+                VStack {
+                    Spacer()
+                    Text("Welcome Back!")
+                    Spacer()
+                }
+                    .onTapGesture {
+                        withAnimation {
+                            meditationManager.meditationTimer.timerStatus = .stopped
+                        }
+                    }
                     .onAppear {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
                             withAnimation {
@@ -71,6 +80,7 @@ struct TimerView: View {
                             }
                         }
                     }
+                
             case .stopped:
                 
                 Picker("Time", selection: $meditationManager.meditationTimer.timerInMinutes) {
@@ -100,7 +110,7 @@ struct TimerView: View {
                 Text(meditationManager.koanFunc())
                     .padding()
                     .onAppear {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + Double(meditationManager.preparationTime)) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + Double(meditationManager.meditationTimer.preparationTime)) {
                             currentDate = .now
                             withAnimation {
                                 meditationManager.meditationTimer.timerStatus = .running
@@ -109,7 +119,7 @@ struct TimerView: View {
                     }
             }
             
-            Spacer()
+            Spacer(minLength: 0)
         }
         .onAppear {
             notificationCenter.requestAuthorization(options: [.alert, .sound]) { success, error in
