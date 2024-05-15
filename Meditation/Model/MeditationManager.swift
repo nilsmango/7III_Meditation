@@ -17,18 +17,30 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
     
     // MARK: Timer
     
-    @Published var meditationTimer = MeditationTimer(targetDate: Date.distantFuture, timerInMinutes: 10.0, running: .stopped)
+    @AppStorage("meditationTimer") private var meditationTimerData: Data = Data()
     
-    // Timer time in minutes
-    @AppStorage("selectedMinutes") var selectedMinutes = 60
+    var meditationTimer: MeditationTimer {
+        get {
+            if let loadedData = try? JSONDecoder().decode(MeditationTimer.self, from: meditationTimerData) {
+                return loadedData
+            } else {
+                return MeditationTimer(targetDate: Date.distantFuture, timerInMinutes: 12, timerStatus: .stopped, preparationTime: 3, intervalActive: false, intervalTime: 60, timerSound: .kitchenTimer, intervalSound: .kitchenTimer)
+            }
+        }
+        set {
+            if let encoded = try? JSONEncoder().encode(newValue) {
+                meditationTimerData = encoded
+            }
+        }
+    }
+    
     
     // Preparation time in seconds
     @AppStorage("preparationTime") var preparationTime = 3
-    
+        
     /// starting the meditation timer
     func startTimer() {
-        meditationTimer.timerInMinutes = Double(selectedMinutes)
-        meditationTimer.targetDate = Date.now.addingTimeInterval(Double(preparationTime + selectedMinutes * 60))
+        meditationTimer.targetDate = Date.now.addingTimeInterval(Double(preparationTime + meditationTimer.timerInMinutes * 60))
         
         // add a notification for the timer
         let content = UNMutableNotificationContent()
@@ -49,11 +61,17 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
             }
         }
 //        withAnimation {
-            meditationTimer.running = .preparing
+            meditationTimer.timerStatus = .preparing
 //        }
     }
     
+    func koanFunc() -> String {
+        let koanArray: [String] = ["Love is the way.", "Have a great flight.", "What is the sound of one hand clapping?", "May all beings be happy and free from suffering.", "You miss 100% of the shots you don’t take. – Wayne Gretzky — Michael Scott", "Let it be.", "Don't panic.", "Be here now.", "Know your self.", "If you meet the Buddha, kill him."]
+        return koanArray.randomElement() ?? "If you meet the Buddha, kill him."
+    }
+    
     // MARK: Notifications
+    
     private let notificationCenter = UNUserNotificationCenter.current()
     
     // This method will be called when the app is in the foreground

@@ -10,11 +10,38 @@ import Foundation
 /// the meditation timer
 struct MeditationTimer: Codable {
     var targetDate: Date
-    var timerInMinutes: Double
-    var running: TimerStatus
+    var timerInMinutes: Int
+    var timerStatus: TimerStatus
+    /// preparation time in seconds
+    var preparationTime: Int
+    
+    
+    var intervalActive: Bool
+    /// interval time in seconds
+    var intervalTime: Int
+    var timerSound: TimerSound
+    var intervalSound: TimerSound
 }
 
 enum TimerStatus: String, CaseIterable, Identifiable, Codable {
     case running, alarm, stopped, paused, preparing
     var id: Self { self }
+}
+
+enum TimerSound: String, Codable {
+    case kitchenTimer
+
+    var prettyString: String {
+        switch self {
+        case .kitchenTimer:
+            return "Kitchen Timer"
+        }
+    }
+
+    var rawNotificationSound: String {
+        switch self {
+        case .kitchenTimer:
+            return "Kitchen Timer Normal.caf"
+        }
+    }
 }

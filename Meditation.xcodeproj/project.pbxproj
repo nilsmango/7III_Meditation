@@ -15,6 +15,7 @@
 		78385D1F2BF3674800581057 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78385D1E2BF3674800581057 /* TimerView.swift */; };
 		78385D212BF3DFEE00581057 /* MeditationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78385D202BF3DFEE00581057 /* MeditationManager.swift */; };
 		78385D232BF3E11B00581057 /* MeditationSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78385D222BF3E11B00581057 /* MeditationSession.swift */; };
+		7879BDF02BF4A43E001994D2 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7879BDEF2BF4A43E001994D2 /* Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		78385D202BF3DFEE00581057 /* MeditationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationManager.swift; sourceTree = "<group>"; };
 		78385D222BF3E11B00581057 /* MeditationSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationSession.swift; sourceTree = "<group>"; };
 		78385D242BF3E4F100581057 /* Kitchen Timer Normal.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kitchen Timer Normal.caf"; sourceTree = "<group>"; };
+		7879BDEF2BF4A43E001994D2 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 				78385D202BF3DFEE00581057 /* MeditationManager.swift */,
 				78385D192BF366A000581057 /* MeditationTimer.swift */,
 				78385D222BF3E11B00581057 /* MeditationSession.swift */,
+				7879BDEF2BF4A43E001994D2 /* Helpers.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -127,7 +130,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1530;
-				LastUpgradeCheck = 1530;
+				LastUpgradeCheck = 1540;
 				TargetAttributes = {
 					78385D062BF3647300581057 = {
 						CreatedOnToolsVersion = 15.3;
@@ -170,6 +173,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				78385D1A2BF366A000581057 /* MeditationTimer.swift in Sources */,
+				7879BDF02BF4A43E001994D2 /* Helpers.swift in Sources */,
 				78385D0D2BF3647300581057 /* ContentView.swift in Sources */,
 				78385D212BF3DFEE00581057 /* MeditationManager.swift in Sources */,
 				78385D1F2BF3674800581057 /* TimerView.swift in Sources */,
@@ -215,6 +219,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -276,6 +281,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -303,6 +309,7 @@
 				CODE_SIGN_ENTITLEMENTS = Meditation/Meditation.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Meditation/Preview Content\"";
 				DEVELOPMENT_TEAM = A9H57996U3;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -342,6 +349,7 @@
 				CODE_SIGN_ENTITLEMENTS = Meditation/Meditation.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Meditation/Preview Content\"";
 				DEVELOPMENT_TEAM = A9H57996U3;
 				ENABLE_HARDENED_RUNTIME = YES;
