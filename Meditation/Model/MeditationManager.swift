@@ -15,6 +15,36 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
     
     @Published var meditationSessions = [MeditationSession]()
     
+    let meditationSessionsPathComponent = "meditationSessions.data"
+    
+    func saveMeditationSessionsToDisk() {
+        let fileManager = FileManager.default
+        let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let fileURL = documentsURL.appendingPathComponent(meditationSessionsPathComponent)
+        
+        do {
+            let data = try JSONEncoder().encode(meditationSessions)
+            try data.write(to: fileURL)
+        } catch {
+            print("Error saving meditation sessions: \(error)")
+        }
+    }
+    
+    func loadMeditationSessionsFromDisk() {
+        let fileManager = FileManager.default
+        let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let fileURL = documentsURL.appendingPathComponent(meditationSessionsPathComponent)
+        
+        if let data = try? Data(contentsOf: fileURL) {
+            do {
+                let sessions = try JSONDecoder().decode([MeditationSession].self, from: data)
+                meditationSessions = sessions
+            } catch {
+                print("Error loading meditation sessions: \(error)")
+            }
+        }
+    }
+    
     // MARK: Timer
     
     @AppStorage("meditationTimer") private var meditationTimerData: Data = Data()
@@ -94,7 +124,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
         notificationCenter.removePendingNotificationRequests(withIdentifiers: [timerNotificationIdentifier])
         
         meditationTimer.targetDate = Date()
-        // TODO: save meditation session
+        saveMeditationSession()
     }
     
     func pauseMeditation() {
@@ -113,15 +143,14 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
         meditationTimer.timerInMinutes = minutesLeftToMeditate
         
         meditationTimer.targetDate = currentDate
-        // TODO: save meditation session
+        saveMeditationSession()
     }
     
     func endMeditation() {
         
         timer.invalidate()
         meditationTimer.timerStatus = .alarm
-        
-        // TODO: save meditation session!
+        saveMeditationSession()
     }
     
     /// returns a random koan
@@ -193,6 +222,14 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
         }
     
     func saveMeditationSession() {
+        
+        // update meditations array and save it
+        let meditationSession = MeditationSession(startDate: meditationTimer.startDate, endDate: meditationTimer.targetDate)
+        meditationSessions.append(meditationSession)
+        saveMeditationSessionsToDisk()
+        
+        // save mindful session to health
+        if HKHealthStore.isHealthDataAvailable() {
             
             // startTime and endTime are NSDate objects
             if let mindfulType = HKObjectType.categoryType(forIdentifier: .mindfulSession) {
@@ -216,8 +253,8 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
                     }
                     
                 })
-            
             }
-            
         }
+        
+    }
 }

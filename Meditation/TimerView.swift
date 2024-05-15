@@ -151,6 +151,7 @@ struct TimerView: View {
                 }
             }
             notificationCenter.delegate = meditationManager
+            meditationManager.activateHealthKit()
         }
     }
 }

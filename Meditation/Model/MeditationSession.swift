@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct MeditationSession: Identifiable {
-    let id = UUID()
+struct MeditationSession: Identifiable, Codable {
+    var id = UUID()
     let startDate: Date
     let endDate: Date
 }
