@@ -20,8 +20,6 @@ struct TimerView: View {
             
             switch meditationManager.meditationTimer.timerStatus {
             case .running:
-                Group {
-                    Text("Running")
                     
                     Text(meditationManager.meditationTimer.timeLeft)
                         .monospacedDigit()
@@ -47,11 +45,9 @@ struct TimerView: View {
                         })
                         .buttonStyle(.bordered)
                     }
-                }
-                .transition(.opacity)
+
                 
             case .alarm:
-                Group {
                     VStack {
                         Spacer()
                         Text("Welcome Back!")
@@ -69,19 +65,15 @@ struct TimerView: View {
                             }
                         }
                     }
-                    
-                }
-                .transition(.opacity)
+
             case .stopped:
                 
-                Group {
                     Picker("Time", selection: $meditationManager.meditationTimer.timerInMinutes) {
                         ForEach(1...300, id: \.self) { minutes in
                             Text("\(minutes) \(minutes == 1 ? "Minute" : "Minutes")")
-                                .foregroundColor(minutes % 60 == 0 ? .blue : .primary)
-                                .font(minutes % 60 == 0 ? .headline : .body)
                         }
                     }
+                    .font(.title)
                 
                 // .pickerStyle(WheelPickerStyle())
                 
@@ -92,14 +84,11 @@ struct TimerView: View {
                     }
                     
                 }, label: {
-                    Label("Begin Meditation", systemImage: "infinity")
+                    Text("Start")
                 })
                 .buttonStyle(.bordered)
-            }
-                .transition(.opacity)
+
             case .paused:
-                Group {
-                    Text("Running")
                     
                     Text(meditationManager.meditationTimer.timeLeft)
                         .monospacedDigit()
@@ -125,8 +114,7 @@ struct TimerView: View {
                         })
                         .buttonStyle(.bordered)
                     }
-                }
-                .transition(.opacity)
+
             case .preparing:
                 Text(meditationManager.koanFunc())
                     .padding()
@@ -137,7 +125,6 @@ struct TimerView: View {
                             }
                         }
                     }
-                    .transition(.opacity)
             }
             
             Spacer(minLength: 0)
