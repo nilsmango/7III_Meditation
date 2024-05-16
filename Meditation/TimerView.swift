@@ -21,114 +21,48 @@ struct TimerView: View {
             switch meditationManager.meditationTimer.timerStatus {
             case .running:
                     
-                    Text(meditationManager.meditationTimer.timeLeft)
-                        .monospacedDigit()
-                    
-                    
-                    HStack {
-                        Button(action: {
-                            withAnimation {
-                                meditationManager.pauseMeditation()
-                            }
-                        }, label: {
-                            Label("Pause", systemImage: "pause")
-                        })
-                        .buttonStyle(.bordered)
-                        
-                        Button(role: .destructive, action: {
-                            
-                            withAnimation {
-                                meditationManager.stopMeditation()
-                            }
-                        }, label: {
-                            Label("Stop", systemImage: "xmark")
-                        })
-                        .buttonStyle(.bordered)
-                    }
+                TimerRunningView(meditationManager: meditationManager, isRunning: true)
 
                 
             case .alarm:
                     VStack {
                         Spacer()
                         Text("Welcome Back!")
+                            .font(.title)
                         Spacer()
                     }
                     .onTapGesture {
-                        withAnimation {
                             meditationManager.meditationTimer.timerStatus = .stopped
-                        }
                     }
                     .onAppear {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                            withAnimation {
                                 meditationManager.meditationTimer.timerStatus = .stopped
-                            }
                         }
                     }
 
             case .stopped:
                 
-                    Picker("Time", selection: $meditationManager.meditationTimer.timerInMinutes) {
-                        ForEach(1...300, id: \.self) { minutes in
-                            Text("\(minutes) \(minutes == 1 ? "Minute" : "Minutes")")
-                        }
-                    }
-                    .font(.title)
-                
-                // .pickerStyle(WheelPickerStyle())
-                
-                Button(action: {
+                TimerStoppedView(meditationManager: meditationManager)
                     
-                    withAnimation {
-                        meditationManager.startMeditation()
-                    }
-                    
-                }, label: {
-                    Text("Start")
-                })
-                .buttonStyle(.bordered)
 
             case .paused:
                     
-                    Text(meditationManager.meditationTimer.timeLeft)
-                        .monospacedDigit()
-                    
-                    HStack {
-                        Button(action: {
-                            withAnimation {
-                                meditationManager.startMeditation()
-                            }
-                        }, label: {
-                            Label("Resume", systemImage: "arrow.clockwise")
-                        })
-                        .buttonStyle(.bordered)
-                        
-                        Button(role: .destructive, action: {
-                            
-                            withAnimation {
-                                // reseting the timer
-                                meditationManager.meditationTimer.timerStatus = .alarm
-                            }
-                        }, label: {
-                            Label("Stop", systemImage: "xmark")
-                        })
-                        .buttonStyle(.bordered)
-                    }
+                TimerRunningView(meditationManager: meditationManager, isRunning: false)
 
             case .preparing:
                 Text(meditationManager.koanFunc())
-                    .padding()
+                    .font(.title)
+                    .padding(32)
                     .onAppear {
                         DispatchQueue.main.asyncAfter(deadline: .now() + Double(meditationManager.meditationTimer.preparationTime)) {
-                            withAnimation {
                                 meditationManager.meditationTimer.timerStatus = .running
-                            }
                         }
                     }
             }
             
             Spacer(minLength: 0)
         }
+        .animation(.easeInOut(duration: 0.7).delay(0.3), value: meditationManager.meditationTimer.timerStatus)
         .onAppear {
             notificationCenter.requestAuthorization(options: [.alert, .sound]) { success, error in
                 if success {

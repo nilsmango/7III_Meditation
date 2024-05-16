@@ -14,7 +14,6 @@ struct ContentView: View {
         VStack {
             TimerView(meditationManager: meditationManager)
         }
-        .padding()
     }
 }
 
