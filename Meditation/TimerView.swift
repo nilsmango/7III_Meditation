@@ -25,12 +25,10 @@ struct TimerView: View {
 
                 
             case .alarm:
-                    VStack {
-                        Spacer()
+                    
                         Text("Welcome Back!")
                             .font(.title)
-                        Spacer()
-                    }
+                        
                     .onTapGesture {
                             meditationManager.meditationTimer.timerStatus = .stopped
                     }
