@@ -54,7 +54,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
             if let loadedData = try? JSONDecoder().decode(MeditationTimer.self, from: meditationTimerData) {
                 return loadedData
             } else {
-                return MeditationTimer(startDate: Date.distantPast, targetDate: Date.distantPast, timerInMinutes: 12, timerStatus: .stopped, preparationTime: 3, intervalActive: false, intervalTime: 60, timerSound: .kitchenTimer, intervalSound: .kitchenTimer, timeLeft: "12:00")
+                return MeditationTimer(startDate: Date.distantPast, targetDate: Date.distantPast, timerInMinutes: 12, timerStatus: .stopped, preparationTime: 3, intervalActive: false, intervalTime: 60, endSound: .kitchenTimer, startSound: .kitchenTimer, intervalSound: .kitchenTimer, timeLeft: "12:00")
             }
         }
         set {
@@ -65,6 +65,8 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
     }
     
     let timerNotificationIdentifier = "Meditation Timer Notification"
+    @Published var welcomeMessage = "Welcome Back!"
+    @Published var startMessage = "Your Meditation has Started!"
     
     var timer = Timer()
     
@@ -73,12 +75,30 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
         meditationTimer.startDate = Date.now.addingTimeInterval(Double(meditationTimer.preparationTime))
         meditationTimer.targetDate = Date.now.addingTimeInterval(Double(meditationTimer.preparationTime + meditationTimer.timerInMinutes * 60))
         
-        // add a notification for the timer
+        // add a notification for the timer start
+        let startContent = UNMutableNotificationContent()
+        
+        startContent.title = startMessage
+        startContent.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: meditationTimer.startSound.rawNotificationSound))
+        
+        let startTargetDate = meditationTimer.startDate
+        let startTriggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: startTargetDate)
+        let startTrigger = UNCalendarNotificationTrigger(dateMatching: startTriggerDate, repeats: false)
+        
+        let startRequest = UNNotificationRequest(identifier: "Start", content: startContent, trigger: startTrigger)
+        
+        notificationCenter.add(startRequest) { error in
+            if let error = error {
+                print("Error: \(error)")
+            }
+        }
+        
+        // add a notification for the timer end
         let content = UNMutableNotificationContent()
-        content.title = "Welcome Back!"
+        content.title = welcomeMessage
         content.body = "Your meditation is now complete."
         
-        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: meditationTimer.intervalSound.rawNotificationSound))
+        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: meditationTimer.endSound.rawNotificationSound))
         
         let targetDate = meditationTimer.targetDate
         let triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: targetDate)

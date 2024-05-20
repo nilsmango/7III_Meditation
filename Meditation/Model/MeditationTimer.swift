@@ -20,7 +20,8 @@ struct MeditationTimer: Codable {
     var intervalActive: Bool
     /// interval time in seconds
     var intervalTime: Int
-    var timerSound: TimerSound
+    var endSound: TimerSound
+    var startSound: TimerSound
     var intervalSound: TimerSound
     
     var timeLeft: String

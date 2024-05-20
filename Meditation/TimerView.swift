@@ -26,7 +26,7 @@ struct TimerView: View {
                 
             case .alarm:
                     
-                        Text("Welcome Back!")
+                Text(meditationManager.welcomeMessage)
                             .font(.title)
                         
                     .onTapGesture {
