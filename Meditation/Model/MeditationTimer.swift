@@ -32,7 +32,7 @@ enum TimerStatus: String, CaseIterable, Identifiable, Codable {
     var id: Self { self }
 }
 
-enum TimerSound: String, Codable {
+enum TimerSound: String, Codable, CaseIterable {
     case kitchenTimer
 
     var prettyString: String {

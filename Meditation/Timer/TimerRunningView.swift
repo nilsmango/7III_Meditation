@@ -16,7 +16,7 @@ struct TimerRunningView: View {
     
     var body: some View {
         ZStack {
-            Text(meditationManager.meditationTimer.timeLeft)
+            Text(meditationManager.meditationTimer.targetDate, style: .timer)
                 .font(.title)
                 .monospacedDigit()
             

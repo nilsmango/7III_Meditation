@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7827880A2BF68B67004E7F77 /* TimerRunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782788092BF68B67004E7F77 /* TimerRunningView.swift */; };
+		7827880D2BFB3F45004E7F77 /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7827880C2BFB3F45004E7F77 /* OptionsView.swift */; };
 		78385D0B2BF3647300581057 /* MeditationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78385D0A2BF3647300581057 /* MeditationApp.swift */; };
 		78385D0D2BF3647300581057 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78385D0C2BF3647300581057 /* ContentView.swift */; };
 		78385D0F2BF3647500581057 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78385D0E2BF3647500581057 /* Assets.xcassets */; };
@@ -24,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		782788092BF68B67004E7F77 /* TimerRunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerRunningView.swift; sourceTree = "<group>"; };
+		7827880C2BFB3F45004E7F77 /* OptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsView.swift; sourceTree = "<group>"; };
 		78385D072BF3647300581057 /* Meditation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meditation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78385D0A2BF3647300581057 /* MeditationApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationApp.swift; sourceTree = "<group>"; };
 		78385D0C2BF3647300581057 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -51,6 +53,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7827880B2BFB3F30004E7F77 /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				78385D1E2BF3674800581057 /* TimerView.swift */,
+				7879BDF42BF684FD001994D2 /* TimerStoppedView.swift */,
+				782788092BF68B67004E7F77 /* TimerRunningView.swift */,
+				7879BDF22BF68448001994D2 /* CircleButtonStyle.swift */,
+			);
+			path = Timer;
+			sourceTree = "<group>";
+		};
 		78385CFE2BF3647300581057 = {
 			isa = PBXGroup;
 			children = (
@@ -72,10 +85,8 @@
 			children = (
 				78385D0A2BF3647300581057 /* MeditationApp.swift */,
 				78385D0C2BF3647300581057 /* ContentView.swift */,
-				78385D1E2BF3674800581057 /* TimerView.swift */,
-				7879BDF42BF684FD001994D2 /* TimerStoppedView.swift */,
-				782788092BF68B67004E7F77 /* TimerRunningView.swift */,
-				7879BDF22BF68448001994D2 /* CircleButtonStyle.swift */,
+				7827880C2BFB3F45004E7F77 /* OptionsView.swift */,
+				7827880B2BFB3F30004E7F77 /* Timer */,
 				78385D1B2BF366F900581057 /* Model */,
 				78385D0E2BF3647500581057 /* Assets.xcassets */,
 				78385D252BF3E4F700581057 /* Sounds */,
@@ -191,6 +202,7 @@
 				7879BDF52BF684FD001994D2 /* TimerStoppedView.swift in Sources */,
 				78385D212BF3DFEE00581057 /* MeditationManager.swift in Sources */,
 				78385D1F2BF3674800581057 /* TimerView.swift in Sources */,
+				7827880D2BFB3F45004E7F77 /* OptionsView.swift in Sources */,
 				78385D0B2BF3647300581057 /* MeditationApp.swift in Sources */,
 				78385D232BF3E11B00581057 /* MeditationSession.swift in Sources */,
 			);
