@@ -24,7 +24,6 @@ struct MeditationTimer: Codable {
     var startSound: TimerSound
     var intervalSound: TimerSound
     
-    var timeLeft: String
 }
 
 enum TimerStatus: String, CaseIterable, Identifiable, Codable {

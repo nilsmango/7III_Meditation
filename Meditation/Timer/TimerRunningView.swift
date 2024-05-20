@@ -16,7 +16,13 @@ struct TimerRunningView: View {
     
     var body: some View {
         ZStack {
-            Text(meditationManager.meditationTimer.targetDate, style: .timer)
+            Group {
+                if isRunning {
+                    Text(meditationManager.meditationTimer.targetDate, style: .timer)
+                } else {
+                    Text(dateToDateFormatted(from: meditationManager.meditationTimer.startDate, to: meditationManager.meditationTimer.startDate.addingTimeInterval(Double(meditationManager.meditationTimer.timerInMinutes * 60))))
+                }
+            }
                 .font(.title)
                 .monospacedDigit()
             

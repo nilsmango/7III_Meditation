@@ -54,7 +54,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
             if let loadedData = try? JSONDecoder().decode(MeditationTimer.self, from: meditationTimerData) {
                 return loadedData
             } else {
-                return MeditationTimer(startDate: Date.distantPast, targetDate: Date.distantPast, timerInMinutes: 12, timerStatus: .stopped, preparationTime: 3, intervalActive: false, intervalTime: 60, endSound: .kitchenTimer, startSound: .kitchenTimer, intervalSound: .kitchenTimer, timeLeft: "12:00")
+                return MeditationTimer(startDate: Date.distantPast, targetDate: Date.distantPast, timerInMinutes: 12, timerStatus: .stopped, preparationTime: 3, intervalActive: false, intervalTime: 60, endSound: .kitchenTimer, startSound: .kitchenTimer, intervalSound: .kitchenTimer)
             }
         }
         set {
@@ -68,7 +68,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
     @Published var welcomeMessage = "Welcome Back!"
     @Published var startMessage = "Your Meditation has Started!"
     
-    var timer = Timer()
+    var timer: Timer?
     
     /// starting the meditation timer
     func startMeditation() {
@@ -114,28 +114,33 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
         
         meditationTimer.timerStatus = .preparing
         
-        // already set timeLeft to the time to get it smooth in the view
-        meditationTimer.timeLeft = dateToDateFormatted(from: meditationTimer.startDate.addingTimeInterval(1), to: meditationTimer.targetDate)
+        // setting the timer status change
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: Double(meditationTimer.preparationTime) + Double(meditationTimer.timerInMinutes * 60) , repeats: false, block: { timer in
+            self.endMeditation()
+        })
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + Double(meditationTimer.preparationTime)) {
-                
-            // Start timer and update timeLeft and everything.
-            self.timer = Timer.scheduledTimer(withTimeInterval: 1.0 , repeats: true, block: { timer in
-                let currentDate = Date.now
-                
-                if currentDate >= self.meditationTimer.targetDate {
+        // save meditation session
+        saveMeditationSession()
+    }
+    
+    func checkStatusOfTimer() {
+        timer?.invalidate()
+        if meditationTimer.timerStatus == .running {
+            if meditationTimer.targetDate >= Date() {
+                // start timer to targetDate again
+                let timeInterval = meditationTimer.targetDate.timeIntervalSinceNow
+                timer = Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: false, block: { timer in
                     self.endMeditation()
-                    
-                } else {
-                    // update timeLeft string
-                    self.meditationTimer.timeLeft = dateToDateFormatted(from: currentDate, to: self.meditationTimer.targetDate)
-                }
-            })
+                })
+            } else {
+                endMeditation()
             }
+        }
     }
     
     func stopMeditation() {
-        timer.invalidate()
+        timer?.invalidate()
         
         meditationTimer.timerStatus = .alarm
         
@@ -143,13 +148,14 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
         // stop  notification
         notificationCenter.removePendingNotificationRequests(withIdentifiers: [timerNotificationIdentifier])
         
+        // edit meditation session
         meditationTimer.targetDate = Date()
-        saveMeditationSession()
+        editMeditationSession()
     }
     
     func pauseMeditation() {
         
-        timer.invalidate()
+        timer?.invalidate()
         
         meditationTimer.timerStatus = .paused
         
@@ -163,19 +169,18 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
         meditationTimer.timerInMinutes = minutesLeftToMeditate
         
         meditationTimer.targetDate = currentDate
-        saveMeditationSession()
+        
+        // edit meditation session
+        editMeditationSession()
     }
     
     func endMeditation() {
-        
-        timer.invalidate()
         meditationTimer.timerStatus = .alarm
-        saveMeditationSession()
     }
     
     /// returns a random koan
     func koanFunc() -> String {
-        let koanArray: [String] = ["Love is the way.", "Have a great flight.", "What is the sound of one hand clapping?", "May all beings be happy and free from suffering.", "You miss 100% of the shots you don’t take.\n– Wayne Gretzky\n- Michael Scott", "Let it be.", "Don't panic.", "Be here now.", "Know your self.", "If you meet the Buddha, kill him."]
+        let koanArray: [String] = ["Love is the way.", "Have a great flight.", "What is the sound of one hand clapping?", "May all beings be happy and free from suffering.", "You miss 100% of the shots you don’t take.\n- Wayne Gretzky\n- Michael Scott", "Let it be.", "Don't panic.", "Be here now.", "Know your self.", "If you meet the Buddha, kill him."]
         return koanArray.randomElement() ?? "If you meet the Buddha, kill him."
     }
     
@@ -189,24 +194,24 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
         completionHandler([.sound])
     }
     
-
+    
     
     // Handle notification when the user taps on it
-//    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-//        // Handle user's response to the notification
-//        let identifier = response.notification.request.identifier
-//        
-//        // Extract information from the notification content and perform actions
-//        if let recipeTitle = identifier.components(separatedBy: Constants.notificationSeparator).first {
-//            // change path to the recipe of the notification
-//            if let recipeIndex = recipes.firstIndex(where: { $0.title == recipeTitle }) {
-//                path = NavigationPath()
-//                path.append(recipes[recipeIndex])
-//            }
-//        }
-//        
-//        completionHandler()
-//    }
+    //    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+    //        // Handle user's response to the notification
+    //        let identifier = response.notification.request.identifier
+    //
+    //        // Extract information from the notification content and perform actions
+    //        if let recipeTitle = identifier.components(separatedBy: Constants.notificationSeparator).first {
+    //            // change path to the recipe of the notification
+    //            if let recipeIndex = recipes.firstIndex(where: { $0.title == recipeTitle }) {
+    //                path = NavigationPath()
+    //                path.append(recipes[recipeIndex])
+    //            }
+    //        }
+    //
+    //        completionHandler()
+    //    }
     
     
     
@@ -218,14 +223,14 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
         
         if HKHealthStore.isHealthDataAvailable() {
             
-        
+            
             let typestoRead = Set([
                 HKObjectType.categoryType(forIdentifier: HKCategoryTypeIdentifier.mindfulSession)!
-                ])
+            ])
             
             let typestoShare = Set([
                 HKObjectType.categoryType(forIdentifier: HKCategoryTypeIdentifier.mindfulSession)!
-                ])
+            ])
             
             self.healthStore.requestAuthorization(toShare: typestoShare, read: typestoRead) { (success, error) -> Void in
                 if success == false {
@@ -237,9 +242,9 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
                     NSLog(" Integrated SuccessFully")
                 }
             }
-        
+            
         }
-        }
+    }
     
     func saveMeditationSession() {
         
@@ -276,5 +281,50 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
             }
         }
         
+    }
+    
+    func editMeditationSession() {
+        // remove the last saved meditation from array
+        meditationSessions.removeLast()
+        
+        // remove last saved mindful session from health
+        if HKHealthStore.isHealthDataAvailable() {
+            deleteLastMindfulSession {
+                // Save new meditation session only after the last mindful session is deleted
+                self.saveMeditationSession()
+            }
+            
+        }
+        
+        
+    }
+    
+    private func deleteLastMindfulSession(completion: @escaping () -> Void) {
+        guard let mindfulType = HKObjectType.categoryType(forIdentifier: .mindfulSession) else {
+            print("Mindful session type not available")
+            completion()
+            return
+        }
+        
+        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
+        
+        let query = HKSampleQuery(sampleType: mindfulType, predicate: nil, limit: 1, sortDescriptors: [sortDescriptor]) { query, samples, error in
+            guard let sample = samples?.first as? HKCategorySample, error == nil else {
+                print("Error fetching last mindful session: \(error?.localizedDescription ?? "Unknown error")")
+                completion()
+                return
+            }
+            
+            self.healthStore.delete(sample) { success, error in
+                if success {
+                    print("Successfully deleted the last mindful session")
+                } else {
+                    print("Error deleting the last mindful session: \(error?.localizedDescription ?? "Unknown error")")
+                }
+                completion()
+            }
+        }
+        
+        healthStore.execute(query)
     }
 }
