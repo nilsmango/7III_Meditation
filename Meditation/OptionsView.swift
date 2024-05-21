@@ -12,6 +12,7 @@ struct OptionsView: View {
 
     var body: some View {
         List {
+            
             Section("Messages") {
                 TextField("Welcome Back Text", text: $meditationManager.welcomeMessage)
                 
@@ -38,7 +39,18 @@ struct OptionsView: View {
 //                            }
                 // TODO: koans, reminders to meditate, intervals
             }
+            
+            Section("Misc") {
+                Picker("Preparation Time", selection: $meditationManager.meditationTimer.preparationTime) {
+                    ForEach(1...60, id: \.self) { seconds in
+                        Text("\(seconds) \(seconds == 1 ? "Second" : "Seconds")")
+                    }
+                }
+//                .pickerStyle(.wheel)
+            }
         }
+        .scrollContentBackground(.hidden) // Hides the default background
+        .background(.customGray)
     }
 }
 

@@ -40,6 +40,7 @@ struct TimerRunningView: View {
                                 meditationManager.pauseMeditation()
                         }, label: {
                                 Text("Pause")
+                                .font(.title2)
                         })
                         .buttonStyle(CircleButtonStyle())
                         .frame(minWidth: halfWidth, alignment: .center)
@@ -48,6 +49,7 @@ struct TimerRunningView: View {
                             meditationManager.stopMeditation()
                     }, label: {
                         Text("Stop")
+                            .font(.title2)
                     })
                     .buttonStyle(CircleButtonStyle())
                     .frame(width: halfWidth, alignment: .center)
@@ -57,6 +59,7 @@ struct TimerRunningView: View {
                                 meditationManager.startMeditation()
                         }, label: {
                             Text("Resume")
+                                .font(.title2)
                         })
                         .buttonStyle(CircleButtonStyle())
                         .frame(minWidth: halfWidth, alignment: .center)
@@ -66,6 +69,7 @@ struct TimerRunningView: View {
                                 meditationManager.meditationTimer.timerStatus = .alarm
                         }, label: {
                             Text("Reset")
+                                .font(.title2)
                         })
                         .buttonStyle(CircleButtonStyle())
                         .frame(width: halfWidth, alignment: .center)

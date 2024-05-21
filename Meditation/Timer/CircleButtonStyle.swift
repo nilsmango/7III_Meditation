@@ -16,7 +16,7 @@ struct CircleButtonStyle: ButtonStyle {
             .background(
                 ZStack {
                     Circle()
-                        .fill(.customGray)
+                        .fill(.accent)
                         .opacity(configuration.isPressed ? 0.75 : 1.0)
                         
                 }

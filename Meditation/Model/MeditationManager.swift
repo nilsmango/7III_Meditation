@@ -234,12 +234,10 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
             
             self.healthStore.requestAuthorization(toShare: typestoShare, read: typestoRead) { (success, error) -> Void in
                 if success == false {
-                    print("couldn't get get authorization")
-                    NSLog(" Display not allowed")
+                    print("Couldn't get get Health Store authorization")
                 }
                 if success == true {
-                    print("don't worry everything is good\(success)")
-                    NSLog(" Integrated SuccessFully")
+                    print("Health Store authorization granted")
                 }
             }
             

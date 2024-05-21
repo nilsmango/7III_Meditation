@@ -33,7 +33,7 @@ struct TimerStoppedView: View {
                             meditationManager.startMeditation()
                     }, label: {
                         Text("Start")
-                
+                            .font(.title2)
                     })
                     .buttonStyle(CircleButtonStyle())
                 Spacer()
