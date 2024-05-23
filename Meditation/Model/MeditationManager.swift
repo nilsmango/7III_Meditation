@@ -54,7 +54,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
             if let loadedData = try? JSONDecoder().decode(MeditationTimer.self, from: meditationTimerData) {
                 return loadedData
             } else {
-                return MeditationTimer(startDate: Date.distantPast, targetDate: Date.distantPast, timerInMinutes: 12, timerStatus: .stopped, preparationTime: 3, intervalActive: false, intervalTime: 60, endSound: TimerSound(name: "Kitchen Timer", fileName: "Kitchen Timer Normal.caf"), startSound: TimerSound(name: "Kitchen Timer", fileName: "Kitchen Timer Normal.caf"), intervalSound: TimerSound(name: "Kitchen Timer", fileName: "Kitchen Timer Normal.caf"), reminderSound: TimerSound(name: "Kitchen Timer", fileName: "Kitchen Timer Normal.caf"))
+                return MeditationTimer(startDate: Date.distantPast, targetDate: Date.distantPast, timerInMinutes: 12, timerStatus: .stopped, preparationTime: 3, intervalActive: false, intervalTime: 60, endSound: TimerSound(name: "Friendly End", fileName: "Friendly End.caf"), startSound: TimerSound(name: "Friendly", fileName: "Friendly.caf"), intervalSound: TimerSound(name: "Kitchen Timer", fileName: "Kitchen Timer Normal.caf"), reminderSound: TimerSound(name: "Dual Bowl", fileName: "Dual Bowl.caf"))
             }
         }
         set {
@@ -188,9 +188,24 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
     
     private let notificationCenter = UNUserNotificationCenter.current()
     let soundOptions = [
-        TimerSound(name: "Kitchen Timer", fileName: "Kitchen Timer Normal.caf"),
-        TimerSound(name: "Gong Timer", fileName: "Kitchen  Normal.caf"),
-        TimerSound(name: "Bang Thing", fileName: "Timer Normal.caf")
+        TimerSound(name: "Synth Bell", fileName: "Synth Bell.caf"),
+        TimerSound(name: "Basic Bells 1", fileName: "Basic Bells 1.caf"),
+        TimerSound(name: "Basic Bells 2", fileName: "Basic Bells 2.caf"),
+        TimerSound(name: "Basic Bells 3", fileName: "Basic Bells 3.caf"),
+        TimerSound(name: "Chimes", fileName: "Chimes.caf"),
+        TimerSound(name: "Chimes 2", fileName: "Chimes 2.caf"),
+        TimerSound(name: "Chimes 3", fileName: "Chimes 3.caf"),
+        TimerSound(name: "Chimes 4", fileName: "Chimes 4.caf"),
+        TimerSound(name: "Dual Bowl", fileName: "Dual Bowl.caf"),
+        TimerSound(name: "Friendly", fileName: "Friendly.caf"),
+        TimerSound(name: "Friendly End", fileName: "Friendly End.caf"),
+        TimerSound(name: "Gong 2", fileName: "Gong 2.caf"),
+        TimerSound(name: "Gong 2b", fileName: "Gong 2b.caf"),
+        TimerSound(name: "Metallophone", fileName: "Metallophone.caf"),
+        TimerSound(name: "Singing Bowl 1", fileName: "Singing Bowl 1.caf"),
+        TimerSound(name: "Singing Bowl 2", fileName: "Singing Bowl 2.caf"),
+        TimerSound(name: "Singing Bowl 2b", fileName: "Singing Bowl 2b.caf"),
+        TimerSound(name: "Kitchen Timer", fileName: "Kitchen Timer Normal.caf")
     ]
     
     // This method will be called when the app is in the foreground

@@ -60,7 +60,7 @@ struct TimerView: View {
             
             Spacer(minLength: 0)
         }
-        .animation(.easeInOut(duration: 0.7).delay(0.3), value: meditationManager.meditationTimer.timerStatus)
+        .animation(.easeInOut(duration: 1.0).delay(0.3), value: meditationManager.meditationTimer.timerStatus)
         .onAppear {
             notificationCenter.requestAuthorization(options: [.alert, .sound]) { success, error in
                 if success {

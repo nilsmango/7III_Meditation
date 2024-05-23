@@ -42,7 +42,7 @@ struct TimerRunningView: View {
                                 Text("Pause")
                                 .font(.title2)
                         })
-                        .buttonStyle(CircleButtonStyle())
+                        .buttonStyle(CircleButtonStyle(hugeCircle: false))
                         .frame(minWidth: halfWidth, alignment: .center)
                         
                     Button(role: .destructive, action: {

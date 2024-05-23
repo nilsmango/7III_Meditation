@@ -11,6 +11,23 @@
 		7827880D2BFB3F45004E7F77 /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7827880C2BFB3F45004E7F77 /* OptionsView.swift */; };
 		7834263C2BFF6B990008F9F9 /* NotificationSoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7834263B2BFF6B990008F9F9 /* NotificationSoundView.swift */; };
 		783426402BFF6C7B0008F9F9 /* TimerSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7834263F2BFF6C7B0008F9F9 /* TimerSound.swift */; };
+		783426742BFFBC7F0008F9F9 /* Synth Bell.caf in Resources */ = {isa = PBXBuildFile; fileRef = 783426632BFFBC7E0008F9F9 /* Synth Bell.caf */; };
+		783426752BFFBC7F0008F9F9 /* Dual Bowl.caf in Resources */ = {isa = PBXBuildFile; fileRef = 783426642BFFBC7E0008F9F9 /* Dual Bowl.caf */; };
+		783426762BFFBC7F0008F9F9 /* Friendly.caf in Resources */ = {isa = PBXBuildFile; fileRef = 783426652BFFBC7E0008F9F9 /* Friendly.caf */; };
+		783426772BFFBC7F0008F9F9 /* Basic Bells 3.caf in Resources */ = {isa = PBXBuildFile; fileRef = 783426662BFFBC7E0008F9F9 /* Basic Bells 3.caf */; };
+		783426782BFFBC7F0008F9F9 /* Friendly End.caf in Resources */ = {isa = PBXBuildFile; fileRef = 783426672BFFBC7E0008F9F9 /* Friendly End.caf */; };
+		783426792BFFBC7F0008F9F9 /* Chimes 3.caf in Resources */ = {isa = PBXBuildFile; fileRef = 783426682BFFBC7E0008F9F9 /* Chimes 3.caf */; };
+		7834267A2BFFBC7F0008F9F9 /* Chimes.caf in Resources */ = {isa = PBXBuildFile; fileRef = 783426692BFFBC7E0008F9F9 /* Chimes.caf */; };
+		7834267B2BFFBC7F0008F9F9 /* Basic Bells 1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 7834266A2BFFBC7E0008F9F9 /* Basic Bells 1.caf */; };
+		7834267C2BFFBC7F0008F9F9 /* Chimes 4.caf in Resources */ = {isa = PBXBuildFile; fileRef = 7834266B2BFFBC7F0008F9F9 /* Chimes 4.caf */; };
+		7834267D2BFFBC7F0008F9F9 /* Chimes 2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 7834266C2BFFBC7F0008F9F9 /* Chimes 2.caf */; };
+		7834267E2BFFBC7F0008F9F9 /* Basic Bells 2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 7834266D2BFFBC7F0008F9F9 /* Basic Bells 2.caf */; };
+		7834267F2BFFBC7F0008F9F9 /* Singing Bowl 1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 7834266E2BFFBC7F0008F9F9 /* Singing Bowl 1.caf */; };
+		783426802BFFBC7F0008F9F9 /* Metallophone.caf in Resources */ = {isa = PBXBuildFile; fileRef = 7834266F2BFFBC7F0008F9F9 /* Metallophone.caf */; };
+		783426812BFFBC7F0008F9F9 /* Gong 2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 783426702BFFBC7F0008F9F9 /* Gong 2.caf */; };
+		783426822BFFBC7F0008F9F9 /* Singing Bowl 2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 783426712BFFBC7F0008F9F9 /* Singing Bowl 2.caf */; };
+		783426832BFFBC7F0008F9F9 /* Gong 2b.caf in Resources */ = {isa = PBXBuildFile; fileRef = 783426722BFFBC7F0008F9F9 /* Gong 2b.caf */; };
+		783426842BFFBC7F0008F9F9 /* Singing Bowl 2b.caf in Resources */ = {isa = PBXBuildFile; fileRef = 783426732BFFBC7F0008F9F9 /* Singing Bowl 2b.caf */; };
 		78385D0B2BF3647300581057 /* MeditationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78385D0A2BF3647300581057 /* MeditationApp.swift */; };
 		78385D0D2BF3647300581057 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78385D0C2BF3647300581057 /* ContentView.swift */; };
 		78385D0F2BF3647500581057 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78385D0E2BF3647500581057 /* Assets.xcassets */; };
@@ -30,6 +47,23 @@
 		7827880C2BFB3F45004E7F77 /* OptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsView.swift; sourceTree = "<group>"; };
 		7834263B2BFF6B990008F9F9 /* NotificationSoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSoundView.swift; sourceTree = "<group>"; };
 		7834263F2BFF6C7B0008F9F9 /* TimerSound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSound.swift; sourceTree = "<group>"; };
+		783426632BFFBC7E0008F9F9 /* Synth Bell.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Synth Bell.caf"; sourceTree = "<group>"; };
+		783426642BFFBC7E0008F9F9 /* Dual Bowl.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dual Bowl.caf"; sourceTree = "<group>"; };
+		783426652BFFBC7E0008F9F9 /* Friendly.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Friendly.caf; sourceTree = "<group>"; };
+		783426662BFFBC7E0008F9F9 /* Basic Bells 3.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Basic Bells 3.caf"; sourceTree = "<group>"; };
+		783426672BFFBC7E0008F9F9 /* Friendly End.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Friendly End.caf"; sourceTree = "<group>"; };
+		783426682BFFBC7E0008F9F9 /* Chimes 3.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Chimes 3.caf"; sourceTree = "<group>"; };
+		783426692BFFBC7E0008F9F9 /* Chimes.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Chimes.caf; sourceTree = "<group>"; };
+		7834266A2BFFBC7E0008F9F9 /* Basic Bells 1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Basic Bells 1.caf"; sourceTree = "<group>"; };
+		7834266B2BFFBC7F0008F9F9 /* Chimes 4.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Chimes 4.caf"; sourceTree = "<group>"; };
+		7834266C2BFFBC7F0008F9F9 /* Chimes 2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Chimes 2.caf"; sourceTree = "<group>"; };
+		7834266D2BFFBC7F0008F9F9 /* Basic Bells 2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Basic Bells 2.caf"; sourceTree = "<group>"; };
+		7834266E2BFFBC7F0008F9F9 /* Singing Bowl 1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Singing Bowl 1.caf"; sourceTree = "<group>"; };
+		7834266F2BFFBC7F0008F9F9 /* Metallophone.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Metallophone.caf; sourceTree = "<group>"; };
+		783426702BFFBC7F0008F9F9 /* Gong 2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gong 2.caf"; sourceTree = "<group>"; };
+		783426712BFFBC7F0008F9F9 /* Singing Bowl 2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Singing Bowl 2.caf"; sourceTree = "<group>"; };
+		783426722BFFBC7F0008F9F9 /* Gong 2b.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gong 2b.caf"; sourceTree = "<group>"; };
+		783426732BFFBC7F0008F9F9 /* Singing Bowl 2b.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Singing Bowl 2b.caf"; sourceTree = "<group>"; };
 		78385D072BF3647300581057 /* Meditation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meditation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78385D0A2BF3647300581057 /* MeditationApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationApp.swift; sourceTree = "<group>"; };
 		78385D0C2BF3647300581057 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -124,6 +158,23 @@
 		78385D252BF3E4F700581057 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				7834266A2BFFBC7E0008F9F9 /* Basic Bells 1.caf */,
+				7834266D2BFFBC7F0008F9F9 /* Basic Bells 2.caf */,
+				783426662BFFBC7E0008F9F9 /* Basic Bells 3.caf */,
+				7834266C2BFFBC7F0008F9F9 /* Chimes 2.caf */,
+				783426682BFFBC7E0008F9F9 /* Chimes 3.caf */,
+				7834266B2BFFBC7F0008F9F9 /* Chimes 4.caf */,
+				783426692BFFBC7E0008F9F9 /* Chimes.caf */,
+				783426642BFFBC7E0008F9F9 /* Dual Bowl.caf */,
+				783426672BFFBC7E0008F9F9 /* Friendly End.caf */,
+				783426652BFFBC7E0008F9F9 /* Friendly.caf */,
+				783426702BFFBC7F0008F9F9 /* Gong 2.caf */,
+				783426722BFFBC7F0008F9F9 /* Gong 2b.caf */,
+				7834266F2BFFBC7F0008F9F9 /* Metallophone.caf */,
+				7834266E2BFFBC7F0008F9F9 /* Singing Bowl 1.caf */,
+				783426712BFFBC7F0008F9F9 /* Singing Bowl 2.caf */,
+				783426732BFFBC7F0008F9F9 /* Singing Bowl 2b.caf */,
+				783426632BFFBC7E0008F9F9 /* Synth Bell.caf */,
 				78385D242BF3E4F100581057 /* Kitchen Timer Normal.caf */,
 			);
 			path = Sounds;
@@ -187,9 +238,26 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				783426832BFFBC7F0008F9F9 /* Gong 2b.caf in Resources */,
+				783426802BFFBC7F0008F9F9 /* Metallophone.caf in Resources */,
+				783426842BFFBC7F0008F9F9 /* Singing Bowl 2b.caf in Resources */,
 				7879BDF12BF4BDE4001994D2 /* Kitchen Timer Normal.caf in Resources */,
+				7834267C2BFFBC7F0008F9F9 /* Chimes 4.caf in Resources */,
 				78385D132BF3647500581057 /* Preview Assets.xcassets in Resources */,
+				7834267E2BFFBC7F0008F9F9 /* Basic Bells 2.caf in Resources */,
+				7834267D2BFFBC7F0008F9F9 /* Chimes 2.caf in Resources */,
 				78385D0F2BF3647500581057 /* Assets.xcassets in Resources */,
+				7834267A2BFFBC7F0008F9F9 /* Chimes.caf in Resources */,
+				783426742BFFBC7F0008F9F9 /* Synth Bell.caf in Resources */,
+				783426782BFFBC7F0008F9F9 /* Friendly End.caf in Resources */,
+				783426812BFFBC7F0008F9F9 /* Gong 2.caf in Resources */,
+				7834267F2BFFBC7F0008F9F9 /* Singing Bowl 1.caf in Resources */,
+				783426752BFFBC7F0008F9F9 /* Dual Bowl.caf in Resources */,
+				783426762BFFBC7F0008F9F9 /* Friendly.caf in Resources */,
+				7834267B2BFFBC7F0008F9F9 /* Basic Bells 1.caf in Resources */,
+				783426792BFFBC7F0008F9F9 /* Chimes 3.caf in Resources */,
+				783426772BFFBC7F0008F9F9 /* Basic Bells 3.caf in Resources */,
+				783426822BFFBC7F0008F9F9 /* Singing Bowl 2.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

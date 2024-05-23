@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CircleButtonStyle: ButtonStyle {
 //    var bgColor: Color
+    var hugeCircle: Bool = true
 
     func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
@@ -17,11 +18,11 @@ struct CircleButtonStyle: ButtonStyle {
                 ZStack {
                     Circle()
                         .fill(.accent)
-                        .opacity(configuration.isPressed ? 0.75 : 1.0)
+                        .opacity(configuration.isPressed ? 0.0 : 1.0)
                         
                 }
-                .scaleEffect(configuration.isPressed ? 1.3 : 1)
-                .animation(.easeOut, value: configuration.isPressed)
+                    .scaleEffect(configuration.isPressed ? hugeCircle ? 5 : 1 : 1)
+                    .animation(.linear(duration: hugeCircle ? 2.0 : 0.8), value: configuration.isPressed)
         )
     }
 }
