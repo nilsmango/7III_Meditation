@@ -31,20 +31,4 @@ enum TimerStatus: String, CaseIterable, Identifiable, Codable {
     var id: Self { self }
 }
 
-enum TimerSound: String, Codable, CaseIterable {
-    case kitchenTimer
 
-    var prettyString: String {
-        switch self {
-        case .kitchenTimer:
-            return "Kitchen Timer"
-        }
-    }
-
-    var rawNotificationSound: String {
-        switch self {
-        case .kitchenTimer:
-            return "Kitchen Timer Normal.caf"
-        }
-    }
-}

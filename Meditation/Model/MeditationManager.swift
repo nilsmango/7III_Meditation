@@ -54,7 +54,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
             if let loadedData = try? JSONDecoder().decode(MeditationTimer.self, from: meditationTimerData) {
                 return loadedData
             } else {
-                return MeditationTimer(startDate: Date.distantPast, targetDate: Date.distantPast, timerInMinutes: 12, timerStatus: .stopped, preparationTime: 3, intervalActive: false, intervalTime: 60, endSound: .kitchenTimer, startSound: .kitchenTimer, intervalSound: .kitchenTimer)
+                return MeditationTimer(startDate: Date.distantPast, targetDate: Date.distantPast, timerInMinutes: 12, timerStatus: .stopped, preparationTime: 3, intervalActive: false, intervalTime: 60, endSound: TimerSound(name: "Kitchen Timer", fileName: "Kitchen Timer Normal.caf"), startSound: TimerSound(name: "Kitchen Timer", fileName: "Kitchen Timer Normal.caf"), intervalSound: TimerSound(name: "Kitchen Timer", fileName: "Kitchen Timer Normal.caf"))
             }
         }
         set {
@@ -79,7 +79,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
         let startContent = UNMutableNotificationContent()
         
         startContent.title = startMessage
-        startContent.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: meditationTimer.startSound.rawNotificationSound))
+        startContent.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: meditationTimer.startSound.fileName))
         
         let startTargetDate = meditationTimer.startDate
         let startTriggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: startTargetDate)
@@ -98,7 +98,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
         content.title = welcomeMessage
         content.body = "Your meditation is now complete."
         
-        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: meditationTimer.endSound.rawNotificationSound))
+        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: meditationTimer.endSound.fileName))
         
         let targetDate = meditationTimer.targetDate
         let triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: targetDate)
