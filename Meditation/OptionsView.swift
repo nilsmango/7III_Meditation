@@ -21,7 +21,7 @@ struct OptionsView: View {
                 
                 Section("Sounds") {
                     NavigationLink {
-                        NotificationSoundView(chosenSound: $meditationManager.meditationTimer.startSound, title: "Start Sound")
+                        NotificationSoundView(chosenSound: $meditationManager.meditationTimer.startSound, title: "Start Sound", soundOptions: meditationManager.soundOptions)
                     } label: {
                         HStack {
                             Text("Start Sound")
@@ -33,12 +33,23 @@ struct OptionsView: View {
                     }
                     
                     NavigationLink {
-                        NotificationSoundView(chosenSound: $meditationManager.meditationTimer.endSound, title: "End Sound")
+                        NotificationSoundView(chosenSound: $meditationManager.meditationTimer.endSound, title: "End Sound", soundOptions: meditationManager.soundOptions)
                     } label: {
                         HStack {
                             Text("End Sound")
                             Spacer()
                             Text(meditationManager.meditationTimer.endSound.name)
+                                .opacity(0.5)
+                        }
+                    }
+                    
+                    NavigationLink {
+                        NotificationSoundView(chosenSound: $meditationManager.meditationTimer.endSound, title: "Reminder Sound", soundOptions: meditationManager.soundOptions)
+                    } label: {
+                        HStack {
+                            Text("Reminder Sound")
+                            Spacer()
+                            Text(meditationManager.meditationTimer.reminderSound.name)
                                 .opacity(0.5)
                         }
                     }
@@ -61,7 +72,7 @@ struct OptionsView: View {
     //                .pickerStyle(.wheel)
                 }
             }
-            .scrollContentBackground(.hidden) // Hides the default background
+            .scrollContentBackground(.hidden)
             .background(.customGray)
             .navigationTitle("Options")
             .navigationBarTitleDisplayMode(.inline)

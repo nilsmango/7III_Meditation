@@ -13,12 +13,7 @@ struct NotificationSoundView: View {
     @Binding var chosenSound: TimerSound
     var title: String
     
-    let soundOptions = [
-        TimerSound(name: "Kitchen Timer", fileName: "Kitchen Timer Normal.caf"),
-        TimerSound(name: "Gong Timer", fileName: "Kitchen  Normal.caf"),
-        TimerSound(name: "Bang Thing", fileName: "Timer Normal.caf")
-        
-    ]
+    let soundOptions: [TimerSound]
     
     var body: some View {
         
@@ -35,6 +30,8 @@ struct NotificationSoundView: View {
                                 
                         }
                     }
+                    .scrollContentBackground(.hidden)
+                    .background(.customGray)
                     .navigationTitle(title)
                     .navigationBarTitleDisplayMode(.inline)
                 }
@@ -54,7 +51,11 @@ struct NotificationSoundView: View {
 
 #Preview {
     NavigationStack {
-        NotificationSoundView(chosenSound: .constant(TimerSound(name: "Kitchen Timer", fileName: "Kitchen Timer Normal.caf")), title: "Start Sound")
+        NotificationSoundView(chosenSound: .constant(TimerSound(name: "Kitchen Timer", fileName: "Kitchen Timer Normal.caf")), title: "Start Sound", soundOptions: [
+            TimerSound(name: "Kitchen Timer", fileName: "Kitchen Timer Normal.caf"),
+            TimerSound(name: "Gong Timer", fileName: "Kitchen  Normal.caf"),
+            TimerSound(name: "Bang Thing", fileName: "Timer Normal.caf")
+        ])
     }
     
 }

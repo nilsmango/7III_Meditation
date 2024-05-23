@@ -54,7 +54,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
             if let loadedData = try? JSONDecoder().decode(MeditationTimer.self, from: meditationTimerData) {
                 return loadedData
             } else {
-                return MeditationTimer(startDate: Date.distantPast, targetDate: Date.distantPast, timerInMinutes: 12, timerStatus: .stopped, preparationTime: 3, intervalActive: false, intervalTime: 60, endSound: TimerSound(name: "Kitchen Timer", fileName: "Kitchen Timer Normal.caf"), startSound: TimerSound(name: "Kitchen Timer", fileName: "Kitchen Timer Normal.caf"), intervalSound: TimerSound(name: "Kitchen Timer", fileName: "Kitchen Timer Normal.caf"))
+                return MeditationTimer(startDate: Date.distantPast, targetDate: Date.distantPast, timerInMinutes: 12, timerStatus: .stopped, preparationTime: 3, intervalActive: false, intervalTime: 60, endSound: TimerSound(name: "Kitchen Timer", fileName: "Kitchen Timer Normal.caf"), startSound: TimerSound(name: "Kitchen Timer", fileName: "Kitchen Timer Normal.caf"), intervalSound: TimerSound(name: "Kitchen Timer", fileName: "Kitchen Timer Normal.caf"), reminderSound: TimerSound(name: "Kitchen Timer", fileName: "Kitchen Timer Normal.caf"))
             }
         }
         set {
@@ -187,6 +187,11 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
     // MARK: Notifications
     
     private let notificationCenter = UNUserNotificationCenter.current()
+    let soundOptions = [
+        TimerSound(name: "Kitchen Timer", fileName: "Kitchen Timer Normal.caf"),
+        TimerSound(name: "Gong Timer", fileName: "Kitchen  Normal.caf"),
+        TimerSound(name: "Bang Thing", fileName: "Timer Normal.caf")
+    ]
     
     // This method will be called when the app is in the foreground
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {

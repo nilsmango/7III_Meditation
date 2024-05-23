@@ -23,7 +23,7 @@ struct MeditationTimer: Codable {
     var endSound: TimerSound
     var startSound: TimerSound
     var intervalSound: TimerSound
-    
+    var reminderSound: TimerSound
 }
 
 enum TimerStatus: String, CaseIterable, Identifiable, Codable {
