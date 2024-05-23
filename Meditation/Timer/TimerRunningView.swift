@@ -14,8 +14,23 @@ struct TimerRunningView: View {
     
     let halfWidth = UIScreen.main.bounds.width / 2.8
     
+    @State private var circleProgress = 0.0
+    @State private var timer: Timer?
+
+    private let updateInterval = 5.0
+    
     var body: some View {
         ZStack {
+            
+            TimerCircleView(progress: circleProgress, accentColor: .accent, updateInterval: updateInterval)
+                .onAppear {
+                    if isRunning {
+                        startTimer()
+                    } else {
+                        circleProgress = 0.0
+                    }
+                }
+            
             Group {
                 if isRunning {
                     Text(meditationManager.meditationTimer.targetDate, style: .timer)
@@ -82,6 +97,30 @@ struct TimerRunningView: View {
         }
         
     }
+    
+    private func startTimer() {
+        
+            updateProgress()
+        
+            timer = Timer.scheduledTimer(withTimeInterval: updateInterval, repeats: true) { _ in
+                if circleProgress >= 1.0 {
+                    stopTimer()
+                } else {
+                    updateProgress()
+                }
+            }
+        }
+        
+        private func stopTimer() {
+            timer?.invalidate()
+            timer = nil
+        }
+        
+        private func updateProgress() {
+            let elapsedTime = Date().timeIntervalSince(meditationManager.meditationTimer.startDate) + updateInterval
+            let totalDuration = Double(meditationManager.meditationTimer.timerInMinutes * 60)
+            circleProgress = elapsedTime / totalDuration
+        }
 }
 
 #Preview {

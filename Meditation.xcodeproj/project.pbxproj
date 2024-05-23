@@ -28,6 +28,7 @@
 		783426822BFFBC7F0008F9F9 /* Singing Bowl 2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 783426712BFFBC7F0008F9F9 /* Singing Bowl 2.caf */; };
 		783426832BFFBC7F0008F9F9 /* Gong 2b.caf in Resources */ = {isa = PBXBuildFile; fileRef = 783426722BFFBC7F0008F9F9 /* Gong 2b.caf */; };
 		783426842BFFBC7F0008F9F9 /* Singing Bowl 2b.caf in Resources */ = {isa = PBXBuildFile; fileRef = 783426732BFFBC7F0008F9F9 /* Singing Bowl 2b.caf */; };
+		783426862BFFCFB20008F9F9 /* TimerCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783426852BFFCFB20008F9F9 /* TimerCircleView.swift */; };
 		78385D0B2BF3647300581057 /* MeditationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78385D0A2BF3647300581057 /* MeditationApp.swift */; };
 		78385D0D2BF3647300581057 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78385D0C2BF3647300581057 /* ContentView.swift */; };
 		78385D0F2BF3647500581057 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78385D0E2BF3647500581057 /* Assets.xcassets */; };
@@ -64,6 +65,7 @@
 		783426712BFFBC7F0008F9F9 /* Singing Bowl 2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Singing Bowl 2.caf"; sourceTree = "<group>"; };
 		783426722BFFBC7F0008F9F9 /* Gong 2b.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gong 2b.caf"; sourceTree = "<group>"; };
 		783426732BFFBC7F0008F9F9 /* Singing Bowl 2b.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Singing Bowl 2b.caf"; sourceTree = "<group>"; };
+		783426852BFFCFB20008F9F9 /* TimerCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerCircleView.swift; sourceTree = "<group>"; };
 		78385D072BF3647300581057 /* Meditation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meditation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78385D0A2BF3647300581057 /* MeditationApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationApp.swift; sourceTree = "<group>"; };
 		78385D0C2BF3647300581057 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				78385D1E2BF3674800581057 /* TimerView.swift */,
+				783426852BFFCFB20008F9F9 /* TimerCircleView.swift */,
 				7879BDF42BF684FD001994D2 /* TimerStoppedView.swift */,
 				782788092BF68B67004E7F77 /* TimerRunningView.swift */,
 				7879BDF22BF68448001994D2 /* CircleButtonStyle.swift */,
@@ -274,6 +277,7 @@
 				7879BDF32BF68448001994D2 /* CircleButtonStyle.swift in Sources */,
 				7879BDF02BF4A43E001994D2 /* Helpers.swift in Sources */,
 				78385D0D2BF3647300581057 /* ContentView.swift in Sources */,
+				783426862BFFCFB20008F9F9 /* TimerCircleView.swift in Sources */,
 				7834263C2BFF6B990008F9F9 /* NotificationSoundView.swift in Sources */,
 				7879BDF52BF684FD001994D2 /* TimerStoppedView.swift in Sources */,
 				78385D212BF3DFEE00581057 /* MeditationManager.swift in Sources */,
