@@ -106,15 +106,12 @@ struct TimerRunningView: View {
             updateProgress()
         
             timer = Timer.scheduledTimer(withTimeInterval: updateInterval, repeats: true) { _ in
-                if circleProgress >= 1.0 {
-                    stopTimer()
-                } else {
                     updateProgress()
-                }
             }
         }
         
         private func stopTimer() {
+            meditationManager.endMeditation()
             timer?.invalidate()
             timer = nil
         }
@@ -123,6 +120,10 @@ struct TimerRunningView: View {
             let elapsedTime = Date().timeIntervalSince(meditationManager.meditationTimer.startDate) + updateInterval
             let totalDuration = Double(meditationManager.meditationTimer.timerInMinutes * 60)
             circleProgress = elapsedTime / totalDuration
+            
+            if circleProgress >= 1.0 {
+                stopTimer()
+            }
         }
 }
 

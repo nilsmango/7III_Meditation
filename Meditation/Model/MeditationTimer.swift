@@ -16,7 +16,6 @@ struct MeditationTimer: Codable {
     /// preparation time in seconds
     var preparationTime: Int
     
-    
     var intervalActive: Bool
     /// interval time in seconds
     var intervalTime: Int
