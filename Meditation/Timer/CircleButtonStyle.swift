@@ -20,6 +20,7 @@ struct CircleButtonStyle: ButtonStyle {
                     Circle()
                         .fill(.accent.opacity(configuration.isPressed ? 0.3 : 1.0))
                 }
+                    .shadow(color: .black.opacity(0.1), radius: 10)
 //                    .scaleEffect(configuration.isPressed ? hugeCircle ? 5 : 1 : 1)
 //                    .animation(.linear(duration: hugeCircle ? 2.0 : 0.8), value: configuration.isPressed)
                     .animation(.snappy(duration: 0.1), value: configuration.isPressed)

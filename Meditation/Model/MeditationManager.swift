@@ -10,7 +10,7 @@ import SwiftUI
 import HealthKit
 
 class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
-    
+        
     // MARK: History
     
     @Published var meditationSessions = [MeditationSession]()
@@ -44,6 +44,10 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
             }
         }
     }
+    
+    // MARK: Design
+    
+    @AppStorage("gradientBackground") var gradientBackground: Bool = true
     
     // MARK: Timer
     

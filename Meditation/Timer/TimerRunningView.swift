@@ -16,8 +16,8 @@ struct TimerRunningView: View {
     
     @State private var circleProgress = 0.0
     @State private var timer: Timer?
-
-    private let updateInterval = 5.0
+    
+    private let updateInterval = 1.0
     
     var body: some View {
         ZStack {
@@ -30,7 +30,7 @@ struct TimerRunningView: View {
                         circleProgress = 0.0
                     }
                 }
-                
+            
             
             Group {
                 if isRunning {
@@ -39,8 +39,8 @@ struct TimerRunningView: View {
                     Text(dateToDateFormatted(from: meditationManager.meditationTimer.startDate, to: meditationManager.meditationTimer.startDate.addingTimeInterval(Double(meditationManager.meditationTimer.timerInMinutes * 60))))
                 }
             }
-                .font(.title)
-                .monospacedDigit()
+            .font(.title)
+            .monospacedDigit()
             
             VStack {
                 Spacer()
@@ -49,32 +49,34 @@ struct TimerRunningView: View {
                 Spacer()
                 
                 HStack {
-
+                    
                     if isRunning {
                         
                         Button(action: {
                             meditationManager.pauseMeditation()
-                            circleProgress = 0.0
+                            stopTimer()
                         }, label: {
-                                Text("Pause")
+                            Text("Pause")
                                 .font(.title2)
                         })
                         .buttonStyle(CircleButtonStyle(hugeCircle: false))
                         .frame(minWidth: halfWidth, alignment: .center)
                         
-                    Button(role: .destructive, action: {
+                        Button(role: .destructive, action: {
                             meditationManager.stopMeditation()
-                    }, label: {
-                        Text("Stop")
-                            .font(.title2)
-                    })
-                    .buttonStyle(CircleButtonStyle())
-                    .frame(width: halfWidth, alignment: .center)
-                    
+                            stopTimer()
+                        }, label: {
+                            Text("Stop")
+                                .font(.title2)
+                        })
+                        .buttonStyle(CircleButtonStyle())
+                        .frame(width: halfWidth, alignment: .center)
+                        
                     } else {
                         Button(action: {
                             circleProgress = 0.0
                             meditationManager.startMeditation()
+                            startTimer()
                         }, label: {
                             Text("Resume")
                                 .font(.title2)
@@ -83,8 +85,8 @@ struct TimerRunningView: View {
                         .frame(minWidth: halfWidth, alignment: .center)
                         
                         Button(role: .destructive, action: {
-                                // reseting the timer
-                                meditationManager.meditationTimer.timerStatus = .alarm
+                            // reseting the timer
+                            meditationManager.meditationTimer.timerStatus = .alarm
                         }, label: {
                             Text("Reset")
                                 .font(.title2)
@@ -92,7 +94,7 @@ struct TimerRunningView: View {
                         .buttonStyle(CircleButtonStyle())
                         .frame(width: halfWidth, alignment: .center)
                     }
-                        
+                    
                 }
                 Spacer()
             }
@@ -103,28 +105,28 @@ struct TimerRunningView: View {
     
     private func startTimer() {
         
+        updateProgress()
+        
+        timer = Timer.scheduledTimer(withTimeInterval: updateInterval, repeats: true) { _ in
             updateProgress()
-        
-            timer = Timer.scheduledTimer(withTimeInterval: updateInterval, repeats: true) { _ in
-                    updateProgress()
-            }
         }
+    }
+    
+    private func stopTimer() {
+        timer?.invalidate()
+        timer = nil
+    }
+    
+    private func updateProgress() {
+        let elapsedTime = Date().timeIntervalSince(meditationManager.meditationTimer.startDate) + updateInterval
+        let totalDuration = Double(meditationManager.meditationTimer.timerInMinutes * 60)
+        circleProgress = elapsedTime / totalDuration
         
-        private func stopTimer() {
+        if Date() >= meditationManager.meditationTimer.targetDate.addingTimeInterval(3) {
             meditationManager.endMeditation()
-            timer?.invalidate()
-            timer = nil
+            stopTimer()
         }
-        
-        private func updateProgress() {
-            let elapsedTime = Date().timeIntervalSince(meditationManager.meditationTimer.startDate) + updateInterval
-            let totalDuration = Double(meditationManager.meditationTimer.timerInMinutes * 60)
-            circleProgress = elapsedTime / totalDuration
-            
-            if circleProgress >= 1.0 {
-                stopTimer()
-            }
-        }
+    }
 }
 
 #Preview {

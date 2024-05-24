@@ -33,7 +33,7 @@ struct ContentView: View {
                 }
                 TimerView(meditationManager: meditationManager)
             }
-                .background(.customGray)
+            .background(meditationManager.gradientBackground ? LinearGradient(gradient: Gradient(colors: [.customGray, .accent]), startPoint: .top, endPoint: .bottom) : LinearGradient(gradient: Gradient(colors: [.customGray]), startPoint: .top, endPoint: .bottom))
         }
         
     }

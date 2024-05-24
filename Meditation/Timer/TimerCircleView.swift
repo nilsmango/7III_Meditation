@@ -18,16 +18,16 @@ struct TimerCircleView: View {
                 .stroke(style: StrokeStyle(lineWidth: 20.0, lineCap: .round, lineJoin: .round))
                 .foregroundColor(accentColor)
                 .opacity(0.2)
-
+            
             Circle()
                 .trim(from: 0.0, to: progress)
                 .stroke(style: StrokeStyle(lineWidth: 20.0, lineCap: .round, lineJoin: .round))
                 .foregroundColor(accentColor)
                 .rotationEffect(Angle(degrees: 270))
         }
-            .frame(height: 200)
-            .padding()
-            .animation(.linear(duration: updateInterval), value: progress)
+        .frame(height: 200)
+        .padding()
+        .animation(.linear(duration: updateInterval), value: progress)
     }
 }
 

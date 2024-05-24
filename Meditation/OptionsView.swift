@@ -70,6 +70,8 @@ struct OptionsView: View {
                         }
                     }
     //                .pickerStyle(.wheel)
+                    
+                    Toggle("Gradient Background", isOn: $meditationManager.gradientBackground)
                 }
             }
             .scrollContentBackground(.hidden)
