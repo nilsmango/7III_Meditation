@@ -17,19 +17,21 @@ struct NotificationSoundView: View {
     
     var body: some View {
         
-                    List(soundOptions) { sound in
-                        Button(action: {
-                            playSound(fileName: sound.fileName)
-                            chosenSound = sound
-                        }) {
-                            if chosenSound.fileName == sound.fileName {
-                                
-                            }
-                            Label(sound.name, systemImage: chosenSound.fileName == sound.fileName ? "circle.fill" : "circle")
-                                .tint(.primary)
-                                
-                        }
+        List {
+            Section {
+                ForEach(soundOptions) { sound in
+                    Button(action: {
+                        playSound(fileName: sound.fileName)
+                        chosenSound = sound
+                    }) {
+                        Label(sound.name, systemImage: chosenSound.fileName == sound.fileName ? "circle.fill" : "circle")
+                            .tint(.primary)
                     }
+                }
+            } footer: {
+                Label("The sounds Singing Bowl 2, Gong 2, Chimes, Metallophone and their variations were created from samples by https://freesound.org/people/juskiddink/", systemImage: "info.circle")
+            }
+        }
                     .scrollContentBackground(.hidden)
                     .background(.customGray)
                     .navigationTitle(title)

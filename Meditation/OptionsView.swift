@@ -44,7 +44,7 @@ struct OptionsView: View {
                     }
                     
                     NavigationLink {
-                        NotificationSoundView(chosenSound: $meditationManager.meditationTimer.endSound, title: "Reminder Sound", soundOptions: meditationManager.soundOptions)
+                        NotificationSoundView(chosenSound: $meditationManager.meditationTimer.reminderSound, title: "Reminder Sound", soundOptions: meditationManager.soundOptions)
                     } label: {
                         HStack {
                             Text("Reminder Sound")
