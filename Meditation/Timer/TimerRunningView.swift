@@ -30,6 +30,7 @@ struct TimerRunningView: View {
                         circleProgress = 0.0
                     }
                 }
+                
             
             Group {
                 if isRunning {
@@ -52,7 +53,8 @@ struct TimerRunningView: View {
                     if isRunning {
                         
                         Button(action: {
-                                meditationManager.pauseMeditation()
+                            meditationManager.pauseMeditation()
+                            circleProgress = 0.0
                         }, label: {
                                 Text("Pause")
                                 .font(.title2)
@@ -71,7 +73,8 @@ struct TimerRunningView: View {
                     
                     } else {
                         Button(action: {
-                                meditationManager.startMeditation()
+                            circleProgress = 0.0
+                            meditationManager.startMeditation()
                         }, label: {
                             Text("Resume")
                                 .font(.title2)
