@@ -48,7 +48,7 @@ struct TimerView: View {
                 TimerRunningView(meditationManager: meditationManager, isRunning: false)
 
             case .preparing:
-                Text(meditationManager.koanFunc())
+                Text(meditationManager.meditationTimer.showKoan ? meditationManager.koanFunc() : "")
                     .font(.title)
                     .padding(32)
                     .onAppear {

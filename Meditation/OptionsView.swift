@@ -17,6 +17,12 @@ struct OptionsView: View {
                     TextField("Welcome Back Text", text: $meditationManager.welcomeMessage)
                     
                     TextField("Meditation Started Text", text: $meditationManager.startMessage)
+                    
+                    Toggle("Show Koan", isOn: $meditationManager.meditationTimer.showKoan)
+                    
+                    if meditationManager.meditationTimer.showKoan {
+                        NavigationLink("Edit Koans", destination: KoansEditView(meditationManager: meditationManager))
+                    }
                 }
                 
                 Section("Sounds") {
@@ -62,6 +68,7 @@ struct OptionsView: View {
     //                            }
                     // TODO: koans, reminders to meditate, intervals
                 }
+
                 
                 Section("Misc") {
                     Picker("Preparation Time", selection: $meditationManager.meditationTimer.preparationTime) {
