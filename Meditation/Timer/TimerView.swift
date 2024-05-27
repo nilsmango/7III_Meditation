@@ -9,11 +9,7 @@ import SwiftUI
 
 struct TimerView: View {
     @ObservedObject var meditationManager: MeditationManager
-        
-    // Notifications
-    private let notificationCenter = UNUserNotificationCenter.current()
-    
-    
+
     var body: some View {
         VStack {
             Spacer(minLength: 0)
@@ -61,19 +57,6 @@ struct TimerView: View {
             Spacer(minLength: 0)
         }
         .animation(.easeInOut(duration: 1.0).delay(0.3), value: meditationManager.meditationTimer.timerStatus)
-        .onAppear {
-            notificationCenter.requestAuthorization(options: [.alert, .sound]) { success, error in
-                if success {
-                    // print("All set!")
-                } else if let error = error {
-                    print(error.localizedDescription)
-                }
-            }
-            notificationCenter.delegate = meditationManager
-            meditationManager.activateHealthKit()
-            
-            meditationManager.checkStatusOfTimer()
-        }
     }
 }
 

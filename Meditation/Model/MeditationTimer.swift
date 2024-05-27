@@ -26,6 +26,8 @@ struct MeditationTimer: Codable {
     
     var showKoan: Bool
     var koans: [String]
+    
+    var statistics: MeditationStatistics
 }
 
 enum TimerStatus: String, CaseIterable, Identifiable, Codable {

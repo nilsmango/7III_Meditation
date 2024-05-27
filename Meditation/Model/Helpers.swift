@@ -36,3 +36,12 @@ func dateToDateFormatted(from: Date, to: Date) -> String {
         return formatted
     }
 }
+
+
+func getStartOfMonth(numberOfMonthsFromNow: Int) -> Date {
+    let calendar = Calendar.current
+    let startOfDay = calendar.startOfDay(for: Calendar.current.date(byAdding: .month, value: -numberOfMonthsFromNow, to: Date())!)
+    let startOfMonth = calendar.dateComponents([.year, .month], from: startOfDay)
+    return calendar.date(from: startOfMonth)!
+    
+}

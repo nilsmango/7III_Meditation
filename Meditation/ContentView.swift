@@ -10,11 +10,21 @@ import SwiftUI
 struct ContentView: View {
     @ObservedObject var meditationManager: MeditationManager
     
+    // Notifications
+    private let notificationCenter = UNUserNotificationCenter.current()
+    
+    
     var body: some View {
         NavigationStack {
             ZStack {
                 VStack {
                     HStack {
+                        NavigationLink(destination: StatisticsView(meditationManager: meditationManager)) {
+                            StreakButton(streakNumber: meditationManager.meditationTimer.statistics.currentStreak)
+                                .padding(.horizontal)
+                                .padding(.vertical, 4)
+                        }
+                        
                         Spacer()
                         
                         NavigationLink(destination: OptionsView(meditationManager: meditationManager)) {
@@ -25,15 +35,30 @@ struct ContentView: View {
                                 .labelStyle(.iconOnly)
                                 .padding(.horizontal)
                                 .padding(.vertical, 4)
-                            
                         }
                     }
+                    
                     Spacer()
                     
                 }
                 TimerView(meditationManager: meditationManager)
             }
             .background(meditationManager.gradientBackground ? LinearGradient(gradient: Gradient(colors: [.customGray, .accent]), startPoint: .top, endPoint: .bottom) : LinearGradient(gradient: Gradient(colors: [.customGray]), startPoint: .top, endPoint: .bottom))
+        }
+        .onAppear {
+            meditationManager.checkStatusOfTimer()
+            
+            notificationCenter.requestAuthorization(options: [.alert, .sound]) { success, error in
+                if success {
+                    // print("All set!")
+                } else if let error = error {
+                    print(error.localizedDescription)
+                }
+            }
+            notificationCenter.delegate = meditationManager
+            
+            meditationManager.activateHealthKitGetMeditationSessions()
+            
         }
         
     }

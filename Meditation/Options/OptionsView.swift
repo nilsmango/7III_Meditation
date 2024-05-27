@@ -66,7 +66,7 @@ struct OptionsView: View {
     //                                        Text(sound.prettyString).tag(sound)
     //                                    }
     //                            }
-                    // TODO: koans, reminders to meditate, intervals
+                    // TODO: reminders to meditate, intervals
                 }
 
                 

@@ -42,6 +42,13 @@
 		7879BDF32BF68448001994D2 /* CircleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7879BDF22BF68448001994D2 /* CircleButtonStyle.swift */; };
 		7879BDF52BF684FD001994D2 /* TimerStoppedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7879BDF42BF684FD001994D2 /* TimerStoppedView.swift */; };
 		789A0E072C032377009CB9E7 /* KoansEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E062C032377009CB9E7 /* KoansEditView.swift */; };
+		789A0E092C0388FE009CB9E7 /* StreakButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E082C0388FE009CB9E7 /* StreakButton.swift */; };
+		789A0E0B2C038C42009CB9E7 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E0A2C038C42009CB9E7 /* StatisticsView.swift */; };
+		789A0E102C0392F5009CB9E7 /* MeditationStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E0F2C0392F5009CB9E7 /* MeditationStatistics.swift */; };
+		789A0E122C04D965009CB9E7 /* StreakTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E112C04D965009CB9E7 /* StreakTile.swift */; };
+		789A0E142C04FCCA009CB9E7 /* MonthlyChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E132C04FCCA009CB9E7 /* MonthlyChart.swift */; };
+		789A0E182C04FE57009CB9E7 /* DateComponents + Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E172C04FE57009CB9E7 /* DateComponents + Identifiable.swift */; };
+		789A0E1A2C04FEAB009CB9E7 /* DateComponents + Comparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E192C04FEAB009CB9E7 /* DateComponents + Comparable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +89,13 @@
 		7879BDF22BF68448001994D2 /* CircleButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButtonStyle.swift; sourceTree = "<group>"; };
 		7879BDF42BF684FD001994D2 /* TimerStoppedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerStoppedView.swift; sourceTree = "<group>"; };
 		789A0E062C032377009CB9E7 /* KoansEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoansEditView.swift; sourceTree = "<group>"; };
+		789A0E082C0388FE009CB9E7 /* StreakButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakButton.swift; sourceTree = "<group>"; };
+		789A0E0A2C038C42009CB9E7 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
+		789A0E0F2C0392F5009CB9E7 /* MeditationStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationStatistics.swift; sourceTree = "<group>"; };
+		789A0E112C04D965009CB9E7 /* StreakTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakTile.swift; sourceTree = "<group>"; };
+		789A0E132C04FCCA009CB9E7 /* MonthlyChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyChart.swift; sourceTree = "<group>"; };
+		789A0E172C04FE57009CB9E7 /* DateComponents + Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateComponents + Identifiable.swift"; sourceTree = "<group>"; };
+		789A0E192C04FEAB009CB9E7 /* DateComponents + Comparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateComponents + Comparable.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,9 +142,9 @@
 			children = (
 				78385D0A2BF3647300581057 /* MeditationApp.swift */,
 				78385D0C2BF3647300581057 /* ContentView.swift */,
-				7827880C2BFB3F45004E7F77 /* OptionsView.swift */,
-				789A0E062C032377009CB9E7 /* KoansEditView.swift */,
-				7834263B2BFF6B990008F9F9 /* NotificationSoundView.swift */,
+				789A0E082C0388FE009CB9E7 /* StreakButton.swift */,
+				789A0E0E2C039149009CB9E7 /* Statistics */,
+				789A0E0D2C03912D009CB9E7 /* Options */,
 				7827880B2BFB3F30004E7F77 /* Timer */,
 				78385D1B2BF366F900581057 /* Model */,
 				78385D0E2BF3647500581057 /* Assets.xcassets */,
@@ -154,9 +168,12 @@
 			children = (
 				78385D202BF3DFEE00581057 /* MeditationManager.swift */,
 				78385D192BF366A000581057 /* MeditationTimer.swift */,
+				789A0E0F2C0392F5009CB9E7 /* MeditationStatistics.swift */,
 				7834263F2BFF6C7B0008F9F9 /* TimerSound.swift */,
 				78385D222BF3E11B00581057 /* MeditationSession.swift */,
 				7879BDEF2BF4A43E001994D2 /* Helpers.swift */,
+				789A0E172C04FE57009CB9E7 /* DateComponents + Identifiable.swift */,
+				789A0E192C04FEAB009CB9E7 /* DateComponents + Comparable.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -184,6 +201,26 @@
 				78385D242BF3E4F100581057 /* Kitchen Timer Normal.caf */,
 			);
 			path = Sounds;
+			sourceTree = "<group>";
+		};
+		789A0E0D2C03912D009CB9E7 /* Options */ = {
+			isa = PBXGroup;
+			children = (
+				7827880C2BFB3F45004E7F77 /* OptionsView.swift */,
+				789A0E062C032377009CB9E7 /* KoansEditView.swift */,
+				7834263B2BFF6B990008F9F9 /* NotificationSoundView.swift */,
+			);
+			path = Options;
+			sourceTree = "<group>";
+		};
+		789A0E0E2C039149009CB9E7 /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				789A0E0A2C038C42009CB9E7 /* StatisticsView.swift */,
+				789A0E112C04D965009CB9E7 /* StreakTile.swift */,
+				789A0E132C04FCCA009CB9E7 /* MonthlyChart.swift */,
+			);
+			path = Statistics;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -277,15 +314,22 @@
 				7827880A2BF68B67004E7F77 /* TimerRunningView.swift in Sources */,
 				783426402BFF6C7B0008F9F9 /* TimerSound.swift in Sources */,
 				78385D1A2BF366A000581057 /* MeditationTimer.swift in Sources */,
+				789A0E092C0388FE009CB9E7 /* StreakButton.swift in Sources */,
+				789A0E182C04FE57009CB9E7 /* DateComponents + Identifiable.swift in Sources */,
 				7879BDF32BF68448001994D2 /* CircleButtonStyle.swift in Sources */,
 				7879BDF02BF4A43E001994D2 /* Helpers.swift in Sources */,
+				789A0E102C0392F5009CB9E7 /* MeditationStatistics.swift in Sources */,
 				789A0E072C032377009CB9E7 /* KoansEditView.swift in Sources */,
 				78385D0D2BF3647300581057 /* ContentView.swift in Sources */,
 				783426862BFFCFB20008F9F9 /* TimerCircleView.swift in Sources */,
+				789A0E1A2C04FEAB009CB9E7 /* DateComponents + Comparable.swift in Sources */,
+				789A0E142C04FCCA009CB9E7 /* MonthlyChart.swift in Sources */,
 				7834263C2BFF6B990008F9F9 /* NotificationSoundView.swift in Sources */,
 				7879BDF52BF684FD001994D2 /* TimerStoppedView.swift in Sources */,
 				78385D212BF3DFEE00581057 /* MeditationManager.swift in Sources */,
+				789A0E122C04D965009CB9E7 /* StreakTile.swift in Sources */,
 				78385D1F2BF3674800581057 /* TimerView.swift in Sources */,
+				789A0E0B2C038C42009CB9E7 /* StatisticsView.swift in Sources */,
 				7827880D2BFB3F45004E7F77 /* OptionsView.swift in Sources */,
 				78385D0B2BF3647300581057 /* MeditationApp.swift in Sources */,
 				78385D232BF3E11B00581057 /* MeditationSession.swift in Sources */,
@@ -439,7 +483,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.4;
@@ -483,7 +527,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.4;

@@ -11,13 +11,120 @@ import HealthKit
 
 class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
         
-    // MARK: History
+    // MARK: Statistics
     
     @Published var meditationSessions = [MeditationSession]()
     
+    // calendar for everybody
+    let calendar = Calendar.current
+    
+    /// Computed property to calculate total meditation duration for each day in the last month
+    var meditationDurationPerDay: [Date: TimeInterval] {
+        var durations: [Date: TimeInterval] = [:]
+        
+        let thirtyDaysAgo = calendar.date(byAdding: .day, value: -30, to: Date())!
+        
+        for session in meditationSessions {
+            // Filter out sessions older than 30 days
+            guard session.startDate >= thirtyDaysAgo else { continue }
+            
+            let startOfDay = calendar.startOfDay(for: session.startDate)
+            let duration = session.endDate.timeIntervalSince(session.startDate)
+            
+            if let existingDuration = durations[startOfDay] {
+                durations[startOfDay] = existingDuration + duration
+            } else {
+                durations[startOfDay] = duration
+            }
+        }
+        
+        return durations
+    }
+    
+    var averageMeditationsPerMonth: [DateComponents: TimeInterval] {
+        var timePerMonth: [DateComponents: TimeInterval] = [:]
+        
+        // calculating total time per month
+        for session in meditationSessions {
+            let yearAndMonthComponent = calendar.dateComponents([.year, .month], from: session.startDate)
+            let duration = session.endDate.timeIntervalSince(session.startDate)
+            
+            if var existingMonthData = timePerMonth[yearAndMonthComponent] {
+                existingMonthData += duration
+                timePerMonth[yearAndMonthComponent] = existingMonthData
+            } else {
+                timePerMonth[yearAndMonthComponent] = duration
+            }
+        }
+        
+        // getting the average per month
+        for monthAndTime in timePerMonth {
+            // get the days the month of the DateComponent has
+            if let date = calendar.date(from: monthAndTime.key) {
+                if let daysRange = calendar.range(of: .day, in: .month, for: date) {
+                    let numberOfDays = daysRange.count
+                    
+                    // get the average daily meditation time for that month
+                    let averagePerDay = monthAndTime.value / Double(numberOfDays)
+                    
+                    timePerMonth[monthAndTime.key] = averagePerDay
+                }
+                
+            }
+        }
+        
+        return timePerMonth
+    }
+    
+    @AppStorage("healthPermission") var healthPermission = false
+    
     let meditationSessionsPathComponent = "meditationSessions.data"
     
-    func saveMeditationSessionsToDisk() {
+    /// gets the meditation sessions, either from the documents, or from health if provided
+    private func getMeditationSessions() {
+        // load meditation session from health if possible
+        if HKHealthStore.isHealthDataAvailable() && healthPermission {
+            loadMeditationSessionsFromHealth()
+        } else {
+            loadMeditationSessionsFromDisk()
+        }
+        updateMeditationStatistics()
+    }
+    
+    /// loading meditation sessions from health store
+    private func loadMeditationSessionsFromHealth() {
+        let mindfulType = HKObjectType.categoryType(forIdentifier: .mindfulSession)!
+
+        let startDate = Date.distantPast // or a specific date
+            let endDate = Date()
+            
+            let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: .strictStartDate)
+            let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: true)
+            
+            let query = HKSampleQuery(sampleType: mindfulType, predicate: predicate, limit: HKObjectQueryNoLimit, sortDescriptors: [sortDescriptor]) { (query, results, error) in
+                guard error == nil else {
+                    print("Error fetching mindfulness sessions from HealthKit: \(String(describing: error))")
+                    return
+                }
+                
+                guard let results = results as? [HKCategorySample] else {
+                    print("Failed to cast results as [HKCategorySample]")
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    for sample in results {
+                        let session = MeditationSession(startDate: sample.startDate, endDate: sample.endDate)
+                        self.meditationSessions.append(session)
+                    }
+                }
+            }
+        
+            healthStore.execute(query)
+        }
+    
+    /// saving meditation sessions to disk (for if we have no health store available)
+    private func saveMeditationSessionsToDisk() {
         let fileManager = FileManager.default
         let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
         let fileURL = documentsURL.appendingPathComponent(meditationSessionsPathComponent)
@@ -30,7 +137,8 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
         }
     }
     
-    func loadMeditationSessionsFromDisk() {
+    /// loading meditation sessions from disk (for if we have no health store available)
+    private func loadMeditationSessionsFromDisk() {
         let fileManager = FileManager.default
         let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
         let fileURL = documentsURL.appendingPathComponent(meditationSessionsPathComponent)
@@ -44,6 +152,129 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
             }
         }
     }
+
+    // updating the meditation statistics from the meditation sessions
+    func updateMeditationStatistics() {
+        // reverse the meditation sessions so we have the newest to oldest
+        let sortedSessions = meditationSessions.reversed()
+        
+        // update current streak
+        if let newestSession = sortedSessions.first {
+            
+            // Calculate the start of yesterday
+            if let startOfYesterday = calendar.date(byAdding: .day, value: -1, to: calendar.startOfDay(for: Date())) {
+                
+                // last session was yesterday or today
+                if newestSession.endDate >= startOfYesterday {
+                    
+                    // Calculate the active streak length
+                    var streakLength = 0
+                    var lastSessionDate: Date? = nil
+                    
+                    for session in sortedSessions {
+                        let sessionDate = calendar.startOfDay(for: session.endDate)
+                        
+                        if let lastDate = lastSessionDate {
+                            let daysDifference = calendar.dateComponents([.day], from: sessionDate, to: lastDate).day!
+                            
+                            if daysDifference == 1 {
+                                // The session is on the previous day of the last session
+                                streakLength += 1
+                                lastSessionDate = sessionDate
+                            } else if daysDifference == 0 {
+                                // The session is on the same day as the last session
+                                continue
+                            } else {
+                                // The session is not on the previous day, break the streak
+                                break
+                            }
+                        } else {
+                            // First session in the streak
+                            streakLength = 1
+                            lastSessionDate = sessionDate
+                        }
+                    }
+                    print("The active streak length is \(streakLength) days.")
+                    meditationTimer.statistics.currentStreak = streakLength
+                    
+                    
+                } else {
+                    // no active streak
+                    meditationTimer.statistics.currentStreak = 0
+                }
+            }
+        }
+        
+        // Calculate the longest streak
+        var lastSessionDate: Date? = nil
+        var longestStreak = 0
+        var currentStreak = 0
+        
+        for session in sortedSessions {
+            let sessionDate = calendar.startOfDay(for: session.endDate)
+            
+            if let lastDate = lastSessionDate {
+                let daysDifference = calendar.dateComponents([.day], from: sessionDate, to: lastDate).day!
+                
+                if daysDifference == 1 {
+                    // The session is on the previous day of the last session
+                    currentStreak += 1
+                } else if daysDifference > 1 {
+                    // The session is not on the previous day, reset the streak
+                    longestStreak = max(longestStreak, currentStreak)
+                    currentStreak = 1
+                }
+                // If daysDifference is 0, the session is on the same day, no change in streak
+            } else {
+                // First session in the streak
+                currentStreak = 1
+            }
+            
+            lastSessionDate = sessionDate
+        }
+        
+        // Check the final streak
+        longestStreak = max(longestStreak, currentStreak)
+        
+        print("The longest streak length is \(longestStreak) days.")
+        
+        meditationTimer.statistics.longestStreak = longestStreak
+        
+    }
+    
+        
+    /// update the current streak when we are meditating
+    /// use before saving the meditation session!
+    private func updateCurrentStreak() {
+        if meditationTimer.statistics.currentStreak > 0 {
+            // get the last meditation session
+            if let lastDate = meditationSessions.max(by: { $0.endDate > $1.endDate })?.endDate {
+                if dateIsToday(date: lastDate) {
+                    // keep the streak as is
+                } else {
+                    // +1!
+                    meditationTimer.statistics.currentStreak += 1
+                }
+            }
+        } else {
+            meditationTimer.statistics.currentStreak = 1
+        }
+    }
+    
+    private func dateIsToday(date: Date) -> Bool {
+        let startOfToday = calendar.startOfDay(for: Date())
+        
+        return date >= startOfToday ? true : false
+    }
+    
+    private func updateLongestStreakFromCurrentStreak() {
+        if meditationTimer.statistics.currentStreak > meditationTimer.statistics.longestStreak {
+            meditationTimer.statistics.longestStreak = meditationTimer.statistics.currentStreak
+        }
+    }
+    
+
+    
     
     // MARK: Design
     
@@ -58,7 +289,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
             if let loadedData = try? JSONDecoder().decode(MeditationTimer.self, from: meditationTimerData) {
                 return loadedData
             } else {
-                return MeditationTimer(startDate: Date.distantPast, targetDate: Date.distantPast, timerInMinutes: 12, timerStatus: .stopped, preparationTime: 3, intervalActive: false, intervalTime: 60, endSound: TimerSound(name: "Friendly End", fileName: "Friendly End.caf"), startSound: TimerSound(name: "Friendly", fileName: "Friendly.caf"), intervalSound: TimerSound(name: "Kitchen Timer", fileName: "Kitchen Timer Normal.caf"), reminderSound: TimerSound(name: "Dual Bowl", fileName: "Dual Bowl.caf"), showKoan: true, koans: ["Love is the way.", "Have a great flight.", "What is the sound of one hand clapping?", "May all beings be happy and free from suffering.", "You miss 100% of the shots you don’t take.\n- Wayne Gretzky\n- Michael Scott", "Let it be.", "Don't panic.", "Be here now.", "Know your self.", "If you meet the Buddha, kill him."])
+                return MeditationTimer(startDate: Date.distantPast, targetDate: Date.distantPast, timerInMinutes: 12, timerStatus: .stopped, preparationTime: 3, intervalActive: false, intervalTime: 60, endSound: TimerSound(name: "Friendly End", fileName: "Friendly End.caf"), startSound: TimerSound(name: "Friendly", fileName: "Friendly.caf"), intervalSound: TimerSound(name: "Kitchen Timer", fileName: "Kitchen Timer Normal.caf"), reminderSound: TimerSound(name: "Dual Bowl", fileName: "Dual Bowl.caf"), showKoan: true, koans: ["Love is the way.", "Have a great flight.", "What is the sound of one hand clapping?", "May all beings be happy and free from suffering.", "You miss 100% of the shots you don’t take.\n- Wayne Gretzky\n- Michael Scott", "Let it be.", "Don't panic.", "Be here now.", "Know your self.", "If you meet the Buddha, kill him.", "Don’t seek the truth; just drop your opinions."], statistics: MeditationStatistics(currentStreak: 0, longestStreak: 0))
             }
         }
         set {
@@ -125,6 +356,9 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
         timer = Timer.scheduledTimer(withTimeInterval: Double(meditationTimer.preparationTime) + Double(meditationTimer.timerInMinutes * 60) , repeats: false, block: { timer in
             self.endMeditation()
         })
+        
+        // update the current streak
+        updateCurrentStreak()
         
         // save meditation session
         saveMeditationSession()
@@ -252,66 +486,75 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
     
     let healthStore = HKHealthStore()
     
-    func activateHealthKit() {
+    func activateHealthKitGetMeditationSessions() {
         
         if HKHealthStore.isHealthDataAvailable() {
             
             
-            let typestoRead = Set([
+            let typesToRead = Set([
                 HKObjectType.categoryType(forIdentifier: HKCategoryTypeIdentifier.mindfulSession)!
             ])
             
-            let typestoShare = Set([
+            let typesToShare = Set([
                 HKObjectType.categoryType(forIdentifier: HKCategoryTypeIdentifier.mindfulSession)!
             ])
             
-            self.healthStore.requestAuthorization(toShare: typestoShare, read: typestoRead) { (success, error) -> Void in
-                if success == false {
-                    print("Couldn't get get Health Store authorization")
-                }
-                if success == true {
-                    print("Health Store authorization granted")
+            healthStore.requestAuthorization(toShare: typesToShare, read: typesToRead) { (success, error) -> Void in
+                DispatchQueue.main.async {
+                    if success == false {
+                        print("Couldn't get get Health Store authorization")
+                        self.healthPermission = false
+                        self.getMeditationSessions()
+                    }
+                    if success == true {
+                        print("Health Store authorization granted")
+                        self.healthPermission = true
+                        self.getMeditationSessions()
+                    }
                 }
             }
-            
         }
     }
     
     func saveMeditationSession() {
         
-        // update meditations array and save it
+        // update meditations array and save it either to disk or to health if available
         let meditationSession = MeditationSession(startDate: meditationTimer.startDate, endDate: meditationTimer.targetDate)
         meditationSessions.append(meditationSession)
-        saveMeditationSessionsToDisk()
         
-        // save mindful session to health
-        if HKHealthStore.isHealthDataAvailable() {
-            
-            // startTime and endTime are NSDate objects
-            if let mindfulType = HKObjectType.categoryType(forIdentifier: .mindfulSession) {
+        if healthPermission {
+            // save mindful session to health
+            if HKHealthStore.isHealthDataAvailable() {
                 
-                // we create our new object we want to push in Health app
-                let mindfulSample = HKCategorySample(type:mindfulType, value: 0, start: meditationTimer.startDate, end: meditationTimer.targetDate)
-                
-                // at the end, we save it
-                healthStore.save(mindfulSample, withCompletion: { (success, error) -> Void in
+                // startTime and endTime are NSDate objects
+                if let mindfulType = HKObjectType.categoryType(forIdentifier: .mindfulSession) {
                     
-                    if error != nil {
-                        // something happened
-                        return
-                    }
+                    // we create our new object we want to push in Health app
+                    let mindfulSample = HKCategorySample(type:mindfulType, value: 0, start: meditationTimer.startDate, end: meditationTimer.targetDate)
                     
-                    if success {
-                        print("New meditation data was saved in HealthKit")
+                    // at the end, we save it
+                    healthStore.save(mindfulSample, withCompletion: { (success, error) -> Void in
                         
-                    } else {
-                        // something happened again
-                    }
-                    
-                })
+                        if error != nil {
+                            // something happened, let's just save to disk
+                            self.saveMeditationSessionsToDisk()
+                            return
+                        }
+                        
+                        if success {
+                            print("New meditation data was saved in HealthKit")
+                            
+                        } else {
+                            // something happened again
+                            self.saveMeditationSessionsToDisk()
+                        }
+                        
+                    })
+                }
             }
+        } else {
+            saveMeditationSessionsToDisk()
         }
-        
     }
     
     func editMeditationSession() {
