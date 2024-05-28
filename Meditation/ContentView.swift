@@ -13,19 +13,28 @@ struct ContentView: View {
     // Notifications
     private let notificationCenter = UNUserNotificationCenter.current()
     
+    @State private var rotation = Angle(degrees: 0.0)
     
     var body: some View {
         NavigationStack {
             ZStack {
                 VStack {
                     HStack {
-                        NavigationLink(destination: StatisticsView(meditationManager: meditationManager)) {
-                            StreakButton(streakNumber: meditationManager.meditationTimer.statistics.currentStreak)
-                                .padding(.horizontal)
-                                .padding(.vertical, 4)
-                        }
+                        
+                        StreakButton(streakNumber: meditationManager.meditationTimer.statistics.currentStreak)
+                            .padding(.horizontal)
+                            .padding(.vertical, 4)
+                            .rotationEffect(rotation)
+                            .onTapGesture {
+                                rotation += Angle(degrees: 360)
+                            }
+                            .animation(.easeInOut(duration: 1.0), value: rotation)
                         
                         Spacer()
+                        NavigationLink(destination: StatisticsView(meditationManager: meditationManager)) {
+                            StatisticsButton(padding: 5.5)
+                                .padding(.vertical, 4)
+                        }
                         
                         NavigationLink(destination: OptionsView(meditationManager: meditationManager)) {
                             Label("Options", systemImage: "ellipsis.circle.fill")
@@ -33,7 +42,7 @@ struct ContentView: View {
                                 .symbolRenderingMode(.palette)
                                 .foregroundStyle(.blackWhite, .accent)
                                 .labelStyle(.iconOnly)
-                                .padding(.horizontal)
+                                .padding(.trailing)
                                 .padding(.vertical, 4)
                         }
                     }

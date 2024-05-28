@@ -27,6 +27,7 @@ struct StatisticsView: View {
                 StreakTile(streakText: "Longest Streak", streakNumber: String(meditationManager.meditationTimer.statistics.longestStreak), frameWidth: frameWidth)
             }
             .padding(.horizontal)
+            .padding(.top)
             
             ThirtyDaysChart(meditationManager: meditationManager)
             .padding()
@@ -44,7 +45,6 @@ struct StatisticsView: View {
                         .fill(.whiteAndListGray)
                 }
                 .padding(.horizontal)
-            
             
         }
         .background(.customGray)

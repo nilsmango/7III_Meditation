@@ -19,7 +19,7 @@ struct StreakButton: View {
     }
     
     var body: some View {
-        Label(String(streakNumber) + streakAppendix, systemImage: "chart.bar.xaxis")
+        Text(String(streakNumber) + streakAppendix)
             .fontDesign(.rounded)
             .symbolRenderingMode(.palette)
             .foregroundStyle(.blackAndWhite, .accent)

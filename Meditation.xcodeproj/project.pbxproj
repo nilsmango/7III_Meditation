@@ -50,6 +50,7 @@
 		789A0E182C04FE57009CB9E7 /* DateComponents + Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E172C04FE57009CB9E7 /* DateComponents + Identifiable.swift */; };
 		789A0E1A2C04FEAB009CB9E7 /* DateComponents + Comparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E192C04FEAB009CB9E7 /* DateComponents + Comparable.swift */; };
 		789A0E1C2C05B3EA009CB9E7 /* ThirtyDaysChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E1B2C05B3EA009CB9E7 /* ThirtyDaysChart.swift */; };
+		789A0E202C05C35A009CB9E7 /* StatisticsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E1F2C05C35A009CB9E7 /* StatisticsButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +99,7 @@
 		789A0E172C04FE57009CB9E7 /* DateComponents + Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateComponents + Identifiable.swift"; sourceTree = "<group>"; };
 		789A0E192C04FEAB009CB9E7 /* DateComponents + Comparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateComponents + Comparable.swift"; sourceTree = "<group>"; };
 		789A0E1B2C05B3EA009CB9E7 /* ThirtyDaysChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirtyDaysChart.swift; sourceTree = "<group>"; };
+		789A0E1F2C05C35A009CB9E7 /* StatisticsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 				78385D0A2BF3647300581057 /* MeditationApp.swift */,
 				78385D0C2BF3647300581057 /* ContentView.swift */,
 				789A0E082C0388FE009CB9E7 /* StreakButton.swift */,
+				789A0E1F2C05C35A009CB9E7 /* StatisticsButton.swift */,
 				789A0E0E2C039149009CB9E7 /* Statistics */,
 				789A0E0D2C03912D009CB9E7 /* Options */,
 				7827880B2BFB3F30004E7F77 /* Timer */,
@@ -330,6 +333,7 @@
 				789A0E142C04FCCA009CB9E7 /* MonthlyChart.swift in Sources */,
 				7834263C2BFF6B990008F9F9 /* NotificationSoundView.swift in Sources */,
 				7879BDF52BF684FD001994D2 /* TimerStoppedView.swift in Sources */,
+				789A0E202C05C35A009CB9E7 /* StatisticsButton.swift in Sources */,
 				78385D212BF3DFEE00581057 /* MeditationManager.swift in Sources */,
 				789A0E122C04D965009CB9E7 /* StreakTile.swift in Sources */,
 				78385D1F2BF3674800581057 /* TimerView.swift in Sources */,

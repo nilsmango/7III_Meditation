@@ -21,7 +21,7 @@ struct StreakTile: View {
                 .fontWeight(.bold)
         }
         .padding()
-        .frame(width: frameWidth, height: frameWidth)
+        .frame(width: frameWidth, height: frameWidth * 0.9)
         .background {
             RoundedRectangle(cornerRadius: 25.0)
                 .fill(.whiteAndListGray)
