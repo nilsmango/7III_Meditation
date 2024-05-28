@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7827880A2BF68B67004E7F77 /* TimerRunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782788092BF68B67004E7F77 /* TimerRunningView.swift */; };
 		7827880D2BFB3F45004E7F77 /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7827880C2BFB3F45004E7F77 /* OptionsView.swift */; };
+		782992412C06316B003C4949 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78385D0E2BF3647500581057 /* Assets.xcassets */; };
 		7834263C2BFF6B990008F9F9 /* NotificationSoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7834263B2BFF6B990008F9F9 /* NotificationSoundView.swift */; };
 		783426402BFF6C7B0008F9F9 /* TimerSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7834263F2BFF6C7B0008F9F9 /* TimerSound.swift */; };
 		783426742BFFBC7F0008F9F9 /* Synth Bell.caf in Resources */ = {isa = PBXBuildFile; fileRef = 783426632BFFBC7E0008F9F9 /* Synth Bell.caf */; };
@@ -51,7 +52,43 @@
 		789A0E1A2C04FEAB009CB9E7 /* DateComponents + Comparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E192C04FEAB009CB9E7 /* DateComponents + Comparable.swift */; };
 		789A0E1C2C05B3EA009CB9E7 /* ThirtyDaysChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E1B2C05B3EA009CB9E7 /* ThirtyDaysChart.swift */; };
 		789A0E202C05C35A009CB9E7 /* StatisticsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E1F2C05C35A009CB9E7 /* StatisticsButton.swift */; };
+		789A0E282C06131E009CB9E7 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 789A0E272C06131E009CB9E7 /* WidgetKit.framework */; };
+		789A0E2A2C06131E009CB9E7 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 789A0E292C06131E009CB9E7 /* SwiftUI.framework */; };
+		789A0E2D2C06131E009CB9E7 /* WidgetExtensionBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E2C2C06131E009CB9E7 /* WidgetExtensionBundle.swift */; };
+		789A0E2F2C06131E009CB9E7 /* WidgetExtensionLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E2E2C06131E009CB9E7 /* WidgetExtensionLiveActivity.swift */; };
+		789A0E312C06131E009CB9E7 /* WidgetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E302C06131E009CB9E7 /* WidgetExtension.swift */; };
+		789A0E372C061320009CB9E7 /* WidgetExtensionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 789A0E252C06131E009CB9E7 /* WidgetExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		789A0E3F2C061570009CB9E7 /* TimerStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E3E2C061570009CB9E7 /* TimerStatus.swift */; };
+		789A0E402C061577009CB9E7 /* TimerStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E3E2C061570009CB9E7 /* TimerStatus.swift */; };
+		789A0E442C061B76009CB9E7 /* WidgetButtonLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E432C061B76009CB9E7 /* WidgetButtonLabel.swift */; };
+		789A0E452C061BA1009CB9E7 /* TimerBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E412C061AED009CB9E7 /* TimerBannerView.swift */; };
+		789A0E472C061BAE009CB9E7 /* WidgetButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E462C061BAE009CB9E7 /* WidgetButtonState.swift */; };
+		789A0E482C061ECE009CB9E7 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7879BDEF2BF4A43E001994D2 /* Helpers.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		789A0E352C061320009CB9E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 78385CFF2BF3647300581057 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 789A0E242C06131E009CB9E7;
+			remoteInfo = WidgetExtensionExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		789A0E382C061320009CB9E7 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				789A0E372C061320009CB9E7 /* WidgetExtensionExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		782788092BF68B67004E7F77 /* TimerRunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerRunningView.swift; sourceTree = "<group>"; };
@@ -100,6 +137,18 @@
 		789A0E192C04FEAB009CB9E7 /* DateComponents + Comparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateComponents + Comparable.swift"; sourceTree = "<group>"; };
 		789A0E1B2C05B3EA009CB9E7 /* ThirtyDaysChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirtyDaysChart.swift; sourceTree = "<group>"; };
 		789A0E1F2C05C35A009CB9E7 /* StatisticsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsButton.swift; sourceTree = "<group>"; };
+		789A0E252C06131E009CB9E7 /* WidgetExtensionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WidgetExtensionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		789A0E272C06131E009CB9E7 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		789A0E292C06131E009CB9E7 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		789A0E2C2C06131E009CB9E7 /* WidgetExtensionBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetExtensionBundle.swift; sourceTree = "<group>"; };
+		789A0E2E2C06131E009CB9E7 /* WidgetExtensionLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetExtensionLiveActivity.swift; sourceTree = "<group>"; };
+		789A0E302C06131E009CB9E7 /* WidgetExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetExtension.swift; sourceTree = "<group>"; };
+		789A0E342C061320009CB9E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		789A0E3C2C061412009CB9E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		789A0E3E2C061570009CB9E7 /* TimerStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerStatus.swift; sourceTree = "<group>"; };
+		789A0E412C061AED009CB9E7 /* TimerBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerBannerView.swift; sourceTree = "<group>"; };
+		789A0E432C061B76009CB9E7 /* WidgetButtonLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetButtonLabel.swift; sourceTree = "<group>"; };
+		789A0E462C061BAE009CB9E7 /* WidgetButtonState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetButtonState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +156,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		789A0E222C06131E009CB9E7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				789A0E2A2C06131E009CB9E7 /* SwiftUI.framework in Frameworks */,
+				789A0E282C06131E009CB9E7 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,6 +187,8 @@
 			isa = PBXGroup;
 			children = (
 				78385D092BF3647300581057 /* Meditation */,
+				789A0E2B2C06131E009CB9E7 /* WidgetExtension */,
+				789A0E262C06131E009CB9E7 /* Frameworks */,
 				78385D082BF3647300581057 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -137,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				78385D072BF3647300581057 /* Meditation.app */,
+				789A0E252C06131E009CB9E7 /* WidgetExtensionExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -144,6 +205,7 @@
 		78385D092BF3647300581057 /* Meditation */ = {
 			isa = PBXGroup;
 			children = (
+				789A0E3C2C061412009CB9E7 /* Info.plist */,
 				78385D0A2BF3647300581057 /* MeditationApp.swift */,
 				78385D0C2BF3647300581057 /* ContentView.swift */,
 				789A0E082C0388FE009CB9E7 /* StreakButton.swift */,
@@ -173,6 +235,7 @@
 			children = (
 				78385D202BF3DFEE00581057 /* MeditationManager.swift */,
 				78385D192BF366A000581057 /* MeditationTimer.swift */,
+				789A0E3E2C061570009CB9E7 /* TimerStatus.swift */,
 				789A0E0F2C0392F5009CB9E7 /* MeditationStatistics.swift */,
 				7834263F2BFF6C7B0008F9F9 /* TimerSound.swift */,
 				78385D222BF3E11B00581057 /* MeditationSession.swift */,
@@ -229,6 +292,37 @@
 			path = Statistics;
 			sourceTree = "<group>";
 		};
+		789A0E262C06131E009CB9E7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				789A0E272C06131E009CB9E7 /* WidgetKit.framework */,
+				789A0E292C06131E009CB9E7 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		789A0E2B2C06131E009CB9E7 /* WidgetExtension */ = {
+			isa = PBXGroup;
+			children = (
+				789A0E2C2C06131E009CB9E7 /* WidgetExtensionBundle.swift */,
+				789A0E2E2C06131E009CB9E7 /* WidgetExtensionLiveActivity.swift */,
+				789A0E492C061FB5009CB9E7 /* WidgetViews */,
+				789A0E302C06131E009CB9E7 /* WidgetExtension.swift */,
+				789A0E342C061320009CB9E7 /* Info.plist */,
+			);
+			path = WidgetExtension;
+			sourceTree = "<group>";
+		};
+		789A0E492C061FB5009CB9E7 /* WidgetViews */ = {
+			isa = PBXGroup;
+			children = (
+				789A0E412C061AED009CB9E7 /* TimerBannerView.swift */,
+				789A0E432C061B76009CB9E7 /* WidgetButtonLabel.swift */,
+				789A0E462C061BAE009CB9E7 /* WidgetButtonState.swift */,
+			);
+			path = WidgetViews;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -239,15 +333,34 @@
 				78385D032BF3647300581057 /* Sources */,
 				78385D042BF3647300581057 /* Frameworks */,
 				78385D052BF3647300581057 /* Resources */,
+				789A0E382C061320009CB9E7 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				789A0E362C061320009CB9E7 /* PBXTargetDependency */,
 			);
 			name = Meditation;
 			productName = Meditation;
 			productReference = 78385D072BF3647300581057 /* Meditation.app */;
 			productType = "com.apple.product-type.application";
+		};
+		789A0E242C06131E009CB9E7 /* WidgetExtensionExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 789A0E3B2C061320009CB9E7 /* Build configuration list for PBXNativeTarget "WidgetExtensionExtension" */;
+			buildPhases = (
+				789A0E212C06131E009CB9E7 /* Sources */,
+				789A0E222C06131E009CB9E7 /* Frameworks */,
+				789A0E232C06131E009CB9E7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WidgetExtensionExtension;
+			productName = WidgetExtensionExtension;
+			productReference = 789A0E252C06131E009CB9E7 /* WidgetExtensionExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -256,11 +369,14 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1530;
+				LastSwiftUpdateCheck = 1540;
 				LastUpgradeCheck = 1540;
 				TargetAttributes = {
 					78385D062BF3647300581057 = {
 						CreatedOnToolsVersion = 15.3;
+					};
+					789A0E242C06131E009CB9E7 = {
+						CreatedOnToolsVersion = 15.4;
 					};
 				};
 			};
@@ -278,6 +394,7 @@
 			projectRoot = "";
 			targets = (
 				78385D062BF3647300581057 /* Meditation */,
+				789A0E242C06131E009CB9E7 /* WidgetExtensionExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -310,6 +427,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		789A0E232C06131E009CB9E7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				782992412C06316B003C4949 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -330,6 +455,7 @@
 				78385D0D2BF3647300581057 /* ContentView.swift in Sources */,
 				783426862BFFCFB20008F9F9 /* TimerCircleView.swift in Sources */,
 				789A0E1A2C04FEAB009CB9E7 /* DateComponents + Comparable.swift in Sources */,
+				789A0E3F2C061570009CB9E7 /* TimerStatus.swift in Sources */,
 				789A0E142C04FCCA009CB9E7 /* MonthlyChart.swift in Sources */,
 				7834263C2BFF6B990008F9F9 /* NotificationSoundView.swift in Sources */,
 				7879BDF52BF684FD001994D2 /* TimerStoppedView.swift in Sources */,
@@ -344,7 +470,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		789A0E212C06131E009CB9E7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				789A0E442C061B76009CB9E7 /* WidgetButtonLabel.swift in Sources */,
+				789A0E2F2C06131E009CB9E7 /* WidgetExtensionLiveActivity.swift in Sources */,
+				789A0E472C061BAE009CB9E7 /* WidgetButtonState.swift in Sources */,
+				789A0E482C061ECE009CB9E7 /* Helpers.swift in Sources */,
+				789A0E452C061BA1009CB9E7 /* TimerBannerView.swift in Sources */,
+				789A0E402C061577009CB9E7 /* TimerStatus.swift in Sources */,
+				789A0E2D2C06131E009CB9E7 /* WidgetExtensionBundle.swift in Sources */,
+				789A0E312C06131E009CB9E7 /* WidgetExtension.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		789A0E362C061320009CB9E7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 789A0E242C06131E009CB9E7 /* WidgetExtensionExtension */;
+			targetProxy = 789A0E352C061320009CB9E7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		78385D142BF3647500581057 /* Debug */ = {
@@ -466,6 +615,7 @@
 		78385D172BF3647500581057 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Meditation/Meditation.entitlements;
@@ -477,10 +627,12 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Meditation/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "7III Meditation";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "We need access to Mindful Minutes so we can save your meditation sessions.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "We need access to Mindful Minutes so we can save your meditation sessions.";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -510,6 +662,7 @@
 		78385D182BF3647500581057 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Meditation/Meditation.entitlements;
@@ -521,10 +674,12 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Meditation/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "7III Meditation";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "We need access to Mindful Minutes so we can save your meditation sessions.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "We need access to Mindful Minutes so we can save your meditation sessions.";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -551,6 +706,65 @@
 			};
 			name = Release;
 		};
+		789A0E392C061320009CB9E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A9H57996U3;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WidgetExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = WidgetExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.project7III.meditation.WidgetExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		789A0E3A2C061320009CB9E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A9H57996U3;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WidgetExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = WidgetExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.project7III.meditation.WidgetExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -568,6 +782,15 @@
 			buildConfigurations = (
 				78385D172BF3647500581057 /* Debug */,
 				78385D182BF3647500581057 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		789A0E3B2C061320009CB9E7 /* Build configuration list for PBXNativeTarget "WidgetExtensionExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				789A0E392C061320009CB9E7 /* Debug */,
+				789A0E3A2C061320009CB9E7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

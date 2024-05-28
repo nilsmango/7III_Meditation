@@ -10,9 +10,6 @@ import SwiftUI
 struct ContentView: View {
     @ObservedObject var meditationManager: MeditationManager
     
-    // Notifications
-    private let notificationCenter = UNUserNotificationCenter.current()
-    
     @State private var rotation = Angle(degrees: 0.0)
     
     var body: some View {
@@ -53,23 +50,7 @@ struct ContentView: View {
                 TimerView(meditationManager: meditationManager)
             }
             .background(meditationManager.gradientBackground ? LinearGradient(gradient: Gradient(colors: [.customGray2, .accent]), startPoint: .top, endPoint: .bottom) : LinearGradient(gradient: Gradient(colors: [.customGray2]), startPoint: .top, endPoint: .bottom))
-        }
-        .onAppear {
-            meditationManager.checkStatusOfTimer()
-            
-            notificationCenter.requestAuthorization(options: [.alert, .sound]) { success, error in
-                if success {
-                    // print("All set!")
-                } else if let error = error {
-                    print(error.localizedDescription)
-                }
-            }
-            notificationCenter.delegate = meditationManager
-            
-            meditationManager.activateHealthKitGetMeditationSessions()
-            
-        }
-        
+        }        
     }
 }
 

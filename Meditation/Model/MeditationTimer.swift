@@ -30,9 +30,4 @@ struct MeditationTimer: Codable {
     var statistics: MeditationStatistics
 }
 
-enum TimerStatus: String, CaseIterable, Identifiable, Codable {
-    case running, alarm, stopped, paused, preparing
-    var id: Self { self }
-}
-
 
