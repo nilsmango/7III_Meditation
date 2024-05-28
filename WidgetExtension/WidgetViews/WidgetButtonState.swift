@@ -16,7 +16,7 @@ enum WidgetButtonState: String {
         case .stop:
             "xmark"
         case .pause:
-            "pause.fill"
+            "pause"
         case .resume:
             "arrow.clockwise"
         }

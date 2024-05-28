@@ -11,13 +11,23 @@ struct WidgetButtonLabel: View {
     let buttonState: WidgetButtonState
     
     var body: some View {
-        Label(buttonState.rawValue.capitalized, systemImage: buttonState.symbolName)
-            .fontWeight(buttonState == .pause ? .regular : .bold)
-            .labelStyle(.iconOnly)
+        ZStack {
+            Label(buttonState.rawValue.capitalized, systemImage: buttonState.symbolName)
+                .fontWeight(.bold)
+                .labelStyle(.iconOnly)
+            
+            if buttonState == .pause {
+                Label("", systemImage: "xmark")
+                    .fontWeight(.bold)
+                    .labelStyle(.iconOnly)
+                    .opacity(0.0)
+            }
+        }
+        
 
     }
 }
 
-#Preview {
-    WidgetButtonLabel(buttonState: .pause)
-}
+//#Preview {
+//    WidgetButtonLabel(buttonState: .pause)
+//}

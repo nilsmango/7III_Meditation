@@ -11,6 +11,7 @@ struct TimerBannerView: View {
     var targetDate: Date
     var timerInMinutes: Int
     var timerStatus: TimerStatus
+    
     var body: some View {
         
         HStack {
@@ -29,10 +30,14 @@ struct TimerBannerView: View {
                 .buttonStyle(.borderedProminent)
                 .buttonBorderShape(.circle)
                 .tint(.accent)
-                
-                Text(targetDate, style: .timer)
-                    .font(.title)
-                    .monospacedDigit()
+                .padding(.trailing, 4)
+
+                ProgressView(timerInterval: targetDate.addingTimeInterval(-Double(timerInMinutes*60))...targetDate, countsDown: false) {
+                             Text("Meditation")
+                         } currentValueLabel: {
+                             Text(targetDate, style: .timer)
+                          }
+                .tint(.accent)
                 
             case .alarm:
                 Text("Add welcome back text here")
@@ -43,8 +48,16 @@ struct TimerBannerView: View {
                 .buttonStyle(.borderedProminent)
                 .buttonBorderShape(.circle)
                 .tint(.accent)
+                .padding(.trailing, 40)
                 
-                Text(dateToDateFormatted(from: Date(), to: Date().addingTimeInterval(Double(timerInMinutes * 60))))
+//                Text(dateToDateFormatted(from: Date(), to: Date().addingTimeInterval(Double(timerInMinutes * 60))))
+                
+                ProgressView(value: 0.0) {
+                             Text("Meditation")
+                         } currentValueLabel: {
+                             Text(dateToDateFormatted(from: Date(), to: Date().addingTimeInterval(Double(timerInMinutes * 60))))
+                          }
+                .tint(.accent)
                 
             case .paused:
                 Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
@@ -52,6 +65,21 @@ struct TimerBannerView: View {
                 })
                 .buttonStyle(.borderedProminent)
                 .buttonBorderShape(.circle)
+                .tint(.accent)
+                
+                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                    WidgetButtonLabel(buttonState: .stop)
+                })
+                .buttonStyle(.borderedProminent)
+                .buttonBorderShape(.circle)
+                .tint(.accent)
+                .padding(.trailing, 4)
+                
+                ProgressView(value: 0.0) {
+                             Text("Meditation")
+                         } currentValueLabel: {
+                             Text(dateToDateFormatted(from: Date(), to: Date().addingTimeInterval(Double(timerInMinutes * 60))))
+                          }
                 .tint(.accent)
                     
             case .preparing:
