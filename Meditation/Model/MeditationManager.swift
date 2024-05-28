@@ -38,7 +38,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
             }
         }
         
-        // find today and add 0 if not in there
+        // add 0 minute session for today if no session was done today
         let startOfToday = calendar.startOfDay(for: Date())
         let duration = 0.0
         
@@ -69,15 +69,23 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
         for monthAndTime in timePerMonth {
             // get the days the month of the DateComponent has
             if let date = calendar.date(from: monthAndTime.key) {
-                if let daysRange = calendar.range(of: .day, in: .month, for: date) {
-                    let numberOfDays = daysRange.count
-                    
-                    // get the average daily meditation time for that month
-                    let averagePerDay = monthAndTime.value / Double(numberOfDays)
-                    
-                    timePerMonth[monthAndTime.key] = averagePerDay
-                }
                 
+                let currentMonthComponent = calendar.dateComponents([.year, .month], from: Date())
+                
+                if monthAndTime.key == currentMonthComponent {
+                    // If it is the current month, count only days up to today
+                    let numberOfDays = calendar.component(.day, from: Date())
+                    let averagePerDay = monthAndTime.value / Double(numberOfDays)
+                    timePerMonth[monthAndTime.key] = averagePerDay
+                    
+                } else {
+                    // If it is a past month, count all days in the month
+                    if let daysRange = calendar.range(of: .day, in: .month, for: date) {
+                        let numberOfDays = daysRange.count
+                        let averagePerDay = monthAndTime.value / Double(numberOfDays)
+                        timePerMonth[monthAndTime.key] = averagePerDay
+                    }
+                }
             }
         }
         
