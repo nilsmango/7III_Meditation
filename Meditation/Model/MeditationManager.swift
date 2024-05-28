@@ -104,7 +104,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
         } else {
             loadMeditationSessionsFromDisk()
         }
-        updateMeditationStatistics()
+        
     }
     
     /// loading meditation sessions from health store
@@ -133,6 +133,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
                         let session = MeditationSession(startDate: sample.startDate, endDate: sample.endDate)
                         self.meditationSessions.append(session)
                     }
+                    self.updateMeditationStatistics()
                 }
             }
         
@@ -163,6 +164,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
             do {
                 let sessions = try JSONDecoder().decode([MeditationSession].self, from: data)
                 meditationSessions = sessions
+                updateMeditationStatistics()
             } catch {
                 print("Error loading meditation sessions: \(error)")
             }
@@ -182,7 +184,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
                 
                 // last session was yesterday or today
                 if newestSession.endDate >= startOfYesterday {
-                    
+
                     // Calculate the active streak length
                     var streakLength = 0
                     var lastSessionDate: Date? = nil
@@ -210,9 +212,8 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
                             lastSessionDate = sessionDate
                         }
                     }
-                    print("The active streak length is \(streakLength) days.")
+
                     meditationTimer.statistics.currentStreak = streakLength
-                    
                     
                 } else {
                     // no active streak
@@ -231,14 +232,14 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
             
             if let lastDate = lastSessionDate {
                 let daysDifference = calendar.dateComponents([.day], from: sessionDate, to: lastDate).day!
-                
+
                 if daysDifference == 1 {
                     // The session is on the previous day of the last session
                     currentStreak += 1
                 } else if daysDifference > 1 {
                     // The session is not on the previous day, reset the streak
                     longestStreak = max(longestStreak, currentStreak)
-                    currentStreak = 1
+                    currentStreak = 0
                 }
                 // If daysDifference is 0, the session is on the same day, no change in streak
             } else {
@@ -251,9 +252,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
         
         // Check the final streak
         longestStreak = max(longestStreak, currentStreak)
-        
-        print("The longest streak length is \(longestStreak) days.")
-        
+                
         meditationTimer.statistics.longestStreak = longestStreak
         
     }
@@ -270,10 +269,12 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
                 } else {
                     // +1!
                     meditationTimer.statistics.currentStreak += 1
+                    updateLongestStreakFromCurrentStreak()
                 }
             }
         } else {
             meditationTimer.statistics.currentStreak = 1
+            updateLongestStreakFromCurrentStreak()
         }
     }
     
