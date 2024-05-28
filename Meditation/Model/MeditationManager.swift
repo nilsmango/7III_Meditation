@@ -38,6 +38,14 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
             }
         }
         
+        // find today and add 0 if not in there
+        let startOfToday = calendar.startOfDay(for: Date())
+        let duration = 0.0
+        
+        if durations[startOfToday] == nil {
+            durations[startOfToday] = duration
+        }
+        
         return durations
     }
     
