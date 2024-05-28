@@ -10,11 +10,6 @@ import Charts
 
 struct StatisticsView: View {
     @ObservedObject var meditationManager: MeditationManager
-    
-    let xWidth = 6
-    
-    // Set the time to midnight -(xWidth - 1) for value
-    let startOfDay = Calendar.current.startOfDay(for: Calendar.current.date(byAdding: .day, value: -5, to: Date())!)
 
     let screenWidth = UIScreen.main.bounds.size.width
     let padding = 16.0
@@ -33,47 +28,22 @@ struct StatisticsView: View {
             }
             .padding(.horizontal)
             
-            VStack {
-                Text("Last 30 Days")
-                    .font(.title3)
-                    .fontWeight(.bold)
-                    .padding(.bottom, 8)
-                Chart {
-                    ForEach(meditationManager.meditationDurationPerDay.sorted(by: { $0.key < $1.key }), id: \.key) { date, duration in
-                        BarMark(
-                            x: .value("Day", date, unit: .day),
-                            y: .value("Duration", duration / 60)
-                        )
-                    }
-                }
-                .chartYAxis {
-                    AxisMarks(values: .automatic) { value in
-                        if let numberOfMinutes = value.as(Int.self) {
-                            AxisValueLabel {
-                                Text(String(numberOfMinutes) + " Min.")
-                            }
-                        }
-                        AxisGridLine()
-                        
-                    }
-                }
-                .chartXAxis {
-                    AxisMarks(values: .stride(by: .day, count: 1))
-                }
-                .chartScrollableAxes(.horizontal)
-                .chartScrollPosition(x: .constant(startOfDay))
-                .chartXVisibleDomain(length: xWidth * 24 * 60 * 60)
-                .frame(height: 250)
-            }
+            ThirtyDaysChart(meditationManager: meditationManager)
             .padding()
             .background {
                 RoundedRectangle(cornerRadius: 25.0)
-                    .fill(.whiteAndBlack)
+                    .fill(.whiteAndListGray)
             }
             .padding(.horizontal)
-            .padding(.vertical, 8)
+            .padding(.vertical, padding / 2)
             
             MonthlyChart(meditationManager: meditationManager)
+                .padding()
+                .background {
+                    RoundedRectangle(cornerRadius: 25.0)
+                        .fill(.whiteAndListGray)
+                }
+                .padding(.horizontal)
             
             
         }

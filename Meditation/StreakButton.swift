@@ -40,5 +40,5 @@ struct StreakButton: View {
         }
         Spacer()
     }
-    .background(LinearGradient(gradient: Gradient(colors: [.customGray, .accent]), startPoint: .top, endPoint: .bottom))
+    .background(LinearGradient(gradient: Gradient(colors: [.customGray2, .accent]), startPoint: .top, endPoint: .bottom))
 }

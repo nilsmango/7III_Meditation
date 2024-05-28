@@ -25,6 +25,8 @@ struct KoansEditView: View {
                     newKoan = ""
                 }
         }
+        .scrollContentBackground(.hidden)
+        .background(.customGray)
         .navigationBarItems(trailing: EditButton())
     }
 }

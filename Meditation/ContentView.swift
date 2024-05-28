@@ -43,7 +43,7 @@ struct ContentView: View {
                 }
                 TimerView(meditationManager: meditationManager)
             }
-            .background(meditationManager.gradientBackground ? LinearGradient(gradient: Gradient(colors: [.customGray, .accent]), startPoint: .top, endPoint: .bottom) : LinearGradient(gradient: Gradient(colors: [.customGray]), startPoint: .top, endPoint: .bottom))
+            .background(meditationManager.gradientBackground ? LinearGradient(gradient: Gradient(colors: [.customGray2, .accent]), startPoint: .top, endPoint: .bottom) : LinearGradient(gradient: Gradient(colors: [.customGray2]), startPoint: .top, endPoint: .bottom))
         }
         .onAppear {
             meditationManager.checkStatusOfTimer()

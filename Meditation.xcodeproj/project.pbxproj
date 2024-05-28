@@ -49,6 +49,7 @@
 		789A0E142C04FCCA009CB9E7 /* MonthlyChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E132C04FCCA009CB9E7 /* MonthlyChart.swift */; };
 		789A0E182C04FE57009CB9E7 /* DateComponents + Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E172C04FE57009CB9E7 /* DateComponents + Identifiable.swift */; };
 		789A0E1A2C04FEAB009CB9E7 /* DateComponents + Comparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E192C04FEAB009CB9E7 /* DateComponents + Comparable.swift */; };
+		789A0E1C2C05B3EA009CB9E7 /* ThirtyDaysChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E1B2C05B3EA009CB9E7 /* ThirtyDaysChart.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,6 +97,7 @@
 		789A0E132C04FCCA009CB9E7 /* MonthlyChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyChart.swift; sourceTree = "<group>"; };
 		789A0E172C04FE57009CB9E7 /* DateComponents + Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateComponents + Identifiable.swift"; sourceTree = "<group>"; };
 		789A0E192C04FEAB009CB9E7 /* DateComponents + Comparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateComponents + Comparable.swift"; sourceTree = "<group>"; };
+		789A0E1B2C05B3EA009CB9E7 /* ThirtyDaysChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirtyDaysChart.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +220,7 @@
 			children = (
 				789A0E0A2C038C42009CB9E7 /* StatisticsView.swift */,
 				789A0E112C04D965009CB9E7 /* StreakTile.swift */,
+				789A0E1B2C05B3EA009CB9E7 /* ThirtyDaysChart.swift */,
 				789A0E132C04FCCA009CB9E7 /* MonthlyChart.swift */,
 			);
 			path = Statistics;
@@ -320,6 +323,7 @@
 				7879BDF02BF4A43E001994D2 /* Helpers.swift in Sources */,
 				789A0E102C0392F5009CB9E7 /* MeditationStatistics.swift in Sources */,
 				789A0E072C032377009CB9E7 /* KoansEditView.swift in Sources */,
+				789A0E1C2C05B3EA009CB9E7 /* ThirtyDaysChart.swift in Sources */,
 				78385D0D2BF3647300581057 /* ContentView.swift in Sources */,
 				783426862BFFCFB20008F9F9 /* TimerCircleView.swift in Sources */,
 				789A0E1A2C04FEAB009CB9E7 /* DateComponents + Comparable.swift in Sources */,

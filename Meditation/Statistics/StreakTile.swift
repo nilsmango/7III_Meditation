@@ -24,7 +24,7 @@ struct StreakTile: View {
         .frame(width: frameWidth, height: frameWidth)
         .background {
             RoundedRectangle(cornerRadius: 25.0)
-                .fill(.whiteAndBlack)
+                .fill(.whiteAndListGray)
         }
     }
 }
