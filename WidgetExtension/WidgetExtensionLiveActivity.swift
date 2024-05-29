@@ -264,8 +264,7 @@ struct WidgetExtensionLiveActivity: Widget {
                         .frame(width: 25, height: 25)
                 }
             }
-            // TODO: change the widgetURL!
-            .widgetURL(URL(string: "http://www.apple.com"))
+//            .widgetURL(URL(string: "http://www.apple.com"))
             .keylineTint(.accent)
         }
     }
@@ -317,23 +316,23 @@ extension WidgetExtensionAttributes {
 
 extension WidgetExtensionAttributes.ContentState {
     fileprivate static var running: WidgetExtensionAttributes.ContentState {
-        WidgetExtensionAttributes.ContentState(targetDate: Date().addingTimeInterval(600), timerInMinutes: 10, timerStatus: .running, gradientBackground: true, welcomeBackText: "Welcome Back!", koanText: "Love is the way.")
+        WidgetExtensionAttributes.ContentState(targetDate: Date().addingTimeInterval(60), timerInMinutes: 1, timerStatus: .running, gradientBackground: true, welcomeBackText: "Welcome Back!", koanText: "Love is the way.")
      }
      
      fileprivate static var paused: WidgetExtensionAttributes.ContentState {
-         WidgetExtensionAttributes.ContentState(targetDate: Date().addingTimeInterval(600), timerInMinutes: 10, timerStatus: .paused, gradientBackground: true, welcomeBackText: "Welcome Back!", koanText: "Love is the way.")
+         WidgetExtensionAttributes.ContentState(targetDate: Date().addingTimeInterval(60), timerInMinutes: 1, timerStatus: .paused, gradientBackground: true, welcomeBackText: "Welcome Back!", koanText: "Love is the way.")
      }
     
     fileprivate static var alarm: WidgetExtensionAttributes.ContentState {
-        WidgetExtensionAttributes.ContentState(targetDate: Date().addingTimeInterval(600), timerInMinutes: 10, timerStatus: .alarm, gradientBackground: true, welcomeBackText: "Welcome Back!", koanText: "Love is the way.")
+        WidgetExtensionAttributes.ContentState(targetDate: Date().addingTimeInterval(60), timerInMinutes: 1, timerStatus: .alarm, gradientBackground: true, welcomeBackText: "Welcome Back!", koanText: "Love is the way.")
     }
     
     fileprivate static var preparing: WidgetExtensionAttributes.ContentState {
-        WidgetExtensionAttributes.ContentState(targetDate: Date().addingTimeInterval(600), timerInMinutes: 10, timerStatus: .preparing, gradientBackground: true, welcomeBackText: "Welcome Back!", koanText: "Love is the way.")
+        WidgetExtensionAttributes.ContentState(targetDate: Date().addingTimeInterval(60), timerInMinutes: 1, timerStatus: .preparing, gradientBackground: true, welcomeBackText: "Welcome Back!", koanText: "Love is the way.")
     }
     
     fileprivate static var stopped: WidgetExtensionAttributes.ContentState {
-        WidgetExtensionAttributes.ContentState(targetDate: Date().addingTimeInterval(600), timerInMinutes: 10, timerStatus: .stopped, gradientBackground: true, welcomeBackText: "Welcome Back!", koanText: "Love is the way.")
+        WidgetExtensionAttributes.ContentState(targetDate: Date().addingTimeInterval(60), timerInMinutes: 1, timerStatus: .stopped, gradientBackground: true, welcomeBackText: "Welcome Back!", koanText: "Love is the way.")
     }
 }
 

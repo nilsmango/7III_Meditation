@@ -651,7 +651,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
         if activity == nil {
             let attributes = WidgetExtensionAttributes()
             let state = WidgetExtensionAttributes.ContentState(targetDate: meditationTimer.targetDate, timerInMinutes: meditationTimer.timerInMinutes, timerStatus: meditationTimer.timerStatus, gradientBackground: gradientBackground, welcomeBackText: welcomeMessage, koanText: koanFunc())
-            let content = ActivityContent(state: state, staleDate: nil)
+            let content = ActivityContent(state: state, staleDate: meditationTimer.targetDate)
             
             do {
                 activity = try Activity<WidgetExtensionAttributes>.request(
@@ -690,7 +690,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
             welcomeBackText: welcomeMessage,
             koanText: koanFunc()
         )
-        let content = ActivityContent(state: state, staleDate: nil)
+        let content = ActivityContent(state: state, staleDate: meditationTimer.targetDate)
 
         Task {
             await activity?.update(content)
