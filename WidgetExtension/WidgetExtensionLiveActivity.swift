@@ -74,10 +74,77 @@ struct WidgetExtensionLiveActivity: Widget {
                             .tint(.accent)
                         }
                         
-                        // TODO: buttons for play stop, again with the switch timerStatus (but use text, instead icons)
+                        switch context.state.timerStatus {
+                        case .running:
+                            HStack {
+                                Spacer()
+                                
+                                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                                    Label("Pause", systemImage: "pause")
+                                })
+                                .font(.title)
+//                                .fontWeight(.bold)
+                                .buttonStyle(.borderedProminent)
+                                .buttonBorderShape(.capsule)
+                                .tint(.accent)
+                                
+                                Spacer()
+                                
+                                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                                    Label("Stop", systemImage: "xmark")
+                                })
+                                .font(.title)
+//                                .fontWeight(.bold)
+                                .buttonStyle(.borderedProminent)
+                                .buttonBorderShape(.capsule)
+                                .tint(.accent)
+                                
+                                Spacer()
+                            }
+                        case .alarm:
+                            Text(context.state.welcomeBackText)
+                        case .paused:
+                            HStack {
+                                Spacer()
+                                
+                                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                                    Label("Resume", systemImage: "arrow.clockwise")
+                                })
+                                .font(.title)
+//                                .fontWeight(.bold)
+                                .buttonStyle(.borderedProminent)
+                                .buttonBorderShape(.capsule)
+                                .tint(.accent)
+                                
+                                Spacer()
+                                
+                                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                                    Label("Stop", systemImage: "xmark")
+                                })
+                                .font(.title)
+//                                .fontWeight(.bold)
+                                .buttonStyle(.borderedProminent)
+                                .buttonBorderShape(.capsule)
+                                .tint(.accent)
+                                
+                                Spacer()
+                            }
+                        case .preparing:
+                            Text(context.state.koanText)
+                        case .stopped:
+                            HStack {
+                                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                                    Label("Start", systemImage: "play.fill")
+                                })
+                                .font(.title)
+//                                .fontWeight(.bold)
+                                .buttonStyle(.borderedProminent)
+                                .buttonBorderShape(.capsule)
+                                .tint(.accent)
+                                
+                            }
+                        }
                     }
-                    
-                    // more content
                 }
             } compactLeading: {
                 if context.state.timerStatus == .running {
