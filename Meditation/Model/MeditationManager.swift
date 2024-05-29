@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import HealthKit
+import ActivityKit
 
 class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
         
@@ -263,7 +264,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
     private func updateCurrentStreak() {
         if meditationTimer.statistics.currentStreak > 0 {
             // get the last meditation session
-            if let lastDate = meditationSessions.max(by: { $0.endDate > $1.endDate })?.endDate {
+            if let lastDate = meditationSessions.last?.endDate {
                 if dateIsToday(date: lastDate) {
                     // keep the streak as is
                 } else {
@@ -374,6 +375,9 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
             self.endMeditation()
         })
         
+        // start live activity
+        startActivity()
+        
         // update the current streak
         updateCurrentStreak()
         
@@ -407,6 +411,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
         
         // edit meditation session
         meditationTimer.targetDate = Date()
+        
         editMeditationSession()
     }
     
@@ -433,6 +438,8 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
     
     func endMeditation() {
         meditationTimer.timerStatus = .alarm
+        
+        stopActivity()
     }
     
     /// returns a random koan
@@ -575,6 +582,9 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
     }
     
     func editMeditationSession() {
+        // update activity
+        updateActivity()
+        
         // remove the last saved meditation from array
         meditationSessions.removeLast()
         
@@ -587,13 +597,17 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
             
         }
         
-        
+        if meditationTimer.timerStatus == .alarm || meditationTimer.timerStatus == .stopped {
+            stopActivity()
+        }
     }
     
     private func deleteLastMindfulSession(completion: @escaping () -> Void) {
         guard let mindfulType = HKObjectType.categoryType(forIdentifier: .mindfulSession) else {
             print("Mindful session type not available")
-            completion()
+            DispatchQueue.main.async {
+                completion()
+            }
             return
         }
         
@@ -602,7 +616,9 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
         let query = HKSampleQuery(sampleType: mindfulType, predicate: nil, limit: 1, sortDescriptors: [sortDescriptor]) { query, samples, error in
             guard let sample = samples?.first as? HKCategorySample, error == nil else {
                 print("Error fetching last mindful session: \(error?.localizedDescription ?? "Unknown error")")
-                completion()
+                DispatchQueue.main.async {
+                    completion()
+                }
                 return
             }
             
@@ -612,10 +628,74 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
                 } else {
                     print("Error deleting the last mindful session: \(error?.localizedDescription ?? "Unknown error")")
                 }
-                completion()
+                DispatchQueue.main.async {
+                    completion()
+                }
             }
         }
         
         healthStore.execute(query)
     }
+    
+    // MARK: Widget Extension
+    
+    private var activity: Activity<WidgetExtensionAttributes>? = nil
+    
+    private func startActivity() {
+        
+        // schedule update
+        DispatchQueue.main.asyncAfter(deadline: .now() + Double(meditationTimer.preparationTime)) {
+            self.updateActivity(switchToRunning: true)
+        }
+        
+        if activity == nil {
+            let attributes = WidgetExtensionAttributes()
+            let state = WidgetExtensionAttributes.ContentState(targetDate: meditationTimer.targetDate, timerInMinutes: meditationTimer.timerInMinutes, timerStatus: meditationTimer.timerStatus, gradientBackground: gradientBackground, welcomeBackText: welcomeMessage, koanText: koanFunc())
+            let content = ActivityContent(state: state, staleDate: nil)
+            
+            do {
+                activity = try Activity<WidgetExtensionAttributes>.request(
+                    attributes: attributes,
+                    content: content,
+                    pushType: nil
+                )
+                print("Activity started")
+            } catch {
+                print("Failed to start activity: \(error)")
+            }
+        } else {
+            updateActivity()
+        }        
+    }
+    
+    private func stopActivity() {
+        
+        let state = WidgetExtensionAttributes.ContentState(targetDate: meditationTimer.targetDate, timerInMinutes: meditationTimer.timerInMinutes, timerStatus: meditationTimer.timerStatus, gradientBackground: gradientBackground, welcomeBackText: welcomeMessage, koanText: koanFunc())
+        let content = ActivityContent(state: state, staleDate: nil)
+        
+        Task {
+            await activity?.end(content, dismissalPolicy: .immediate)
+            self.activity = nil
+            print("Activity ended")
+        }
+    }
+    
+    private func updateActivity(switchToRunning: Bool = false) {
+
+        let state = WidgetExtensionAttributes.ContentState(
+            targetDate: meditationTimer.targetDate,
+            timerInMinutes: meditationTimer.timerInMinutes,
+            timerStatus: switchToRunning ? .running : meditationTimer.timerStatus,
+            gradientBackground: gradientBackground,
+            welcomeBackText: welcomeMessage,
+            koanText: koanFunc()
+        )
+        let content = ActivityContent(state: state, staleDate: nil)
+
+        Task {
+            await activity?.update(content)
+            print("Activity updated")
+        }
+    }
+    
 }

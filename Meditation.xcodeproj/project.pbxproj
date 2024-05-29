@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7824958A2C075A5300CEA09D /* WidgetExtensionLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E2E2C06131E009CB9E7 /* WidgetExtensionLiveActivity.swift */; };
 		7827880A2BF68B67004E7F77 /* TimerRunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782788092BF68B67004E7F77 /* TimerRunningView.swift */; };
 		7827880D2BFB3F45004E7F77 /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7827880C2BFB3F45004E7F77 /* OptionsView.swift */; };
 		782992412C06316B003C4949 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78385D0E2BF3647500581057 /* Assets.xcassets */; };
@@ -60,9 +61,6 @@
 		789A0E372C061320009CB9E7 /* WidgetExtensionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 789A0E252C06131E009CB9E7 /* WidgetExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		789A0E3F2C061570009CB9E7 /* TimerStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E3E2C061570009CB9E7 /* TimerStatus.swift */; };
 		789A0E402C061577009CB9E7 /* TimerStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E3E2C061570009CB9E7 /* TimerStatus.swift */; };
-		789A0E442C061B76009CB9E7 /* WidgetButtonLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E432C061B76009CB9E7 /* WidgetButtonLabel.swift */; };
-		789A0E452C061BA1009CB9E7 /* TimerBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E412C061AED009CB9E7 /* TimerBannerView.swift */; };
-		789A0E472C061BAE009CB9E7 /* WidgetButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E462C061BAE009CB9E7 /* WidgetButtonState.swift */; };
 		789A0E482C061ECE009CB9E7 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7879BDEF2BF4A43E001994D2 /* Helpers.swift */; };
 /* End PBXBuildFile section */
 
@@ -146,9 +144,6 @@
 		789A0E342C061320009CB9E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		789A0E3C2C061412009CB9E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		789A0E3E2C061570009CB9E7 /* TimerStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerStatus.swift; sourceTree = "<group>"; };
-		789A0E412C061AED009CB9E7 /* TimerBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerBannerView.swift; sourceTree = "<group>"; };
-		789A0E432C061B76009CB9E7 /* WidgetButtonLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetButtonLabel.swift; sourceTree = "<group>"; };
-		789A0E462C061BAE009CB9E7 /* WidgetButtonState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetButtonState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -306,21 +301,10 @@
 			children = (
 				789A0E2C2C06131E009CB9E7 /* WidgetExtensionBundle.swift */,
 				789A0E2E2C06131E009CB9E7 /* WidgetExtensionLiveActivity.swift */,
-				789A0E492C061FB5009CB9E7 /* WidgetViews */,
 				789A0E302C06131E009CB9E7 /* WidgetExtension.swift */,
 				789A0E342C061320009CB9E7 /* Info.plist */,
 			);
 			path = WidgetExtension;
-			sourceTree = "<group>";
-		};
-		789A0E492C061FB5009CB9E7 /* WidgetViews */ = {
-			isa = PBXGroup;
-			children = (
-				789A0E412C061AED009CB9E7 /* TimerBannerView.swift */,
-				789A0E432C061B76009CB9E7 /* WidgetButtonLabel.swift */,
-				789A0E462C061BAE009CB9E7 /* WidgetButtonState.swift */,
-			);
-			path = WidgetViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -464,6 +448,7 @@
 				789A0E122C04D965009CB9E7 /* StreakTile.swift in Sources */,
 				78385D1F2BF3674800581057 /* TimerView.swift in Sources */,
 				789A0E0B2C038C42009CB9E7 /* StatisticsView.swift in Sources */,
+				7824958A2C075A5300CEA09D /* WidgetExtensionLiveActivity.swift in Sources */,
 				7827880D2BFB3F45004E7F77 /* OptionsView.swift in Sources */,
 				78385D0B2BF3647300581057 /* MeditationApp.swift in Sources */,
 				78385D232BF3E11B00581057 /* MeditationSession.swift in Sources */,
@@ -474,11 +459,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				789A0E442C061B76009CB9E7 /* WidgetButtonLabel.swift in Sources */,
 				789A0E2F2C06131E009CB9E7 /* WidgetExtensionLiveActivity.swift in Sources */,
-				789A0E472C061BAE009CB9E7 /* WidgetButtonState.swift in Sources */,
 				789A0E482C061ECE009CB9E7 /* Helpers.swift in Sources */,
-				789A0E452C061BA1009CB9E7 /* TimerBannerView.swift in Sources */,
 				789A0E402C061577009CB9E7 /* TimerStatus.swift in Sources */,
 				789A0E2D2C06131E009CB9E7 /* WidgetExtensionBundle.swift in Sources */,
 				789A0E312C06131E009CB9E7 /* WidgetExtension.swift in Sources */,
@@ -630,8 +612,8 @@
 				INFOPLIST_FILE = Meditation/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "7III Meditation";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "We need access to Mindful Minutes so we can save your meditation sessions.";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "We need access to Mindful Minutes so we can save your meditation sessions.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "We need access to Mindful Minutes so we can save and load your meditation sessions.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "We need access to Mindful Minutes so we can save and load your meditation sessions.";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -643,7 +625,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.4;
@@ -677,8 +659,8 @@
 				INFOPLIST_FILE = Meditation/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "7III Meditation";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "We need access to Mindful Minutes so we can save your meditation sessions.";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "We need access to Mindful Minutes so we can save your meditation sessions.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "We need access to Mindful Minutes so we can save and load your meditation sessions.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "We need access to Mindful Minutes so we can save and load your meditation sessions.";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -690,7 +672,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.4;
@@ -718,7 +700,7 @@
 				INFOPLIST_FILE = WidgetExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = WidgetExtension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -747,7 +729,7 @@
 				INFOPLIST_FILE = WidgetExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = WidgetExtension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -24,7 +24,6 @@ struct WidgetExtensionAttributes: ActivityAttributes {
     }
 
     // Fixed non-changing properties about your activity go here!
-    var name: String
 }
 
 struct WidgetExtensionLiveActivity: Widget {
@@ -33,14 +32,89 @@ struct WidgetExtensionLiveActivity: Widget {
             // Lock screen/banner UI goes here
             VStack {
                 Spacer()
-            TimerBannerView(targetDate: context.state.targetDate, timerInMinutes: context.state.timerInMinutes, timerStatus: context.state.timerStatus, welcomeText: context.state.welcomeBackText, koanText: context.state.koanText)
+                HStack {
+                    switch context.state.timerStatus {
+                    case .running:
+                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                            WidgetButtonLabel(buttonState: .pause)
+                        })
+                        .buttonStyle(.borderedProminent)
+                        .buttonBorderShape(.circle)
+                        .tint(.accent)
+                        
+                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                            WidgetButtonLabel(buttonState: .stop)
+                        })
+                        .buttonStyle(.borderedProminent)
+                        .buttonBorderShape(.circle)
+                        .tint(.accent)
+                        .padding(.trailing, 4)
+
+                        ProgressView(timerInterval: context.state.targetDate.addingTimeInterval(-Double(context.state.timerInMinutes*60))...context.state.targetDate, countsDown: false) {
+                                     Text("Meditation")
+                                 } currentValueLabel: {
+                                     Text(context.state.targetDate, style: .timer)
+                                  }
+                        .tint(.accent)
+                        
+                    case .alarm:
+                        Spacer()
+                        Text(context.state.welcomeBackText)
+                        Spacer()
+                    case .stopped:
+                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                            WidgetButtonLabel(buttonState: .play)
+                        })
+                        .buttonStyle(.borderedProminent)
+                        .buttonBorderShape(.circle)
+                        .tint(.accent)
+                        .padding(.trailing, 43)
+                        
+        //                Text(dateToDateFormatted(from: Date(), to: Date().addingTimeInterval(Double(timerInMinutes * 60))))
+                        
+                        ProgressView(value: 0.0) {
+                                     Text("Meditation")
+                                 } currentValueLabel: {
+                                     Text(dateToDateFormatted(from: Date(), to: Date().addingTimeInterval(Double(context.state.timerInMinutes * 60))))
+                                  }
+                        .tint(.accent)
+                        
+                    case .paused:
+                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                            WidgetButtonLabel(buttonState: .resume)
+                        })
+                        .buttonStyle(.borderedProminent)
+                        .buttonBorderShape(.circle)
+                        .tint(.accent)
+                        
+                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                            WidgetButtonLabel(buttonState: .stop)
+                        })
+                        .buttonStyle(.borderedProminent)
+                        .buttonBorderShape(.circle)
+                        .tint(.accent)
+                        .padding(.trailing, 4)
+                        
+                        ProgressView(value: 0.0) {
+                                     Text("Meditation")
+                                 } currentValueLabel: {
+                                     Text(dateToDateFormatted(from: Date(), to: Date().addingTimeInterval(Double(context.state.timerInMinutes * 60))))
+                                  }
+                        .tint(.accent)
+                            
+                    case .preparing:
+                        Spacer()
+                        Text(context.state.koanText)
+                        Spacer()
+                    }
+                    
+                }
                     
                 Spacer()
             }
             .padding()
-            .background(.regularMaterial)
 //            .background(context.state.gradientBackground ? LinearGradient(gradient: Gradient(colors: [.customGray2, .accent]), startPoint: .top, endPoint: .bottom) : LinearGradient(gradient: Gradient(colors: [.customGray2]), startPoint: .top, endPoint: .bottom))
-//            .activityBackgroundTint(Color.red)
+            .activityBackgroundTint(nil)
 //            .activitySystemActionForegroundColor(.blackAndWhite)
 
         } dynamicIsland: { context in
@@ -93,8 +167,7 @@ struct WidgetExtensionLiveActivity: Widget {
                                 Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
                                     Label("Pause", systemImage: "pause")
                                 })
-                                .font(.title)
-//                                .fontWeight(.bold)
+                                .font(.title2)
                                 .buttonStyle(.borderedProminent)
                                 .buttonBorderShape(.capsule)
                                 .tint(.accent)
@@ -104,7 +177,7 @@ struct WidgetExtensionLiveActivity: Widget {
                                 Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
                                     Label("Stop", systemImage: "xmark")
                                 })
-                                .font(.title)
+                                .font(.title2)
 //                                .fontWeight(.bold)
                                 .buttonStyle(.borderedProminent)
                                 .buttonBorderShape(.capsule)
@@ -114,6 +187,9 @@ struct WidgetExtensionLiveActivity: Widget {
                             }
                         case .alarm:
                             Text(context.state.welcomeBackText)
+                                .font(.title2)
+                                .padding(10)
+                            
                         case .paused:
                             HStack {
                                 Spacer()
@@ -121,7 +197,7 @@ struct WidgetExtensionLiveActivity: Widget {
                                 Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
                                     Label("Resume", systemImage: "arrow.clockwise")
                                 })
-                                .font(.title)
+                                .font(.title2)
 //                                .fontWeight(.bold)
                                 .buttonStyle(.borderedProminent)
                                 .buttonBorderShape(.capsule)
@@ -132,7 +208,7 @@ struct WidgetExtensionLiveActivity: Widget {
                                 Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
                                     Label("Stop", systemImage: "xmark")
                                 })
-                                .font(.title)
+                                .font(.title2)
 //                                .fontWeight(.bold)
                                 .buttonStyle(.borderedProminent)
                                 .buttonBorderShape(.capsule)
@@ -142,12 +218,15 @@ struct WidgetExtensionLiveActivity: Widget {
                             }
                         case .preparing:
                             Text(context.state.koanText)
+                                .font(.title2)
+                                .padding(10)
+                            
                         case .stopped:
                             HStack {
                                 Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
                                     Label("Start", systemImage: "play.fill")
                                 })
-                                .font(.title)
+                                .font(.title2)
 //                                .fontWeight(.bold)
                                 .buttonStyle(.borderedProminent)
                                 .buttonBorderShape(.capsule)
@@ -163,9 +242,8 @@ struct WidgetExtensionLiveActivity: Widget {
                     .frame(width: 25, height: 25)
                 
             } compactTrailing: {
-                HStack {
-//                    Spacer()
-//                    Spacer()
+//                HStack {
+
                     
                     if context.state.timerStatus == .running {
                         Text(context.state.targetDate, style: .timer)
@@ -173,8 +251,8 @@ struct WidgetExtensionLiveActivity: Widget {
                         Text(dateToDateFormatted(from: Date(), to: Date().addingTimeInterval(Double(context.state.timerInMinutes * 60))))
                             .font(.body)
                     }
-                }
-                .padding(.horizontal)
+//                }
+//                .padding(.horizontal)
             } minimal: {
                 if context.state.timerStatus == .running {
                     
@@ -193,9 +271,47 @@ struct WidgetExtensionLiveActivity: Widget {
     }
 }
 
+struct WidgetButtonLabel: View {
+    let buttonState: WidgetButtonState
+    
+    var body: some View {
+        ZStack {
+            Label(buttonState.rawValue.capitalized, systemImage: buttonState.symbolName)
+                .fontWeight(.bold)
+                .labelStyle(.iconOnly)
+            
+            if buttonState == .pause {
+                Label("", systemImage: "xmark")
+                    .fontWeight(.bold)
+                    .labelStyle(.iconOnly)
+                    .opacity(0.0)
+            }
+        }
+        
+
+    }
+}
+
+enum WidgetButtonState: String {
+    case play, stop, pause, resume
+    var symbolName: String {
+        switch self {
+        case .play:
+            "play.fill"
+        case .stop:
+            "xmark"
+        case .pause:
+            "pause"
+        case .resume:
+            "arrow.clockwise"
+        }
+    }
+    
+}
+
 extension WidgetExtensionAttributes {
     fileprivate static var preview: WidgetExtensionAttributes {
-        WidgetExtensionAttributes(name: "World")
+        WidgetExtensionAttributes()
     }
 }
 
