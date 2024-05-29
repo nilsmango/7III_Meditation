@@ -11,6 +11,8 @@ struct TimerBannerView: View {
     var targetDate: Date
     var timerInMinutes: Int
     var timerStatus: TimerStatus
+    var welcomeText: String
+    var koanText: String
     
     var body: some View {
         
@@ -40,7 +42,9 @@ struct TimerBannerView: View {
                 .tint(.accent)
                 
             case .alarm:
-                Text("Add welcome back text here")
+                Spacer()
+                Text(welcomeText)
+                Spacer()
             case .stopped:
                 Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
                     WidgetButtonLabel(buttonState: .play)
@@ -48,7 +52,7 @@ struct TimerBannerView: View {
                 .buttonStyle(.borderedProminent)
                 .buttonBorderShape(.circle)
                 .tint(.accent)
-                .padding(.trailing, 40)
+                .padding(.trailing, 43)
                 
 //                Text(dateToDateFormatted(from: Date(), to: Date().addingTimeInterval(Double(timerInMinutes * 60))))
                 
@@ -83,7 +87,9 @@ struct TimerBannerView: View {
                 .tint(.accent)
                     
             case .preparing:
-                Text("Add koan here")
+                Spacer()
+                Text(koanText)
+                Spacer()
             }
             
         }

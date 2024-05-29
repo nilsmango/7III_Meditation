@@ -12,13 +12,14 @@ import SwiftUI
 struct WidgetExtensionAttributes: ActivityAttributes {
     public struct ContentState: Codable, Hashable {
         // Dynamic stateful properties about your activity go here!
-        var emoji: String
 //        var startDate: Date
         var targetDate: Date
         var timerInMinutes: Int
         var timerStatus: TimerStatus
 //        var preparationTime: Int
         var gradientBackground: Bool
+        var welcomeBackText: String
+        var koanText: String
         
     }
 
@@ -30,10 +31,13 @@ struct WidgetExtensionLiveActivity: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: WidgetExtensionAttributes.self) { context in
             // Lock screen/banner UI goes here
-//            VStack {
-                TimerBannerView(targetDate: context.state.targetDate, timerInMinutes: context.state.timerInMinutes, timerStatus: context.state.timerStatus)
-                    .padding()
-//            }
+            VStack {
+                Spacer()
+            TimerBannerView(targetDate: context.state.targetDate, timerInMinutes: context.state.timerInMinutes, timerStatus: context.state.timerStatus, welcomeText: context.state.welcomeBackText, koanText: context.state.koanText)
+                    
+                Spacer()
+            }
+            .padding()
             .background(context.state.gradientBackground ? LinearGradient(gradient: Gradient(colors: [.customGray2, .accent]), startPoint: .top, endPoint: .bottom) : LinearGradient(gradient: Gradient(colors: [.customGray2]), startPoint: .top, endPoint: .bottom))
 //            .activityBackgroundTint(Color.red)
 //            .activitySystemActionForegroundColor(.blackAndWhite)
@@ -111,18 +115,33 @@ extension WidgetExtensionAttributes {
 }
 
 extension WidgetExtensionAttributes.ContentState {
-    fileprivate static var smiley: WidgetExtensionAttributes.ContentState {
-        WidgetExtensionAttributes.ContentState(emoji: "🛑🛑", targetDate: Date().addingTimeInterval(600), timerInMinutes: 10, timerStatus: .running, gradientBackground: true)
+    fileprivate static var running: WidgetExtensionAttributes.ContentState {
+        WidgetExtensionAttributes.ContentState(targetDate: Date().addingTimeInterval(600), timerInMinutes: 10, timerStatus: .running, gradientBackground: true, welcomeBackText: "Welcome Back!", koanText: "Love is the way.")
      }
      
-     fileprivate static var starEyes: WidgetExtensionAttributes.ContentState {
-         WidgetExtensionAttributes.ContentState(emoji: "🏃‍♂️🏃‍♂️", targetDate: Date().addingTimeInterval(600), timerInMinutes: 10, timerStatus: .paused, gradientBackground: true)
+     fileprivate static var paused: WidgetExtensionAttributes.ContentState {
+         WidgetExtensionAttributes.ContentState(targetDate: Date().addingTimeInterval(600), timerInMinutes: 10, timerStatus: .paused, gradientBackground: true, welcomeBackText: "Welcome Back!", koanText: "Love is the way.")
      }
+    
+    fileprivate static var alarm: WidgetExtensionAttributes.ContentState {
+        WidgetExtensionAttributes.ContentState(targetDate: Date().addingTimeInterval(600), timerInMinutes: 10, timerStatus: .alarm, gradientBackground: true, welcomeBackText: "Welcome Back!", koanText: "Love is the way.")
+    }
+    
+    fileprivate static var preparing: WidgetExtensionAttributes.ContentState {
+        WidgetExtensionAttributes.ContentState(targetDate: Date().addingTimeInterval(600), timerInMinutes: 10, timerStatus: .preparing, gradientBackground: true, welcomeBackText: "Welcome Back!", koanText: "Love is the way.")
+    }
+    
+    fileprivate static var stopped: WidgetExtensionAttributes.ContentState {
+        WidgetExtensionAttributes.ContentState(targetDate: Date().addingTimeInterval(600), timerInMinutes: 10, timerStatus: .stopped, gradientBackground: true, welcomeBackText: "Welcome Back!", koanText: "Love is the way.")
+    }
 }
 
 #Preview("Notification", as: .content, using: WidgetExtensionAttributes.preview) {
    WidgetExtensionLiveActivity()
 } contentStates: {
-    WidgetExtensionAttributes.ContentState.smiley
-    WidgetExtensionAttributes.ContentState.starEyes
+    WidgetExtensionAttributes.ContentState.running
+    WidgetExtensionAttributes.ContentState.paused
+    WidgetExtensionAttributes.ContentState.alarm
+    WidgetExtensionAttributes.ContentState.preparing
+    WidgetExtensionAttributes.ContentState.stopped
 }
