@@ -38,7 +38,8 @@ struct WidgetExtensionLiveActivity: Widget {
                 Spacer()
             }
             .padding()
-            .background(context.state.gradientBackground ? LinearGradient(gradient: Gradient(colors: [.customGray2, .accent]), startPoint: .top, endPoint: .bottom) : LinearGradient(gradient: Gradient(colors: [.customGray2]), startPoint: .top, endPoint: .bottom))
+            .background(.regularMaterial)
+//            .background(context.state.gradientBackground ? LinearGradient(gradient: Gradient(colors: [.customGray2, .accent]), startPoint: .top, endPoint: .bottom) : LinearGradient(gradient: Gradient(colors: [.customGray2]), startPoint: .top, endPoint: .bottom))
 //            .activityBackgroundTint(Color.red)
 //            .activitySystemActionForegroundColor(.blackAndWhite)
 
@@ -47,14 +48,24 @@ struct WidgetExtensionLiveActivity: Widget {
                 // Expanded UI goes here.  Compose the expanded UI through
                 // various regions, like leading/trailing/center/bottom
                 DynamicIslandExpandedRegion(.leading) {
-                    if context.state.timerStatus == .running {
-                        Text(context.state.targetDate, style: .timer)
-                    } else {
-                        Text(dateToDateFormatted(from: Date(), to: Date().addingTimeInterval(Double(context.state.timerInMinutes * 60))))
-                    }
+                    Circle()
+                        .fill(.accent)
+                        .frame(width: 25, height: 25)
                 }
                 DynamicIslandExpandedRegion(.trailing) {
-                    Text("Meditation")
+                    HStack {
+//                        Spacer()
+//                        Spacer()
+//                        
+                        if context.state.timerStatus == .running {
+                            Text(context.state.targetDate, style: .timer)
+                        } else {
+                            Text(dateToDateFormatted(from: Date(), to: Date().addingTimeInterval(Double(context.state.timerInMinutes * 60))))
+                                .font(.body)
+                        }
+                    }
+                    .padding(.horizontal)
+                    
                 }
                 DynamicIslandExpandedRegion(.bottom) {
                     VStack {
@@ -147,25 +158,32 @@ struct WidgetExtensionLiveActivity: Widget {
                     }
                 }
             } compactLeading: {
-                if context.state.timerStatus == .running {
-                    Text(context.state.targetDate, style: .timer)
-                } else {
-                    Text(dateToDateFormatted(from: Date(), to: Date().addingTimeInterval(Double(context.state.timerInMinutes * 60))))
-                }
+                Circle()
+                    .fill(.accent)
+                    .frame(width: 25, height: 25)
+                
             } compactTrailing: {
-                Text("Meditation")
+                HStack {
+//                    Spacer()
+//                    Spacer()
+                    
+                    if context.state.timerStatus == .running {
+                        Text(context.state.targetDate, style: .timer)
+                    } else {
+                        Text(dateToDateFormatted(from: Date(), to: Date().addingTimeInterval(Double(context.state.timerInMinutes * 60))))
+                            .font(.body)
+                    }
+                }
+                .padding(.horizontal)
             } minimal: {
-                switch context.state.timerStatus {
-                case .running:
-                    WidgetButtonLabel(buttonState: .play)
-                case .alarm:
-                    WidgetButtonLabel(buttonState: .resume)
-                case .paused:
-                    WidgetButtonLabel(buttonState: .pause)
-                case .preparing:
-                    WidgetButtonLabel(buttonState: .play)
-                case .stopped:
-                    WidgetButtonLabel(buttonState: .stop)
+                if context.state.timerStatus == .running {
+                    
+                    Text(context.state.targetDate, style: .timer)
+                        .font(.caption2)
+                } else {
+                    Circle()
+                        .fill(.accent)
+                        .frame(width: 25, height: 25)
                 }
             }
             // TODO: change the widgetURL!
