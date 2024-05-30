@@ -42,9 +42,9 @@ struct WidgetExtensionLiveActivity: Widget {
                         .buttonBorderShape(.circle)
                         .tint(.accent)
                         
-                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                        Button(intent: StopMeditation()) {
                             WidgetButtonLabel(buttonState: .stop)
-                        })
+                        }
                         .buttonStyle(.borderedProminent)
                         .buttonBorderShape(.circle)
                         .tint(.accent)

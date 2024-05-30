@@ -23,14 +23,13 @@ struct TimerView: View {
             case .alarm:
                     
                 Text(meditationManager.welcomeMessage)
-                            .font(.title)
-                        
+                    .font(.title)
                     .onTapGesture {
-                            meditationManager.meditationTimer.timerStatus = .stopped
+                        meditationManager.meditationTimer.timerStatus = .stopped
                     }
                     .onAppear {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                meditationManager.meditationTimer.timerStatus = .stopped
+                            meditationManager.meditationTimer.timerStatus = .stopped
                         }
                     }
 

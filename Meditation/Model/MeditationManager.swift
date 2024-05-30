@@ -11,7 +11,9 @@ import HealthKit
 import ActivityKit
 
 class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
-        
+    
+    static let shared = MeditationManager()
+    
     // MARK: Statistics
     
     @Published var meditationSessions = [MeditationSession]()
@@ -392,9 +394,11 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
                 // start timer to targetDate again
                 let timeInterval = meditationTimer.targetDate.timeIntervalSinceNow
                 timer = Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: false, block: { timer in
+                    print("running the check and ending with timer")
                     self.endMeditation()
                 })
             } else {
+                print("ending normal with check")
                 endMeditation()
             }
         }
@@ -404,7 +408,6 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
         timer?.invalidate()
         
         meditationTimer.timerStatus = .alarm
-        
         
         // stop  notification
         notificationCenter.removePendingNotificationRequests(withIdentifiers: [timerNotificationIdentifier])
@@ -587,6 +590,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
         
         // remove the last saved meditation from array
         meditationSessions.removeLast()
+        
         
         // remove last saved mindful session from health
         if HKHealthStore.isHealthDataAvailable() {

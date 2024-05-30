@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct MeditationApp: App {
-    @StateObject private var meditationManager = MeditationManager()
+    @StateObject private var meditationManager = MeditationManager.shared
     
     // Notifications
     private let notificationCenter = UNUserNotificationCenter.current()
