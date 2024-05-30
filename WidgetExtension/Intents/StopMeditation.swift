@@ -14,7 +14,9 @@ struct StopMeditation: LiveActivityIntent {
 
     func perform() async throws -> some IntentResult {
         // Call the function from your app model
-        MeditationManager.shared.stopMeditation()
+        DispatchQueue.main.async {
+            MeditationManager.shared.stopMeditation()
+        }
         return .result()
     }
 }
