@@ -70,6 +70,7 @@ struct IslandExpandedBottomView: View {
         case .preparing:
                 Text(koanText)
                     .font(.title)
+                    .minimumScaleFactor(0.6)
                     .padding()
             
         case .stopped:

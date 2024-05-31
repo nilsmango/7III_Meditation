@@ -79,6 +79,7 @@ struct ActivityLockScreenView: View {
                 case .preparing:
                     Text(koanText)
                         .font(.title)
+                        .minimumScaleFactor(0.6)
                 }
                 
             }
