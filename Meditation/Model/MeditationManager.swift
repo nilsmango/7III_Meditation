@@ -377,6 +377,8 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
             self.endMeditation()
         })
         
+        startStatusTimer(updateInterval: updateInterval)
+        
         // start live activity
         startActivity()
         
@@ -404,23 +406,44 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
         }
     }
     
-    func stopMeditation() {
+    func stopMeditation(withSaving: Bool = true) {
         timer?.invalidate()
+        stopStatusTimer()
         
         meditationTimer.timerStatus = .alarm
         
-        // stop  notification
+        // stop  notifications
         notificationCenter.removePendingNotificationRequests(withIdentifiers: [timerNotificationIdentifier])
         
         // edit meditation session
         meditationTimer.targetDate = Date()
         
-        editMeditationSession()
+        editMeditationSession(withSaving: withSaving)
+        
+        // add a notification for the timer end
+        let content = UNMutableNotificationContent()
+        content.title = welcomeMessage
+        content.body = "Your meditation is now complete."
+        
+        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: meditationTimer.endSound.fileName))
+        
+        let targetDate = meditationTimer.targetDate.addingTimeInterval(1.2)
+        let triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: targetDate)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: timerNotificationIdentifier, content: content, trigger: trigger)
+
+        notificationCenter.add(request) { error in
+            if let error = error {
+                print("Error: \(error)")
+            }
+        }
     }
     
     func pauseMeditation() {
         
         timer?.invalidate()
+        stopStatusTimer()
         
         meditationTimer.timerStatus = .paused
         
@@ -436,18 +459,20 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
         meditationTimer.targetDate = currentDate
         
         // edit meditation session
-        editMeditationSession()
+        editMeditationSession(pause: true)
     }
     
     func endMeditation() {
-        meditationTimer.timerStatus = .alarm
-        
-        stopActivity()
+        if meditationTimer.timerStatus == .running || meditationTimer.timerStatus == .paused {
+            meditationTimer.timerStatus = .alarm
+            
+            stopActivity()
+        }
     }
     
     /// returns a random koan
-    func koanFunc() -> String {
-        return meditationTimer.koans.randomElement() ?? "If you meet the Buddha, kill him."
+    private func makeKoanOfTheDay() {
+        koanOfTheDay = meditationTimer.koans.randomElement() ?? "If you meet the Buddha, kill him."
     }
     
     func deleteKoan(at offsets: IndexSet) {
@@ -507,13 +532,47 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
     //        completionHandler()
     //    }
     
+    // MARK: Meditation Circle View
+    
+    var statusTimer: Timer?
+    @Published var circleProgress = 0.0
+    var updateInterval = 1.0
+    var koanOfTheDay = "Let go or get dragged."
+    
+    func startStatusTimer(updateInterval: Double) {
+        stopStatusTimer()
+        self.updateInterval = updateInterval
+        updateProgress()
+        
+        statusTimer = Timer.scheduledTimer(withTimeInterval: updateInterval, repeats: true) { _ in
+            self.updateProgress()
+        }
+    }
+    
+    private func stopStatusTimer() {
+        circleProgress = 0.0
+        statusTimer?.invalidate()
+        statusTimer = nil
+    }
+    
+    private func updateProgress() {
+        let elapsedTime = Date().timeIntervalSince(meditationTimer.startDate) + updateInterval
+        let totalDuration = Double(meditationTimer.timerInMinutes * 60)
+        circleProgress = elapsedTime / totalDuration
+        
+        if Date() >= meditationTimer.targetDate.addingTimeInterval(3) {
+            endMeditation()
+            stopStatusTimer()
+        }
+    }
+    
     
     
     // MARK: HealthKit
     
     let healthStore = HKHealthStore()
     
-    func activateHealthKitGetMeditationSessions() {
+    func startupChecks() {
         
         if HKHealthStore.isHealthDataAvailable() {
             
@@ -541,6 +600,9 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
                 }
             }
         }
+        
+        makeKoanOfTheDay()
+        checkStatusOfTimer()
     }
     
     func saveMeditationSession() {
@@ -584,21 +646,22 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
         }
     }
     
-    func editMeditationSession() {
+    func editMeditationSession(pause: Bool = false, withSaving: Bool = true) {
         // update activity
-        updateActivity()
+        updateActivity(pause: pause)
         
         // remove the last saved meditation from array
-        meditationSessions.removeLast()
-        
-        
-        // remove last saved mindful session from health
-        if HKHealthStore.isHealthDataAvailable() {
-            deleteLastMindfulSession {
-                // Save new meditation session only after the last mindful session is deleted
-                self.saveMeditationSession()
-            }
+        if withSaving {
+            meditationSessions.removeLast()
             
+            // remove last saved mindful session from health
+            if HKHealthStore.isHealthDataAvailable() {
+                deleteLastMindfulSession {
+                    // Save new meditation session only after the last mindful session is deleted
+                    self.saveMeditationSession()
+                }
+                
+            }
         }
         
         if meditationTimer.timerStatus == .alarm || meditationTimer.timerStatus == .stopped {
@@ -654,7 +717,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
         
         if activity == nil {
             let attributes = WidgetExtensionAttributes()
-            let state = WidgetExtensionAttributes.ContentState(targetDate: meditationTimer.targetDate, timerInMinutes: meditationTimer.timerInMinutes, timerStatus: meditationTimer.timerStatus, gradientBackground: gradientBackground, welcomeBackText: welcomeMessage, koanText: koanFunc())
+            let state = WidgetExtensionAttributes.ContentState(targetDate: meditationTimer.targetDate, timerInMinutes: meditationTimer.timerInMinutes, timerStatus: meditationTimer.timerStatus, gradientBackground: gradientBackground, welcomeBackText: welcomeMessage, koanText: koanOfTheDay)
             let content = ActivityContent(state: state, staleDate: meditationTimer.targetDate)
             
             do {
@@ -674,7 +737,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
     
     private func stopActivity() {
         
-        let state = WidgetExtensionAttributes.ContentState(targetDate: meditationTimer.targetDate, timerInMinutes: meditationTimer.timerInMinutes, timerStatus: meditationTimer.timerStatus, gradientBackground: gradientBackground, welcomeBackText: welcomeMessage, koanText: koanFunc())
+        let state = WidgetExtensionAttributes.ContentState(targetDate: meditationTimer.targetDate, timerInMinutes: meditationTimer.timerInMinutes, timerStatus: meditationTimer.timerStatus, gradientBackground: gradientBackground, welcomeBackText: welcomeMessage, koanText: koanOfTheDay)
         let content = ActivityContent(state: state, staleDate: nil)
         
         Task {
@@ -684,21 +747,23 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
         }
     }
     
-    private func updateActivity(switchToRunning: Bool = false) {
-
+    private func updateActivity(switchToRunning: Bool = false, pause: Bool = false) {
+        if switchToRunning {
+            print("switching to running now!")
+        }
         let state = WidgetExtensionAttributes.ContentState(
             targetDate: meditationTimer.targetDate,
             timerInMinutes: meditationTimer.timerInMinutes,
             timerStatus: switchToRunning ? .running : meditationTimer.timerStatus,
             gradientBackground: gradientBackground,
             welcomeBackText: welcomeMessage,
-            koanText: koanFunc()
+            koanText: koanOfTheDay
         )
-        let content = ActivityContent(state: state, staleDate: meditationTimer.targetDate)
+        let content = ActivityContent(state: state, staleDate: pause ? Date.distantFuture : meditationTimer.targetDate)
 
         Task {
             await activity?.update(content)
-            print("Activity updated")
+            print("Activity updated, pause was \(pause)")
         }
     }
     

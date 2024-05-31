@@ -29,7 +29,7 @@ struct MeditationApp: App {
                     }
                     notificationCenter.delegate = meditationManager
                     
-                    meditationManager.activateHealthKitGetMeditationSessions()
+                    meditationManager.startupChecks()
                     
                 }
         }

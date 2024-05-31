@@ -8,7 +8,7 @@
 import AppIntents
 
 @available(iOS 16.0, *)
-struct StopMeditation: LiveActivityIntent {
+struct StopMeditation: AppIntent {
     static var title: LocalizedStringResource = "Stop Meditation"
     static var description = IntentDescription("Stops the current meditation session.")
 
