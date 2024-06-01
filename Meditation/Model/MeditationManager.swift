@@ -576,7 +576,6 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
         
         if HKHealthStore.isHealthDataAvailable() {
             
-            
             let typesToRead = Set([
                 HKObjectType.categoryType(forIdentifier: HKCategoryTypeIdentifier.mindfulSession)!
             ])
@@ -738,7 +737,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
     private func stopActivity() {
         
         let state = WidgetExtensionAttributes.ContentState(targetDate: meditationTimer.targetDate, timerInMinutes: meditationTimer.timerInMinutes, timerStatus: meditationTimer.timerStatus, gradientBackground: gradientBackground, welcomeBackText: welcomeMessage, koanText: koanOfTheDay)
-        let content = ActivityContent(state: state, staleDate: nil)
+        let content = ActivityContent(state: state, staleDate: Date().addingTimeInterval(1.7))
         
         Task {
             await activity?.end(content, dismissalPolicy: .immediate)
@@ -766,5 +765,4 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
             print("Activity updated, pause was \(pause)")
         }
     }
-    
 }
