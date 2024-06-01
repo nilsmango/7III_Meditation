@@ -12,18 +12,28 @@ struct ContentView: View {
     
     @State private var rotation = Angle(degrees: 0.0)
     
+    @State private var emojis: [UUID] = []
+    @State private var emoji = "🔥"
+    
     var body: some View {
         NavigationStack {
             ZStack {
                 VStack {
                     HStack {
-                        
                         StreakButton(streakNumber: meditationManager.meditationTimer.statistics.currentStreak)
                             .padding(.horizontal)
                             .padding(.vertical, 4)
                             .rotationEffect(rotation)
                             .onTapGesture {
                                 rotation += Angle(degrees: 360)
+                                if meditationManager.meditationTimer.statistics.currentStreak < 1 {
+                                    emoji = "😐"
+                                } else {
+                                    emoji = "🔥"
+                                }
+                                for _ in 0..<18 {
+                                    emojis.append(UUID())
+                                }
                             }
                             .animation(.easeInOut(duration: 1.0), value: rotation)
                         
@@ -48,6 +58,8 @@ struct ContentView: View {
                     
                 }
                 TimerView(meditationManager: meditationManager)
+                
+                AttackOfTheEmojiView(emojis: emojis, emoji: emoji)
             }
             .background(meditationManager.gradientBackground ? LinearGradient(gradient: Gradient(colors: [.customGray2, .accent]), startPoint: .top, endPoint: .bottom) : LinearGradient(gradient: Gradient(colors: [.customGray2]), startPoint: .top, endPoint: .bottom))
         }        
