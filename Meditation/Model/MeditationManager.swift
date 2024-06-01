@@ -407,59 +407,74 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
     }
     
     func stopMeditation(withSaving: Bool = true) {
-        timer?.invalidate()
-        stopStatusTimer()
         
-        meditationTimer.timerStatus = .alarm
-        
-        // stop  notifications
-        notificationCenter.removePendingNotificationRequests(withIdentifiers: [timerNotificationIdentifier])
-        
-        // edit meditation session
-        meditationTimer.targetDate = Date()
-        
-        editMeditationSession(withSaving: withSaving)
-        
-        // add a notification for the timer end
-        let content = UNMutableNotificationContent()
-        content.title = welcomeMessage
-        content.body = "Your meditation is now complete."
-        
-        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: meditationTimer.endSound.fileName))
-        
-        let targetDate = meditationTimer.targetDate.addingTimeInterval(1.2)
-        let triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: targetDate)
-        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
-        
-        let request = UNNotificationRequest(identifier: timerNotificationIdentifier, content: content, trigger: trigger)
+        // little security thing to make sure the button was not pressed after meditation ended
+        if Date() >= meditationTimer.targetDate {
+            stopActivity()
+            meditationTimer.timerStatus = .stopped
+            
+        } else {
+            timer?.invalidate()
+            stopStatusTimer()
+            
+            meditationTimer.timerStatus = .alarm
+            
+            // stop  notifications
+            notificationCenter.removePendingNotificationRequests(withIdentifiers: [timerNotificationIdentifier])
+            
+            // edit meditation session
+            meditationTimer.targetDate = Date()
+            
+            editMeditationSession(withSaving: withSaving)
+            
+            // add a notification for the timer end
+            let content = UNMutableNotificationContent()
+            content.title = welcomeMessage
+            content.body = "Your meditation is now complete."
+            
+            content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: meditationTimer.endSound.fileName))
+            
+            let targetDate = meditationTimer.targetDate.addingTimeInterval(1.2)
+            let triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: targetDate)
+            let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
+            
+            let request = UNNotificationRequest(identifier: timerNotificationIdentifier, content: content, trigger: trigger)
 
-        notificationCenter.add(request) { error in
-            if let error = error {
-                print("Error: \(error)")
+            notificationCenter.add(request) { error in
+                if let error = error {
+                    print("Error: \(error)")
+                }
             }
         }
     }
     
     func pauseMeditation() {
         
-        timer?.invalidate()
-        stopStatusTimer()
-        
-        meditationTimer.timerStatus = .paused
-        
-        // stop  notification
-        notificationCenter.removePendingNotificationRequests(withIdentifiers: [timerNotificationIdentifier])
-        
-        let currentDate = Date()
-        
-        // update the minutes to meditate (rounded up)
-        let minutesLeftToMeditate = Int(ceil(meditationTimer.targetDate.timeIntervalSince(currentDate) / 60))
-        meditationTimer.timerInMinutes = minutesLeftToMeditate
-        
-        meditationTimer.targetDate = currentDate
-        
-        // edit meditation session
-        editMeditationSession(pause: true)
+        // little security thing to make sure the button was not pressed after meditation ended
+        if Date() >= meditationTimer.targetDate {
+            stopActivity()
+            meditationTimer.timerStatus = .stopped
+            
+        } else {
+            timer?.invalidate()
+            stopStatusTimer()
+            
+            meditationTimer.timerStatus = .paused
+            
+            // stop  notification
+            notificationCenter.removePendingNotificationRequests(withIdentifiers: [timerNotificationIdentifier])
+            
+            let currentDate = Date()
+            
+            // update the minutes to meditate (rounded up)
+            let minutesLeftToMeditate = Int(ceil(meditationTimer.targetDate.timeIntervalSince(currentDate) / 60))
+            meditationTimer.timerInMinutes = minutesLeftToMeditate
+            
+            meditationTimer.targetDate = currentDate
+            
+            // edit meditation session
+            editMeditationSession(pause: true)
+        }
     }
     
     func endMeditation() {
