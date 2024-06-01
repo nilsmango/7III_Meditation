@@ -780,4 +780,52 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
             print("Activity updated, pause was \(pause)")
         }
     }
+    
+    // MARK: Meditation Reminders
+    @AppStorage("reminders") private var remindersData: Data = Data()
+    
+    let remindersIdentifier = "Meditation Reminders Identifier"
+    
+    var reminders: Reminders {
+        get {
+            if let loadedData = try? JSONDecoder().decode(Reminders.self, from: remindersData) {
+                return loadedData
+            } else {
+                return Reminders(activateReminders: false, remindAgain: false, reminderStyle: .manual, reminderTime: Date.now)
+            }
+        }
+        set {
+            if let encoded = try? JSONEncoder().encode(newValue) {
+                remindersData = encoded
+            }
+        }
+    }
+    
+    func updateReminders() {
+        
+        // stopp all reminders notifications
+        notificationCenter.removePendingNotificationRequests(withIdentifiers: [remindersIdentifier])
+        
+        if reminders.activateReminders {
+            // add a notification for the reminder
+            let content = UNMutableNotificationContent()
+            content.title = "Time to Meditate!"
+    //        content.body = "Your meditation is now complete."
+            
+            content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: meditationTimer.reminderSound.fileName))
+            
+            let targetDate = reminders.reminderTime
+            let triggerDate = Calendar.current.dateComponents([.hour, .minute], from: targetDate)
+            let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: true)
+            
+            let request = UNNotificationRequest(identifier: remindersIdentifier, content: content, trigger: trigger)
+
+            notificationCenter.add(request) { error in
+                if let error = error {
+                    print("Error: \(error)")
+                }
+            }
+        }
+        
+    }
 }

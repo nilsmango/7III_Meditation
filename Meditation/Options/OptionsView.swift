@@ -25,7 +25,7 @@ struct OptionsView: View {
                     }
                 }
                 
-                Section("Sounds") {
+                Section("Meditation Sounds") {
                     NavigationLink {
                         NotificationSoundView(chosenSound: $meditationManager.meditationTimer.startSound, title: "Start Sound", soundOptions: meditationManager.soundOptions)
                     } label: {
@@ -49,16 +49,7 @@ struct OptionsView: View {
                         }
                     }
                     
-                    NavigationLink {
-                        NotificationSoundView(chosenSound: $meditationManager.meditationTimer.reminderSound, title: "Reminder Sound", soundOptions: meditationManager.soundOptions)
-                    } label: {
-                        HStack {
-                            Text("Reminder Sound")
-                            Spacer()
-                            Text(meditationManager.meditationTimer.reminderSound.name)
-                                .opacity(0.5)
-                        }
-                    }
+                    
                     
                     
     //                Picker("Interval Sound", selection: $meditationManager.meditationTimer.intervalSound) {
@@ -79,6 +70,35 @@ struct OptionsView: View {
     //                .pickerStyle(.wheel)
                     
                     Toggle("Gradient Background", isOn: $meditationManager.gradientBackground)
+                }
+                
+                Section(content:  {
+                    Toggle("Activate Reminders", isOn: $meditationManager.reminders.activateReminders)
+                    
+                    if meditationManager.reminders.activateReminders {
+                        NavigationLink {
+                            NotificationSoundView(chosenSound: $meditationManager.meditationTimer.reminderSound, title: "Reminder Sound", soundOptions: meditationManager.soundOptions)
+                        } label: {
+                            HStack {
+                                Text("Reminder Sound")
+                                Spacer()
+                                Text(meditationManager.meditationTimer.reminderSound.name)
+                                    .opacity(0.5)
+                            }
+                        }
+                        
+                        DatePicker("Reminder Time", selection: $meditationManager.reminders.reminderTime, displayedComponents: .hourAndMinute)
+                                        
+//                        Toggle("Remind Again", isOn: $meditationManager.reminders.remindAgain)
+                                                
+                    }
+                }, header: {
+                    Text("Reminders")
+                }, footer: {
+//                    Label("**Remind Again** will remind you to meditate if you don't meditate after the first reminder.", systemImage: "info.circle")
+                })
+                .onChange(of: meditationManager.reminders) {
+                    meditationManager.updateReminders()
                 }
             }
             .scrollContentBackground(.hidden)
