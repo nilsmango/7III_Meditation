@@ -67,9 +67,7 @@ struct ActivityLockScreenView: View {
                     
                     Spacer()
                     
-                    Text(dateToDateFormatted(from: Date(), to: Date().addingTimeInterval(Double(timerInMinutes * 60))))
-                        .font(.title)
-                        .fontWeight(.bold)
+                    TimeStoppedView(timerInMinutes: timerInMinutes)
                     
                     Spacer()
                     
@@ -92,5 +90,5 @@ struct ActivityLockScreenView: View {
 }
 
 #Preview {
-    ActivityLockScreenView(timerStatus: .paused, targetDate: Date().addingTimeInterval(600), timerInMinutes: 10, welcomeBackText: "Welcome", koanText: "some koan", frameWidth: 50)
+    ActivityLockScreenView(timerStatus: .running, targetDate: Date().addingTimeInterval(600), timerInMinutes: 10, welcomeBackText: "Welcome", koanText: "some koan", frameWidth: 50)
 }

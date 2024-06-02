@@ -12,40 +12,23 @@ struct TimerHackView: View {
     let timerInMinutes: Int
     
     var body: some View {
-        if timerInMinutes > 60 {
-            Text("0:00:00")
-                .font(.title)
-                .fontWeight(.bold)
-                .hidden()
-                .overlay(alignment: .leading) {
-                    Text(targetDate, style: .timer)
-                        .font(.title)
-                        .fontWeight(.bold)
-                }
-        } else if timerInMinutes > 10 {
-            Text("00:00")
-                .font(.title)
-                .fontWeight(.bold)
-                .hidden()
-                .overlay(alignment: .leading) {
-                    Text(targetDate, style: .timer)
-                        .font(.title)
-                        .fontWeight(.bold)
-                }
-        } else {
-            Text("0:00")
-                .font(.title)
-                .fontWeight(.bold)
-                .hidden()
-                .overlay(alignment: .leading) {
-                    Text(targetDate, style: .timer)
-                        .font(.title)
-                        .fontWeight(.bold)
-                }
-        }
+        Text(dateToDateFormatted(from: Date(), to: Date().addingTimeInterval(Double((timerInMinutes - 1) * 60))))
+            .font(.title)
+            .fontWeight(.bold)
+            .monospacedDigit()
+            .hidden()
+            .overlay(alignment: .leading) {
+                Text(targetDate, style: .timer)
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .monospacedDigit()
+            }
     }
 }
 
 #Preview {
     TimerHackView(targetDate: Date().addingTimeInterval(600), timerInMinutes: 10)
+        .background {
+            Color.green
+        }
 }

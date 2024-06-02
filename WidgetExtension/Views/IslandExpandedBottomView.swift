@@ -59,9 +59,7 @@ struct IslandExpandedBottomView: View {
                 
                 Spacer()
                 
-                Text(dateToDateFormatted(from: Date(), to: Date().addingTimeInterval(Double(timerInMinutes * 60))))
-                    .font(.title)
-                    .fontWeight(.bold)
+                TimeStoppedView(timerInMinutes: timerInMinutes)
                 
             }
             .frame(height: frameWidth)
@@ -83,5 +81,5 @@ struct IslandExpandedBottomView: View {
 }
 
 #Preview {
-    IslandExpandedBottomView(timerStatus: .paused, targetDate: Date().addingTimeInterval(600), timerInMinutes: 10, welcomeBackText: "Welcome", koanText: "some koan", frameWidth: 50)
+    IslandExpandedBottomView(timerStatus: .running, targetDate: Date().addingTimeInterval(600), timerInMinutes: 10, welcomeBackText: "Welcome", koanText: "some koan", frameWidth: 50)
 }

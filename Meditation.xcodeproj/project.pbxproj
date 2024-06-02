@@ -77,6 +77,8 @@
 		785D09632C0B9AF200044AE9 /* NoiseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785D09622C0B9AF200044AE9 /* NoiseView.swift */; };
 		785D09652C0B9F2200044AE9 /* FlyingEmojiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785D09642C0B9F2200044AE9 /* FlyingEmojiView.swift */; };
 		785D09672C0BA00500044AE9 /* AttackOfTheEmojiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785D09662C0BA00500044AE9 /* AttackOfTheEmojiView.swift */; };
+		785D096A2C0C4ABD00044AE9 /* TimeStoppedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785D09692C0C4ABD00044AE9 /* TimeStoppedView.swift */; };
+		785D096B2C0C4ABD00044AE9 /* TimeStoppedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785D09692C0C4ABD00044AE9 /* TimeStoppedView.swift */; };
 		7879BDF02BF4A43E001994D2 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7879BDEF2BF4A43E001994D2 /* Helpers.swift */; };
 		7879BDF12BF4BDE4001994D2 /* Kitchen Timer Normal.caf in Resources */ = {isa = PBXBuildFile; fileRef = 78385D242BF3E4F100581057 /* Kitchen Timer Normal.caf */; };
 		7879BDF32BF68448001994D2 /* CircleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7879BDF22BF68448001994D2 /* CircleButtonStyle.swift */; };
@@ -176,6 +178,7 @@
 		785D09622C0B9AF200044AE9 /* NoiseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoiseView.swift; sourceTree = "<group>"; };
 		785D09642C0B9F2200044AE9 /* FlyingEmojiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlyingEmojiView.swift; sourceTree = "<group>"; };
 		785D09662C0BA00500044AE9 /* AttackOfTheEmojiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttackOfTheEmojiView.swift; sourceTree = "<group>"; };
+		785D09692C0C4ABD00044AE9 /* TimeStoppedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeStoppedView.swift; sourceTree = "<group>"; };
 		7879BDEF2BF4A43E001994D2 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		7879BDF22BF68448001994D2 /* CircleButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButtonStyle.swift; sourceTree = "<group>"; };
 		7879BDF42BF684FD001994D2 /* TimerStoppedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerStoppedView.swift; sourceTree = "<group>"; };
@@ -259,7 +262,7 @@
 				78385D0C2BF3647300581057 /* ContentView.swift */,
 				789A0E082C0388FE009CB9E7 /* StreakButton.swift */,
 				789A0E1F2C05C35A009CB9E7 /* StatisticsButton.swift */,
-				785D09622C0B9AF200044AE9 /* NoiseView.swift */,
+				785D096C2C0C4B5300044AE9 /* Buddha Box */,
 				785D09682C0BA7F900044AE9 /* Flying Emoji */,
 				789A0E0E2C039149009CB9E7 /* Statistics */,
 				789A0E0D2C03912D009CB9E7 /* Options */,
@@ -341,6 +344,7 @@
 				785D09542C09F27F00044AE9 /* ActivityLockScreenView.swift */,
 				785D09512C09F18D00044AE9 /* IslandExpandedBottomView.swift */,
 				785D09572C0A06EC00044AE9 /* TimerHackView.swift */,
+				785D09692C0C4ABD00044AE9 /* TimeStoppedView.swift */,
 				785473692C090104009645BF /* WidgetLogoView.swift */,
 				7854736E2C090185009645BF /* WidgetButtonLabel.swift */,
 				785473762C09056E009645BF /* CircleProgressView.swift */,
@@ -357,6 +361,14 @@
 				785D09642C0B9F2200044AE9 /* FlyingEmojiView.swift */,
 			);
 			path = "Flying Emoji";
+			sourceTree = "<group>";
+		};
+		785D096C2C0C4B5300044AE9 /* Buddha Box */ = {
+			isa = PBXGroup;
+			children = (
+				785D09622C0B9AF200044AE9 /* NoiseView.swift */,
+			);
+			path = "Buddha Box";
 			sourceTree = "<group>";
 		};
 		789A0E0D2C03912D009CB9E7 /* Options */ = {
@@ -530,6 +542,7 @@
 				789A0E182C04FE57009CB9E7 /* DateComponents + Identifiable.swift in Sources */,
 				7879BDF32BF68448001994D2 /* CircleButtonStyle.swift in Sources */,
 				7879BDF02BF4A43E001994D2 /* Helpers.swift in Sources */,
+				785D096A2C0C4ABD00044AE9 /* TimeStoppedView.swift in Sources */,
 				789A0E102C0392F5009CB9E7 /* MeditationStatistics.swift in Sources */,
 				785D095B2C0A48BC00044AE9 /* StopMeditationWithoutSaving.swift in Sources */,
 				789A0E072C032377009CB9E7 /* KoansEditView.swift in Sources */,
@@ -588,6 +601,7 @@
 				785473642C07B5E4009645BF /* DateComponents + Comparable.swift in Sources */,
 				785D094D2C09CFE800044AE9 /* ResumeMeditation.swift in Sources */,
 				785473652C07B5E4009645BF /* MeditationTimer.swift in Sources */,
+				785D096B2C0C4ABD00044AE9 /* TimeStoppedView.swift in Sources */,
 				785473662C07B5E4009645BF /* MeditationSession.swift in Sources */,
 				785473672C07B5E4009645BF /* TimerSound.swift in Sources */,
 				785D09532C09F18D00044AE9 /* IslandExpandedBottomView.swift in Sources */,
