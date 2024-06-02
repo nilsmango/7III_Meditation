@@ -77,6 +77,7 @@
 		785D09672C0BA00500044AE9 /* AttackOfTheEmojiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785D09662C0BA00500044AE9 /* AttackOfTheEmojiView.swift */; };
 		785D096A2C0C4ABD00044AE9 /* TimeStoppedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785D09692C0C4ABD00044AE9 /* TimeStoppedView.swift */; };
 		785D096B2C0C4ABD00044AE9 /* TimeStoppedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785D09692C0C4ABD00044AE9 /* TimeStoppedView.swift */; };
+		785D096F2C0C56F800044AE9 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785D096E2C0C56F800044AE9 /* AudioManager.swift */; };
 		7879BDF02BF4A43E001994D2 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7879BDEF2BF4A43E001994D2 /* Helpers.swift */; };
 		7879BDF12BF4BDE4001994D2 /* Kitchen Timer Normal.caf in Resources */ = {isa = PBXBuildFile; fileRef = 78385D242BF3E4F100581057 /* Kitchen Timer Normal.caf */; };
 		7879BDF32BF68448001994D2 /* CircleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7879BDF22BF68448001994D2 /* CircleButtonStyle.swift */; };
@@ -99,6 +100,10 @@
 		789A0E372C061320009CB9E7 /* WidgetExtensionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 789A0E252C06131E009CB9E7 /* WidgetExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		789A0E3F2C061570009CB9E7 /* TimerStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E3E2C061570009CB9E7 /* TimerStatus.swift */; };
 		789A0E482C061ECE009CB9E7 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7879BDEF2BF4A43E001994D2 /* Helpers.swift */; };
+		78C862AB2C0C5A29006235AB /* SoundpipeAudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 78C862AA2C0C5A29006235AB /* SoundpipeAudioKit */; };
+		78C862AD2C0CC39D006235AB /* loop.aif in Resources */ = {isa = PBXBuildFile; fileRef = 78C862AC2C0CC39D006235AB /* loop.aif */; };
+		78DAE2F12C0C579D00F2CCB0 /* NoiseMixerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DAE2F02C0C579D00F2CCB0 /* NoiseMixerView.swift */; };
+		78DAE2F32C0C58FA00F2CCB0 /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 78DAE2F22C0C58FA00F2CCB0 /* AudioKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -175,6 +180,7 @@
 		785D09642C0B9F2200044AE9 /* FlyingEmojiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlyingEmojiView.swift; sourceTree = "<group>"; };
 		785D09662C0BA00500044AE9 /* AttackOfTheEmojiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttackOfTheEmojiView.swift; sourceTree = "<group>"; };
 		785D09692C0C4ABD00044AE9 /* TimeStoppedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeStoppedView.swift; sourceTree = "<group>"; };
+		785D096E2C0C56F800044AE9 /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		7879BDEF2BF4A43E001994D2 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		7879BDF22BF68448001994D2 /* CircleButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButtonStyle.swift; sourceTree = "<group>"; };
 		7879BDF42BF684FD001994D2 /* TimerStoppedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerStoppedView.swift; sourceTree = "<group>"; };
@@ -197,6 +203,8 @@
 		789A0E342C061320009CB9E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		789A0E3C2C061412009CB9E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		789A0E3E2C061570009CB9E7 /* TimerStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerStatus.swift; sourceTree = "<group>"; };
+		78C862AC2C0CC39D006235AB /* loop.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = loop.aif; sourceTree = "<group>"; };
+		78DAE2F02C0C579D00F2CCB0 /* NoiseMixerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoiseMixerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +212,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78C862AB2C0C5A29006235AB /* SoundpipeAudioKit in Frameworks */,
+				78DAE2F32C0C58FA00F2CCB0 /* AudioKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +303,7 @@
 				7879BDEF2BF4A43E001994D2 /* Helpers.swift */,
 				789A0E172C04FE57009CB9E7 /* DateComponents + Identifiable.swift */,
 				789A0E192C04FEAB009CB9E7 /* DateComponents + Comparable.swift */,
+				785D096E2C0C56F800044AE9 /* AudioManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -300,6 +311,7 @@
 		78385D252BF3E4F700581057 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				78C862AC2C0CC39D006235AB /* loop.aif */,
 				7834266A2BFFBC7E0008F9F9 /* Basic Bells 1.caf */,
 				7834266D2BFFBC7F0008F9F9 /* Basic Bells 2.caf */,
 				783426662BFFBC7E0008F9F9 /* Basic Bells 3.caf */,
@@ -361,6 +373,7 @@
 		785D096C2C0C4B5300044AE9 /* Buddha Box */ = {
 			isa = PBXGroup;
 			children = (
+				78DAE2F02C0C579D00F2CCB0 /* NoiseMixerView.swift */,
 			);
 			path = "Buddha Box";
 			sourceTree = "<group>";
@@ -426,6 +439,10 @@
 				789A0E362C061320009CB9E7 /* PBXTargetDependency */,
 			);
 			name = Meditation;
+			packageProductDependencies = (
+				78DAE2F22C0C58FA00F2CCB0 /* AudioKit */,
+				78C862AA2C0C5A29006235AB /* SoundpipeAudioKit */,
+			);
 			productName = Meditation;
 			productReference = 78385D072BF3647300581057 /* Meditation.app */;
 			productType = "com.apple.product-type.application";
@@ -474,6 +491,10 @@
 				Base,
 			);
 			mainGroup = 78385CFE2BF3647300581057;
+			packageReferences = (
+				785D096D2C0C56EB00044AE9 /* XCRemoteSwiftPackageReference "AudioKit" */,
+				78C862A92C0C5A29006235AB /* XCRemoteSwiftPackageReference "SoundpipeAudioKit" */,
+			);
 			productRefGroup = 78385D082BF3647300581057 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -493,6 +514,7 @@
 				783426802BFFBC7F0008F9F9 /* Metallophone.caf in Resources */,
 				783426842BFFBC7F0008F9F9 /* Singing Bowl 2b.caf in Resources */,
 				7879BDF12BF4BDE4001994D2 /* Kitchen Timer Normal.caf in Resources */,
+				78C862AD2C0CC39D006235AB /* loop.aif in Resources */,
 				7834267C2BFFBC7F0008F9F9 /* Chimes 4.caf in Resources */,
 				78385D132BF3647500581057 /* Preview Assets.xcassets in Resources */,
 				7834267E2BFFBC7F0008F9F9 /* Basic Bells 2.caf in Resources */,
@@ -535,6 +557,7 @@
 				789A0E092C0388FE009CB9E7 /* StreakButton.swift in Sources */,
 				789A0E182C04FE57009CB9E7 /* DateComponents + Identifiable.swift in Sources */,
 				7879BDF32BF68448001994D2 /* CircleButtonStyle.swift in Sources */,
+				785D096F2C0C56F800044AE9 /* AudioManager.swift in Sources */,
 				7879BDF02BF4A43E001994D2 /* Helpers.swift in Sources */,
 				785D096A2C0C4ABD00044AE9 /* TimeStoppedView.swift in Sources */,
 				789A0E102C0392F5009CB9E7 /* MeditationStatistics.swift in Sources */,
@@ -547,6 +570,7 @@
 				789A0E1A2C04FEAB009CB9E7 /* DateComponents + Comparable.swift in Sources */,
 				785D09552C09F27F00044AE9 /* ActivityLockScreenView.swift in Sources */,
 				789A0E3F2C061570009CB9E7 /* TimerStatus.swift in Sources */,
+				78DAE2F12C0C579D00F2CCB0 /* NoiseMixerView.swift in Sources */,
 				789A0E142C04FCCA009CB9E7 /* MonthlyChart.swift in Sources */,
 				7854735F2C07B359009645BF /* StopMeditation.swift in Sources */,
 				785D09652C0B9F2200044AE9 /* FlyingEmojiView.swift in Sources */,
@@ -916,6 +940,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		785D096D2C0C56EB00044AE9 /* XCRemoteSwiftPackageReference "AudioKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AudioKit/AudioKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.6.4;
+			};
+		};
+		78C862A92C0C5A29006235AB /* XCRemoteSwiftPackageReference "SoundpipeAudioKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AudioKit/SoundpipeAudioKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.6.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		78C862AA2C0C5A29006235AB /* SoundpipeAudioKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 78C862A92C0C5A29006235AB /* XCRemoteSwiftPackageReference "SoundpipeAudioKit" */;
+			productName = SoundpipeAudioKit;
+		};
+		78DAE2F22C0C58FA00F2CCB0 /* AudioKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 785D096D2C0C56EB00044AE9 /* XCRemoteSwiftPackageReference "AudioKit" */;
+			productName = AudioKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 78385CFF2BF3647300581057 /* Project object */;
 }
