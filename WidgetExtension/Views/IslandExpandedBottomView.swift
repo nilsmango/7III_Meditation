@@ -13,6 +13,7 @@ struct IslandExpandedBottomView: View {
     let timerInMinutes: Int
     let welcomeBackText: String
     let koanText: String
+    let showKoan: Bool
     
     let frameWidth: Double
     
@@ -69,6 +70,7 @@ struct IslandExpandedBottomView: View {
                 Text(koanText)
                     .font(.title)
                     .minimumScaleFactor(0.6)
+                    .opacity(showKoan ? 1.0 : 0.0)
                     .padding()
             
         case .stopped:
@@ -81,5 +83,5 @@ struct IslandExpandedBottomView: View {
 }
 
 #Preview {
-    IslandExpandedBottomView(timerStatus: .running, targetDate: Date().addingTimeInterval(600), timerInMinutes: 10, welcomeBackText: "Welcome", koanText: "some koan", frameWidth: 50)
+    IslandExpandedBottomView(timerStatus: .running, targetDate: Date().addingTimeInterval(600), timerInMinutes: 10, welcomeBackText: "Welcome", koanText: "some koan", showKoan: true, frameWidth: 50)
 }

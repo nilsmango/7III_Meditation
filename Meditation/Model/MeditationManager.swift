@@ -731,7 +731,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
         
         if activity == nil {
             let attributes = WidgetExtensionAttributes()
-            let state = WidgetExtensionAttributes.ContentState(targetDate: meditationTimer.targetDate, timerInMinutes: meditationTimer.timerInMinutes, timerStatus: meditationTimer.timerStatus, gradientBackground: gradientBackground, welcomeBackText: welcomeMessage, koanText: koanOfTheDay)
+            let state = WidgetExtensionAttributes.ContentState(targetDate: meditationTimer.targetDate, timerInMinutes: meditationTimer.timerInMinutes, timerStatus: meditationTimer.timerStatus, gradientBackground: gradientBackground, welcomeBackText: welcomeMessage, koanText: koanOfTheDay, showKoan: meditationTimer.showKoan)
             let content = ActivityContent(state: state, staleDate: meditationTimer.targetDate)
             
             do {
@@ -751,7 +751,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
     
     private func stopActivity() {
         
-        let state = WidgetExtensionAttributes.ContentState(targetDate: meditationTimer.targetDate, timerInMinutes: meditationTimer.timerInMinutes, timerStatus: meditationTimer.timerStatus, gradientBackground: gradientBackground, welcomeBackText: welcomeMessage, koanText: koanOfTheDay)
+        let state = WidgetExtensionAttributes.ContentState(targetDate: meditationTimer.targetDate, timerInMinutes: meditationTimer.timerInMinutes, timerStatus: meditationTimer.timerStatus, gradientBackground: gradientBackground, welcomeBackText: welcomeMessage, koanText: koanOfTheDay, showKoan: meditationTimer.showKoan)
         let content = ActivityContent(state: state, staleDate: Date().addingTimeInterval(1.7))
         
         Task {
@@ -771,7 +771,8 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
             timerStatus: switchToRunning ? .running : meditationTimer.timerStatus,
             gradientBackground: gradientBackground,
             welcomeBackText: welcomeMessage,
-            koanText: koanOfTheDay
+            koanText: koanOfTheDay,
+            showKoan: meditationTimer.showKoan
         )
         let content = ActivityContent(state: state, staleDate: pause ? Date.distantFuture : meditationTimer.targetDate)
 

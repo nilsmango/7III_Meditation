@@ -13,6 +13,7 @@ struct ActivityLockScreenView: View {
     let timerInMinutes: Int
     let welcomeBackText: String
     let koanText: String
+    let showKoan: Bool
     
     let frameWidth: Double
     var body: some View {
@@ -78,6 +79,7 @@ struct ActivityLockScreenView: View {
                     Text(koanText)
                         .font(.title)
                         .minimumScaleFactor(0.6)
+                        .opacity(showKoan ? 1.0 : 0.0)
                 }
                 
             }
@@ -90,5 +92,5 @@ struct ActivityLockScreenView: View {
 }
 
 #Preview {
-    ActivityLockScreenView(timerStatus: .running, targetDate: Date().addingTimeInterval(600), timerInMinutes: 10, welcomeBackText: "Welcome", koanText: "some koan", frameWidth: 50)
+    ActivityLockScreenView(timerStatus: .running, targetDate: Date().addingTimeInterval(600), timerInMinutes: 10, welcomeBackText: "Welcome", koanText: "some koan", showKoan: true, frameWidth: 50)
 }

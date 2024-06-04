@@ -20,6 +20,7 @@ struct WidgetExtensionAttributes: ActivityAttributes {
         var gradientBackground: Bool
         var welcomeBackText: String
         var koanText: String
+        var showKoan: Bool
         
     }
     
@@ -33,7 +34,7 @@ struct WidgetExtensionLiveActivity: Widget {
         ActivityConfiguration(for: WidgetExtensionAttributes.self) { context in
             // Lock screen/banner UI goes here
             
-            ActivityLockScreenView(timerStatus: context.state.timerStatus, targetDate: context.state.targetDate, timerInMinutes: context.state.timerInMinutes, welcomeBackText: context.state.welcomeBackText, koanText: context.state.koanText, frameWidth: frameWidth)
+            ActivityLockScreenView(timerStatus: context.state.timerStatus, targetDate: context.state.targetDate, timerInMinutes: context.state.timerInMinutes, welcomeBackText: context.state.welcomeBackText, koanText: context.state.koanText, showKoan: context.state.showKoan, frameWidth: frameWidth)
                 .activityBackgroundTint(nil)
             //            .background(context.state.gradientBackground ? LinearGradient(gradient: Gradient(colors: [.customGray2, .accent]), startPoint: .top, endPoint: .bottom) : LinearGradient(gradient: Gradient(colors: [.customGray2]), startPoint: .top, endPoint: .bottom))
             
@@ -57,7 +58,7 @@ struct WidgetExtensionLiveActivity: Widget {
                 }
                 
                 DynamicIslandExpandedRegion(.bottom) {
-                    IslandExpandedBottomView(timerStatus: context.state.timerStatus, targetDate: context.state.targetDate, timerInMinutes: context.state.timerInMinutes, welcomeBackText: context.state.welcomeBackText, koanText: context.state.koanText, frameWidth: frameWidth)
+                    IslandExpandedBottomView(timerStatus: context.state.timerStatus, targetDate: context.state.targetDate, timerInMinutes: context.state.timerInMinutes, welcomeBackText: context.state.welcomeBackText, koanText: context.state.koanText, showKoan: context.state.showKoan, frameWidth: frameWidth)
                 }
             } compactLeading: {
                 WidgetLogoView()
@@ -84,23 +85,23 @@ extension WidgetExtensionAttributes {
 
 extension WidgetExtensionAttributes.ContentState {
     fileprivate static var running: WidgetExtensionAttributes.ContentState {
-        WidgetExtensionAttributes.ContentState(targetDate: Date().addingTimeInterval(60), timerInMinutes: 1, timerStatus: .running, gradientBackground: true, welcomeBackText: "Welcome Back!", koanText: "Love is the way.")
+        WidgetExtensionAttributes.ContentState(targetDate: Date().addingTimeInterval(60), timerInMinutes: 1, timerStatus: .running, gradientBackground: true, welcomeBackText: "Welcome Back!", koanText: "Love is the way.", showKoan: true)
     }
     
     fileprivate static var paused: WidgetExtensionAttributes.ContentState {
-        WidgetExtensionAttributes.ContentState(targetDate: Date().addingTimeInterval(60), timerInMinutes: 1, timerStatus: .paused, gradientBackground: true, welcomeBackText: "Welcome Back!", koanText: "Love is the way.")
+        WidgetExtensionAttributes.ContentState(targetDate: Date().addingTimeInterval(60), timerInMinutes: 1, timerStatus: .paused, gradientBackground: true, welcomeBackText: "Welcome Back!", koanText: "Love is the way.", showKoan: true)
     }
     
     fileprivate static var alarm: WidgetExtensionAttributes.ContentState {
-        WidgetExtensionAttributes.ContentState(targetDate: Date().addingTimeInterval(60), timerInMinutes: 1, timerStatus: .alarm, gradientBackground: true, welcomeBackText: "Welcome Back!", koanText: "Love is the way.")
+        WidgetExtensionAttributes.ContentState(targetDate: Date().addingTimeInterval(60), timerInMinutes: 1, timerStatus: .alarm, gradientBackground: true, welcomeBackText: "Welcome Back!", koanText: "Love is the way.", showKoan: true)
     }
     
     fileprivate static var preparing: WidgetExtensionAttributes.ContentState {
-        WidgetExtensionAttributes.ContentState(targetDate: Date().addingTimeInterval(60), timerInMinutes: 1, timerStatus: .preparing, gradientBackground: true, welcomeBackText: "Welcome Back!", koanText: "Love is the way.")
+        WidgetExtensionAttributes.ContentState(targetDate: Date().addingTimeInterval(60), timerInMinutes: 1, timerStatus: .preparing, gradientBackground: true, welcomeBackText: "Welcome Back!", koanText: "Love is the way.", showKoan: true)
     }
     
     fileprivate static var stopped: WidgetExtensionAttributes.ContentState {
-        WidgetExtensionAttributes.ContentState(targetDate: Date().addingTimeInterval(60), timerInMinutes: 1, timerStatus: .stopped, gradientBackground: true, welcomeBackText: "Welcome Back!", koanText: "Love is the way.")
+        WidgetExtensionAttributes.ContentState(targetDate: Date().addingTimeInterval(60), timerInMinutes: 1, timerStatus: .stopped, gradientBackground: true, welcomeBackText: "Welcome Back!", koanText: "Love is the way.", showKoan: true)
     }
 }
 
