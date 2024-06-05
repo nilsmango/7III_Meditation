@@ -32,20 +32,20 @@ struct NoiseMixerView: View {
                 
                                 Text("Shift")
                                 Slider(value: $audioManager.soundData.looper1Shift, in: -12...12)
-                Text(String(format: "%.1f", audioManager.soundData.looper1Shift))
+                Text(String(format: "%.2f", audioManager.soundData.looper1Shift))
                     .monospacedDigit()
                             
 
 
                 
                 Text("Ladder Filter Cutoff Frequency")
-                Slider(value: $audioManager.filterData.logMoogCutoff, in: log10(20)...log10(20000))
-                Text(String(format: "%.0f", audioManager.filterData.moogCutoff))
+                Slider(value: $audioManager.effectsData.logMoogCutoff, in: log10(20)...log10(20000))
+                Text(String(format: "%.0f", audioManager.effectsData.moogCutoff))
                     .monospacedDigit()
                 
                 Text("Ladder Filter Resonance")
-                Slider(value: $audioManager.filterData.moogResonance, in: 0...1)
-                Text(String(format: "%.1f", audioManager.filterData.moogResonance))
+                Slider(value: $audioManager.effectsData.moogResonance, in: 0...1)
+                Text(String(format: "%.2f", audioManager.effectsData.moogResonance))
                     .monospacedDigit()
                 
                 Toggle("High Pass", isOn: $highPassFilter)
@@ -59,10 +59,38 @@ struct NoiseMixerView: View {
                 
                 if highPassFilter {
                     Text("High Pass Cutoff Frequency")
-                    Slider(value: $audioManager.filterData.logHighPassCutoff, in: log10(20)...log10(20000))
-                    Text(String(format: "%.0f", audioManager.filterData.highPassCutoff))
+                    Slider(value: $audioManager.effectsData.logHighPassCutoff, in: log10(20)...log10(20000))
+                    Text(String(format: "%.0f", audioManager.effectsData.highPassCutoff))
                         .monospacedDigit()
                 }
+                
+                Text("Delay Dry/Wet")
+                Slider(value: $audioManager.effectsData.delayDryWetMix, in: 0...1)
+                Text(String(format: "%.2f", audioManager.effectsData.delayDryWetMix))
+                    .monospacedDigit()
+                
+                Text("Delay Time")
+                Slider(value: Binding(
+                                get: {
+                                    sqrt(audioManager.effectsData.delayTime)
+                                },
+                                set: { newValue in
+                                    audioManager.effectsData.delayTime = newValue * newValue
+                                }
+                            ), in: sqrt(0.001)...sqrt(5.000))
+                            Text(String(format: "%.3f", audioManager.effectsData.delayTime))
+                                .monospacedDigit()
+                        
+                
+                Text("Delay Feedback")
+                Slider(value: $audioManager.effectsData.delayFeedback, in: 0...1)
+                Text(String(format: "%.2f", audioManager.effectsData.delayFeedback))
+                    .monospacedDigit()
+                
+                Text("Reverb Dry/Wet")
+                Slider(value: $audioManager.effectsData.reverbDryWetMix, in: 0...1)
+                Text(String(format: "%.2f", audioManager.effectsData.reverbDryWetMix))
+                    .monospacedDigit()
                 
                 
                 Button(action: {

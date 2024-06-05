@@ -19,7 +19,7 @@ struct NoiseData {
 
 }
 
-struct FilterData {
+struct EffectsData {
     var moogCutoff: AUValue = 20000.0
     var moogResonance: AUValue = 0.0
     var logMoogCutoff: AUValue {
@@ -40,6 +40,11 @@ struct FilterData {
                 highPassCutoff = pow(10, newValue)
             }
         }
+    
+    var reverbDryWetMix: AUValue = 0.0
+    var delayFeedback: AUValue = 0.0
+    var delayTime: AUValue = 0.001
+    var delayDryWetMix: AUValue = 0.0
 }
 
 class AudioManager: ObservableObject, HasAudioEngine {
@@ -53,6 +58,12 @@ class AudioManager: ObservableObject, HasAudioEngine {
     
     var moogLadder: MoogLadder!
     var highPass: HighPassButterworthFilter!
+    var delay: VariableDelay!
+    var delayWet = Mixer()
+    var delayDry = Mixer()
+    var delayMix = Mixer()
+    
+    var reverb: ZitaReverb!
     
     var peakLimiter: PeakLimiter!
     var preMixer = Mixer()
@@ -74,11 +85,16 @@ class AudioManager: ObservableObject, HasAudioEngine {
     }
     
     
-    @Published var filterData = FilterData() {
+    @Published var effectsData = EffectsData() {
         didSet {
-            moogLadder.cutoffFrequency = filterData.moogCutoff
-            moogLadder.resonance = filterData.moogResonance
-            highPass.cutoffFrequency = filterData.highPassCutoff
+            moogLadder.cutoffFrequency = effectsData.moogCutoff
+            moogLadder.resonance = effectsData.moogResonance
+            highPass.cutoffFrequency = effectsData.highPassCutoff
+            delay.feedback = effectsData.delayFeedback
+            delay.time = effectsData.delayTime
+            delayWet.volume = effectsData.delayDryWetMix
+            delayDry.volume = abs(effectsData.delayDryWetMix - 1.0)
+            reverb.dryWetMix = effectsData.reverbDryWetMix
         }
     }
     
@@ -113,16 +129,37 @@ class AudioManager: ObservableObject, HasAudioEngine {
         preMixer.addInput(white)
         
         
-        moogLadder = MoogLadder(preMixer, cutoffFrequency: filterData.moogCutoff, resonance: filterData.moogResonance)
+        moogLadder = MoogLadder(preMixer, cutoffFrequency: effectsData.moogCutoff, resonance: effectsData.moogResonance)
         lowpassMixer.addInput(moogLadder)
         
-        highPass = HighPassButterworthFilter(moogLadder, cutoffFrequency: filterData.highPassCutoff)
+        highPass = HighPassButterworthFilter(moogLadder, cutoffFrequency: effectsData.highPassCutoff)
         highPassMixer.addInput(highPass)
         
         filterMix.addInput(highPassMixer)
         filterMix.addInput(lowpassMixer)
         
-        peakLimiter = PeakLimiter(filterMix)
+        delay = VariableDelay(filterMix, time: effectsData.delayTime, feedback: effectsData.delayFeedback, maximumTime: 5.0)
+        
+        delayWet.addInput(delay)
+        delayDry.addInput(filterMix)
+        
+        delayMix.addInput(delayWet)
+        delayMix.addInput(delayDry)
+        
+        reverb = ZitaReverb(delayMix,
+                                    predelay: 45.0,
+                                    crossoverFrequency: 500.0,
+                                    lowReleaseTime: 25.0,
+                                    midReleaseTime: 26.0,
+                                    dampingFrequency: 2000.0,
+                                    equalizerFrequency1: 400.0,
+                                    equalizerLevel1: 1.0,
+                                    equalizerFrequency2: 3000.0,
+                            equalizerLevel2: 0.3,
+                                    dryWetMix: effectsData.reverbDryWetMix)
+                
+        peakLimiter = PeakLimiter(reverb)
+        
         mixer.addInput(peakLimiter)
         engine.output = mixer
         
@@ -151,7 +188,7 @@ class AudioManager: ObservableObject, HasAudioEngine {
     }
     
     func startHighPass() {
-        filterData.highPassCutoff = 20.0
+        effectsData.highPassCutoff = 20.0
         highPassMixer.volume = 1.0
         lowpassMixer.volume = 0.0
     }
