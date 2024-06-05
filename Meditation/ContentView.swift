@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var meditationManager: MeditationManager
+    @ObservedObject var audioManager: AudioManager
     
     @State private var rotation = Angle(degrees: 0.0)
     
@@ -38,14 +39,23 @@ struct ContentView: View {
                             .animation(.easeInOut(duration: 1.0), value: rotation)
                         
                         Spacer()
+                        NavigationLink(destination: BuddhaBoxView(audioManager: audioManager)) {
+                            Label("Options", systemImage: "waveform.circle.fill")
+                                .font(.title)
+                                .symbolRenderingMode(.palette)
+                                .foregroundStyle(.blackWhite, .accent)
+                                .labelStyle(.iconOnly)
+                                .padding(.vertical, 4)
+                        }
+                        
                         NavigationLink(destination: StatisticsView(meditationManager: meditationManager)) {
-                            StatisticsButton(padding: 5.5)
+                            StatisticsButton(padding: 6.2)
                                 .padding(.vertical, 4)
                         }
                         
                         NavigationLink(destination: OptionsView(meditationManager: meditationManager)) {
                             Label("Options", systemImage: "ellipsis.circle.fill")
-                                .font(.title.weight(.ultraLight))
+                                .font(.title)
                                 .symbolRenderingMode(.palette)
                                 .foregroundStyle(.blackWhite, .accent)
                                 .labelStyle(.iconOnly)
@@ -67,5 +77,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView(meditationManager: MeditationManager())
+    ContentView(meditationManager: MeditationManager(), audioManager: AudioManager())
 }

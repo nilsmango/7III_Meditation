@@ -102,6 +102,7 @@
 		789A0E482C061ECE009CB9E7 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7879BDEF2BF4A43E001994D2 /* Helpers.swift */; };
 		78C862AB2C0C5A29006235AB /* SoundpipeAudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 78C862AA2C0C5A29006235AB /* SoundpipeAudioKit */; };
 		78C862AD2C0CC39D006235AB /* loop.aif in Resources */ = {isa = PBXBuildFile; fileRef = 78C862AC2C0CC39D006235AB /* loop.aif */; };
+		78C862AF2C0F0866006235AB /* BuddhaBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C862AE2C0F0866006235AB /* BuddhaBoxView.swift */; };
 		78DAE2F12C0C579D00F2CCB0 /* NoiseMixerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DAE2F02C0C579D00F2CCB0 /* NoiseMixerView.swift */; };
 		78DAE2F32C0C58FA00F2CCB0 /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 78DAE2F22C0C58FA00F2CCB0 /* AudioKit */; };
 /* End PBXBuildFile section */
@@ -204,6 +205,7 @@
 		789A0E3C2C061412009CB9E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		789A0E3E2C061570009CB9E7 /* TimerStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerStatus.swift; sourceTree = "<group>"; };
 		78C862AC2C0CC39D006235AB /* loop.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = loop.aif; sourceTree = "<group>"; };
+		78C862AE2C0F0866006235AB /* BuddhaBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuddhaBoxView.swift; sourceTree = "<group>"; };
 		78DAE2F02C0C579D00F2CCB0 /* NoiseMixerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoiseMixerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -373,6 +375,7 @@
 		785D096C2C0C4B5300044AE9 /* Buddha Box */ = {
 			isa = PBXGroup;
 			children = (
+				78C862AE2C0F0866006235AB /* BuddhaBoxView.swift */,
 				78DAE2F02C0C579D00F2CCB0 /* NoiseMixerView.swift */,
 			);
 			path = "Buddha Box";
@@ -549,6 +552,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78C862AF2C0F0866006235AB /* BuddhaBoxView.swift in Sources */,
 				7827880A2BF68B67004E7F77 /* TimerRunningView.swift in Sources */,
 				785D094C2C09CFE800044AE9 /* ResumeMeditation.swift in Sources */,
 				783426402BFF6C7B0008F9F9 /* TimerSound.swift in Sources */,

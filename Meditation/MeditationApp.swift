@@ -6,9 +6,27 @@
 //
 
 import SwiftUI
+import AudioKit
+import AVFoundation
 
 @main
 struct MeditationApp: App {
+    init() {
+            #if os(iOS)
+                do {
+                    Settings.bufferLength = .short
+                    try AVAudioSession.sharedInstance().setPreferredIOBufferDuration(Settings.bufferLength.duration)
+                    try AVAudioSession.sharedInstance().setCategory(.playAndRecord,
+                                                                    options: [.defaultToSpeaker, .mixWithOthers, .allowBluetoothA2DP])
+                    try AVAudioSession.sharedInstance().setActive(true)
+                } catch let err {
+                    print(err)
+                }
+            #endif
+        }
+    
+    @StateObject private var audioManager = AudioManager()
+    
     @StateObject private var meditationManager = MeditationManager.shared
     
     // Notifications
@@ -16,7 +34,7 @@ struct MeditationApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView(meditationManager: meditationManager)
+            ContentView(meditationManager: meditationManager, audioManager: audioManager)
                 .onAppear {
                     meditationManager.checkStatusOfTimer()
                     
