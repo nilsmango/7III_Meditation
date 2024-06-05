@@ -20,7 +20,9 @@ struct NoiseData {
 }
 
 struct EffectsData {
-    var moogCutoff: AUValue = 20000.0
+    var distortionMix: AUValue = 0.0
+    
+    var moogCutoff: AUValue = 22050.0
     var moogResonance: AUValue = 0.0
     var logMoogCutoff: AUValue {
             get {
@@ -57,6 +59,7 @@ class AudioManager: ObservableObject, HasAudioEngine {
     var looper1PitchShifter: TimePitch!
 
     
+    var distortion: Distortion!
     var moogLadder: LowPassFilter!
     var highPass: HighPassFilter!
     var delay: VariableDelay!
@@ -88,6 +91,7 @@ class AudioManager: ObservableObject, HasAudioEngine {
     
     @Published var effectsData = EffectsData() {
         didSet {
+            distortion.finalMix = effectsData.distortionMix
             moogLadder.cutoffFrequency = effectsData.moogCutoff
             moogLadder.resonance = effectsData.moogResonance
             highPass.cutoffFrequency = effectsData.highPassCutoff
@@ -127,7 +131,9 @@ class AudioManager: ObservableObject, HasAudioEngine {
         preMixer.addInput(white)
         
         
-        moogLadder = LowPassFilter(preMixer, cutoffFrequency: effectsData.moogCutoff, resonance: effectsData.moogResonance)
+        distortion = Distortion(preMixer, ringModFreq2: 173, ringModMix: 0, decimationMix: 0.0, finalMix: effectsData.distortionMix)
+        
+        moogLadder = LowPassFilter(distortion, cutoffFrequency: effectsData.moogCutoff, resonance: effectsData.moogResonance)
         lowpassMixer.addInput(moogLadder)
         
         highPass = HighPassFilter(moogLadder, cutoffFrequency: effectsData.highPassCutoff, resonance: effectsData.highPassResonance)

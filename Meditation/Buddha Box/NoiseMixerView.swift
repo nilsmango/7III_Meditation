@@ -36,6 +36,10 @@ struct NoiseMixerView: View {
                     .monospacedDigit()
                             
 
+                Text("Distortion")
+                Slider(value: $audioManager.effectsData.distortionMix, in: 0...100)
+                Text(String(format: "%.0f", audioManager.effectsData.distortionMix))
+                    .monospacedDigit()
 
                 
                 Text("Low Pass Filter Cutoff Frequency")
@@ -62,12 +66,12 @@ struct NoiseMixerView: View {
                     Slider(value: $audioManager.effectsData.logHighPassCutoff, in: log10(10)...log10(22050))
                     Text(String(format: "%.0f", audioManager.effectsData.highPassCutoff))
                         .monospacedDigit()
+                    
+                    Text("High Pass Resonance")
+                    Slider(value: $audioManager.effectsData.highPassResonance, in: 0...40)
+                    Text(String(format: "%.2f", audioManager.effectsData.highPassResonance))
+                        .monospacedDigit()
                 }
-                
-                Text("High Pass Resonance")
-                Slider(value: $audioManager.effectsData.highPassResonance, in: 0...40)
-                Text(String(format: "%.2f", audioManager.effectsData.highPassResonance))
-                    .monospacedDigit()
                 
                 Text("Delay Dry/Wet")
                 Slider(value: $audioManager.effectsData.delayDryWetMix, in: 0...1)
