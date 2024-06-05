@@ -38,13 +38,13 @@ struct NoiseMixerView: View {
 
 
                 
-                Text("Ladder Filter Cutoff Frequency")
-                Slider(value: $audioManager.effectsData.logMoogCutoff, in: log10(20)...log10(20000))
+                Text("Low Pass Filter Cutoff Frequency")
+                Slider(value: $audioManager.effectsData.logMoogCutoff, in: log10(10)...log10(22050))
                 Text(String(format: "%.0f", audioManager.effectsData.moogCutoff))
                     .monospacedDigit()
                 
-                Text("Ladder Filter Resonance")
-                Slider(value: $audioManager.effectsData.moogResonance, in: 0...1)
+                Text("Low Pass Filter Resonance")
+                Slider(value: $audioManager.effectsData.moogResonance, in: 0...40)
                 Text(String(format: "%.2f", audioManager.effectsData.moogResonance))
                     .monospacedDigit()
                 

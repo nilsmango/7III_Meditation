@@ -57,7 +57,7 @@ class AudioManager: ObservableObject, HasAudioEngine {
     var looper1PitchShifter: TimePitch!
 
     
-    var moogLadder: MoogLadder!
+    var moogLadder: LowPassFilter!
     var highPass: HighPassFilter!
     var delay: VariableDelay!
     var delayWet = Mixer()
@@ -127,7 +127,7 @@ class AudioManager: ObservableObject, HasAudioEngine {
         preMixer.addInput(white)
         
         
-        moogLadder = MoogLadder(preMixer, cutoffFrequency: effectsData.moogCutoff, resonance: effectsData.moogResonance)
+        moogLadder = LowPassFilter(preMixer, cutoffFrequency: effectsData.moogCutoff, resonance: effectsData.moogResonance)
         lowpassMixer.addInput(moogLadder)
         
         highPass = HighPassFilter(moogLadder, cutoffFrequency: effectsData.highPassCutoff, resonance: effectsData.highPassResonance)
