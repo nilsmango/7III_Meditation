@@ -353,7 +353,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
         // add a notification for the timer end
         let content = UNMutableNotificationContent()
         content.title = welcomeMessage
-        content.body = "Your meditation is now complete."
+//        content.body = "Your meditation is now complete."
         
         content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: meditationTimer.endSound.fileName))
         
