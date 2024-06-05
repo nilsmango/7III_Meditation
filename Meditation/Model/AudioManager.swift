@@ -31,7 +31,8 @@ struct EffectsData {
             }
         }
     
-    var highPassCutoff: AUValue = 20.0
+    var highPassCutoff: AUValue = 10.0
+    var highPassResonance: AUValue = 0.0
     var logHighPassCutoff: AUValue {
             get {
                 return log10(highPassCutoff)
@@ -57,7 +58,7 @@ class AudioManager: ObservableObject, HasAudioEngine {
 
     
     var moogLadder: MoogLadder!
-    var highPass: HighPassButterworthFilter!
+    var highPass: HighPassFilter!
     var delay: VariableDelay!
     var delayWet = Mixer()
     var delayDry = Mixer()
@@ -90,6 +91,7 @@ class AudioManager: ObservableObject, HasAudioEngine {
             moogLadder.cutoffFrequency = effectsData.moogCutoff
             moogLadder.resonance = effectsData.moogResonance
             highPass.cutoffFrequency = effectsData.highPassCutoff
+            highPass.resonance = effectsData.highPassResonance
             delay.feedback = effectsData.delayFeedback
             delay.time = effectsData.delayTime
             delayWet.volume = effectsData.delayDryWetMix
@@ -128,7 +130,7 @@ class AudioManager: ObservableObject, HasAudioEngine {
         moogLadder = MoogLadder(preMixer, cutoffFrequency: effectsData.moogCutoff, resonance: effectsData.moogResonance)
         lowpassMixer.addInput(moogLadder)
         
-        highPass = HighPassButterworthFilter(moogLadder, cutoffFrequency: effectsData.highPassCutoff)
+        highPass = HighPassFilter(moogLadder, cutoffFrequency: effectsData.highPassCutoff, resonance: effectsData.highPassResonance)
         highPassMixer.addInput(highPass)
         
         filterMix.addInput(highPassMixer)
@@ -184,7 +186,8 @@ class AudioManager: ObservableObject, HasAudioEngine {
     }
     
     func startHighPass() {
-        effectsData.highPassCutoff = 20.0
+        effectsData.highPassCutoff = 10.0
+        effectsData.highPassResonance = 0.0
         highPassMixer.volume = 1.0
         lowpassMixer.volume = 0.0
     }
