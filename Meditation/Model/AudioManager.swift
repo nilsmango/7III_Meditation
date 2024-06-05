@@ -53,7 +53,7 @@ class AudioManager: ObservableObject, HasAudioEngine {
     var pink = PinkNoise()
     var white = WhiteNoise()
     var looper1: AudioPlayer!
-    var looper1PitchShifter: PitchShifter!
+    var looper1PitchShifter: TimePitch!
 
     
     var moogLadder: MoogLadder!
@@ -80,7 +80,7 @@ class AudioManager: ObservableObject, HasAudioEngine {
             pink.amplitude = soundData.pinkAmplitude
             white.amplitude = soundData.whiteAmplitude
             looper1.volume = soundData.looper1Amplitude
-            looper1PitchShifter.shift = soundData.looper1Shift
+            looper1PitchShifter.pitch = soundData.looper1Shift
         }
     }
     
@@ -108,12 +108,8 @@ class AudioManager: ObservableObject, HasAudioEngine {
         // buffered audio player for seamless looping (only do this for short audio loops)
         looper1 = AudioPlayer(url: fileURL, buffered: true)
         looper1.isLooping = true
- 
-
-        let pitchShifterWindowSize: AUValue = 1024.0
-        let pitchShifterCrossfade: AUValue = 512.0
         
-        looper1PitchShifter = PitchShifter(looper1, shift: soundData.looper1Shift, windowSize: pitchShifterWindowSize, crossfade: pitchShifterCrossfade)
+        looper1PitchShifter = TimePitch(looper1, pitch: soundData.looper1Shift)
         preMixer.addInput(looper1PitchShifter)
         
         brown.start()

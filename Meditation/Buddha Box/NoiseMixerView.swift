@@ -31,8 +31,8 @@ struct NoiseMixerView: View {
                     .monospacedDigit()
                 
                                 Text("Shift")
-                                Slider(value: $audioManager.soundData.looper1Shift, in: -12...12)
-                Text(String(format: "%.2f", audioManager.soundData.looper1Shift))
+                                Slider(value: $audioManager.soundData.looper1Shift, in: -2400...2400)
+                Text(String(format: "%.0f", audioManager.soundData.looper1Shift))
                     .monospacedDigit()
                             
 
