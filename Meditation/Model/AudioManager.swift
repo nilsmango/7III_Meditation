@@ -17,6 +17,14 @@ struct NoiseData {
     var looper1Amplitude: AUValue = 0.0
     var looper1Shift: AUValue = 0.0
 
+    var looper2Amplitude: AUValue = 0.0
+    var looper2Shift: AUValue = 0.0
+    
+    var looper3Amplitude: AUValue = 0.0
+    var looper3Shift: AUValue = 0.0
+    
+    var looper4Amplitude: AUValue = 0.0
+    var looper4Shift: AUValue = 1.0
 }
 
 struct EffectsData {
@@ -44,10 +52,12 @@ struct EffectsData {
             }
         }
     
-    var reverbDryWetMix: AUValue = 0.0
     var delayFeedback: AUValue = 0.0
-    var delayTime: AUValue = 0.001
+    var delayTime: AUValue = 0.73
     var delayDryWetMix: AUValue = 0.0
+
+    var reverbDryWetMix: AUValue = 0.0
+    
 }
 
 class AudioManager: ObservableObject, HasAudioEngine {
@@ -57,7 +67,12 @@ class AudioManager: ObservableObject, HasAudioEngine {
     var white = WhiteNoise()
     var looper1: AudioPlayer!
     var looper1PitchShifter: TimePitch!
-
+    var looper2: AudioPlayer!
+    var looper2PitchShifter: TimePitch!
+    var looper3: AudioPlayer!
+    var looper3PitchShifter: TimePitch!
+    var looper4: AudioPlayer!
+    var looper4PitchShifter: VariSpeed!
     
     var distortion: Distortion!
     var moogLadder: LowPassFilter!
@@ -85,6 +100,12 @@ class AudioManager: ObservableObject, HasAudioEngine {
             white.amplitude = soundData.whiteAmplitude
             looper1.volume = soundData.looper1Amplitude
             looper1PitchShifter.pitch = soundData.looper1Shift
+            looper2.volume = soundData.looper2Amplitude
+            looper2PitchShifter.pitch = soundData.looper2Shift
+            looper3.volume = soundData.looper3Amplitude
+            looper3PitchShifter.pitch = soundData.looper3Shift
+            looper4.volume = soundData.looper4Amplitude
+            looper4PitchShifter.rate = soundData.looper4Shift
         }
     }
     
@@ -96,6 +117,7 @@ class AudioManager: ObservableObject, HasAudioEngine {
             moogLadder.resonance = effectsData.moogResonance
             highPass.cutoffFrequency = effectsData.highPassCutoff
             highPass.resonance = effectsData.highPassResonance
+            
             delay.feedback = effectsData.delayFeedback
             delay.time = effectsData.delayTime
             delayWet.volume = effectsData.delayDryWetMix
@@ -107,16 +129,50 @@ class AudioManager: ObservableObject, HasAudioEngine {
     @Published var isPlaying = false
 
     init() {
-        guard let fileURL = Bundle.main.url(forResource: "loop", withExtension: "aif") else {
+        guard let fileURL1 = Bundle.main.url(forResource: "Phonogeneli", withExtension: "aif") else {
+                    fatalError("Wav file not found in bundle")
+                }
+        guard let fileURL2 = Bundle.main.url(forResource: "060", withExtension: "aif") else {
+                    fatalError("Wav file not found in bundle")
+                }
+        
+        guard let fileURL3 = Bundle.main.url(forResource: "Basic Bells 1", withExtension: "caf") else {
+                    fatalError("Wav file not found in bundle")
+                }
+        
+        guard let fileURL4 = Bundle.main.url(forResource: "047", withExtension: "aif") else {
                     fatalError("Wav file not found in bundle")
                 }
         
         // buffered audio player for seamless looping (only do this for short audio loops)
-        looper1 = AudioPlayer(url: fileURL, buffered: true)
+        looper1 = AudioPlayer(url: fileURL1, buffered: true)
         looper1.isLooping = true
         
         looper1PitchShifter = TimePitch(looper1, pitch: soundData.looper1Shift)
         preMixer.addInput(looper1PitchShifter)
+        
+        looper2 = AudioPlayer(url: fileURL2, buffered: true)
+        looper2.isLooping = true
+        
+        looper2PitchShifter = TimePitch(looper2, pitch: soundData.looper2Shift)
+        preMixer.addInput(looper2PitchShifter)
+        
+        looper3 = AudioPlayer(url: fileURL3, buffered: true)
+        looper3.isLooping = true
+        
+        looper3PitchShifter = TimePitch(looper3, pitch: soundData.looper3Shift)
+        preMixer.addInput(looper3PitchShifter)
+        
+        looper4 = AudioPlayer(url: fileURL4, buffered: true)
+        looper4.isLooping = true
+        
+        looper4PitchShifter = VariSpeed(looper4, rate: soundData.looper4Shift)
+        preMixer.addInput(looper4PitchShifter)
+        looper4.volume = 0.0
+        
+        looper1.volume = 0.0
+        looper2.volume = 0.0
+        looper3.volume = 0.0
         
         brown.start()
         pink.start()
@@ -125,7 +181,7 @@ class AudioManager: ObservableObject, HasAudioEngine {
         brown.amplitude = soundData.brownianAmplitude
         pink.amplitude = soundData.pinkAmplitude
         white.amplitude = soundData.whiteAmplitude
-        looper1.volume = soundData.looper1Amplitude
+
         preMixer.addInput(brown)
         preMixer.addInput(pink)
         preMixer.addInput(white)
@@ -165,6 +221,7 @@ class AudioManager: ObservableObject, HasAudioEngine {
         peakLimiter = PeakLimiter(reverb)
         
         mixer.addInput(peakLimiter)
+                
         engine.output = mixer
         
         mixer.volume = 0.0
@@ -176,6 +233,9 @@ class AudioManager: ObservableObject, HasAudioEngine {
             try engine.start()
             isPlaying = true
             looper1.play()
+            looper2.play()
+            looper3.play()
+            looper4.play()
             fadeIn()
         } catch {
             print("AudioEngine failed to start: \(error)")
@@ -187,6 +247,9 @@ class AudioManager: ObservableObject, HasAudioEngine {
         
         fadeOut {
             self.looper1.stop()
+            self.looper2.stop()
+            self.looper3.stop()
+            self.looper4.stop()
             self.engine.stop()
         }
     }
@@ -216,7 +279,7 @@ class AudioManager: ObservableObject, HasAudioEngine {
 
     private func fadeOut(completion: @escaping () -> Void) {
         let steps = 100
-        let duration: Double = 2.0  // Duration of the fade in seconds
+        let duration: Double = 4.0  // Duration of the fade in seconds
         for i in 0...steps {
             DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) * (duration / Double(steps))) {
                 let progress = Double(i) / Double(steps)

@@ -101,8 +101,10 @@
 		789A0E3F2C061570009CB9E7 /* TimerStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E3E2C061570009CB9E7 /* TimerStatus.swift */; };
 		789A0E482C061ECE009CB9E7 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7879BDEF2BF4A43E001994D2 /* Helpers.swift */; };
 		78C862AB2C0C5A29006235AB /* SoundpipeAudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 78C862AA2C0C5A29006235AB /* SoundpipeAudioKit */; };
-		78C862AD2C0CC39D006235AB /* loop.aif in Resources */ = {isa = PBXBuildFile; fileRef = 78C862AC2C0CC39D006235AB /* loop.aif */; };
 		78C862AF2C0F0866006235AB /* BuddhaBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C862AE2C0F0866006235AB /* BuddhaBoxView.swift */; };
+		78C862B12C11B295006235AB /* Phonogeneli.aif in Resources */ = {isa = PBXBuildFile; fileRef = 78C862B02C11B295006235AB /* Phonogeneli.aif */; };
+		78C862B32C11B29C006235AB /* 060.aif in Resources */ = {isa = PBXBuildFile; fileRef = 78C862B22C11B29C006235AB /* 060.aif */; };
+		78C862B52C11B8B0006235AB /* 047.aif in Resources */ = {isa = PBXBuildFile; fileRef = 78C862B42C11B8B0006235AB /* 047.aif */; };
 		78DAE2F12C0C579D00F2CCB0 /* NoiseMixerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DAE2F02C0C579D00F2CCB0 /* NoiseMixerView.swift */; };
 		78DAE2F32C0C58FA00F2CCB0 /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 78DAE2F22C0C58FA00F2CCB0 /* AudioKit */; };
 /* End PBXBuildFile section */
@@ -204,8 +206,10 @@
 		789A0E342C061320009CB9E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		789A0E3C2C061412009CB9E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		789A0E3E2C061570009CB9E7 /* TimerStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerStatus.swift; sourceTree = "<group>"; };
-		78C862AC2C0CC39D006235AB /* loop.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = loop.aif; sourceTree = "<group>"; };
 		78C862AE2C0F0866006235AB /* BuddhaBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuddhaBoxView.swift; sourceTree = "<group>"; };
+		78C862B02C11B295006235AB /* Phonogeneli.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = Phonogeneli.aif; sourceTree = "<group>"; };
+		78C862B22C11B29C006235AB /* 060.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = 060.aif; sourceTree = "<group>"; };
+		78C862B42C11B8B0006235AB /* 047.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = 047.aif; sourceTree = "<group>"; };
 		78DAE2F02C0C579D00F2CCB0 /* NoiseMixerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoiseMixerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -313,7 +317,9 @@
 		78385D252BF3E4F700581057 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				78C862AC2C0CC39D006235AB /* loop.aif */,
+				78C862B02C11B295006235AB /* Phonogeneli.aif */,
+				78C862B22C11B29C006235AB /* 060.aif */,
+				78C862B42C11B8B0006235AB /* 047.aif */,
 				7834266A2BFFBC7E0008F9F9 /* Basic Bells 1.caf */,
 				7834266D2BFFBC7F0008F9F9 /* Basic Bells 2.caf */,
 				783426662BFFBC7E0008F9F9 /* Basic Bells 3.caf */,
@@ -517,7 +523,6 @@
 				783426802BFFBC7F0008F9F9 /* Metallophone.caf in Resources */,
 				783426842BFFBC7F0008F9F9 /* Singing Bowl 2b.caf in Resources */,
 				7879BDF12BF4BDE4001994D2 /* Kitchen Timer Normal.caf in Resources */,
-				78C862AD2C0CC39D006235AB /* loop.aif in Resources */,
 				7834267C2BFFBC7F0008F9F9 /* Chimes 4.caf in Resources */,
 				78385D132BF3647500581057 /* Preview Assets.xcassets in Resources */,
 				7834267E2BFFBC7F0008F9F9 /* Basic Bells 2.caf in Resources */,
@@ -528,10 +533,13 @@
 				783426782BFFBC7F0008F9F9 /* Friendly End.caf in Resources */,
 				783426812BFFBC7F0008F9F9 /* Gong 2.caf in Resources */,
 				7834267F2BFFBC7F0008F9F9 /* Singing Bowl 1.caf in Resources */,
+				78C862B12C11B295006235AB /* Phonogeneli.aif in Resources */,
+				78C862B32C11B29C006235AB /* 060.aif in Resources */,
 				783426752BFFBC7F0008F9F9 /* Dual Bowl.caf in Resources */,
 				783426762BFFBC7F0008F9F9 /* Friendly.caf in Resources */,
 				7834267B2BFFBC7F0008F9F9 /* Basic Bells 1.caf in Resources */,
 				783426792BFFBC7F0008F9F9 /* Chimes 3.caf in Resources */,
+				78C862B52C11B8B0006235AB /* 047.aif in Resources */,
 				783426772BFFBC7F0008F9F9 /* Basic Bells 3.caf in Resources */,
 				783426822BFFBC7F0008F9F9 /* Singing Bowl 2.caf in Resources */,
 			);

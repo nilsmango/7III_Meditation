@@ -32,16 +32,47 @@ struct NoiseMixerView: View {
                 Text("Tape Loops")
                     .font(.title3)
                     .fontWeight(.bold)
+                
+                
                 Text("Phonogeneli")
                 Slider(value: $audioManager.soundData.looper1Amplitude, in: 0...1)
                 Text(String(format: "%.1f", audioManager.soundData.looper1Amplitude))
                     .monospacedDigit()
                 
-                                Text("Shift")
-                                Slider(value: $audioManager.soundData.looper1Shift, in: -2400...2400)
+                Text("Shift")
+                Slider(value: $audioManager.soundData.looper1Shift, in: -2400...2400)
                 Text(String(format: "%.0f", audioManager.soundData.looper1Shift))
                     .monospacedDigit()
-                            
+                
+                Text("060")
+                Slider(value: $audioManager.soundData.looper2Amplitude, in: 0...1)
+                Text(String(format: "%.1f", audioManager.soundData.looper2Amplitude))
+                    .monospacedDigit()
+                
+                Text("Shift")
+                Slider(value: $audioManager.soundData.looper2Shift, in: -2400...2400)
+                Text(String(format: "%.0f", audioManager.soundData.looper2Shift))
+                    .monospacedDigit()
+                
+                Text("Basic Bells 1")
+                Slider(value: $audioManager.soundData.looper3Amplitude, in: 0...1)
+                Text(String(format: "%.1f", audioManager.soundData.looper3Amplitude))
+                    .monospacedDigit()
+                
+                Text("Shift")
+                Slider(value: $audioManager.soundData.looper3Shift, in: -2400...2400)
+                Text(String(format: "%.0f", audioManager.soundData.looper3Shift))
+                    .monospacedDigit()
+                
+                Text("047")
+                Slider(value: $audioManager.soundData.looper4Amplitude, in: 0...1)
+                Text(String(format: "%.1f", audioManager.soundData.looper4Amplitude))
+                    .monospacedDigit()
+                
+                Text("Speed")
+                Slider(value: $audioManager.soundData.looper4Shift, in: 0.25...4)
+                Text(String(format: "%.2f", audioManager.soundData.looper4Shift))
+                    .monospacedDigit()
 
                 Text("Distortion")
                 Slider(value: $audioManager.effectsData.distortionMix, in: 0...100)
@@ -108,6 +139,10 @@ struct NoiseMixerView: View {
                 Text(String(format: "%.2f", audioManager.effectsData.reverbDryWetMix))
                     .monospacedDigit()
                 
+//                Text("Feedback")
+//                Slider(value: $audioManager.effectsData.feedbackMix, in: 0...1)
+//                Text(String(format: "%.2f", audioManager.effectsData.feedbackMix))
+//                    .monospacedDigit()
                 
                 Button(action: {
                     if audioManager.isPlaying {
