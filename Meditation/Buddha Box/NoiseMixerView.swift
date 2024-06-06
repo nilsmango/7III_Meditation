@@ -16,6 +16,9 @@ struct NoiseMixerView: View {
         ScrollView {
             VStack(spacing: 23) {
                 
+                Text("Noise")
+                    .font(.title3)
+                    .fontWeight(.bold)
                 Text("Brown Noise")
                 Slider(value: $audioManager.soundData.brownianAmplitude, in: 0...1)
                 
@@ -25,7 +28,11 @@ struct NoiseMixerView: View {
                 Text("White Noise")
                 Slider(value: $audioManager.soundData.whiteAmplitude, in: 0...1)
                 
-                Text("Wav Loop")
+                
+                Text("Tape Loops")
+                    .font(.title3)
+                    .fontWeight(.bold)
+                Text("Phonogeneli")
                 Slider(value: $audioManager.soundData.looper1Amplitude, in: 0...1)
                 Text(String(format: "%.1f", audioManager.soundData.looper1Amplitude))
                     .monospacedDigit()
