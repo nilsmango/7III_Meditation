@@ -16,7 +16,7 @@ struct AttackOfTheEmojiView: View {
     var body: some View {
         ZStack {
             ForEach(emojis, id: \.self) { id in
-                FlyingEmojiView(emoji: emoji, duration: Double.random(in: 2.0...6.0), xOffset: Double.random(in: -xOffset...xOffset), delay: Double.random(in: 0.4...1.0))
+                FlyingEmojiView(emoji: emoji, duration: Double.random(in: 2.0...6.0), xOffset: Double.random(in: -xOffset...xOffset), delay: Double.random(in: 0.4...1.5))
                         }
         }
 //        .onAppear {

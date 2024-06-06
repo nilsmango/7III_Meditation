@@ -32,7 +32,7 @@ struct ContentView: View {
                                 } else {
                                     emoji = "🔥"
                                 }
-                                for _ in 0..<18 {
+                                for _ in 0..<18*6 {
                                     emojis.append(UUID())
                                 }
                             }
