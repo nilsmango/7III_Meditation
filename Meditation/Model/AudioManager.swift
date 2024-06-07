@@ -52,6 +52,8 @@ struct EffectsData {
             }
         }
     
+    var endVariRate: AUValue = 1.0
+    
     var delayFeedback: AUValue = 0.0
     var delayTime: AUValue = 0.73
     var delayDryWetMix: AUValue = 0.0
@@ -92,6 +94,8 @@ class AudioManager: ObservableObject, HasAudioEngine {
     var filterMix = Mixer()
     
     var mixer = Mixer()
+    
+    var endVariSpeed: VariSpeed!
 
     @Published var soundData = NoiseData() {
         didSet {
@@ -118,6 +122,7 @@ class AudioManager: ObservableObject, HasAudioEngine {
             highPass.cutoffFrequency = effectsData.highPassCutoff
             highPass.resonance = effectsData.highPassResonance
             
+            endVariSpeed.rate = effectsData.endVariRate
             delay.feedback = effectsData.delayFeedback
             delay.time = effectsData.delayTime
             delayWet.volume = effectsData.delayDryWetMix
@@ -186,8 +191,9 @@ class AudioManager: ObservableObject, HasAudioEngine {
         preMixer.addInput(pink)
         preMixer.addInput(white)
         
+        endVariSpeed = VariSpeed(preMixer, rate: effectsData.endVariRate)
         
-        distortion = Distortion(preMixer, ringModFreq2: 173, ringModMix: 0, decimationMix: 0.0, finalMix: effectsData.distortionMix)
+        distortion = Distortion(endVariSpeed, ringModFreq2: 173, ringModMix: 0, decimationMix: 0.0, finalMix: effectsData.distortionMix)
         
         moogLadder = LowPassFilter(distortion, cutoffFrequency: effectsData.moogCutoff, resonance: effectsData.moogResonance)
         lowpassMixer.addInput(moogLadder)
@@ -197,6 +203,8 @@ class AudioManager: ObservableObject, HasAudioEngine {
         
         filterMix.addInput(highPassMixer)
         filterMix.addInput(lowpassMixer)
+        
+        
         
         delay = VariableDelay(filterMix, time: effectsData.delayTime, feedback: effectsData.delayFeedback, maximumTime: 5.0)
         
@@ -255,8 +263,8 @@ class AudioManager: ObservableObject, HasAudioEngine {
     }
     
     func startHighPass() {
-        effectsData.highPassCutoff = 10.0
-        effectsData.highPassResonance = 0.0
+//        effectsData.highPassCutoff = 10.0
+//        effectsData.highPassResonance = 0.0
         highPassMixer.volume = 1.0
         lowpassMixer.volume = 0.0
     }
