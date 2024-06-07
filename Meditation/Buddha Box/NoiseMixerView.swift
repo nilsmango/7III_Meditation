@@ -33,46 +33,23 @@ struct NoiseMixerView: View {
                     .font(.title3)
                     .fontWeight(.bold)
                 
-                
-                Text("Phonogeneli")
-                Slider(value: $audioManager.soundData.looper1Amplitude, in: 0...1)
-                Text(String(format: "%.1f", audioManager.soundData.looper1Amplitude))
-                    .monospacedDigit()
-                
-                Text("Shift")
-                Slider(value: $audioManager.soundData.looper1Shift, in: -2400...2400)
-                Text(String(format: "%.0f", audioManager.soundData.looper1Shift))
-                    .monospacedDigit()
-                
-                Text("060")
-                Slider(value: $audioManager.soundData.looper2Amplitude, in: 0...1)
-                Text(String(format: "%.1f", audioManager.soundData.looper2Amplitude))
-                    .monospacedDigit()
-                
-                Text("Shift")
-                Slider(value: $audioManager.soundData.looper2Shift, in: -2400...2400)
-                Text(String(format: "%.0f", audioManager.soundData.looper2Shift))
-                    .monospacedDigit()
-                
-                Text("Basic Bells 1")
-                Slider(value: $audioManager.soundData.looper3Amplitude, in: 0...1)
-                Text(String(format: "%.1f", audioManager.soundData.looper3Amplitude))
-                    .monospacedDigit()
-                
-                Text("Shift")
-                Slider(value: $audioManager.soundData.looper3Shift, in: -2400...2400)
-                Text(String(format: "%.0f", audioManager.soundData.looper3Shift))
-                    .monospacedDigit()
-                
-                Text("047")
-                Slider(value: $audioManager.soundData.looper4Amplitude, in: 0...1)
-                Text(String(format: "%.1f", audioManager.soundData.looper4Amplitude))
-                    .monospacedDigit()
-                
-                Text("Speed")
-                Slider(value: $audioManager.soundData.looper4Shift, in: 0.25...4)
-                Text(String(format: "%.2f", audioManager.soundData.looper4Shift))
-                    .monospacedDigit()
+                ForEach($audioManager.tapeMachineControls) { $tapeMachine in
+                    Text(tapeMachine.fileName)
+                    Slider(value: $tapeMachine.volume, in: 0...1)
+                    Text(String(format: "%.1f", tapeMachine.volume))
+                        .monospacedDigit()
+                        
+                    
+                    Text("Shift")
+                    Slider(value: $tapeMachine.pitchShift, in: -2400...2400)
+                    Text(String(format: "%.0f", tapeMachine.pitchShift))
+                        .monospacedDigit()
+                    
+                    Text("Speed")
+                    Slider(value: $tapeMachine.variSpeed, in: 0.25...4)
+                    Text(String(format: "%.2f", tapeMachine.variSpeed))
+                        .monospacedDigit()
+                }
                 
                 Text("Effects")
                     .font(.title3)
