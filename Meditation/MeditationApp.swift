@@ -35,9 +35,7 @@ struct MeditationApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView(meditationManager: meditationManager, audioManager: audioManager)
-                .onAppear {
-                    meditationManager.checkStatusOfTimer()
-                    
+                .onAppear {                    
                     notificationCenter.requestAuthorization(options: [.alert, .sound]) { success, error in
                         if success {
                             // print("All set!")
@@ -46,9 +44,6 @@ struct MeditationApp: App {
                         }
                     }
                     notificationCenter.delegate = meditationManager
-                    
-                    meditationManager.startupChecks()
-                    
                 }
         }
     }

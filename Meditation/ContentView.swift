@@ -72,7 +72,12 @@ struct ContentView: View {
                 AttackOfTheEmojiView(emojis: emojis, emoji: emoji)
             }
             .background(meditationManager.gradientBackground ? LinearGradient(gradient: Gradient(colors: [.customGray2, .accent]), startPoint: .top, endPoint: .bottom) : LinearGradient(gradient: Gradient(colors: [.customGray2]), startPoint: .top, endPoint: .bottom))
-        }        
+            .onAppear {
+                meditationManager.checkStatusOfTimer()
+                
+                meditationManager.startupChecks()
+            }
+        }
     }
 }
 
