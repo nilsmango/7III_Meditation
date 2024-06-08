@@ -11,6 +11,8 @@ struct NoiseMixerView: View {
     @ObservedObject var audioManager: AudioManager
     
     @State private var highPassFilter = false
+    @State private var isRecording = false
+    @State private var showFilePicker = false
     
     var body: some View {
         ScrollView {
@@ -28,6 +30,53 @@ struct NoiseMixerView: View {
                 Text("White Noise")
                 Slider(value: $audioManager.soundData.whiteAmplitude, in: 0...1)
                 
+                
+                Text("User Loop")
+                    .font(.title3)
+                    .fontWeight(.bold)
+                
+                if audioManager.userSelectedPlayer != nil {
+                                Text("User Selected Audio")
+                    Slider(value: $audioManager.soundData.userVolume, in: 0...1)
+                                Text(String(format: "%.1f", audioManager.soundData.userVolume))
+                                    .monospacedDigit()
+                            }
+                            
+                            HStack {
+                                Button(action: {
+                                    showFilePicker.toggle()
+                                }) {
+                                    Text("Select Audio File")
+                                }
+                                .fileImporter(
+                                    isPresented: $showFilePicker,
+                                    allowedContentTypes: [.audio],
+                                    onCompletion: { result in
+                                        switch result {
+                                        case .success(let url):
+                                            _ = url.startAccessingSecurityScopedResource()
+                                            audioManager.loadUserSelectedAudio(url: url)
+                                        case .failure(let error):
+                                            print("Error selecting file: \(error.localizedDescription)")
+                                        }
+                                    }
+                                )
+                                
+                                if audioManager.isRecording {
+                                    Button(action: {
+                                        audioManager.stopRecording()
+                                    }) {
+                                        Text("Stop Recording")
+                                            .foregroundColor(.red)
+                                    }
+                                } else {
+                                    Button(action: {
+                                        audioManager.startRecording()
+                                    }) {
+                                        Text("Start Recording")
+                                    }
+                                }
+                            }
                 
                 Text("Tape Loops")
                     .font(.title3)
@@ -134,16 +183,20 @@ struct NoiseMixerView: View {
 //                    .monospacedDigit()
                 
                 Button(action: {
-                    if audioManager.isPlaying {
+                    switch audioManager.isPlaying {
+                    case .playing:
                         audioManager.stop()
-                    } else {
+                    case .stopped:
                         audioManager.play()
+                    default:
+                        break
                     }
+                    
                 }) {
-                    Text(audioManager.isPlaying ? "Stop" : "Play")
+                    Text(stateText)
                         .font(.title)
                         .padding()
-                        .background(audioManager.isPlaying ? Color.red : Color.green)
+                        .background(stateBackground)
                         .foregroundColor(.white)
                         .cornerRadius(10)
                 }
@@ -151,6 +204,28 @@ struct NoiseMixerView: View {
             .padding()
         }
         
+    }
+    
+    var stateText: String {
+            switch audioManager.isPlaying {
+            case .playing:
+                return "Stop"
+            case .fadingOut:
+                return "Fading Out"
+            case .stopped:
+                return "Play"
+            }
+        }
+    
+    var stateBackground: Color {
+        switch audioManager.isPlaying {
+        case .playing:
+                .red
+        case .fadingOut:
+            .orange
+        case .stopped:
+            .green
+        }
     }
 }
 
