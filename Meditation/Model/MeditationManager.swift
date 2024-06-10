@@ -14,7 +14,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
     
     static let shared = MeditationManager()
     
-    // MARK: Statistics
+    // MARK: - Statistics
     
     @Published var meditationSessions = [MeditationSession]()
     
@@ -296,11 +296,11 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
 
     
     
-    // MARK: Design
+    // MARK: - Design
     
     @AppStorage("gradientBackground") var gradientBackground: Bool = true
     
-    // MARK: Timer
+    // MARK: - Timer
     
     @AppStorage("meditationTimer") private var meditationTimerData: Data = Data()
     
@@ -498,7 +498,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
         meditationTimer.koans.append(text)
     }
     
-    // MARK: Notifications
+    // MARK: - Notifications
     
     private let notificationCenter = UNUserNotificationCenter.current()
     let soundOptions = [
@@ -547,7 +547,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
     //        completionHandler()
     //    }
     
-    // MARK: Meditation Circle View
+    // MARK: - Meditation Circle View
     
     var statusTimer: Timer?
     @Published var circleProgress = 0.0
@@ -718,7 +718,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
         healthStore.execute(query)
     }
     
-    // MARK: Widget Extension
+    // MARK: - Widget Extension
     
     private var activity: Activity<WidgetExtensionAttributes>? = nil
     
@@ -782,7 +782,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
         }
     }
     
-    // MARK: Meditation Reminders
+    // MARK: - Meditation Reminders
     @AppStorage("reminders") private var remindersData: Data = Data()
     
     let remindersIdentifier = "Meditation Reminders Identifier"
