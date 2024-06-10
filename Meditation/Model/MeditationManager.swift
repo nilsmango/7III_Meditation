@@ -470,7 +470,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
             let minutesLeftToMeditate = Int(ceil(meditationTimer.targetDate.timeIntervalSince(currentDate) / 60))
             meditationTimer.timerInMinutes = minutesLeftToMeditate
             
-            meditationTimer.targetDate = currentDate
+            meditationTimer.targetDate = currentDate.addingTimeInterval(TimeInterval(minutesLeftToMeditate*60 + meditationTimer.preparationTime))
             
             // edit meditation session
             editMeditationSession(pause: true)
