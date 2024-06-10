@@ -202,6 +202,7 @@ class AudioManager: ObservableObject, HasAudioEngine {
         delay = VariableDelay(filterMix, time: effectsData.delayTime, feedback: effectsData.delayFeedback, maximumTime: 5.0)
         
         delayWet.addInput(delay)
+        delayWet.volume = 0.0
         delayDry.addInput(filterMix)
         
         delayMix.addInput(delayWet)
