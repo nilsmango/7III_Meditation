@@ -132,10 +132,12 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
                 }
                 
                 DispatchQueue.main.async {
+                    var loadedMeditationSessions: [MeditationSession] = []
                     for sample in results {
                         let session = MeditationSession(startDate: sample.startDate, endDate: sample.endDate)
-                        self.meditationSessions.append(session)
+                        loadedMeditationSessions.append(session)
                     }
+                    self.meditationSessions = loadedMeditationSessions
                     self.updateMeditationStatistics()
                 }
             }
@@ -751,14 +753,15 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
     
     private func stopActivity() {
         
-        let state = WidgetExtensionAttributes.ContentState(targetDate: meditationTimer.targetDate, timerInMinutes: meditationTimer.timerInMinutes, timerStatus: meditationTimer.timerStatus, gradientBackground: gradientBackground, welcomeBackText: welcomeMessage, koanText: koanOfTheDay, showKoan: meditationTimer.showKoan)
-        let content = ActivityContent(state: state, staleDate: Date().addingTimeInterval(1.7))
+//        let state = WidgetExtensionAttributes.ContentState(targetDate: meditationTimer.targetDate, timerInMinutes: meditationTimer.timerInMinutes, timerStatus: meditationTimer.timerStatus, gradientBackground: gradientBackground, welcomeBackText: welcomeMessage, koanText: koanOfTheDay, showKoan: meditationTimer.showKoan)
+//        let content = ActivityContent(state: state, staleDate: Date().addingTimeInterval(1.7))
         
         Task {
-            await activity?.end(content, dismissalPolicy: .immediate)
+            // TODO: test if this nil does work better than the content I have used (should work better)
+            await activity?.end(nil, dismissalPolicy: .immediate)
             self.activity = nil
             print("Activity ended")
-        }
+            }
     }
     
     private func updateActivity(switchToRunning: Bool = false, pause: Bool = false) {
