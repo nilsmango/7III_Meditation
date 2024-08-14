@@ -74,8 +74,6 @@ struct ContentView: View {
             .background(meditationManager.gradientBackground ? LinearGradient(gradient: Gradient(colors: [.customGray2, .accent]), startPoint: .top, endPoint: .bottom) : LinearGradient(gradient: Gradient(colors: [.customGray2]), startPoint: .top, endPoint: .bottom))
             .onAppear {
                 meditationManager.checkStatusOfTimer()
-                
-                meditationManager.startupChecks()
             }
         }
     }

@@ -44,6 +44,7 @@ struct MeditationApp: App {
                         }
                     }
                     notificationCenter.delegate = meditationManager
+                    meditationManager.startupChecks()
                 }
         }
     }
