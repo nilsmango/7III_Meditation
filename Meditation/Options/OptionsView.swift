@@ -19,6 +19,7 @@ struct OptionsView: View {
                     TextField("Meditation Started Text", text: $meditationManager.startMessage)
                     
                     Toggle("Show Koan", isOn: $meditationManager.meditationTimer.showKoan)
+                        .tint(.accentColor)
                     
                     if meditationManager.meditationTimer.showKoan {
                         NavigationLink("Edit Koans", destination: KoansEditView(meditationManager: meditationManager))
@@ -70,10 +71,12 @@ struct OptionsView: View {
     //                .pickerStyle(.wheel)
                     
                     Toggle("Gradient Background", isOn: $meditationManager.gradientBackground)
+                        .tint(.accentColor)
                 }
                 
                 Section(content:  {
                     Toggle("Activate Reminders", isOn: $meditationManager.reminders.activateReminders)
+                        .tint(.accentColor)
                     
                     if meditationManager.reminders.activateReminders {
                         NavigationLink {
