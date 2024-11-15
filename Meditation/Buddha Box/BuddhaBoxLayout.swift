@@ -11,9 +11,7 @@ struct BuddhaBoxLayout: View {
     @ObservedObject var meditationManager: MeditationManager
 
     @ObservedObject var audioManager: AudioManager
-    
-    @State private var isPlaying: Bool = false
-    
+        
     // dial values
     @State private var brownNoiseAmplitude = 0.0
     @State private var pinkNoiseAmplitude = 0.0
@@ -21,11 +19,16 @@ struct BuddhaBoxLayout: View {
     
     @State private var buddhaLoopAmplitude = 0.0
     @State private var buddhaLoopShift = 50.0
-    @State private var buddhaLoopSpeed = 1.0
+    @State private var buddhaLoopSpeed = 20.0
     
     @State private var loopPlaying = 0
     let numberOfLoops = 4
     
+    @State private var buddhaVariSpeed = 20.0
+    @State private var buddhaDistortion = 0.0
+    @State private var buddhaLPFreq = 100.0
+    @State private var buddhaLPRes = 0.0
+    @State private var buddhaHPFreq = 0.0
     
     let buttonFrameSize = CGSize(width: 50, height: 59)
     var body: some View {
@@ -37,14 +40,17 @@ struct BuddhaBoxLayout: View {
                 
                 BuddhaBoxButton(action: {
                     // start stop
-                    if isPlaying {
-                        
-                    } else {
+                    switch audioManager.isPlaying {
+                    case .playing:
+                        audioManager.stop()
+                    case .stopped:
+                        audioManager.play()
+                    default:
+                        break
                         
                     }
-                    
-                    isPlaying.toggle()
-                }, labelText: isPlaying ? "On" : "Off", isFullOpacity: isPlaying, buttonFrameSize: buttonFrameSize)
+                }, labelText: stateText, isFullOpacity: audioManager.isPlaying == .playing, buttonFrameSize: buttonFrameSize)
+                .disabled(audioManager.isPlaying == .fadingOut)
                 
                 
                 Spacer()
@@ -81,7 +87,7 @@ struct BuddhaBoxLayout: View {
 
                         }
                 }
-                .opacity(isPlaying ? 1.0 : 0.5)
+                .opacity(audioManager.isPlaying == .playing ? 1.0 : 0.5)
                 
                 
                 Spacer()
@@ -91,7 +97,7 @@ struct BuddhaBoxLayout: View {
                 // TODO: User Loop
                 Text("User Loop Here")
             }
-            .opacity(isPlaying ? 1.0 : 0.5)
+            .opacity(audioManager.isPlaying == .playing ? 1.0 : 0.5)
             
             // Buddha Loop
             HStack {
@@ -104,8 +110,9 @@ struct BuddhaBoxLayout: View {
                         loopPlaying += 1
                     }
                 }, labelText: "Loop " + String(loopPlaying), isFullOpacity: true, buttonFrameSize: buttonFrameSize)
-                .onChange(of: loopPlaying) { _, _ in
-                    buddhaLoopAmplitude = Double(audioManager.tapeMachineControls[loopPlaying].volume * 100.0)
+                .onChange(of: loopPlaying) { oldValue, newValue in
+                    audioManager.fadeToNextLoop(oldIndex: oldValue, newIndex: newValue)
+                    
                     buddhaLoopShift = mapRange(value: Double(audioManager.tapeMachineControls[loopPlaying].pitchShift), fromRange: -2400...2400, toRange: 0...100)
                     buddhaLoopSpeed = mapRange(value: Double(audioManager.tapeMachineControls[loopPlaying].variSpeed), fromRange: 0.25...4, toRange: 0...100)
                 }
@@ -132,7 +139,7 @@ struct BuddhaBoxLayout: View {
                     }
                 
                 Spacer()
-                // TODO: finish it 0.25...4
+                
                 Dial(value: $buddhaLoopSpeed, resetValue: 20, dialColor: .accentColor, dialName: "VariSpeed", encoderText: String(format: "%.2f", audioManager.tapeMachineControls[loopPlaying].variSpeed))
                     .onChange(of: buddhaLoopSpeed) { _, _ in
                         audioManager.tapeMachineControls[loopPlaying].variSpeed = Float(mapRange(value: buddhaLoopSpeed, fromRange: 0...100, toRange: 0.25...4))
@@ -143,42 +150,64 @@ struct BuddhaBoxLayout: View {
                 
                 Spacer()
             }
-            .opacity(isPlaying ? 1.0 : 0.5)
+            .opacity(audioManager.isPlaying == .playing ? 1.0 : 0.5)
             
             Spacer()
             
             HStack {
                 Spacer()
                 
-                Dial(value: $buddhaLoopAmplitude, dialColor: .accentColor, dialName: "VariSpeed", encoderText: String(format: "%.2f", audioManager.soundData.pinkAmplitude))
-                    .onChange(of: buddhaLoopAmplitude) { _, _ in
-                        //                        audioManager.soundData.pinkAmplitude = Float(buddhaLoopAmplitude / 100.0)
+                Dial(value: $buddhaVariSpeed, resetValue: 20, dialColor: .accentColor, dialName: "VariSpeed", encoderText: String(format: "%.2f", audioManager.effectsData.endVariRate))
+                    .onChange(of: buddhaVariSpeed) { _, _ in
+                        audioManager.effectsData.endVariRate = Float(mapRange(value: buddhaVariSpeed, fromRange: 0...100, toRange: 0.25...4))
+                    }
+                    .onAppear {
+                        buddhaVariSpeed = mapRange(value: Double(audioManager.effectsData.endVariRate), fromRange: 0.25...4, toRange: 0...100)
                     }
                 
                 Spacer()
                 
-                Dial(value: $buddhaLoopAmplitude, dialColor: .accentColor, dialName: "Distortion", encoderText: String(format: "%.2f", audioManager.soundData.pinkAmplitude))
-                    .onChange(of: buddhaLoopAmplitude) { _, _ in
-                        //                        audioManager.soundData.pinkAmplitude = Float(buddhaLoopAmplitude / 100.0)
+                Dial(value: $buddhaDistortion, dialColor: .accentColor, dialName: "Distortion", encoderText: String(format: "%.2f", audioManager.effectsData.distortionMix))
+                    .onChange(of: buddhaDistortion) { _, _ in
+                        audioManager.effectsData.distortionMix = Float(buddhaDistortion / 100.0)
+                    }
+                    .onAppear {
+                        buddhaDistortion = Double(audioManager.effectsData.distortionMix * 100.0)
+                    }
+                
+                Spacer()
+                // audioManager.effectsData.logMoogCutoff, in: log10(10)...log10(22050)
+                Dial(value: $buddhaLPFreq, resetValue: 100, dialColor: .accentColor, dialName: "LP Freq", encoderText: {
+                    let frequency = pow(10, Double(audioManager.effectsData.logMoogCutoff))
+                    if frequency < 1000 {
+                        return String(format: "%.0f", frequency)
+                    } else if frequency < 10000 {
+                        return String(format: "%.2fk", frequency / 1000)
+                    } else {
+                        return String(format: "%.1fk", frequency / 1000)
+                    }
+                }())
+                    .onChange(of: buddhaLPFreq) { _, _ in
+                        audioManager.effectsData.logMoogCutoff = Float(mapRange(value: buddhaLPFreq, fromRange: 0...100, toRange: log10(10)...log10(22050)))
+                    }
+                    .onAppear {
+                        buddhaLPFreq = mapRange(value: Double(audioManager.effectsData.logMoogCutoff), fromRange: log10(10)...log10(22050), toRange: 0...100)
                     }
                 
                 Spacer()
                 
-                Dial(value: $buddhaLoopAmplitude, dialColor: .accentColor, dialName: "LP Freq", encoderText: String(format: "%.2f", audioManager.soundData.pinkAmplitude))
-                    .onChange(of: buddhaLoopAmplitude) { _, _ in
-                        //                        audioManager.soundData.pinkAmplitude = Float(buddhaLoopAmplitude / 100.0)
+                Dial(value: $buddhaLPRes, dialColor: .accentColor, dialName: "LP Res", encoderText: String(format: "%.1f", audioManager.effectsData.moogResonance))
+                    .onChange(of: buddhaLPRes) { _, _ in
+                        // 0...40
+                        audioManager.effectsData.moogResonance = Float(mapRange(value: buddhaLPRes, fromRange: 0...100, toRange: 0...40))
                     }
-                
-                Spacer()
-                
-                Dial(value: $buddhaLoopAmplitude, dialColor: .accentColor, dialName: "LP Res", encoderText: String(format: "%.2f", audioManager.soundData.pinkAmplitude))
-                    .onChange(of: buddhaLoopAmplitude) { _, _ in
-                        //                        audioManager.soundData.pinkAmplitude = Float(buddhaLoopAmplitude / 100.0)
+                    .onAppear {
+                        buddhaLPRes = mapRange(value: Double(audioManager.effectsData.moogResonance), fromRange: 0...40, toRange: 0...100)
                     }
                 
                 Spacer()
             }
-            .opacity(isPlaying ? 1.0 : 0.5)
+            .opacity(audioManager.isPlaying == .playing ? 1.0 : 0.5)
             
             Spacer()
         }
@@ -187,6 +216,17 @@ struct BuddhaBoxLayout: View {
         
 
     }
+    
+    var stateText: String {
+            switch audioManager.isPlaying {
+            case .playing:
+                return "On"
+            case .fadingOut:
+                return "Fading"
+            case .stopped:
+                return "Off"
+            }
+        }
 }
 
 #Preview {

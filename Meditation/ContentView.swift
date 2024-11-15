@@ -40,7 +40,7 @@ struct ContentView: View {
                         
                         Spacer()
                         
-                        NavigationLink(destination: BuddhaBoxView(audioManager: audioManager)) {
+                        NavigationLink(destination: BuddhaBoxLayout(meditationManager: meditationManager, audioManager: audioManager)) {
                             Label("Options", systemImage: "waveform.circle.fill")
                                 .font(.title)
                                 .symbolRenderingMode(.palette)

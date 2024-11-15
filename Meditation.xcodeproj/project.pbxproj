@@ -83,6 +83,8 @@
 		785D096F2C0C56F800044AE9 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785D096E2C0C56F800044AE9 /* AudioManager.swift */; };
 		787000D52CE4EC2400542E3B /* Dial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787000D42CE4EC2400542E3B /* Dial.swift */; };
 		787000D72CE750AE00542E3B /* BuddhaBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787000D62CE750AE00542E3B /* BuddhaBoxButton.swift */; };
+		787000D92CE7D0FD00542E3B /* AppStorageAUValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787000D82CE7D0FC00542E3B /* AppStorageAUValue.swift */; };
+		787000DA2CE7D0FD00542E3B /* AppStorageAUValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787000D82CE7D0FC00542E3B /* AppStorageAUValue.swift */; };
 		7879BDF02BF4A43E001994D2 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7879BDEF2BF4A43E001994D2 /* Helpers.swift */; };
 		7879BDF12BF4BDE4001994D2 /* Kitchen Timer Normal.caf in Resources */ = {isa = PBXBuildFile; fileRef = 78385D242BF3E4F100581057 /* Kitchen Timer Normal.caf */; };
 		7879BDF32BF68448001994D2 /* CircleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7879BDF22BF68448001994D2 /* CircleButtonStyle.swift */; };
@@ -194,6 +196,7 @@
 		785D096E2C0C56F800044AE9 /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		787000D42CE4EC2400542E3B /* Dial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dial.swift; sourceTree = "<group>"; };
 		787000D62CE750AE00542E3B /* BuddhaBoxButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuddhaBoxButton.swift; sourceTree = "<group>"; };
+		787000D82CE7D0FC00542E3B /* AppStorageAUValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorageAUValue.swift; sourceTree = "<group>"; };
 		7879BDEF2BF4A43E001994D2 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		7879BDF22BF68448001994D2 /* CircleButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButtonStyle.swift; sourceTree = "<group>"; };
 		7879BDF42BF684FD001994D2 /* TimerStoppedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerStoppedView.swift; sourceTree = "<group>"; };
@@ -317,6 +320,7 @@
 				7834263F2BFF6C7B0008F9F9 /* TimerSound.swift */,
 				78385D222BF3E11B00581057 /* MeditationSession.swift */,
 				7879BDEF2BF4A43E001994D2 /* Helpers.swift */,
+				787000D82CE7D0FC00542E3B /* AppStorageAUValue.swift */,
 				789A0E172C04FE57009CB9E7 /* DateComponents + Identifiable.swift */,
 				789A0E192C04FEAB009CB9E7 /* DateComponents + Comparable.swift */,
 				785D096E2C0C56F800044AE9 /* AudioManager.swift */,
@@ -610,6 +614,7 @@
 				78DAE2F12C0C579D00F2CCB0 /* NoiseMixerView.swift in Sources */,
 				787000D52CE4EC2400542E3B /* Dial.swift in Sources */,
 				789A0E142C04FCCA009CB9E7 /* MonthlyChart.swift in Sources */,
+				787000D92CE7D0FD00542E3B /* AppStorageAUValue.swift in Sources */,
 				7854735F2C07B359009645BF /* StopMeditation.swift in Sources */,
 				785D09652C0B9F2200044AE9 /* FlyingEmojiView.swift in Sources */,
 				7834263C2BFF6B990008F9F9 /* NotificationSoundView.swift in Sources */,
@@ -652,6 +657,7 @@
 				7854736B2C090119009645BF /* WidgetLogoView.swift in Sources */,
 				785473612C07B5E4009645BF /* TimerStatus.swift in Sources */,
 				785D09592C0A06EC00044AE9 /* TimerHackView.swift in Sources */,
+				787000DA2CE7D0FD00542E3B /* AppStorageAUValue.swift in Sources */,
 				785473622C07B5E4009645BF /* MeditationStatistics.swift in Sources */,
 				785473632C07B5E4009645BF /* DateComponents + Identifiable.swift in Sources */,
 				785473642C07B5E4009645BF /* DateComponents + Comparable.swift in Sources */,

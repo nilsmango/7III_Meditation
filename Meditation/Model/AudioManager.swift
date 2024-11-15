@@ -9,6 +9,7 @@ import Foundation
 import AudioKit
 import SoundpipeAudioKit
 import AVFAudio
+import SwiftUI
 
 struct AudioFile {
     var fileName: String
@@ -38,7 +39,7 @@ struct NoiseData {
 }
 
 struct EffectsData {
-    var distortionMix: AUValue = 0.0
+    @AppStorageAUValue("distortionMix", defaultValue: 0.0) var distortionMix
     
     var moogCutoff: AUValue = 22050.0
     var moogResonance: AUValue = 0.0
@@ -274,7 +275,7 @@ class AudioManager: ObservableObject, HasAudioEngine {
     
     private func fadeIn() {
         let steps = 100
-        let duration: Double = 2.0  // Duration of the fade in seconds
+        let duration: Double = 1.0  // Duration of the fade in seconds
         for i in 0...steps {
             DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) * (duration / Double(steps))) {
                 let progress = Double(i) / Double(steps)
@@ -285,7 +286,7 @@ class AudioManager: ObservableObject, HasAudioEngine {
     
     private func fadeOut(completion: @escaping () -> Void) {
         let steps = 100
-        let duration: Double = 4.0  // Duration of the fade in seconds
+        let duration: Double = 2.5  // Duration of the fade in seconds
         for i in 0...steps {
             DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) * (duration / Double(steps))) {
                 let progress = Double(i) / Double(steps)
@@ -351,6 +352,24 @@ class AudioManager: ObservableObject, HasAudioEngine {
         isRecording = false
         if let fileURL = audioRecorder?.url {
             loadUserSelectedAudio(url: fileURL)
+        }
+    }
+    
+    func fadeToNextLoop(oldIndex: Int, newIndex: Int) {
+        let targetVolume = tapeMachineControls[oldIndex].volume
+        let steps = 100
+        let duration: Double = 2.0 // Duration of the fade in seconds
+
+        for i in 0...steps {
+            DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) * (duration / Double(steps))) {
+                let progress = Double(i) / Double(steps)
+                
+                // Fade out the old volume
+                self.tapeMachineControls[oldIndex].volume = targetVolume * Float((1.0 - progress))
+                
+                // Fade in the new volume
+                self.tapeMachineControls[newIndex].volume = targetVolume * Float(progress)
+            }
         }
     }
 }
