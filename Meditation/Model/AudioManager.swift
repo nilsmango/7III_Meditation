@@ -29,20 +29,20 @@ struct TapeMachineControl: Identifiable {
 }
 
 struct NoiseData {
-    var brownianAmplitude: AUValue = 0.0
-    var pinkAmplitude: AUValue = 0.0
-    var whiteAmplitude: AUValue = 0.0
+    @AppStorageAUValue("brownianAmplitude", defaultValue: 0.0) var brownianAmplitude
+    @AppStorageAUValue("pinkAmplitude", defaultValue: 0.0) var pinkAmplitude
+    @AppStorageAUValue("whiteAmplitude", defaultValue: 0.0) var whiteAmplitude
     
-    var userVolume: AUValue = 0.0
-    var userPitchShift: AUValue = 0.0
-    var userVariSpeed: AUValue = 1.0
+    @AppStorageAUValue("userVolume", defaultValue: 0.0) var userVolume
+    @AppStorageAUValue("userPitchShift", defaultValue: 0.0) var userPitchShift
+    @AppStorageAUValue("userVariSpeed", defaultValue: 1.0) var userVariSpeed
 }
 
 struct EffectsData {
     @AppStorageAUValue("distortionMix", defaultValue: 0.0) var distortionMix
     
-    var moogCutoff: AUValue = 22050.0
-    var moogResonance: AUValue = 0.0
+    @AppStorageAUValue("moogCutoff", defaultValue: 22050.0) var moogCutoff
+    @AppStorageAUValue("moogResonance", defaultValue: 0.0) var moogResonance
     var logMoogCutoff: AUValue {
         get {
             return log10(moogCutoff)
@@ -52,8 +52,8 @@ struct EffectsData {
         }
     }
     
-    var highPassCutoff: AUValue = 10.0
-    var highPassResonance: AUValue = 0.0
+    @AppStorageAUValue("highPassCutoff", defaultValue: 10.0) var highPassCutoff
+    @AppStorageAUValue("highPassResonance", defaultValue: 0.0) var highPassResonance
     var logHighPassCutoff: AUValue {
         get {
             return log10(highPassCutoff)
@@ -62,14 +62,12 @@ struct EffectsData {
             highPassCutoff = pow(10, newValue)
         }
     }
+    @AppStorageAUValue("endVariRate", defaultValue: 1.0) var endVariRate
+    @AppStorageAUValue("delayFeedback", defaultValue: 0.0) var delayFeedback
+    @AppStorageAUValue("delayTime", defaultValue: 0.73) var delayTime
+    @AppStorageAUValue("delayDryWetMix", defaultValue: 0.0) var delayDryWetMix
     
-    var endVariRate: AUValue = 1.0
-    
-    var delayFeedback: AUValue = 0.0
-    var delayTime: AUValue = 0.73
-    var delayDryWetMix: AUValue = 0.0
-    
-    var reverbDryWetMix: AUValue = 0.0
+    @AppStorageAUValue("reverbDryWetMix", defaultValue: 0.0) var reverbDryWetMix
     
 }
 
