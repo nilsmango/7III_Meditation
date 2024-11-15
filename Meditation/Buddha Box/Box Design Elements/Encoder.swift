@@ -25,7 +25,7 @@ struct Encoder: View {
             Circle()
                 .trim(from: 0.0, to: trimMax)
                 .stroke(style: StrokeStyle(lineWidth: lineWidth, lineCap: .round, lineJoin: .bevel))
-                .foregroundColor(.accentColor.opacity(0.2))
+                .foregroundColor(dialColor.opacity(0.2))
                 .rotationEffect(Angle(degrees: 135))
                 .frame(width: dialSize, height: dialSize)
             
