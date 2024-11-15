@@ -85,19 +85,12 @@ struct Dial: View {
                                 oldHorizontalDragDistance = 0.0
                             }
 
-                            .simultaneously(with: SimultaneousGesture(TapGesture(count: 2), TapGesture(count: 3))
-                                        .onEnded { gestureValue in
+                            .simultaneously(with: TapGesture(count: 2)
+                                        .onEnded { _ in
 
-                                                if gestureValue.second != nil {
-                                                    withAnimation(.linear(duration: animationDuration)) {
-                                                        value = maxValue / 2
-                                                    }
-
-                                                } else if gestureValue.first != nil {
                                                     withAnimation(.linear(duration: animationDuration)) {
                                                         value = resetValue
                                                     }
-                                                }
                                             }
                            )
                     )

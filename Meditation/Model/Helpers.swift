@@ -45,3 +45,13 @@ func getStartOfMonth(numberOfMonthsFromNow: Int) -> Date {
     return calendar.date(from: startOfMonth)!
     
 }
+
+
+func mapRange(value: Double, fromRange: ClosedRange<Double>, toRange: ClosedRange<Double>) -> Double {
+    let fromMin = fromRange.lowerBound
+    let fromMax = fromRange.upperBound
+    let toMin = toRange.lowerBound
+    let toMax = toRange.upperBound
+
+    return ((value - fromMin) / (fromMax - fromMin)) * (toMax - toMin) + toMin
+}
