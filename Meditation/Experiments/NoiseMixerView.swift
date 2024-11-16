@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// Prototype with also loading of samples
 struct NoiseMixerView: View {
     @ObservedObject var audioManager: AudioManager
     

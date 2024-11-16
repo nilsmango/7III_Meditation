@@ -9,9 +9,9 @@ import SwiftUI
 
 struct BuddhaBoxLayout: View {
     @ObservedObject var meditationManager: MeditationManager
-
+    
     @ObservedObject var audioManager: AudioManager
-        
+    
     // dial values
     @State private var brownNoiseAmplitude = 0.0
     @State private var pinkNoiseAmplitude = 0.0
@@ -152,17 +152,19 @@ struct BuddhaBoxLayout: View {
             // User Loop
             HStack {
                 Spacer()
-                        BuddhaBoxButton(action: {
-                            if audioManager.isRecording {
-                                    audioManager.stopRecording()
-                                
-                            } else {
-                                    audioManager.startRecording()
-                            }
-                        }, labelText: audioManager.isRecording ? "Stop" : "Record", isFullOpacity: true, buttonFrameSize: buttonFrameSize)
+                
+                // took out the loading of samples as it's much more fun like this.
+                BuddhaBoxButton(action: {
+                    if audioManager.isRecording {
+                        audioManager.stopRecording()
                         
+                    } else {
+                        audioManager.startRecording()
+                    }
+                }, labelText: audioManager.isRecording ? "Stop" : "Record", isFullOpacity: true, buttonFrameSize: buttonFrameSize)
+                
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
-                                
+                
                 Spacer()
                 
                 Dial(value: $userLoopAmplitude, dialColor: .accentColor, dialName: "Volume", encoderText: String(format: "%.2f", audioManager.soundData.userVolume))
@@ -245,12 +247,12 @@ struct BuddhaBoxLayout: View {
                         return String(format: "%.1fk", frequency / 1000)
                     }
                 }())
-                    .onChange(of: buddhaLPFreq) { _, _ in
-                        audioManager.effectsData.logMoogCutoff = Float(mapRange(value: buddhaLPFreq, fromRange: 0...100, toRange: log10(10)...log10(22050)))
-                    }
-                    .onAppear {
-                        buddhaLPFreq = mapRange(value: Double(audioManager.effectsData.logMoogCutoff), fromRange: log10(10)...log10(22050), toRange: 0...100)
-                    }
+                .onChange(of: buddhaLPFreq) { _, _ in
+                    audioManager.effectsData.logMoogCutoff = Float(mapRange(value: buddhaLPFreq, fromRange: 0...100, toRange: log10(10)...log10(22050)))
+                }
+                .onAppear {
+                    buddhaLPFreq = mapRange(value: Double(audioManager.effectsData.logMoogCutoff), fromRange: log10(10)...log10(22050), toRange: 0...100)
+                }
                 
                 Spacer()
                 
@@ -275,13 +277,13 @@ struct BuddhaBoxLayout: View {
                         return String(format: "%.1fk", frequency / 1000)
                     }
                 }())
-                    .onChange(of: buddhaHPFreq) { _, _ in
-                        audioManager.effectsData.logHighPassCutoff = Float(mapRange(value: buddhaHPFreq, fromRange: 0...100, toRange: log10(10)...log10(22050)))
-                    }
-                    .onAppear {
-                        audioManager.startHighPass()
-                        buddhaHPFreq = mapRange(value: Double(audioManager.effectsData.logHighPassCutoff), fromRange: log10(10)...log10(22050), toRange: 0...100)
-                    }
+                .onChange(of: buddhaHPFreq) { _, _ in
+                    audioManager.effectsData.logHighPassCutoff = Float(mapRange(value: buddhaHPFreq, fromRange: 0...100, toRange: log10(10)...log10(22050)))
+                }
+                .onAppear {
+                    audioManager.startHighPass()
+                    buddhaHPFreq = mapRange(value: Double(audioManager.effectsData.logHighPassCutoff), fromRange: log10(10)...log10(22050), toRange: 0...100)
+                }
                 
                 Spacer()
                 
@@ -297,7 +299,7 @@ struct BuddhaBoxLayout: View {
                 Spacer()
             }
             .opacity(audioManager.isPlaying == .playing ? 1.0 : 0.5)
-
+            
             HStack {
                 Spacer()
                 
@@ -310,7 +312,7 @@ struct BuddhaBoxLayout: View {
                     }
                 
                 Spacer()
-
+                
                 Dial(
                     value: $buddhaDelayTime,
                     resetValue: 37.17,
@@ -369,15 +371,15 @@ struct BuddhaBoxLayout: View {
     }
     
     var stateText: String {
-            switch audioManager.isPlaying {
-            case .playing:
-                return "On"
-            case .fadingOut:
-                return "Fading"
-            case .stopped:
-                return "Off"
-            }
+        switch audioManager.isPlaying {
+        case .playing:
+            return "On"
+        case .fadingOut:
+            return "Fading"
+        case .stopped:
+            return "Off"
         }
+    }
 }
 
 #Preview {

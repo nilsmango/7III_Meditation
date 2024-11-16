@@ -293,6 +293,7 @@
 				789A0E0D2C03912D009CB9E7 /* Options */,
 				7827880B2BFB3F30004E7F77 /* Timer */,
 				78385D1B2BF366F900581057 /* Model */,
+				78EBA6C82CE8B2AF00154226 /* Experiments */,
 				78385D0E2BF3647500581057 /* Assets.xcassets */,
 				78385D252BF3E4F700581057 /* Sounds */,
 				78385D102BF3647500581057 /* Meditation.entitlements */,
@@ -406,8 +407,6 @@
 		785D096C2C0C4B5300044AE9 /* Buddha Box */ = {
 			isa = PBXGroup;
 			children = (
-				78C862AE2C0F0866006235AB /* BuddhaBoxView.swift */,
-				78DAE2F02C0C579D00F2CCB0 /* NoiseMixerView.swift */,
 				784ECA812CAFCCB3004C0CF6 /* BuddhaBoxLayout.swift */,
 				784ECA872CAFCDA0004C0CF6 /* Box Design Elements */,
 			);
@@ -455,6 +454,15 @@
 				789A0E342C061320009CB9E7 /* Info.plist */,
 			);
 			path = WidgetExtension;
+			sourceTree = "<group>";
+		};
+		78EBA6C82CE8B2AF00154226 /* Experiments */ = {
+			isa = PBXGroup;
+			children = (
+				78C862AE2C0F0866006235AB /* BuddhaBoxView.swift */,
+				78DAE2F02C0C579D00F2CCB0 /* NoiseMixerView.swift */,
+			);
+			path = Experiments;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
