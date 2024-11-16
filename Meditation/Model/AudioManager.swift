@@ -299,7 +299,7 @@ class AudioManager: ObservableObject, HasAudioEngine {
         }
     }
     
-    // MARK: User Tape Machine
+    // MARK: - User Tape Machine
     var userSelectedPlayer: AudioPlayer?
     private var audioRecorder: AVAudioRecorder?
     @Published var isRecording = false
@@ -366,7 +366,7 @@ class AudioManager: ObservableObject, HasAudioEngine {
     }
     
     
-    // MARK: Loop Fading
+    // MARK: - Loop Fading
     func fadeToNextLoop(oldIndex: Int, newIndex: Int) {
         let targetVolume = tapeMachineControls[oldIndex].volume
         let steps = 100
