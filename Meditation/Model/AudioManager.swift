@@ -64,7 +64,7 @@ struct EffectsData {
     }
     @AppStorageAUValue("endVariRate", defaultValue: 1.0) var endVariRate
     @AppStorageAUValue("delayFeedback", defaultValue: 0.0) var delayFeedback
-    @AppStorageAUValue("delayTime", defaultValue: 0.73) var delayTime
+    @AppStorageAUValue("delayTime", defaultValue: 0.724) var delayTime
     @AppStorageAUValue("delayDryWetMix", defaultValue: 0.0) var delayDryWetMix
     
     @AppStorageAUValue("reverbDryWetMix", defaultValue: 0.0) var reverbDryWetMix
@@ -93,6 +93,9 @@ class AudioManager: ObservableObject, HasAudioEngine {
             
         }
     }
+
+    private var userTimePitcher: TimePitch!
+    private var userVariSpeed: VariSpeed!
     
     private var endVariSpeed: VariSpeed!
     private var distortion: Distortion!
@@ -121,7 +124,8 @@ class AudioManager: ObservableObject, HasAudioEngine {
             white.amplitude = soundData.whiteAmplitude
             
             userSelectedPlayer?.volume = soundData.userVolume
-            
+            userTimePitcher?.pitch = soundData.userPitchShift
+            userVariSpeed?.rate = soundData.userVariSpeed
         }
     }
     
@@ -192,12 +196,10 @@ class AudioManager: ObservableObject, HasAudioEngine {
         
         highPass = HighPassFilter(moogLadder, cutoffFrequency: effectsData.highPassCutoff, resonance: effectsData.highPassResonance)
         highPassMixer.addInput(highPass)
-        
+                
         filterMix.addInput(highPassMixer)
         filterMix.addInput(lowpassMixer)
-        
-        
-        
+                
         delay = VariableDelay(filterMix, time: effectsData.delayTime, feedback: effectsData.delayFeedback, maximumTime: 5.0)
         
         delayWet.addInput(delay)
@@ -317,10 +319,20 @@ class AudioManager: ObservableObject, HasAudioEngine {
             
         } else {
             let userSelectedPlayer = AudioPlayer(url: url, buffered: true)!
-            userSelectedPlayer.volume = 0.0
             userSelectedPlayer.isLooping = true
             self.userSelectedPlayer = userSelectedPlayer
-            preMixer.addInput(self.userSelectedPlayer!)
+            
+            // time pitchers
+            userTimePitcher = TimePitch(self.userSelectedPlayer!, pitch: soundData.userPitchShift)
+            
+            // vari speeds
+            userVariSpeed = VariSpeed(userTimePitcher, rate: soundData.userVariSpeed)
+            
+            preMixer.addInput(userVariSpeed)
+            
+            if engine.avEngine.isRunning {
+                self.userSelectedPlayer!.play()
+            }
         }
     }
     
@@ -353,6 +365,8 @@ class AudioManager: ObservableObject, HasAudioEngine {
         }
     }
     
+    
+    // MARK: Loop Fading
     func fadeToNextLoop(oldIndex: Int, newIndex: Int) {
         let targetVolume = tapeMachineControls[oldIndex].volume
         let steps = 100

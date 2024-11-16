@@ -23,9 +23,10 @@ struct BuddhaBoxButton: View {
                 Circle()
                     .fill(.accent.opacity(isFullOpacity ? 1.0 : 0.2))
                     .shadow(color: .black.opacity(0.1), radius: 10)
-                    .frame(width: buttonFrameSize.width, height: buttonFrameSize.height)
+                    .frame(width: buttonFrameSize.width - 10, height: buttonFrameSize.height)
             }
         }
+        .frame(width: buttonFrameSize.width)
     }
 }
 
