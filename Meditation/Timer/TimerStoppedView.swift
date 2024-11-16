@@ -15,6 +15,7 @@ struct TimerStoppedView: View {
     
     var body: some View {
         ZStack {
+            
             Picker("Time", selection: $meditationManager.meditationTimer.timerInMinutes) {
                 ForEach(1...300, id: \.self) { minutes in
                     Text("\(minutes) \(minutes == 1 ? "Minute" : "Minutes")")
@@ -38,6 +39,9 @@ struct TimerStoppedView: View {
                     .buttonStyle(CircleButtonStyle())
                 Spacer()
             }
+            
+            AdvertisementView()
+
         }
         
         

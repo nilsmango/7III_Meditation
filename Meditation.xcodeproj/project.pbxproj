@@ -114,6 +114,11 @@
 		78C862B52C11B8B0006235AB /* 047.aif in Resources */ = {isa = PBXBuildFile; fileRef = 78C862B42C11B8B0006235AB /* 047.aif */; };
 		78DAE2F12C0C579D00F2CCB0 /* NoiseMixerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DAE2F02C0C579D00F2CCB0 /* NoiseMixerView.swift */; };
 		78DAE2F32C0C58FA00F2CCB0 /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 78DAE2F22C0C58FA00F2CCB0 /* AudioKit */; };
+		78EBA6CA2CE9224100154226 /* AdvertisementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EBA6C92CE9224100154226 /* AdvertisementView.swift */; };
+		78EBA6CD2CE924A900154226 /* Ad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EBA6CC2CE924A900154226 /* Ad.swift */; };
+		78EBA6CE2CE924A900154226 /* Ad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EBA6CC2CE924A900154226 /* Ad.swift */; };
+		78EBA6D02CE924C300154226 /* MeditationAds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EBA6CF2CE924C300154226 /* MeditationAds.swift */; };
+		78EBA6D12CE924C300154226 /* MeditationAds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EBA6CF2CE924C300154226 /* MeditationAds.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -224,6 +229,9 @@
 		78C862B22C11B29C006235AB /* 060.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = 060.aif; sourceTree = "<group>"; };
 		78C862B42C11B8B0006235AB /* 047.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = 047.aif; sourceTree = "<group>"; };
 		78DAE2F02C0C579D00F2CCB0 /* NoiseMixerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoiseMixerView.swift; sourceTree = "<group>"; };
+		78EBA6C92CE9224100154226 /* AdvertisementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementView.swift; sourceTree = "<group>"; };
+		78EBA6CC2CE924A900154226 /* Ad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ad.swift; sourceTree = "<group>"; };
+		78EBA6CF2CE924C300154226 /* MeditationAds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationAds.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -292,6 +300,7 @@
 				789A0E0E2C039149009CB9E7 /* Statistics */,
 				789A0E0D2C03912D009CB9E7 /* Options */,
 				7827880B2BFB3F30004E7F77 /* Timer */,
+				78EBA6CB2CE9248E00154226 /* Ads */,
 				78385D1B2BF366F900581057 /* Model */,
 				78EBA6C82CE8B2AF00154226 /* Experiments */,
 				78385D0E2BF3647500581057 /* Assets.xcassets */,
@@ -325,6 +334,8 @@
 				789A0E172C04FE57009CB9E7 /* DateComponents + Identifiable.swift */,
 				789A0E192C04FEAB009CB9E7 /* DateComponents + Comparable.swift */,
 				785D096E2C0C56F800044AE9 /* AudioManager.swift */,
+				78EBA6CC2CE924A900154226 /* Ad.swift */,
+				78EBA6CF2CE924C300154226 /* MeditationAds.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -465,6 +476,14 @@
 			path = Experiments;
 			sourceTree = "<group>";
 		};
+		78EBA6CB2CE9248E00154226 /* Ads */ = {
+			isa = PBXGroup;
+			children = (
+				78EBA6C92CE9224100154226 /* AdvertisementView.swift */,
+			);
+			path = Ads;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -603,6 +622,7 @@
 				78385D1A2BF366A000581057 /* MeditationTimer.swift in Sources */,
 				789A0E092C0388FE009CB9E7 /* StreakButton.swift in Sources */,
 				789A0E182C04FE57009CB9E7 /* DateComponents + Identifiable.swift in Sources */,
+				78EBA6D12CE924C300154226 /* MeditationAds.swift in Sources */,
 				7879BDF32BF68448001994D2 /* CircleButtonStyle.swift in Sources */,
 				785D096F2C0C56F800044AE9 /* AudioManager.swift in Sources */,
 				7879BDF02BF4A43E001994D2 /* Helpers.swift in Sources */,
@@ -627,7 +647,9 @@
 				785D09652C0B9F2200044AE9 /* FlyingEmojiView.swift in Sources */,
 				7834263C2BFF6B990008F9F9 /* NotificationSoundView.swift in Sources */,
 				7879BDF52BF684FD001994D2 /* TimerStoppedView.swift in Sources */,
+				78EBA6CA2CE9224100154226 /* AdvertisementView.swift in Sources */,
 				7854736F2C090185009645BF /* WidgetButtonLabel.swift in Sources */,
+				78EBA6CD2CE924A900154226 /* Ad.swift in Sources */,
 				784ECA842CAFCCF2004C0CF6 /* Encoder.swift in Sources */,
 				789A0E202C05C35A009CB9E7 /* StatisticsButton.swift in Sources */,
 				7854736C2C090128009645BF /* WidgetLogoView.swift in Sources */,
@@ -669,6 +691,8 @@
 				785473622C07B5E4009645BF /* MeditationStatistics.swift in Sources */,
 				785473632C07B5E4009645BF /* DateComponents + Identifiable.swift in Sources */,
 				785473642C07B5E4009645BF /* DateComponents + Comparable.swift in Sources */,
+				78EBA6CE2CE924A900154226 /* Ad.swift in Sources */,
+				78EBA6D02CE924C300154226 /* MeditationAds.swift in Sources */,
 				785D094D2C09CFE800044AE9 /* ResumeMeditation.swift in Sources */,
 				785473652C07B5E4009645BF /* MeditationTimer.swift in Sources */,
 				785D096B2C0C4ABD00044AE9 /* TimeStoppedView.swift in Sources */,
