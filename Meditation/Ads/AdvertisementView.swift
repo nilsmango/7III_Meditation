@@ -12,17 +12,24 @@ struct AdvertisementView: View {
     @State private var isDragging = false
     @State private var showAd: Bool = true
     
+    var currentAd: Ad {
+        meditationAds.randomElement()!
+    }
+    
+    var showAd33: Bool {
+        Int.random(in: 0..<100) < 34
+//        true
+    }
+    
     var body: some View {
         
-        // TODO: make this always not show if the upgrade was purchased
-        if showAd {
-            let currentAd = meditationAds.randomElement()!
-            
+        // TODO: make this never to show if the upgrade was purchased
+        if showAd && showAd33 {
             VStack {
                 VStack {
                     ZStack {
                         HStack {
-                            Text(currentAd.title)
+                            Text("Ad Spotlight")
                                 .font(.title2)
                                 .fontWeight(.bold)
                                 .fontDesign(.rounded)
@@ -37,7 +44,7 @@ struct AdvertisementView: View {
                             }) {
                                 Label("Close", systemImage: "xmark.circle.fill")
                                     .labelStyle(.iconOnly)
-                                    .font(.title2)
+                                    .font(.title3)
                             }
                             .tint(.primary)
                         }
@@ -45,7 +52,13 @@ struct AdvertisementView: View {
                     
                     HStack {
                         currentAd.image
-                        Text(currentAd.subTitle)
+                        VStack(alignment: .leading) {
+                            Text(currentAd.title)
+                                .fontWeight(.bold)
+                            Text(currentAd.subTitle)
+                                .lineLimit(nil)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
                     }
                     
                     Button(action: {
@@ -56,9 +69,9 @@ struct AdvertisementView: View {
                         showAd = false
                         
                     }) {
-                        Label("Visit \(currentAd.title)", systemImage: currentAd.title == "Molecule Store" ? "flask" : "checkmark.circle.fill")
+                        Label("Visit \(currentAd.title)", systemImage: "arrow.right.circle.fill")
                     }
-                    .tint(.red)
+                    .tint(.blue)
                     .buttonStyle(.borderedProminent)
                     .padding(.vertical)
                     
@@ -66,15 +79,17 @@ struct AdvertisementView: View {
                     Button(action: {
                         // TODO: go to / open upgrade shop
                     }) {
-                        Label("Remove Ads Forever", systemImage: "heart.fill")
+                        Label("Remove Ads Forever", systemImage: "sparkles")
                     }
                     .tint(.green)
-                    .buttonStyle(.borderedProminent)
-                    .padding(.bottom, 8)
+                    .buttonStyle(.bordered)
+                    .padding(.bottom)
                     
+                    // TODO: insert real amount
                     Label("Removing ads is only USD __ and supports the further development of this app. Thank you for your support! ❤️", systemImage: "info.circle")
                         .font(.footnote)
                         .foregroundStyle(.secondary)
+                        .padding(.horizontal)
                     
                 }
                 .padding()
@@ -100,6 +115,7 @@ struct AdvertisementView: View {
                 
 //                Spacer()
             }
+            .frame(maxWidth: 400)
             .padding()
         }
     }
