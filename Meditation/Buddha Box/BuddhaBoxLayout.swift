@@ -13,6 +13,7 @@ struct BuddhaBoxLayout: View {
     @ObservedObject var audioManager: AudioManager
     
     @AppStorage("simpleBuddha") var simpleBuddha = true
+    @AppStorage("noFading") var noFading = false
     
     // dial values
     @State private var brownNoiseAmplitude = 0.0
@@ -142,7 +143,12 @@ struct BuddhaBoxLayout: View {
                     }
                 }, labelText: "Loop " + String(loopPlaying), isFullOpacity: true, buttonFrameSize: buttonFrameSize)
                 .onChange(of: loopPlaying) { oldValue, newValue in
-                    audioManager.fadeToNextLoop(oldIndex: oldValue, newIndex: newValue)
+                    
+                    if noFading {
+                        buddhaLoopAmplitude = Double(audioManager.tapeMachineControls[loopPlaying].volume * 100.0)
+                    } else {
+                        audioManager.fadeToNextLoop(oldIndex: oldValue, newIndex: newValue)
+                    }
                     
                     buddhaLoopShift = mapRange(value: Double(audioManager.tapeMachineControls[loopPlaying].pitchShift), fromRange: -2400...2400, toRange: 0...100)
                     buddhaLoopSpeed = mapRange(value: Double(audioManager.tapeMachineControls[loopPlaying].variSpeed), fromRange: 0.25...4, toRange: 0...100)
@@ -258,13 +264,14 @@ struct BuddhaBoxLayout: View {
                         }
                     
                     Spacer()
-                    
-                    Dial(value: .constant(0.0), dialColor: .accentColor, dialName: "Nothing", encoderText: "")
-                        .opacity(0.0)
-                    
-                    Spacer()
                 }
                 .opacity(audioManager.isPlaying == .playing ? 1.0 : 0.5)
+                    
+                    BuddhaBoxButton(action: {
+                        noFading.toggle()
+                    }, labelText: noFading ? "No Fade" : "Loop Fade", isFullOpacity: true, buttonFrameSize: buttonFrameSize)
+                    
+                    Spacer()
                     
                     BuddhaBoxButton(action: {
                         simpleBuddha = true
