@@ -16,15 +16,10 @@ struct AdvertisementView: View {
         meditationAds.randomElement()!
     }
     
-    var showAd33: Bool {
-        Int.random(in: 0..<100) < 34
-//        true
-    }
-    
     var body: some View {
         
         // TODO: make this never to show if the upgrade was purchased
-        if showAd && showAd33 {
+        if showAd {
             VStack {
                 VStack {
                     ZStack {
@@ -82,7 +77,7 @@ struct AdvertisementView: View {
                         Label("Remove Ads Forever", systemImage: "sparkles")
                     }
                     .tint(.green)
-                    .buttonStyle(.bordered)
+                    .buttonStyle(.borderedProminent)
                     .padding(.bottom)
                     
                     // TODO: insert real amount
@@ -113,10 +108,14 @@ struct AdvertisementView: View {
                         }
                 )
                 
-//                Spacer()
             }
             .frame(maxWidth: 400)
             .padding()
+            .onAppear {
+                if Int.random(in: 0..<100) < 66 {
+                    showAd = false
+                }
+            }
         }
     }
 }
