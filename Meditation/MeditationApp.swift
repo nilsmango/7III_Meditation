@@ -8,10 +8,12 @@
 import SwiftUI
 import AudioKit
 import AVFoundation
+import StoreKit
 
 @main
 struct MeditationApp: App {
     init() {
+        
             #if os(iOS)
                 do {
                     Settings.bufferLength = .short

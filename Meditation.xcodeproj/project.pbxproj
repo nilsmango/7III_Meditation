@@ -119,6 +119,9 @@
 		78EBA6CE2CE924A900154226 /* Ad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EBA6CC2CE924A900154226 /* Ad.swift */; };
 		78EBA6D02CE924C300154226 /* MeditationAds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EBA6CF2CE924C300154226 /* MeditationAds.swift */; };
 		78EBA6D12CE924C300154226 /* MeditationAds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EBA6CF2CE924C300154226 /* MeditationAds.swift */; };
+		78EBA6D32CEA081B00154226 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78EBA6D22CEA081B00154226 /* StoreKit.framework */; };
+		78EBA6D52CEA086900154226 /* RemoveAdsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EBA6D42CEA086900154226 /* RemoveAdsView.swift */; };
+		78EBA6D72CEA0B2D00154226 /* RefundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EBA6D62CEA0B2D00154226 /* RefundView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -232,6 +235,9 @@
 		78EBA6C92CE9224100154226 /* AdvertisementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementView.swift; sourceTree = "<group>"; };
 		78EBA6CC2CE924A900154226 /* Ad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ad.swift; sourceTree = "<group>"; };
 		78EBA6CF2CE924C300154226 /* MeditationAds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationAds.swift; sourceTree = "<group>"; };
+		78EBA6D22CEA081B00154226 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		78EBA6D42CEA086900154226 /* RemoveAdsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveAdsView.swift; sourceTree = "<group>"; };
+		78EBA6D62CEA0B2D00154226 /* RefundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefundView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,6 +245,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78EBA6D32CEA081B00154226 /* StoreKit.framework in Frameworks */,
 				78C862AB2C0C5A29006235AB /* SoundpipeAudioKit in Frameworks */,
 				78DAE2F32C0C58FA00F2CCB0 /* AudioKit in Frameworks */,
 			);
@@ -430,6 +437,7 @@
 				7827880C2BFB3F45004E7F77 /* OptionsView.swift */,
 				789A0E062C032377009CB9E7 /* KoansEditView.swift */,
 				7834263B2BFF6B990008F9F9 /* NotificationSoundView.swift */,
+				78EBA6D62CEA0B2D00154226 /* RefundView.swift */,
 			);
 			path = Options;
 			sourceTree = "<group>";
@@ -448,6 +456,7 @@
 		789A0E262C06131E009CB9E7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				78EBA6D22CEA081B00154226 /* StoreKit.framework */,
 				789A0E272C06131E009CB9E7 /* WidgetKit.framework */,
 				789A0E292C06131E009CB9E7 /* SwiftUI.framework */,
 			);
@@ -480,6 +489,7 @@
 			isa = PBXGroup;
 			children = (
 				78EBA6C92CE9224100154226 /* AdvertisementView.swift */,
+				78EBA6D42CEA086900154226 /* RemoveAdsView.swift */,
 			);
 			path = Ads;
 			sourceTree = "<group>";
@@ -648,6 +658,7 @@
 				7834263C2BFF6B990008F9F9 /* NotificationSoundView.swift in Sources */,
 				7879BDF52BF684FD001994D2 /* TimerStoppedView.swift in Sources */,
 				78EBA6CA2CE9224100154226 /* AdvertisementView.swift in Sources */,
+				78EBA6D72CEA0B2D00154226 /* RefundView.swift in Sources */,
 				7854736F2C090185009645BF /* WidgetButtonLabel.swift in Sources */,
 				78EBA6CD2CE924A900154226 /* Ad.swift in Sources */,
 				784ECA842CAFCCF2004C0CF6 /* Encoder.swift in Sources */,
@@ -661,6 +672,7 @@
 				78385D1F2BF3674800581057 /* TimerView.swift in Sources */,
 				784ECA822CAFCCB3004C0CF6 /* BuddhaBoxLayout.swift in Sources */,
 				789A0E0B2C038C42009CB9E7 /* StatisticsView.swift in Sources */,
+				78EBA6D52CEA086900154226 /* RemoveAdsView.swift in Sources */,
 				785473742C090281009645BF /* WidgetButtonState.swift in Sources */,
 				7827880D2BFB3F45004E7F77 /* OptionsView.swift in Sources */,
 				785D09492C09CFE100044AE9 /* PauseMeditation.swift in Sources */,

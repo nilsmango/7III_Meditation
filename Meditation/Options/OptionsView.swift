@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import StoreKit
+
 
 struct OptionsView: View {
     @ObservedObject var meditationManager: MeditationManager
@@ -102,6 +104,20 @@ struct OptionsView: View {
                 })
                 .onChange(of: meditationManager.reminders) {
                     meditationManager.updateReminders()
+                }
+                
+                if meditationManager.hasPurchasedPremium {
+                    NavigationLink("Request a Refund") {
+                        RefundView(meditationManager: meditationManager)
+                    }
+                } else {
+                    Button {
+                        Task {
+                            try? await AppStore.sync()
+                        }
+                    } label: {
+                        Label("Restore Purchases", systemImage: "arrow.clockwise.circle.fill")
+                    }
                 }
             }
             .scrollContentBackground(.hidden)
