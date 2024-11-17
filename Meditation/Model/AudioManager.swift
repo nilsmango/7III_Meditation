@@ -321,6 +321,7 @@ class AudioManager: ObservableObject, HasAudioEngine {
             let userSelectedPlayer = AudioPlayer(url: url, buffered: true)!
             userSelectedPlayer.isLooping = true
             self.userSelectedPlayer = userSelectedPlayer
+            self.userSelectedPlayer!.volume = soundData.userVolume
             
             // time pitchers
             userTimePitcher = TimePitch(self.userSelectedPlayer!, pitch: soundData.userPitchShift)
