@@ -6,20 +6,26 @@
 //
 
 import SwiftUI
+import StoreKit
 
 struct AdvertisementView: View {
+    @ObservedObject var meditationManager: MeditationManager
+
     @State private var dragOffset = CGSize.zero
     @State private var isDragging = false
     @State private var showAd: Bool = true
     
-    var currentAd: Ad {
-        meditationAds.randomElement()!
-    }
+    var currentAd: Ad = meditationAds.randomElement()!
+    
+    @State private var showRedeemCode: Bool = false
+    @State private var wasPurchased: Bool = false
+    @State private var isShowingError = false
+    @State private var errorTitle = ""
     
     var body: some View {
         
         // TODO: make this never to show if the upgrade was purchased
-        if showAd {
+        if showAd && !wasPurchased && !meditationManager.hasPurchasedPremium {
             VStack {
                 VStack {
                     ZStack {
@@ -66,25 +72,33 @@ struct AdvertisementView: View {
                     }) {
                         Label("Visit \(currentAd.title)", systemImage: "arrow.right.circle.fill")
                     }
-                    .tint(.blue)
+                    .tint(.primary)
                     .buttonStyle(.borderedProminent)
                     .padding(.vertical)
                     
                     
-                    Button(action: {
-                        // TODO: go to / open upgrade shop
-                    }) {
-                        Label("Remove Ads Forever", systemImage: "sparkles")
+                    if let premium = meditationManager.premiumProducts.first(where: { $0.id == "com.project7III.meditation.removeAds"}) {
+                        Button(action: {
+                            Task {
+                                await buy(product: premium)
+                            }
+                            
+                        }) {
+                            Label("Remove Ads Forever", systemImage: "sparkles")
+                        }
+                        .tint(.green)
+                        .buttonStyle(.bordered)
+                        .padding(.bottom, 6)
+                        .padding(.top, 6)
+                        
+                        Label("Removing ads costs only \(premium.displayPrice) and helps support the development of this app. Thank you for your support! ❤️", systemImage: "info.circle")
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
+                            .padding(.horizontal)
+                        
+                        
                     }
-                    .tint(.green)
-                    .buttonStyle(.borderedProminent)
-                    .padding(.bottom)
                     
-                    // TODO: insert real amount
-                    Label("Removing ads is only USD __ and supports the further development of this app. Thank you for your support! ❤️", systemImage: "info.circle")
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
-                        .padding(.horizontal)
                     
                 }
                 .padding()
@@ -116,10 +130,26 @@ struct AdvertisementView: View {
                     showAd = false
                 }
             }
+            .alert(isPresented: $isShowingError, content: {
+                Alert(title: Text(errorTitle), message: nil, dismissButton: .default(Text("Okay")))
+            })
         }
     }
+    
+    func buy(product: Product) async {
+           do {
+               if try await meditationManager.purchase(product: product) != nil {
+                   wasPurchased = true
+               }
+           } catch StoreError.failedVerification {
+               errorTitle = "Your purchase could not be verified by the App Store."
+               isShowingError = true
+           } catch {
+               print("Failed purchase for \(product.id). \(error)")
+           }
+       }
 }
 
 #Preview {
-    AdvertisementView()
+    AdvertisementView(meditationManager: MeditationManager())
 }

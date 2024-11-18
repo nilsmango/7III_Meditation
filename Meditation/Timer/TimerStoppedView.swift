@@ -40,7 +40,7 @@ struct TimerStoppedView: View {
                 Spacer()
             }
             
-            AdvertisementView()
+            AdvertisementView(meditationManager: meditationManager)
 
         }
         

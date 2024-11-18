@@ -11,6 +11,11 @@ import StoreKit
 
 struct OptionsView: View {
     @ObservedObject var meditationManager: MeditationManager
+    
+    @State private var showRedeemCode: Bool = false
+    @State private var wasPurchased: Bool = false
+    @State private var isShowingError = false
+    @State private var errorTitle = ""
 
     var body: some View {
             List {
@@ -105,27 +110,105 @@ struct OptionsView: View {
                 .onChange(of: meditationManager.reminders) {
                     meditationManager.updateReminders()
                 }
-                
-                if meditationManager.hasPurchasedPremium {
-                    NavigationLink("Request a Refund") {
-                        RefundView(meditationManager: meditationManager)
-                    }
-                } else {
-                    Button {
-                        Task {
-                            try? await AppStore.sync()
+                if let premium = meditationManager.premiumProducts.first(where: { $0.id == "com.project7III.meditation.removeAds"}) {
+                Section(content: {
+                    if meditationManager.hasPurchasedPremium || wasPurchased {
+                        
+                        Text("Thank you for your support! ❤️")
+                        
+                        NavigationLink("Request a Refund") {
+                            RefundView(meditationManager: meditationManager)
                         }
-                    } label: {
-                        Label("Restore Purchases", systemImage: "arrow.clockwise.circle.fill")
+                    } else {
+                        
+                        Button {
+                            Task {
+                                try? await AppStore.sync()
+                            }
+                        } label: {
+                            Label("Restore Purchases", systemImage: "arrow.clockwise.circle.fill")
+                        }
+                        
+                        Button {
+                            showRedeemCode = true
+                        } label: {
+                            Label("Redeem Code", systemImage: "numbers.rectangle.fill")
+                        }
+                        
+                        
+                            Button {
+                                Task {
+                                    await buy(product: premium)
+                                }
+                            } label: {
+                                Label("Support Us & Remove Ads", systemImage: "sparkles")
+                            }
+                            
+
                     }
+                }, header: {
+                    Text("Purchases")
+                }, footer: {
+                    if !meditationManager.hasPurchasedPremium || !wasPurchased {
+                        Label("Removing ads costs only \(premium.displayPrice) and helps support the development of this app. Thank you for your support! ❤️", systemImage: "info.circle")
+                    }
+                })
+                .tint(.primary)
+                    
                 }
+                Section(content: {
+                    Link(destination: URL(string: "mailto:hi@project7iii.com")!) {
+                        Label("Contact", systemImage: "envelope.fill")
+                    }
+                    
+                    Link(destination: URL(string: "https://project7iii.com")!, label: { Label("More from project7III", systemImage: "globe.europe.africa.fill") })
+                    
+                    
+                    Link(destination: URL(string: "https://project7iii.com/meditation/privacy-policy/")!) {
+                        Label("Privacy Policy", systemImage: "lock.fill")
+                    }
+                    
+                    Link(destination: URL(string: "https://project7iii.com/meditation/terms-and-conditions/")!) {
+                        Label("Terms and Conditions", systemImage: "doc.text.fill")
+                    }
+                }, header: {
+                    Text("Help")
+                })
+                .tint(.primary)
+                
             }
             .scrollContentBackground(.hidden)
             .background(.customGray)
             .navigationTitle("Options")
             .navigationBarTitleDisplayMode(.inline)
+            .offerCodeRedemption(isPresented: $showRedeemCode, onCompletion: { result in
+                            switch result {
+                            case .success:
+                                if meditationManager.hasPurchasedPremium {
+                                    wasPurchased = true
+                                }
+                            case .failure(let error):
+                                print("Code redemption failed: \(error.localizedDescription)")
+                            }
+                        })
+            .alert(isPresented: $isShowingError, content: {
+                Alert(title: Text(errorTitle), message: nil, dismissButton: .default(Text("Okay")))
+            })
         
     }
+    
+    func buy(product: Product) async {
+           do {
+               if try await meditationManager.purchase(product: product) != nil {
+                   wasPurchased = true
+               }
+           } catch StoreError.failedVerification {
+               errorTitle = "Your purchase could not be verified by the App Store."
+               isShowingError = true
+           } catch {
+               print("Failed purchase for \(product.id). \(error)")
+           }
+       }
 }
 
 #Preview {

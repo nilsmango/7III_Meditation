@@ -21,6 +21,19 @@ public enum StoreError: Error {
 
 class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
         
+    override init() {
+        super.init()
+        // Start a transaction listener as close to app launch as possible so you don't miss any transactions.
+        updateListenerTask = listenForTransactions()
+        
+        Task {
+            // During store initialization, request products from the App Store.
+            await loadProductIdentifiersAndRequestProducts()
+            
+            await updateCustomerProductStatus()
+        }
+    }
+    
     deinit {
         updateListenerTask?.cancel()
     }
@@ -605,16 +618,6 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
     
     func startupChecks() {
         
-        // Start a transaction listener as close to app launch as possible so you don't miss any transactions.
-        updateListenerTask = listenForTransactions()
-        
-        Task {
-            // During store initialization, request products from the App Store.
-            await loadProductIdentifiersAndRequestProducts()
-            
-            await updateCustomerProductStatus()
-        }
-        
         if HKHealthStore.isHealthDataAvailable() {
             
             let typesToRead = Set([
@@ -991,7 +994,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
             return nil
         }
     }
-    
+        
     func createImageForPurchasedProduct(product: Product? = nil) -> Image {
         let id = product?.id ?? purchasedProducts.first?.id
         if id != nil {

@@ -84,7 +84,6 @@
 		787000D52CE4EC2400542E3B /* Dial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787000D42CE4EC2400542E3B /* Dial.swift */; };
 		787000D72CE750AE00542E3B /* BuddhaBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787000D62CE750AE00542E3B /* BuddhaBoxButton.swift */; };
 		787000D92CE7D0FD00542E3B /* AppStorageAUValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787000D82CE7D0FC00542E3B /* AppStorageAUValue.swift */; };
-		787000DA2CE7D0FD00542E3B /* AppStorageAUValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787000D82CE7D0FC00542E3B /* AppStorageAUValue.swift */; };
 		7879BDF02BF4A43E001994D2 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7879BDEF2BF4A43E001994D2 /* Helpers.swift */; };
 		7879BDF12BF4BDE4001994D2 /* Kitchen Timer Normal.caf in Resources */ = {isa = PBXBuildFile; fileRef = 78385D242BF3E4F100581057 /* Kitchen Timer Normal.caf */; };
 		7879BDF32BF68448001994D2 /* CircleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7879BDF22BF68448001994D2 /* CircleButtonStyle.swift */; };
@@ -120,8 +119,8 @@
 		78EBA6D02CE924C300154226 /* MeditationAds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EBA6CF2CE924C300154226 /* MeditationAds.swift */; };
 		78EBA6D12CE924C300154226 /* MeditationAds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EBA6CF2CE924C300154226 /* MeditationAds.swift */; };
 		78EBA6D32CEA081B00154226 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78EBA6D22CEA081B00154226 /* StoreKit.framework */; };
-		78EBA6D52CEA086900154226 /* RemoveAdsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EBA6D42CEA086900154226 /* RemoveAdsView.swift */; };
 		78EBA6D72CEA0B2D00154226 /* RefundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EBA6D62CEA0B2D00154226 /* RefundView.swift */; };
+		78EBA6DB2CEB40C100154226 /* product_ids.plist in Resources */ = {isa = PBXBuildFile; fileRef = 78EBA6DA2CEB40C100154226 /* product_ids.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -236,8 +235,9 @@
 		78EBA6CC2CE924A900154226 /* Ad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ad.swift; sourceTree = "<group>"; };
 		78EBA6CF2CE924C300154226 /* MeditationAds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationAds.swift; sourceTree = "<group>"; };
 		78EBA6D22CEA081B00154226 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		78EBA6D42CEA086900154226 /* RemoveAdsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveAdsView.swift; sourceTree = "<group>"; };
 		78EBA6D62CEA0B2D00154226 /* RefundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefundView.swift; sourceTree = "<group>"; };
+		78EBA6D82CEB3DB100154226 /* 7III Meditation.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = "7III Meditation.storekit"; sourceTree = "<group>"; };
+		78EBA6DA2CEB40C100154226 /* product_ids.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = product_ids.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -298,6 +298,8 @@
 			isa = PBXGroup;
 			children = (
 				789A0E3C2C061412009CB9E7 /* Info.plist */,
+				78EBA6DA2CEB40C100154226 /* product_ids.plist */,
+				78EBA6D82CEB3DB100154226 /* 7III Meditation.storekit */,
 				78385D0A2BF3647300581057 /* MeditationApp.swift */,
 				78385D0C2BF3647300581057 /* ContentView.swift */,
 				789A0E082C0388FE009CB9E7 /* StreakButton.swift */,
@@ -489,7 +491,6 @@
 			isa = PBXGroup;
 			children = (
 				78EBA6C92CE9224100154226 /* AdvertisementView.swift */,
-				78EBA6D42CEA086900154226 /* RemoveAdsView.swift */,
 			);
 			path = Ads;
 			sourceTree = "<group>";
@@ -594,6 +595,7 @@
 				78385D0F2BF3647500581057 /* Assets.xcassets in Resources */,
 				7834267A2BFFBC7F0008F9F9 /* Chimes.caf in Resources */,
 				783426742BFFBC7F0008F9F9 /* Synth Bell.caf in Resources */,
+				78EBA6DB2CEB40C100154226 /* product_ids.plist in Resources */,
 				783426782BFFBC7F0008F9F9 /* Friendly End.caf in Resources */,
 				783426812BFFBC7F0008F9F9 /* Gong 2.caf in Resources */,
 				7834267F2BFFBC7F0008F9F9 /* Singing Bowl 1.caf in Resources */,
@@ -672,7 +674,6 @@
 				78385D1F2BF3674800581057 /* TimerView.swift in Sources */,
 				784ECA822CAFCCB3004C0CF6 /* BuddhaBoxLayout.swift in Sources */,
 				789A0E0B2C038C42009CB9E7 /* StatisticsView.swift in Sources */,
-				78EBA6D52CEA086900154226 /* RemoveAdsView.swift in Sources */,
 				785473742C090281009645BF /* WidgetButtonState.swift in Sources */,
 				7827880D2BFB3F45004E7F77 /* OptionsView.swift in Sources */,
 				785D09492C09CFE100044AE9 /* PauseMeditation.swift in Sources */,
@@ -699,7 +700,6 @@
 				7854736B2C090119009645BF /* WidgetLogoView.swift in Sources */,
 				785473612C07B5E4009645BF /* TimerStatus.swift in Sources */,
 				785D09592C0A06EC00044AE9 /* TimerHackView.swift in Sources */,
-				787000DA2CE7D0FD00542E3B /* AppStorageAUValue.swift in Sources */,
 				785473622C07B5E4009645BF /* MeditationStatistics.swift in Sources */,
 				785473632C07B5E4009645BF /* DateComponents + Identifiable.swift in Sources */,
 				785473642C07B5E4009645BF /* DateComponents + Comparable.swift in Sources */,
