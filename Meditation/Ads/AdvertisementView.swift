@@ -86,7 +86,7 @@ struct AdvertisementView: View {
                         }) {
                             Label("Remove Ads Forever", systemImage: "sparkles")
                         }
-                        .tint(.green)
+                        .tint(.primary)
                         .buttonStyle(.bordered)
                         .padding(.bottom, 6)
                         .padding(.top, 6)
@@ -95,7 +95,6 @@ struct AdvertisementView: View {
                             .font(.footnote)
                             .foregroundStyle(.secondary)
                             .padding(.horizontal)
-                        
                         
                     }
                     
