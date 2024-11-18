@@ -18,14 +18,13 @@ struct AdvertisementView: View {
     var currentAd: Ad = meditationAds.randomElement()!
     
     @State private var showRedeemCode: Bool = false
-    @State private var wasPurchased: Bool = false
     @State private var isShowingError = false
     @State private var errorTitle = ""
     
     var body: some View {
         
         // TODO: make this never to show if the upgrade was purchased
-        if showAd && !wasPurchased && !meditationManager.hasPurchasedPremium {
+        if showAd && !meditationManager.hasPurchasedPremium {
             VStack {
                 VStack {
                     ZStack {
@@ -125,7 +124,7 @@ struct AdvertisementView: View {
             .frame(maxWidth: 400)
             .padding()
             .onAppear {
-                if Int.random(in: 0..<100) < 66 {
+                if Int.random(in: 0..<4) < 1 {
                     showAd = false
                 }
             }
@@ -138,7 +137,7 @@ struct AdvertisementView: View {
     func buy(product: Product) async {
            do {
                if try await meditationManager.purchase(product: product) != nil {
-                   wasPurchased = true
+                   showAd = false
                }
            } catch StoreError.failedVerification {
                errorTitle = "Your purchase could not be verified by the App Store."

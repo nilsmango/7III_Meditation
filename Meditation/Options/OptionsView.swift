@@ -114,7 +114,7 @@ struct OptionsView: View {
                 Section(content: {
                     if meditationManager.hasPurchasedPremium || wasPurchased {
                         
-                        Text("Thank you for your support! ❤️")
+                        Text("You’ve purchased the ads removal upgrade. Thank you for your support! ❤️")
                         
                         NavigationLink("Request a Refund") {
                             RefundView(meditationManager: meditationManager)
@@ -149,7 +149,7 @@ struct OptionsView: View {
                 }, header: {
                     Text("Purchases")
                 }, footer: {
-                    if !meditationManager.hasPurchasedPremium || !wasPurchased {
+                    if !meditationManager.hasPurchasedPremium {
                         Label("Removing ads costs only \(premium.displayPrice) and helps support the development of this app. Thank you for your support! ❤️", systemImage: "info.circle")
                     }
                 })
