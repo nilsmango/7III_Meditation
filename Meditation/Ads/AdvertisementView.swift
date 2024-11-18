@@ -10,7 +10,7 @@ import StoreKit
 
 struct AdvertisementView: View {
     @ObservedObject var meditationManager: MeditationManager
-
+    
     @State private var dragOffset = CGSize.zero
     @State private var isDragging = false
     @State private var showAd: Bool = true
@@ -22,8 +22,6 @@ struct AdvertisementView: View {
     @State private var errorTitle = ""
     
     var body: some View {
-        
-        // TODO: make this never to show if the upgrade was purchased
         if showAd && !meditationManager.hasPurchasedPremium {
             VStack {
                 VStack {
@@ -40,7 +38,6 @@ struct AdvertisementView: View {
                             
                             Button(action: {
                                 showAd = false
-                                
                             }) {
                                 Label("Close", systemImage: "xmark.circle.fill")
                                     .labelStyle(.iconOnly)
@@ -67,7 +64,6 @@ struct AdvertisementView: View {
                             UIApplication.shared.open(url)
                         }
                         showAd = false
-                        
                     }) {
                         Label("Visit \(currentAd.title)", systemImage: "arrow.right.circle.fill")
                     }
@@ -96,8 +92,6 @@ struct AdvertisementView: View {
                             .padding(.horizontal)
                         
                     }
-                    
-                    
                 }
                 .padding()
                 .background {
@@ -124,8 +118,18 @@ struct AdvertisementView: View {
             .frame(maxWidth: 400)
             .padding()
             .onAppear {
-                if Int.random(in: 0..<4) < 1 {
+                if Int.random(in: 0..<3) < 1 {
                     showAd = false
+                    
+                    // review
+                    if meditationManager.showPromptForReview {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.73) {
+                            if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
+                                SKStoreReviewController.requestReview(in: scene)
+                            }
+                            meditationManager.showPromptForReview = false
+                        }
+                    }
                 }
             }
             .alert(isPresented: $isShowingError, content: {
@@ -135,17 +139,17 @@ struct AdvertisementView: View {
     }
     
     func buy(product: Product) async {
-           do {
-               if try await meditationManager.purchase(product: product) != nil {
-                   showAd = false
-               }
-           } catch StoreError.failedVerification {
-               errorTitle = "Your purchase could not be verified by the App Store."
-               isShowingError = true
-           } catch {
-               print("Failed purchase for \(product.id). \(error)")
-           }
-       }
+        do {
+            if try await meditationManager.purchase(product: product) != nil {
+                showAd = false
+            }
+        } catch StoreError.failedVerification {
+            errorTitle = "Your purchase could not be verified by the App Store."
+            isShowingError = true
+        } catch {
+            print("Failed purchase for \(product.id). \(error)")
+        }
+    }
 }
 
 #Preview {

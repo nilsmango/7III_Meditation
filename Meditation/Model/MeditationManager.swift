@@ -32,6 +32,14 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
             
             await updateCustomerProductStatus()
         }
+        
+        appOpened += 1
+        
+        if appOpened > 0 && appOpened % 10 == 0 && self.currentAppVersion != self.lastVersionPromptedForReview  {
+            self.showPromptForReview = true
+            // The app already displayed the rating and review request view. Store this current version.
+            self.lastVersionPromptedForReview = self.currentAppVersion
+        }
     }
     
     deinit {
@@ -1015,4 +1023,18 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
         }
         return renewalInfo.willAutoRenew
     }
+    
+    // MARK: - Review Reminder
+    
+    /// The most recent app version that prompts for a review.
+    @AppStorage("lastVersionPromptedForReview") var lastVersionPromptedForReview = ""
+    @AppStorage("timesOpened") var appOpened = 0
+    @Published var showPromptForReview = false
+    
+    let currentAppVersion: String = {
+        guard let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
+            return "Unknown"
+        }
+        return version
+    }()
 }

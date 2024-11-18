@@ -171,8 +171,12 @@ struct OptionsView: View {
                     Link(destination: URL(string: "https://project7iii.com/meditation/terms-and-conditions/")!) {
                         Label("Terms and Conditions", systemImage: "doc.text.fill")
                     }
+                    
+                    Link(destination: URL(string: "https://apps.apple.com/app/id6738342562?action=write-review")!) {
+                        Label("Help Us Out & Review this App!", systemImage: "star.fill")
+                    }
                 }, header: {
-                    Text("Help")
+                    Text("Help & More")
                 })
                 .tint(.primary)
                 
