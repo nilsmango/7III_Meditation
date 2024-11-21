@@ -17,6 +17,8 @@ struct AdvertisementView: View {
     
     var currentAd: Ad = meditationAds.randomElement()!
     
+    @State private var showRemoveAds: Bool = false
+    
     @State private var showRedeemCode: Bool = false
     @State private var isShowingError = false
     @State private var errorTitle = ""
@@ -24,73 +26,102 @@ struct AdvertisementView: View {
     var body: some View {
         if showAd && !meditationManager.hasPurchasedPremium {
             VStack {
+                
+                
+                
                 VStack {
-                    ZStack {
+                    
+                    if showRemoveAds, let premium = meditationManager.premiumProducts.first(where: { $0.id == "com.project7III.meditation.removeAds"}) {
+                        
+                        Text("Remove Ads Forever")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .fontDesign(.rounded)
+                        
+                        Text("Removing ads costs only \(premium.displayPrice) and helps support the development of this app. Thank you for your support! ❤️")
+                            .padding(.horizontal)
+                            .padding(.top, 1)
+                        
                         HStack {
-                            Text("Ad Spotlight")
-                                .font(.title2)
-                                .fontWeight(.bold)
-                                .fontDesign(.rounded)
+                            Spacer()
+                            
+                            Button(action: {
+                                Task {
+                                    await buy(product: premium)
+                                }
+                                
+                            }) {
+                                Label("Remove Ads", systemImage: "sparkles")
+                            }
+                            .tint(.green)
+                            .buttonStyle(.borderedProminent)
+                            .padding(.top, 3)
+                            
+                            Spacer()
+                            
+                            Button(action: {
+                                
+                                showAd = false
+                            }) {
+                                Text("No Thanks")
+                            }
+                            .tint(.primary)
+                            .buttonStyle(.bordered)
+                            .padding(.vertical)
+                            
+                            Spacer()
+                            
+                        }
+                        
+                    } else {
+                        Text("Ad Spotlight")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .fontDesign(.rounded)
+                        
+                        
+                        
+                        HStack {
+                            currentAd.image
+                            VStack(alignment: .leading) {
+                                Text(currentAd.title)
+                                    .fontWeight(.bold)
+                                Text(currentAd.subTitle)
+                                    .lineLimit(nil)
+                                    .fixedSize(horizontal: false, vertical: true)
+                            }
                         }
                         
                         HStack {
                             Spacer()
                             
                             Button(action: {
+                                // Open the link in Safari
+                                if let url = URL(string: currentAd.url.absoluteString) {
+                                    UIApplication.shared.open(url)
+                                }
                                 showAd = false
                             }) {
-                                Label("Close", systemImage: "xmark.circle.fill")
-                                    .labelStyle(.iconOnly)
-                                    .font(.title3)
+                                Label("Check it out", systemImage: "checkmark.circle.fill")
+                            }
+                            .tint(.accentColor)
+                            .buttonStyle(.borderedProminent)
+                            .padding(.vertical)
+                            
+                            Spacer()
+                            
+                            Button(action: {
+                                
+                                showRemoveAds = true
+                            }) {
+                                Text("No Thanks")
                             }
                             .tint(.primary)
-                        }
-                    }
-                    
-                    HStack {
-                        currentAd.image
-                        VStack(alignment: .leading) {
-                            Text(currentAd.title)
-                                .fontWeight(.bold)
-                            Text(currentAd.subTitle)
-                                .lineLimit(nil)
-                                .fixedSize(horizontal: false, vertical: true)
-                        }
-                    }
-                    
-                    Button(action: {
-                        // Open the link in Safari
-                        if let url = URL(string: currentAd.url.absoluteString) {
-                            UIApplication.shared.open(url)
-                        }
-                        showAd = false
-                    }) {
-                        Label("Visit \(currentAd.title)", systemImage: "arrow.right.circle.fill")
-                    }
-                    .tint(.primary)
-                    .buttonStyle(.borderedProminent)
-                    .padding(.vertical)
-                    
-                    
-                    if let premium = meditationManager.premiumProducts.first(where: { $0.id == "com.project7III.meditation.removeAds"}) {
-                        Button(action: {
-                            Task {
-                                await buy(product: premium)
-                            }
+                            .buttonStyle(.bordered)
+                            .padding(.vertical)
                             
-                        }) {
-                            Label("Remove Ads Forever", systemImage: "sparkles")
+                            Spacer()
                         }
-                        .tint(.primary)
-                        .buttonStyle(.bordered)
-                        .padding(.bottom, 6)
-                        .padding(.top, 6)
-                        
-                        Label("Removing ads costs only \(premium.displayPrice) and helps support the development of this app. Thank you for your support! ❤️", systemImage: "info.circle")
-                            .font(.footnote)
-                            .foregroundStyle(.secondary)
-                            .padding(.horizontal)
-                        
                     }
                 }
                 .padding()
@@ -119,7 +150,7 @@ struct AdvertisementView: View {
             .padding()
             .onAppear {
                 if Int.random(in: 0..<3) < 1 {
-                    showAd = false
+//                    showAd = false
                     
                     // review
                     if meditationManager.showPromptForReview {
