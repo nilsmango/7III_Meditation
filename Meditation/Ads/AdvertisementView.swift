@@ -26,8 +26,10 @@ struct AdvertisementView: View {
     var body: some View {
         if showAd && !meditationManager.hasPurchasedPremium {
             VStack {
-                
-                
+                Spacer()
+                Spacer()
+                Spacer()
+                Spacer()
                 
                 VStack {
                     
@@ -145,12 +147,13 @@ struct AdvertisementView: View {
                         }
                 )
                 
+                Spacer()
             }
             .frame(maxWidth: 400)
             .padding()
             .onAppear {
                 if Int.random(in: 0..<3) < 1 {
-//                    showAd = false
+                    showAd = false
                     
                     // review
                     if meditationManager.showPromptForReview {
