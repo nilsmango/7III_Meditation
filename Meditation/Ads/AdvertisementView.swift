@@ -48,6 +48,20 @@ struct AdvertisementView: View {
                             Spacer()
                             
                             Button(action: {
+                                
+                                showAd = false
+                            }) {
+                                Text("No Thanks")
+                            }
+                            .tint(.primary)
+                            .buttonStyle(.bordered)
+                            .padding(.vertical)
+                            
+                            
+                            
+                            Spacer()
+                            
+                            Button(action: {
                                 Task {
                                     await buy(product: premium)
                                 }
@@ -57,18 +71,6 @@ struct AdvertisementView: View {
                             }
                             .tint(.green)
                             .buttonStyle(.borderedProminent)
-                            .padding(.top, 3)
-                            
-                            Spacer()
-                            
-                            Button(action: {
-                                
-                                showAd = false
-                            }) {
-                                Text("No Thanks")
-                            }
-                            .tint(.primary)
-                            .buttonStyle(.bordered)
                             .padding(.vertical)
                             
                             Spacer()
@@ -80,9 +82,7 @@ struct AdvertisementView: View {
                             .font(.title2)
                             .fontWeight(.bold)
                             .fontDesign(.rounded)
-                        
-                        
-                        
+                                                
                         HStack {
                             currentAd.image
                             VStack(alignment: .leading) {
@@ -98,6 +98,18 @@ struct AdvertisementView: View {
                             Spacer()
                             
                             Button(action: {
+                                
+                                showRemoveAds = true
+                            }) {
+                                Text("No Thanks")
+                            }
+                            .tint(.primary)
+                            .buttonStyle(.bordered)
+                            .padding(.vertical)
+                            
+                            Spacer()
+                            
+                            Button(action: {
                                 // Open the link in Safari
                                 if let url = URL(string: currentAd.url.absoluteString) {
                                     UIApplication.shared.open(url)
@@ -108,18 +120,6 @@ struct AdvertisementView: View {
                             }
                             .tint(.accentColor)
                             .buttonStyle(.borderedProminent)
-                            .padding(.vertical)
-                            
-                            Spacer()
-                            
-                            Button(action: {
-                                
-                                showRemoveAds = true
-                            }) {
-                                Text("No Thanks")
-                            }
-                            .tint(.primary)
-                            .buttonStyle(.bordered)
                             .padding(.vertical)
                             
                             Spacer()
