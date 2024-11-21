@@ -143,7 +143,7 @@ struct OptionsView: View {
                             } label: {
                                 Label("Support Us & Remove Ads", systemImage: "sparkles")
                             }
-                            
+                            .fontWeight(.bold)
 
                     }
                 }, header: {
