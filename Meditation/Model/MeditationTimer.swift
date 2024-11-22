@@ -21,6 +21,7 @@ struct MeditationTimer: Codable {
     var intervalTime: Int
     var endSound: TimerSound
     var startSound: TimerSound
+    var secondReminder: Bool
     var intervalSound: TimerSound
     var reminderSound: TimerSound
     

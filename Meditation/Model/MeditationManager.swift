@@ -346,7 +346,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
             if let loadedData = try? JSONDecoder().decode(MeditationTimer.self, from: meditationTimerData) {
                 return loadedData
             } else {
-                return MeditationTimer(startDate: Date.distantPast, targetDate: Date.distantPast, timerInMinutes: 12, timerStatus: .stopped, preparationTime: 3, intervalActive: false, intervalTime: 60, endSound: TimerSound(name: "Friendly End", fileName: "Friendly End.caf"), startSound: TimerSound(name: "Friendly", fileName: "Friendly.caf"), intervalSound: TimerSound(name: "Kitchen Timer", fileName: "Kitchen Timer Normal.caf"), reminderSound: TimerSound(name: "Dual Bowl", fileName: "Dual Bowl.caf"), showKoan: true, koans: ["Let go or be dragged.", "Love is the way.", "Have a great flight.", "What is the sound of one hand clapping?", "May all beings be happy and free from suffering.", "You miss 100% of the shots you don’t take.\n- Wayne Gretzky\n- Michael Scott", "Let it be.", "Don't panic.", "Be here now.", "Know your self.", "If you meet the Buddha, kill him.", "Don’t seek the truth; just drop your opinions."], statistics: MeditationStatistics(currentStreak: 0, longestStreak: 0))
+                return MeditationTimer(startDate: Date.distantPast, targetDate: Date.distantPast, timerInMinutes: 12, timerStatus: .stopped, preparationTime: 3, intervalActive: false, intervalTime: 60, endSound: TimerSound(name: "Friendly End", fileName: "Friendly End.caf"), startSound: TimerSound(name: "Friendly", fileName: "Friendly.caf"), secondReminder: false, intervalSound: TimerSound(name: "Kitchen Timer", fileName: "Kitchen Timer Normal.caf"), reminderSound: TimerSound(name: "Dual Bowl", fileName: "Dual Bowl.caf"), showKoan: true, koans: ["Let go or be dragged.", "Love is the way.", "Have a great flight.", "What is the sound of one hand clapping?", "May all beings be happy and free from suffering.", "You miss 100% of the shots you don’t take.\n- Wayne Gretzky\n- Michael Scott", "Let it be.", "Don't panic.", "Be here now.", "Know your self.", "If you meet the Buddha, kill him.", "Don’t seek the truth; just drop your opinions."], statistics: MeditationStatistics(currentStreak: 0, longestStreak: 0))
             }
         }
         set {
@@ -357,10 +357,10 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
     }
     
     let timerNotificationIdentifier = "Meditation Timer Notification"
+    let secondTimerNotificationIdentifier = "Second Meditation Timer Notification"
     
     @AppStorage("welcomeMessage") var welcomeMessage = "Welcome Back!"
     @AppStorage("startMessage") var startMessage = "Your Meditation has Started!"
-
     
     var timer: Timer?
     
@@ -405,6 +405,27 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
                 print("Error: \(error)")
             }
         }
+        
+        // add second notification at end if activated
+        if meditationTimer.secondReminder  {
+            let content = UNMutableNotificationContent()
+            content.title = welcomeMessage
+            
+            content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: meditationTimer.endSound.fileName))
+            
+            let targetDate = meditationTimer.targetDate.addingTimeInterval(10)
+            let triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: targetDate)
+            let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
+            
+            let request = UNNotificationRequest(identifier: secondTimerNotificationIdentifier, content: content, trigger: trigger)
+            
+            notificationCenter.add(request) { error in
+                if let error = error {
+                    print("Error: \(error)")
+                }
+            }
+        }
+        
         
         meditationTimer.timerStatus = .preparing
         
@@ -457,7 +478,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
             meditationTimer.timerStatus = .alarm
             
             // stop  notifications
-            notificationCenter.removePendingNotificationRequests(withIdentifiers: [timerNotificationIdentifier])
+            notificationCenter.removePendingNotificationRequests(withIdentifiers: [timerNotificationIdentifier, secondTimerNotificationIdentifier])
             
             // edit meditation session
             meditationTimer.targetDate = Date()
@@ -499,7 +520,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
             meditationTimer.timerStatus = .paused
             
             // stop  notification
-            notificationCenter.removePendingNotificationRequests(withIdentifiers: [timerNotificationIdentifier])
+            notificationCenter.removePendingNotificationRequests(withIdentifiers: [timerNotificationIdentifier, secondTimerNotificationIdentifier])
             
             let currentDate = Date()
             

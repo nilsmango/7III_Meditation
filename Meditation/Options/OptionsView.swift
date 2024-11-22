@@ -57,9 +57,6 @@ struct OptionsView: View {
                         }
                     }
                     
-                    
-                    
-                    
     //                Picker("Interval Sound", selection: $meditationManager.meditationTimer.intervalSound) {
     //                    ForEach(TimerSound.allCases, id: \.self) { sound in
     //                                        Text(sound.prettyString).tag(sound)
@@ -70,6 +67,9 @@ struct OptionsView: View {
 
                 
                 Section("Misc") {
+                    Toggle("Activate Second End Sound", isOn: $meditationManager.meditationTimer.secondReminder)
+                        .tint(.accentColor)
+                    
                     Picker("Preparation Time", selection: $meditationManager.meditationTimer.preparationTime) {
                         ForEach(1...60, id: \.self) { seconds in
                             Text("\(seconds) \(seconds == 1 ? "Second" : "Seconds")")
