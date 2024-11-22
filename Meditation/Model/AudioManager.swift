@@ -77,7 +77,7 @@ class AudioManager: ObservableObject, HasAudioEngine {
     private var pink = PinkNoise()
     private var white = WhiteNoise()
     
-    private let audioFiles = [AudioFile(fileName: "Phonogeneli", fileExtension: "aif"), AudioFile(fileName: "060", fileExtension: "aif"), AudioFile(fileName: "Basic Bells 1", fileExtension: "caf"), AudioFile(fileName: "047", fileExtension: "aif")]
+    private let audioFiles: [AudioFile] = (0...7).map { AudioFile(fileName: "buddha0\($0)", fileExtension: "aif") } + [AudioFile(fileName: "Basic Bells 1", fileExtension: "caf")]
     
     private var audioPlayers = [AudioPlayer]()
     private var timePitchers = [TimePitch]()
@@ -90,7 +90,6 @@ class AudioManager: ObservableObject, HasAudioEngine {
                 timePitchers[index].pitch = tapeMachineControls[index].pitchShift
                 variSpeeds[index].rate = tapeMachineControls[index].variSpeed
             }
-            
         }
     }
 

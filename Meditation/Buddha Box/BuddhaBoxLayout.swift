@@ -25,7 +25,6 @@ struct BuddhaBoxLayout: View {
     @State private var buddhaLoopSpeed = 20.0
     
     @State private var loopPlaying = 0
-    let numberOfLoops = 4
     
     @State private var userLoopAmplitude = 0.0
     @State private var userLoopShift = 50.0
@@ -136,7 +135,7 @@ struct BuddhaBoxLayout: View {
                 Spacer()
                 
                 BuddhaBoxButton(action: {
-                    if loopPlaying == numberOfLoops - 1 {
+                    if loopPlaying == audioManager.tapeMachineControls.count - 1 {
                         loopPlaying = 0
                     } else {
                         loopPlaying += 1
