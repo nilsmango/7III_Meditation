@@ -88,7 +88,7 @@ class AudioManager: ObservableObject, HasAudioEngine {
             for (index, player) in audioPlayers.enumerated() {
                 player.volume = tapeMachineControls[index].volume
                 timePitchers[index].pitch = tapeMachineControls[index].pitchShift
-                timePitchers[index].rate = tapeMachineControls[index].variSpeed
+                variSpeeds[index].rate = tapeMachineControls[index].variSpeed
             }
             
         }
