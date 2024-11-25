@@ -175,9 +175,17 @@ struct OptionsView: View {
                     Link(destination: URL(string: "https://apps.apple.com/app/id6738342562?action=write-review")!) {
                         Label("Help Us Out & Review this App!", systemImage: "star.fill")
                     }
+                    .fontWeight(.bold)
+                    
                 }, header: {
                     Text("Help & More")
-                })
+                }, footer: {
+                    Label("Use the \"Contact\" button to send us bugs or suggestions.", systemImage: "info.circle")
+                }
+                
+                
+                
+                )
                 .tint(.primary)
                 
             }
