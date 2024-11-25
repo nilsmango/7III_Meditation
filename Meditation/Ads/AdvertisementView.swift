@@ -152,7 +152,7 @@ struct AdvertisementView: View {
             .frame(maxWidth: 400)
             .padding()
             .onAppear {
-                if Int.random(in: 0..<3) < 1 {
+                if Int.random(in: 0..<10) < 7 {
                     showAd = false
                     
                     // review
