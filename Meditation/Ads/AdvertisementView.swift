@@ -15,7 +15,7 @@ struct AdvertisementView: View {
     @State private var isDragging = false
     @State private var showAd: Bool = true
     
-    var currentAd: Ad = meditationAds.randomElement()!
+    var currentAd: Ad
     
     @State private var showRemoveAds: Bool = false
     
@@ -187,5 +187,5 @@ struct AdvertisementView: View {
 }
 
 #Preview {
-    AdvertisementView(meditationManager: MeditationManager())
+    AdvertisementView(meditationManager: MeditationManager(), currentAd: meditationAds.randomElement()!)
 }

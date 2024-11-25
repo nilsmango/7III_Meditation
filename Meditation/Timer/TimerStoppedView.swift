@@ -40,7 +40,7 @@ struct TimerStoppedView: View {
                 Spacer()
             }
             
-            AdvertisementView(meditationManager: meditationManager)
+            AdvertisementView(meditationManager: meditationManager, currentAd: meditationAds.randomElement()!)
 
         }
         
