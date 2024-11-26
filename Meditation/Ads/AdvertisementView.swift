@@ -53,6 +53,7 @@ struct AdvertisementView: View {
                                 Button(action: {
                                     
                                     showAd = false
+                                    showRemoveAds = false
                                 }) {
                                     Text("No Thanks")
                                 }
