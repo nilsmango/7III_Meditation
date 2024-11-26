@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		781D557C2CF606C900C56DE6 /* TricksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781D557B2CF606C900C56DE6 /* TricksView.swift */; };
 		7827880A2BF68B67004E7F77 /* TimerRunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782788092BF68B67004E7F77 /* TimerRunningView.swift */; };
 		7827880D2BFB3F45004E7F77 /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7827880C2BFB3F45004E7F77 /* OptionsView.swift */; };
 		782992412C06316B003C4949 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78385D0E2BF3647500581057 /* Assets.xcassets */; };
@@ -154,6 +155,7 @@
 
 /* Begin PBXFileReference section */
 		781D557A2CF5DF3C00C56DE6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		781D557B2CF606C900C56DE6 /* TricksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricksView.swift; sourceTree = "<group>"; };
 		782788092BF68B67004E7F77 /* TimerRunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerRunningView.swift; sourceTree = "<group>"; };
 		7827880C2BFB3F45004E7F77 /* OptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsView.swift; sourceTree = "<group>"; };
 		7834263B2BFF6B990008F9F9 /* NotificationSoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSoundView.swift; sourceTree = "<group>"; };
@@ -454,6 +456,7 @@
 			isa = PBXGroup;
 			children = (
 				7827880C2BFB3F45004E7F77 /* OptionsView.swift */,
+				781D557B2CF606C900C56DE6 /* TricksView.swift */,
 				789A0E062C032377009CB9E7 /* KoansEditView.swift */,
 				7834263B2BFF6B990008F9F9 /* NotificationSoundView.swift */,
 				78EBA6D62CEA0B2D00154226 /* RefundView.swift */,
@@ -678,6 +681,7 @@
 				789A0E142C04FCCA009CB9E7 /* MonthlyChart.swift in Sources */,
 				787000D92CE7D0FD00542E3B /* AppStorageAUValue.swift in Sources */,
 				7854735F2C07B359009645BF /* StopMeditation.swift in Sources */,
+				781D557C2CF606C900C56DE6 /* TricksView.swift in Sources */,
 				785D09652C0B9F2200044AE9 /* FlyingEmojiView.swift in Sources */,
 				7834263C2BFF6B990008F9F9 /* NotificationSoundView.swift in Sources */,
 				7879BDF52BF684FD001994D2 /* TimerStoppedView.swift in Sources */,
