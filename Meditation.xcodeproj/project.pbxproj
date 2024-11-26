@@ -153,6 +153,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		781D557A2CF5DF3C00C56DE6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		782788092BF68B67004E7F77 /* TimerRunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerRunningView.swift; sourceTree = "<group>"; };
 		7827880C2BFB3F45004E7F77 /* OptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsView.swift; sourceTree = "<group>"; };
 		7834263B2BFF6B990008F9F9 /* NotificationSoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSoundView.swift; sourceTree = "<group>"; };
@@ -288,6 +289,7 @@
 		78385CFE2BF3647300581057 = {
 			isa = PBXGroup;
 			children = (
+				781D557A2CF5DF3C00C56DE6 /* README.md */,
 				78385D092BF3647300581057 /* Meditation */,
 				789A0E2B2C06131E009CB9E7 /* WidgetExtension */,
 				789A0E262C06131E009CB9E7 /* Frameworks */,
