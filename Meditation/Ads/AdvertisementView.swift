@@ -13,7 +13,7 @@ struct AdvertisementView: View {
     
     @State private var dragOffset = CGSize.zero
     @State private var isDragging = false
-    @State private var showAd: Bool = true
+    @State private var showAd: Bool = false
     
     var currentAd: Ad
     
@@ -23,137 +23,146 @@ struct AdvertisementView: View {
     @State private var isShowingError = false
     @State private var errorTitle = ""
     
+    @AppStorage("showAdsNumber") var showAdsNumber = 0
+    
     var body: some View {
-        if showAd && !meditationManager.hasPurchasedPremium {
-            VStack {
-                Spacer()
-                Spacer()
-                Spacer()
-                Spacer()
-                
+        ZStack {
+            if showAd && !meditationManager.hasPurchasedPremium {
                 VStack {
+                    Spacer()
+                    Spacer()
+                    Spacer()
+                    Spacer()
                     
-                    if showRemoveAds, let premium = meditationManager.premiumProducts.first(where: { $0.id == "com.project7III.meditation.removeAds"}) {
+                    VStack {
                         
-                        Text("Remove Ads Forever")
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .fontDesign(.rounded)
-                        
-                        Text("Removing ads costs only \(premium.displayPrice) and helps support the development of this app. Thank you for your support! ❤️")
-                            .padding(.horizontal)
-                            .padding(.top, 1)
-                        
-                        HStack {
-                            Spacer()
+                        if showRemoveAds, let premium = meditationManager.premiumProducts.first(where: { $0.id == "com.project7III.meditation.removeAds"}) {
                             
-                            Button(action: {
+                            Text("Remove Ads Forever")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .fontDesign(.rounded)
+                            
+                            Text("Removing ads costs only \(premium.displayPrice) and helps support the development of this app. Thank you for your support! ❤️")
+                                .padding(.horizontal)
+                                .padding(.top, 1)
+                            
+                            HStack {
+                                Spacer()
                                 
-                                showAd = false
-                            }) {
-                                Text("No Thanks")
-                            }
-                            .tint(.primary)
-                            .buttonStyle(.bordered)
-                            .padding(.vertical)
-                            
-                            
-                            
-                            Spacer()
-                            
-                            Button(action: {
-                                Task {
-                                    await buy(product: premium)
+                                Button(action: {
+                                    
+                                    showAd = false
+                                }) {
+                                    Text("No Thanks")
                                 }
+                                .tint(.primary)
+                                .buttonStyle(.bordered)
+                                .padding(.vertical)
                                 
-                            }) {
-                                Label("Remove Ads", systemImage: "sparkles")
-                            }
-                            .tint(.green)
-                            .buttonStyle(.borderedProminent)
-                            .padding(.vertical)
-                            
-                            Spacer()
-                            
-                        }
-                        
-                    } else {
-                        Text("Ad Spotlight")
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .fontDesign(.rounded)
-                                                
-                        HStack {
-                            currentAd.image
-                            VStack(alignment: .leading) {
-                                Text(currentAd.title)
-                                    .fontWeight(.bold)
-                                Text(currentAd.subTitle)
-                                    .lineLimit(nil)
-                                    .fixedSize(horizontal: false, vertical: true)
-                            }
-                        }
-                        
-                        HStack {
-                            Spacer()
-                            
-                            Button(action: {
                                 
-                                showRemoveAds = true
-                            }) {
-                                Text("No Thanks")
-                            }
-                            .tint(.primary)
-                            .buttonStyle(.bordered)
-                            .padding(.vertical)
-                            
-                            Spacer()
-                            
-                            Button(action: {
-                                // Open the link in Safari
-                                if let url = URL(string: currentAd.url.absoluteString) {
-                                    UIApplication.shared.open(url)
+                                
+                                Spacer()
+                                
+                                Button(action: {
+                                    Task {
+                                        await buy(product: premium)
+                                    }
+                                    
+                                }) {
+                                    Label("Remove Ads", systemImage: "sparkles")
                                 }
-                                showAd = false
-                            }) {
-                                Label("Check it out", systemImage: "checkmark.circle.fill")
+                                .tint(.green)
+                                .buttonStyle(.borderedProminent)
+                                .padding(.vertical)
+                                
+                                Spacer()
+                                
                             }
-                            .tint(.accentColor)
-                            .buttonStyle(.borderedProminent)
-                            .padding(.vertical)
                             
-                            Spacer()
+                        } else {
+                            Text("Ad Spotlight")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .fontDesign(.rounded)
+                            
+                            HStack {
+                                currentAd.image
+                                VStack(alignment: .leading) {
+                                    Text(currentAd.title)
+                                        .fontWeight(.bold)
+                                    Text(currentAd.subTitle)
+                                        .lineLimit(nil)
+                                        .fixedSize(horizontal: false, vertical: true)
+                                }
+                            }
+                            
+                            HStack {
+                                Spacer()
+                                
+                                Button(action: {
+                                    
+                                    showRemoveAds = true
+                                }) {
+                                    Text("No Thanks")
+                                }
+                                .tint(.primary)
+                                .buttonStyle(.bordered)
+                                .padding(.vertical)
+                                
+                                Spacer()
+                                
+                                Button(action: {
+                                    // Open the link in Safari
+                                    if let url = URL(string: currentAd.url.absoluteString) {
+                                        UIApplication.shared.open(url)
+                                    }
+                                    showAd = false
+                                }) {
+                                    Label("Check it out", systemImage: "checkmark.circle.fill")
+                                }
+                                .tint(.accentColor)
+                                .buttonStyle(.borderedProminent)
+                                .padding(.vertical)
+                                
+                                Spacer()
+                            }
                         }
                     }
-                }
-                .padding()
-                .background {
-                    RoundedRectangle(cornerRadius: 21.67, style: .continuous)
-                        .fill(.background)
-                        .shadow(radius: 10)
-                }
-                .offset(x: dragOffset.width, y: dragOffset.height)
-                .gesture(
-                    DragGesture()
-                        .onChanged { value in
-                            dragOffset = value.translation
-                            isDragging = true
-                        }
-                        .onEnded { _ in
-                            withAnimation(.interpolatingSpring(stiffness: 300, damping: 9)) {
-                                dragOffset = .zero
-                                isDragging = false
+                    .padding()
+                    .background {
+                        RoundedRectangle(cornerRadius: 21.67, style: .continuous)
+                            .fill(.background)
+                            .shadow(radius: 10)
+                    }
+                    .offset(x: dragOffset.width, y: dragOffset.height)
+                    .gesture(
+                        DragGesture()
+                            .onChanged { value in
+                                dragOffset = value.translation
+                                isDragging = true
                             }
-                        }
-                )
-                
-                Spacer()
+                            .onEnded { _ in
+                                withAnimation(.interpolatingSpring(stiffness: 300, damping: 9)) {
+                                    dragOffset = .zero
+                                    isDragging = false
+                                }
+                            }
+                    )
+                    
+                    Spacer()
+                }
+                .frame(maxWidth: 400)
+                .padding()
             }
-            .frame(maxWidth: 400)
-            .padding()
+        }
             .onAppear {
-                if Int.random(in: 0..<10) < 7 {
-                    showAd = false
+                showAdsNumber += 1
+                print(showAdsNumber)
+                if showAdsNumber > 4 {
+                    showAdsNumber = 0
+                    
+                    showAd = true
                     
                     // review
                     if meditationManager.showPromptForReview {
@@ -169,7 +178,6 @@ struct AdvertisementView: View {
             .alert(isPresented: $isShowingError, content: {
                 Alert(title: Text(errorTitle), message: nil, dismissButton: .default(Text("Okay")))
             })
-        }
     }
     
     func buy(product: Product) async {
