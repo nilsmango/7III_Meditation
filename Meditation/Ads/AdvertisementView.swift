@@ -159,7 +159,7 @@ struct AdvertisementView: View {
             .onAppear {
                 showAdsNumber += 1
                 print(showAdsNumber)
-                if showAdsNumber > 4 {
+                if showAdsNumber > 6 {
                     showAdsNumber = 0
                     
                     showAd = true
