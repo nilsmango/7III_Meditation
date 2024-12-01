@@ -158,6 +158,7 @@ struct AdvertisementView: View {
             }
         }
             .onAppear {
+                meditationManager.updateMeditationStatistics()
                 showAdsNumber += 1
                 print(showAdsNumber)
                 if showAdsNumber > 6 {
