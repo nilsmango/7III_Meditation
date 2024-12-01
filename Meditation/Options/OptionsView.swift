@@ -21,15 +21,25 @@ struct OptionsView: View {
             List {
                 
                 Section("Messages") {
-                    TextField("Welcome Back Text", text: $meditationManager.welcomeMessage)
-                    
-                    TextField("Meditation Started Text", text: $meditationManager.startMessage)
+                    VStack(alignment: .leading) {
+                        Text("Welcome Back Text:")
+                        TextField("Welcome Back Text", text: $meditationManager.welcomeMessage)
+                    }
+                    VStack(alignment: .leading) {
+                        Text("Welcome Started Text:")
+                        TextField("Meditation Started Text", text: $meditationManager.startMessage)
+                    }
                     
                     Toggle("Show Koan", isOn: $meditationManager.meditationTimer.showKoan)
                         .tint(.accentColor)
                     
                     if meditationManager.meditationTimer.showKoan {
                         NavigationLink("Edit Koans", destination: KoansEditView(meditationManager: meditationManager))
+                    }
+                    VStack(alignment: .leading) {
+                        Text("Background Note:")
+                        TextEditor(text: $meditationManager.backgroundNote)
+                            .frame(height: 110)
                     }
                 }
                 

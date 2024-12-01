@@ -361,6 +361,7 @@ class MeditationManager: NSObject, UNUserNotificationCenterDelegate, ObservableO
     
     @AppStorage("welcomeMessage") var welcomeMessage = "Welcome Back!"
     @AppStorage("startMessage") var startMessage = "Your Meditation has Started!"
+    @AppStorage("backgroundNote") var backgroundNote = ""
     
     var timer: Timer?
     

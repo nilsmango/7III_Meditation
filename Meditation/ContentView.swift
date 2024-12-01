@@ -68,6 +68,8 @@ struct ContentView: View {
                     Spacer()
                     
                 }
+                NoteView(note: meditationManager.backgroundNote)
+                
                 TimerView(meditationManager: meditationManager)
                 
                 AttackOfTheEmojiView(emojis: emojis, emoji: emoji)
