@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -32,7 +32,7 @@
 		783426842BFFBC7F0008F9F9 /* Singing Bowl 2b.caf in Resources */ = {isa = PBXBuildFile; fileRef = 783426732BFFBC7F0008F9F9 /* Singing Bowl 2b.caf */; };
 		783426862BFFCFB20008F9F9 /* TimerCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783426852BFFCFB20008F9F9 /* TimerCircleView.swift */; };
 		78385D0B2BF3647300581057 /* MeditationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78385D0A2BF3647300581057 /* MeditationApp.swift */; };
-		78385D0D2BF3647300581057 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78385D0C2BF3647300581057 /* ContentView.swift */; };
+		78385D0D2BF3647300581057 /* MeditationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78385D0C2BF3647300581057 /* MeditationView.swift */; };
 		78385D0F2BF3647500581057 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78385D0E2BF3647500581057 /* Assets.xcassets */; };
 		78385D132BF3647500581057 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78385D122BF3647500581057 /* Preview Assets.xcassets */; };
 		78385D1A2BF366A000581057 /* MeditationTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78385D192BF366A000581057 /* MeditationTimer.swift */; };
@@ -116,6 +116,20 @@
 		789A0E372C061320009CB9E7 /* WidgetExtensionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 789A0E252C06131E009CB9E7 /* WidgetExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		789A0E3F2C061570009CB9E7 /* TimerStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E3E2C061570009CB9E7 /* TimerStatus.swift */; };
 		789A0E482C061ECE009CB9E7 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7879BDEF2BF4A43E001994D2 /* Helpers.swift */; };
+		78A77D9C2E20FE4700B1872A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A77D9B2E20FE4700B1872A /* ContentView.swift */; };
+		78A77D9E2E20FECD00B1872A /* AppBlockerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A77D9D2E20FECD00B1872A /* AppBlockerModel.swift */; };
+		78A77DA32E20FF6B00B1872A /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A77DA22E20FF6B00B1872A /* HeaderView.swift */; };
+		78A77DA52E20FF8F00B1872A /* AuthorizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A77DA42E20FF8F00B1872A /* AuthorizationView.swift */; };
+		78A77DA72E20FFAF00B1872A /* MainContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A77DA62E20FFAF00B1872A /* MainContentView.swift */; };
+		78A77DA92E20FFD000B1872A /* SelectedAppsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A77DA82E20FFD000B1872A /* SelectedAppsView.swift */; };
+		78A77DAB2E20FFFB00B1872A /* AppSelectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A77DAA2E20FFFB00B1872A /* AppSelectionButton.swift */; };
+		78A77DAD2E21002A00B1872A /* BlockingToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A77DAC2E21002A00B1872A /* BlockingToggleButton.swift */; };
+		78A77DAF2E21004400B1872A /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A77DAE2E21004400B1872A /* StatusView.swift */; };
+		78A77DBB2E21037100B1872A /* ManagedSettings.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78A77DBA2E21037100B1872A /* ManagedSettings.framework */; };
+		78A77DBD2E21037100B1872A /* ManagedSettingsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78A77DBC2E21037100B1872A /* ManagedSettingsUI.framework */; };
+		78A77DC52E21037100B1872A /* ShieldConfigurationExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 78A77DB92E21037100B1872A /* ShieldConfigurationExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		78A77DCF2E21040C00B1872A /* ManagedSettings.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78A77DBA2E21037100B1872A /* ManagedSettings.framework */; };
+		78A77DD72E21040C00B1872A /* ShieldActionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 78A77DCE2E21040C00B1872A /* ShieldActionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		78C862AB2C0C5A29006235AB /* SoundpipeAudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 78C862AA2C0C5A29006235AB /* SoundpipeAudioKit */; };
 		78C862AF2C0F0866006235AB /* BuddhaBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C862AE2C0F0866006235AB /* BuddhaBoxView.swift */; };
 		78DAE2F12C0C579D00F2CCB0 /* NoiseMixerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DAE2F02C0C579D00F2CCB0 /* NoiseMixerView.swift */; };
@@ -138,6 +152,20 @@
 			remoteGlobalIDString = 789A0E242C06131E009CB9E7;
 			remoteInfo = WidgetExtensionExtension;
 		};
+		78A77DC32E21037100B1872A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 78385CFF2BF3647300581057 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 78A77DB82E21037100B1872A;
+			remoteInfo = ShieldConfigurationExtension;
+		};
+		78A77DD52E21040C00B1872A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 78385CFF2BF3647300581057 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 78A77DCD2E21040C00B1872A;
+			remoteInfo = ShieldActionExtension;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -147,7 +175,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				78A77DC52E21037100B1872A /* ShieldConfigurationExtension.appex in Embed Foundation Extensions */,
 				789A0E372C061320009CB9E7 /* WidgetExtensionExtension.appex in Embed Foundation Extensions */,
+				78A77DD72E21040C00B1872A /* ShieldActionExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -181,7 +211,7 @@
 		783426852BFFCFB20008F9F9 /* TimerCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerCircleView.swift; sourceTree = "<group>"; };
 		78385D072BF3647300581057 /* Meditation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meditation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78385D0A2BF3647300581057 /* MeditationApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationApp.swift; sourceTree = "<group>"; };
-		78385D0C2BF3647300581057 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		78385D0C2BF3647300581057 /* MeditationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationView.swift; sourceTree = "<group>"; };
 		78385D0E2BF3647500581057 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		78385D102BF3647500581057 /* Meditation.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Meditation.entitlements; sourceTree = "<group>"; };
 		78385D122BF3647500581057 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -244,6 +274,19 @@
 		789A0E342C061320009CB9E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		789A0E3C2C061412009CB9E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		789A0E3E2C061570009CB9E7 /* TimerStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerStatus.swift; sourceTree = "<group>"; };
+		78A77D9B2E20FE4700B1872A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		78A77D9D2E20FECD00B1872A /* AppBlockerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBlockerModel.swift; sourceTree = "<group>"; };
+		78A77DA22E20FF6B00B1872A /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		78A77DA42E20FF8F00B1872A /* AuthorizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationView.swift; sourceTree = "<group>"; };
+		78A77DA62E20FFAF00B1872A /* MainContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContentView.swift; sourceTree = "<group>"; };
+		78A77DA82E20FFD000B1872A /* SelectedAppsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedAppsView.swift; sourceTree = "<group>"; };
+		78A77DAA2E20FFFB00B1872A /* AppSelectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSelectionButton.swift; sourceTree = "<group>"; };
+		78A77DAC2E21002A00B1872A /* BlockingToggleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockingToggleButton.swift; sourceTree = "<group>"; };
+		78A77DAE2E21004400B1872A /* StatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
+		78A77DB92E21037100B1872A /* ShieldConfigurationExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ShieldConfigurationExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		78A77DBA2E21037100B1872A /* ManagedSettings.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ManagedSettings.framework; path = System/Library/Frameworks/ManagedSettings.framework; sourceTree = SDKROOT; };
+		78A77DBC2E21037100B1872A /* ManagedSettingsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ManagedSettingsUI.framework; path = Library/Frameworks/ManagedSettingsUI.framework; sourceTree = DEVELOPER_DIR; };
+		78A77DCE2E21040C00B1872A /* ShieldActionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ShieldActionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		78C862AE2C0F0866006235AB /* BuddhaBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuddhaBoxView.swift; sourceTree = "<group>"; };
 		78DAE2F02C0C579D00F2CCB0 /* NoiseMixerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoiseMixerView.swift; sourceTree = "<group>"; };
 		78EBA6C92CE9224100154226 /* AdvertisementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementView.swift; sourceTree = "<group>"; };
@@ -254,6 +297,28 @@
 		78EBA6D82CEB3DB100154226 /* 7III Meditation.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = "7III Meditation.storekit"; sourceTree = "<group>"; };
 		78EBA6DA2CEB40C100154226 /* product_ids.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = product_ids.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		78A77DC62E21037100B1872A /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 78A77DB82E21037100B1872A /* ShieldConfigurationExtension */;
+		};
+		78A77DD82E21040C00B1872A /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 78A77DCD2E21040C00B1872A /* ShieldActionExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		78A77DBE2E21037100B1872A /* ShieldConfigurationExtension */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (78A77DC62E21037100B1872A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = ShieldConfigurationExtension; sourceTree = "<group>"; };
+		78A77DD02E21040C00B1872A /* ShieldActionExtension */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (78A77DD82E21040C00B1872A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = ShieldActionExtension; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		78385D042BF3647300581057 /* Frameworks */ = {
@@ -272,6 +337,23 @@
 			files = (
 				789A0E2A2C06131E009CB9E7 /* SwiftUI.framework in Frameworks */,
 				789A0E282C06131E009CB9E7 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		78A77DB62E21037100B1872A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				78A77DBB2E21037100B1872A /* ManagedSettings.framework in Frameworks */,
+				78A77DBD2E21037100B1872A /* ManagedSettingsUI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		78A77DCB2E21040C00B1872A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				78A77DCF2E21040C00B1872A /* ManagedSettings.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +378,8 @@
 				781D557A2CF5DF3C00C56DE6 /* README.md */,
 				78385D092BF3647300581057 /* Meditation */,
 				789A0E2B2C06131E009CB9E7 /* WidgetExtension */,
+				78A77DBE2E21037100B1872A /* ShieldConfigurationExtension */,
+				78A77DD02E21040C00B1872A /* ShieldActionExtension */,
 				789A0E262C06131E009CB9E7 /* Frameworks */,
 				78385D082BF3647300581057 /* Products */,
 			);
@@ -306,6 +390,8 @@
 			children = (
 				78385D072BF3647300581057 /* Meditation.app */,
 				789A0E252C06131E009CB9E7 /* WidgetExtensionExtension.appex */,
+				78A77DB92E21037100B1872A /* ShieldConfigurationExtension.appex */,
+				78A77DCE2E21040C00B1872A /* ShieldActionExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -317,10 +403,9 @@
 				78EBA6DA2CEB40C100154226 /* product_ids.plist */,
 				78EBA6D82CEB3DB100154226 /* 7III Meditation.storekit */,
 				78385D0A2BF3647300581057 /* MeditationApp.swift */,
-				78385D0C2BF3647300581057 /* ContentView.swift */,
-				78713CD62CFC6221000A1B71 /* NoteView.swift */,
-				789A0E082C0388FE009CB9E7 /* StreakButton.swift */,
-				789A0E1F2C05C35A009CB9E7 /* StatisticsButton.swift */,
+				78A77D9B2E20FE4700B1872A /* ContentView.swift */,
+				78A77DA12E20FF5F00B1872A /* AppBlock */,
+				78A77DA02E20FF4F00B1872A /* Meditation */,
 				785D096C2C0C4B5300044AE9 /* Buddha Box */,
 				785D09682C0BA7F900044AE9 /* Flying Emoji */,
 				789A0E0E2C039149009CB9E7 /* Statistics */,
@@ -362,6 +447,7 @@
 				785D096E2C0C56F800044AE9 /* AudioManager.swift */,
 				78EBA6CC2CE924A900154226 /* Ad.swift */,
 				78EBA6CF2CE924C300154226 /* MeditationAds.swift */,
+				78A77D9D2E20FECD00B1872A /* AppBlockerModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -484,6 +570,8 @@
 				78EBA6D22CEA081B00154226 /* StoreKit.framework */,
 				789A0E272C06131E009CB9E7 /* WidgetKit.framework */,
 				789A0E292C06131E009CB9E7 /* SwiftUI.framework */,
+				78A77DBA2E21037100B1872A /* ManagedSettings.framework */,
+				78A77DBC2E21037100B1872A /* ManagedSettingsUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -499,6 +587,31 @@
 				789A0E342C061320009CB9E7 /* Info.plist */,
 			);
 			path = WidgetExtension;
+			sourceTree = "<group>";
+		};
+		78A77DA02E20FF4F00B1872A /* Meditation */ = {
+			isa = PBXGroup;
+			children = (
+				78385D0C2BF3647300581057 /* MeditationView.swift */,
+				789A0E1F2C05C35A009CB9E7 /* StatisticsButton.swift */,
+				789A0E082C0388FE009CB9E7 /* StreakButton.swift */,
+				78713CD62CFC6221000A1B71 /* NoteView.swift */,
+			);
+			path = Meditation;
+			sourceTree = "<group>";
+		};
+		78A77DA12E20FF5F00B1872A /* AppBlock */ = {
+			isa = PBXGroup;
+			children = (
+				78A77DA22E20FF6B00B1872A /* HeaderView.swift */,
+				78A77DA42E20FF8F00B1872A /* AuthorizationView.swift */,
+				78A77DA62E20FFAF00B1872A /* MainContentView.swift */,
+				78A77DA82E20FFD000B1872A /* SelectedAppsView.swift */,
+				78A77DAA2E20FFFB00B1872A /* AppSelectionButton.swift */,
+				78A77DAC2E21002A00B1872A /* BlockingToggleButton.swift */,
+				78A77DAE2E21004400B1872A /* StatusView.swift */,
+			);
+			path = AppBlock;
 			sourceTree = "<group>";
 		};
 		78EBA6C82CE8B2AF00154226 /* Experiments */ = {
@@ -534,6 +647,8 @@
 			);
 			dependencies = (
 				789A0E362C061320009CB9E7 /* PBXTargetDependency */,
+				78A77DC42E21037100B1872A /* PBXTargetDependency */,
+				78A77DD62E21040C00B1872A /* PBXTargetDependency */,
 			);
 			name = Meditation;
 			packageProductDependencies = (
@@ -561,6 +676,50 @@
 			productReference = 789A0E252C06131E009CB9E7 /* WidgetExtensionExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		78A77DB82E21037100B1872A /* ShieldConfigurationExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 78A77DC72E21037100B1872A /* Build configuration list for PBXNativeTarget "ShieldConfigurationExtension" */;
+			buildPhases = (
+				78A77DB52E21037100B1872A /* Sources */,
+				78A77DB62E21037100B1872A /* Frameworks */,
+				78A77DB72E21037100B1872A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				78A77DBE2E21037100B1872A /* ShieldConfigurationExtension */,
+			);
+			name = ShieldConfigurationExtension;
+			packageProductDependencies = (
+			);
+			productName = ShieldConfigurationExtension;
+			productReference = 78A77DB92E21037100B1872A /* ShieldConfigurationExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		78A77DCD2E21040C00B1872A /* ShieldActionExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 78A77DD92E21040C00B1872A /* Build configuration list for PBXNativeTarget "ShieldActionExtension" */;
+			buildPhases = (
+				78A77DCA2E21040C00B1872A /* Sources */,
+				78A77DCB2E21040C00B1872A /* Frameworks */,
+				78A77DCC2E21040C00B1872A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				78A77DD02E21040C00B1872A /* ShieldActionExtension */,
+			);
+			name = ShieldActionExtension;
+			packageProductDependencies = (
+			);
+			productName = ShieldActionExtension;
+			productReference = 78A77DCE2E21040C00B1872A /* ShieldActionExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -568,7 +727,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1540;
+				LastSwiftUpdateCheck = 1640;
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					78385D062BF3647300581057 = {
@@ -576,6 +735,12 @@
 					};
 					789A0E242C06131E009CB9E7 = {
 						CreatedOnToolsVersion = 15.4;
+					};
+					78A77DB82E21037100B1872A = {
+						CreatedOnToolsVersion = 16.4;
+					};
+					78A77DCD2E21040C00B1872A = {
+						CreatedOnToolsVersion = 16.4;
 					};
 				};
 			};
@@ -598,6 +763,8 @@
 			targets = (
 				78385D062BF3647300581057 /* Meditation */,
 				789A0E242C06131E009CB9E7 /* WidgetExtensionExtension */,
+				78A77DB82E21037100B1872A /* ShieldConfigurationExtension */,
+				78A77DCD2E21040C00B1872A /* ShieldActionExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -647,6 +814,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		78A77DB72E21037100B1872A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		78A77DCC2E21040C00B1872A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -656,6 +837,7 @@
 			files = (
 				78C862AF2C0F0866006235AB /* BuddhaBoxView.swift in Sources */,
 				7827880A2BF68B67004E7F77 /* TimerRunningView.swift in Sources */,
+				78A77DAF2E21004400B1872A /* StatusView.swift in Sources */,
 				785D094C2C09CFE800044AE9 /* ResumeMeditation.swift in Sources */,
 				783426402BFF6C7B0008F9F9 /* TimerSound.swift in Sources */,
 				785D09522C09F18D00044AE9 /* IslandExpandedBottomView.swift in Sources */,
@@ -663,6 +845,7 @@
 				789A0E092C0388FE009CB9E7 /* StreakButton.swift in Sources */,
 				789A0E182C04FE57009CB9E7 /* DateComponents + Identifiable.swift in Sources */,
 				78EBA6D12CE924C300154226 /* MeditationAds.swift in Sources */,
+				78A77DA72E20FFAF00B1872A /* MainContentView.swift in Sources */,
 				7879BDF32BF68448001994D2 /* CircleButtonStyle.swift in Sources */,
 				785D096F2C0C56F800044AE9 /* AudioManager.swift in Sources */,
 				7879BDF02BF4A43E001994D2 /* Helpers.swift in Sources */,
@@ -674,12 +857,15 @@
 				784ECA862CAFCD90004C0CF6 /* Triangle.swift in Sources */,
 				789A0E1C2C05B3EA009CB9E7 /* ThirtyDaysChart.swift in Sources */,
 				785D094F2C09F0D600044AE9 /* WidgetButtonStyle.swift in Sources */,
-				78385D0D2BF3647300581057 /* ContentView.swift in Sources */,
+				78A77DAD2E21002A00B1872A /* BlockingToggleButton.swift in Sources */,
+				78385D0D2BF3647300581057 /* MeditationView.swift in Sources */,
 				783426862BFFCFB20008F9F9 /* TimerCircleView.swift in Sources */,
 				789A0E1A2C04FEAB009CB9E7 /* DateComponents + Comparable.swift in Sources */,
 				785D09552C09F27F00044AE9 /* ActivityLockScreenView.swift in Sources */,
 				789A0E3F2C061570009CB9E7 /* TimerStatus.swift in Sources */,
 				78DAE2F12C0C579D00F2CCB0 /* NoiseMixerView.swift in Sources */,
+				78A77DA92E20FFD000B1872A /* SelectedAppsView.swift in Sources */,
+				78A77D9C2E20FE4700B1872A /* ContentView.swift in Sources */,
 				787000D52CE4EC2400542E3B /* Dial.swift in Sources */,
 				789A0E142C04FCCA009CB9E7 /* MonthlyChart.swift in Sources */,
 				787000D92CE7D0FD00542E3B /* AppStorageAUValue.swift in Sources */,
@@ -697,6 +883,7 @@
 				7854736C2C090128009645BF /* WidgetLogoView.swift in Sources */,
 				78385D212BF3DFEE00581057 /* MeditationManager.swift in Sources */,
 				785D09672C0BA00500044AE9 /* AttackOfTheEmojiView.swift in Sources */,
+				78A77DA52E20FF8F00B1872A /* AuthorizationView.swift in Sources */,
 				785D095E2C0B114300044AE9 /* Reminders.swift in Sources */,
 				785473752C09028C009645BF /* WidgetExtensionLiveActivity.swift in Sources */,
 				789A0E122C04D965009CB9E7 /* StreakTile.swift in Sources */,
@@ -704,11 +891,14 @@
 				784ECA822CAFCCB3004C0CF6 /* BuddhaBoxLayout.swift in Sources */,
 				789A0E0B2C038C42009CB9E7 /* StatisticsView.swift in Sources */,
 				785473742C090281009645BF /* WidgetButtonState.swift in Sources */,
+				78A77DAB2E20FFFB00B1872A /* AppSelectionButton.swift in Sources */,
 				78713CD72CFC6221000A1B71 /* NoteView.swift in Sources */,
 				7827880D2BFB3F45004E7F77 /* OptionsView.swift in Sources */,
 				785D09492C09CFE100044AE9 /* PauseMeditation.swift in Sources */,
 				785D09582C0A06EC00044AE9 /* TimerHackView.swift in Sources */,
+				78A77DA32E20FF6B00B1872A /* HeaderView.swift in Sources */,
 				78385D0B2BF3647300581057 /* MeditationApp.swift in Sources */,
+				78A77D9E2E20FECD00B1872A /* AppBlockerModel.swift in Sources */,
 				785473772C09056E009645BF /* CircleProgressView.swift in Sources */,
 				78385D232BF3E11B00581057 /* MeditationSession.swift in Sources */,
 			);
@@ -749,6 +939,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		78A77DB52E21037100B1872A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		78A77DCA2E21040C00B1872A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -756,6 +960,16 @@
 			isa = PBXTargetDependency;
 			target = 789A0E242C06131E009CB9E7 /* WidgetExtensionExtension */;
 			targetProxy = 789A0E352C061320009CB9E7 /* PBXContainerItemProxy */;
+		};
+		78A77DC42E21037100B1872A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 78A77DB82E21037100B1872A /* ShieldConfigurationExtension */;
+			targetProxy = 78A77DC32E21037100B1872A /* PBXContainerItemProxy */;
+		};
+		78A77DD62E21040C00B1872A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 78A77DCD2E21040C00B1872A /* ShieldActionExtension */;
+			targetProxy = 78A77DD52E21040C00B1872A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1033,6 +1247,120 @@
 			};
 			name = Release;
 		};
+		78A77DC82E21037100B1872A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ShieldConfigurationExtension/ShieldConfigurationExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A9H57996U3;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ShieldConfigurationExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ShieldConfigurationExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.project7III.meditation.ShieldConfigurationExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		78A77DC92E21037100B1872A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ShieldConfigurationExtension/ShieldConfigurationExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A9H57996U3;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ShieldConfigurationExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ShieldConfigurationExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.project7III.meditation.ShieldConfigurationExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		78A77DDA2E21040C00B1872A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ShieldActionExtension/ShieldActionExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A9H57996U3;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ShieldActionExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ShieldActionExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.project7III.meditation.ShieldActionExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		78A77DDB2E21040C00B1872A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ShieldActionExtension/ShieldActionExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A9H57996U3;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ShieldActionExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ShieldActionExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.project7III.meditation.ShieldActionExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1059,6 +1387,24 @@
 			buildConfigurations = (
 				789A0E392C061320009CB9E7 /* Debug */,
 				789A0E3A2C061320009CB9E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		78A77DC72E21037100B1872A /* Build configuration list for PBXNativeTarget "ShieldConfigurationExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				78A77DC82E21037100B1872A /* Debug */,
+				78A77DC92E21037100B1872A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		78A77DD92E21040C00B1872A /* Build configuration list for PBXNativeTarget "ShieldActionExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				78A77DDA2E21040C00B1872A /* Debug */,
+				78A77DDB2E21040C00B1872A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

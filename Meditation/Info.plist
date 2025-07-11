@@ -26,5 +26,16 @@
 		<key>UIColorName</key>
 		<string>AccentColor</string>
 	</dict>
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLName</key>
+            <string>com.project7III.meditation</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>7iiilife</string>
+            </array>
+        </dict>
+    </array>
 </dict>
 </plist>
