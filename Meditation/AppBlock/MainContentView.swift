@@ -14,6 +14,12 @@ struct MainContentView: View {
     var body: some View {
         VStack(spacing: 20) {
             if model.hasSelectedApps {
+                Text("Top-up time available: \(model.topUpActive ? "Yes" : "No")")
+                
+                Button(model.topUpActive ? "Disable Top-up Time" : "Enable Top-up Time") {
+                    model.topUpActive.toggle()
+                            }
+                
                 SelectedAppsView(model: model)
             }
             

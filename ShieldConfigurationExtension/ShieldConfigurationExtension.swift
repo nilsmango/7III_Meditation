@@ -13,16 +13,29 @@ import UIKit
 // The system provides a default appearance for any methods that your subclass doesn't override.
 // Make sure that your class name matches the NSExtensionPrincipalClass in your Info.plist.
 class ShieldConfigurationExtension: ShieldConfigurationDataSource {
+    
+    private var hasTopUpTimeAvailable: Bool {
+        return UserDefaults(suiteName: "group.com.project7iii.life")?.bool(forKey: "topUpActive") ?? false
+    }
+    
     override func configuration(shielding application: Application) -> ShieldConfiguration {
+        let subtitle = hasTopUpTimeAvailable
+            ? "This app is currently blocked."
+            : "This app is currently blocked, if you need more time, go to 7III Life to unlock more time."
+        
+        let secondaryButton = hasTopUpTimeAvailable
+            ? ShieldConfiguration.Label(text: "Top up time", color: .systemBlue)
+            : nil
+        
         return ShieldConfiguration(
             backgroundBlurStyle: .systemMaterial,
             backgroundColor: UIColor.systemBackground,
             icon: UIImage(systemName: "shield.fill"),
-            title: ShieldConfiguration.Label(text: "App Blocked", color: .label),
-            subtitle: ShieldConfiguration.Label(text: "This app is currently blocked", color: .secondaryLabel),
-            primaryButtonLabel: ShieldConfiguration.Label(text: "Open App Blocker", color: .white),
+            title: ShieldConfiguration.Label(text: "Blocked by 7III Life", color: .label),
+            subtitle: ShieldConfiguration.Label(text: subtitle, color: .secondaryLabel),
+            primaryButtonLabel: ShieldConfiguration.Label(text: "OK", color: .white),
             primaryButtonBackgroundColor: UIColor.systemBlue,
-            secondaryButtonLabel: ShieldConfiguration.Label(text: "Cancel", color: .systemGray)
+            secondaryButtonLabel: secondaryButton
         )
     }
     

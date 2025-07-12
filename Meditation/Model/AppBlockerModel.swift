@@ -17,12 +17,23 @@ class AppBlockerModel: ObservableObject {
     @AppStorage("isBlocked") var isBlocked = false
     @Published var authorizationStatus: AuthorizationStatus = .notDetermined
     
+    private let appGroupID = "group.com.project7iii.life"
+        
+    @Published var topUpActive: Bool = false {
+        didSet {
+            // Automatically sync to UserDefaults whenever the value changes
+            UserDefaults(suiteName: appGroupID)?.set(topUpActive, forKey: "topUpActive")
+        }
+    }
+    
     private let store = ManagedSettingsStore()
     private let selectionKey = "savedFamilyActivitySelection"
     
     init() {
         checkAuthorizationStatus()
         loadSavedSelection()
+        // Load initial value from UserDefaults
+        self.topUpActive = UserDefaults(suiteName: appGroupID)?.bool(forKey: "topUpActive") ?? false
     }
     
     // MARK: - Persistence
