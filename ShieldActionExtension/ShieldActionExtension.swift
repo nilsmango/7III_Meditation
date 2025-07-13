@@ -47,7 +47,7 @@ class ShieldActionExtension: ShieldActionDelegate {
                         
             try? deviceActivityCenter.startMonitoring(activityName, during: schedule, events: [eventName : event])
             
-            completionHandler(.defer)
+            completionHandler(.none)
             
         @unknown default:
             fatalError()
@@ -84,7 +84,7 @@ class ShieldActionExtension: ShieldActionDelegate {
                         
             try? deviceActivityCenter.startMonitoring(activityName, during: schedule, events: [eventName : event])
             
-            completionHandler(.defer)
+            completionHandler(.none)
             
         @unknown default:
             fatalError()
