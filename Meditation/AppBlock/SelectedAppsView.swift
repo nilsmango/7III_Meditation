@@ -14,7 +14,7 @@ struct SelectedAppsView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("Selected Apps (\(model.selectedAppsCount))")
+            Text("Selected Apps (\(model.selectedAppsCount)), selected Websites (\(model.selectedWebsitesCount))")
                 .font(.headline)
             
             Text("Apps selected for blocking")

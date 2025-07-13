@@ -13,7 +13,14 @@ import SwiftUI
 
 @MainActor
 class AppBlockerModel: ObservableObject {
-    @Published var selection = FamilyActivitySelection()
+    @Published var selection = FamilyActivitySelection() {
+        didSet {
+            saveSelection()
+            if isBlocked {
+                enableBlocking()
+            }
+        }
+    }
     @AppStorage("isBlocked") var isBlocked = false
     @Published var authorizationStatus: AuthorizationStatus = .notDetermined
     
@@ -38,33 +45,23 @@ class AppBlockerModel: ObservableObject {
     
     init() {
         checkAuthorizationStatus()
-        loadSavedSelection()
+        loadSelection()
         self.topUpMinutes = UserDefaults(suiteName: appGroupID)?.integer(forKey: "topUpMinutes") ?? 1
     }
     
     // MARK: - App Selection
-    private func loadSavedSelection() {
-        // The selection is automatically restored from the ManagedSettingsStore
-        // when the app launches, so we need to check if there are any existing shields
-        let apps = store.shield.applications ?? []
-        let domains = store.shield.webDomains ?? []
+    private let selectionKey = "familyActivitySelection"
+    
+    func loadSelection() {
+        if let data = UserDefaults.standard.data(forKey: selectionKey),
+           let decoded = try? JSONDecoder().decode(FamilyActivitySelection.self, from: data) {
+            selection = decoded
+        }
+    }
 
-        if !apps.isEmpty || !domains.isEmpty {
-            // Create a new selection with the existing tokens
-            var newSelection = FamilyActivitySelection()
-            newSelection.applicationTokens = apps
-            newSelection.webDomainTokens = domains
-            
-            if let categories = store.shield.applicationCategories {
-                switch categories {
-                case .specific(let categoryTokens, except: _):
-                    newSelection.categoryTokens = categoryTokens
-                default:
-                    break
-                }
-            }
-            
-            self.selection = newSelection
+    func saveSelection() {
+        if let data = try? JSONEncoder().encode(selection) {
+            UserDefaults.standard.set(data, forKey: selectionKey)
         }
     }
     
@@ -128,6 +125,10 @@ class AppBlockerModel: ObservableObject {
     
     var selectedAppsCount: Int {
         selection.applicationTokens.count
+    }
+    
+    var selectedWebsitesCount: Int {
+        selection.webDomainTokens.count
     }
     
     var isAuthorized: Bool {

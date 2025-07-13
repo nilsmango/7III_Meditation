@@ -37,9 +37,6 @@ struct MainContentView: View {
         .sheet(isPresented: $showTopUpSheet) {
             TopUpTimeView(model: model, showSheet: $showTopUpSheet)
         }
-        .onChange(of: model.selection) {
-            model.enableBlocking()
-        }
     }
 }
 
