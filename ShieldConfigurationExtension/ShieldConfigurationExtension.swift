@@ -17,13 +17,14 @@ class ShieldConfigurationExtension: ShieldConfigurationDataSource {
     override func configuration(shielding application: Application) -> ShieldConfiguration {
         let defaults = UserDefaults(suiteName: "group.com.project7iii.life")
         let hasTopUpTimeAvailable = defaults?.bool(forKey: "topUpActive") ?? false
+        let topUpMinutes = defaults?.integer(forKey: "topUpMinutes") ?? 1
 
         let subtitle = hasTopUpTimeAvailable
             ? "This app is currently blocked."
             : "This app is currently blocked, if you need more time, go to 7III Life to unlock more time."
 
         let secondaryButton = hasTopUpTimeAvailable
-            ? ShieldConfiguration.Label(text: "Top up time", color: .systemBlue)
+            ? ShieldConfiguration.Label(text: "Unlock for \(topUpMinutes) \(topUpMinutes == 1 ? "minute" : "minutes")", color: .systemBlue)
             : nil
 
         return ShieldConfiguration(

@@ -17,6 +17,7 @@ class AppBlockerModel: ObservableObject {
     @AppStorage("isBlocked") var isBlocked = false
     @Published var authorizationStatus: AuthorizationStatus = .notDetermined
     
+    
     private let appGroupID = "group.com.project7iii.life"
         
     @Published var topUpActive: Bool = false {
@@ -26,17 +27,22 @@ class AppBlockerModel: ObservableObject {
         }
     }
     
+    @Published var topUpMinutes: Int = 1 {
+        didSet {
+            // Automatically sync to UserDefaults whenever the value changes
+            UserDefaults(suiteName: appGroupID)?.set(topUpMinutes, forKey: "topUpMinutes")
+        }
+    }
+    
     private let store = ManagedSettingsStore()
-    private let selectionKey = "savedFamilyActivitySelection"
     
     init() {
         checkAuthorizationStatus()
         loadSavedSelection()
-        // Load initial value from UserDefaults
-        self.topUpActive = UserDefaults(suiteName: appGroupID)?.bool(forKey: "topUpActive") ?? false
+        self.topUpMinutes = UserDefaults(suiteName: appGroupID)?.integer(forKey: "topUpMinutes") ?? 1
     }
     
-    // MARK: - Persistence
+    // MARK: - App Selection
     private func loadSavedSelection() {
         // The selection is automatically restored from the ManagedSettingsStore
         // when the app launches, so we need to check if there are any existing shields
@@ -103,6 +109,12 @@ class AppBlockerModel: ObservableObject {
         }
     }
     
+    // MARK: - Top Up Time
+    
+    func topUpTime() {
+        topUpActive = true
+    }
+    
     // MARK: - Computed Properties
     var hasSelectedApps: Bool {
         !selection.applicationTokens.isEmpty
@@ -123,4 +135,8 @@ class AppBlockerModel: ObservableObject {
     var blockingStatusColor: Color {
         isBlocked ? .green : .gray
     }
+}
+
+extension ManagedSettingsStore.Name {
+    static let appSelection = Self("appSelection")
 }

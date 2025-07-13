@@ -10,15 +10,17 @@ import SwiftUI
 struct MainContentView: View {
     @ObservedObject var model: AppBlockerModel
     @State private var showingFamilyPicker = false
+    @State private var showTopUpSheet = false
     
     var body: some View {
         VStack(spacing: 20) {
             if model.hasSelectedApps {
-                Text("Top-up time available: \(model.topUpActive ? "Yes" : "No")")
-                
-                Button(model.topUpActive ? "Disable Top-up Time" : "Enable Top-up Time") {
-                    model.topUpActive.toggle()
-                            }
+                Button {
+                    showTopUpSheet = true
+                } label: {
+                    Label("Top up Time", systemImage: "clock.arrow.trianglehead.counterclockwise.rotate.90")
+                }
+                .buttonStyle(.bordered)
                 
                 SelectedAppsView(model: model)
             }
@@ -32,6 +34,9 @@ struct MainContentView: View {
             StatusView(model: model)
         }
         .familyActivityPicker(isPresented: $showingFamilyPicker, selection: $model.selection)
+        .sheet(isPresented: $showTopUpSheet) {
+            TopUpTimeView(model: model, showSheet: $showTopUpSheet)
+        }
     }
 }
 

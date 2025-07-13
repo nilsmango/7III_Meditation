@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		780ED3BB2E23EFFA00FAF3FC /* TopUpTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780ED3BA2E23EFFA00FAF3FC /* TopUpTimeView.swift */; };
 		781D557C2CF606C900C56DE6 /* TricksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781D557B2CF606C900C56DE6 /* TricksView.swift */; };
 		7827880A2BF68B67004E7F77 /* TimerRunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782788092BF68B67004E7F77 /* TimerRunningView.swift */; };
 		7827880D2BFB3F45004E7F77 /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7827880C2BFB3F45004E7F77 /* OptionsView.swift */; };
@@ -195,6 +196,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		780ED3BA2E23EFFA00FAF3FC /* TopUpTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopUpTimeView.swift; sourceTree = "<group>"; };
 		781D557A2CF5DF3C00C56DE6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		781D557B2CF606C900C56DE6 /* TricksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricksView.swift; sourceTree = "<group>"; };
 		782788092BF68B67004E7F77 /* TimerRunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerRunningView.swift; sourceTree = "<group>"; };
@@ -637,6 +639,7 @@
 				78A77DA22E20FF6B00B1872A /* HeaderView.swift */,
 				78A77DA42E20FF8F00B1872A /* AuthorizationView.swift */,
 				78A77DA62E20FFAF00B1872A /* MainContentView.swift */,
+				780ED3BA2E23EFFA00FAF3FC /* TopUpTimeView.swift */,
 				78A77DA82E20FFD000B1872A /* SelectedAppsView.swift */,
 				78A77DAA2E20FFFB00B1872A /* AppSelectionButton.swift */,
 				78A77DAC2E21002A00B1872A /* BlockingToggleButton.swift */,
@@ -919,6 +922,7 @@
 				787000D72CE750AE00542E3B /* BuddhaBoxButton.swift in Sources */,
 				785D095B2C0A48BC00044AE9 /* StopMeditationWithoutSaving.swift in Sources */,
 				789A0E072C032377009CB9E7 /* KoansEditView.swift in Sources */,
+				780ED3BB2E23EFFA00FAF3FC /* TopUpTimeView.swift in Sources */,
 				784ECA862CAFCD90004C0CF6 /* Triangle.swift in Sources */,
 				789A0E1C2C05B3EA009CB9E7 /* ThirtyDaysChart.swift in Sources */,
 				785D094F2C09F0D600044AE9 /* WidgetButtonStyle.swift in Sources */,
