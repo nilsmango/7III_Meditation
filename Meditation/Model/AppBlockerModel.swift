@@ -46,10 +46,14 @@ class AppBlockerModel: ObservableObject {
     private func loadSavedSelection() {
         // The selection is automatically restored from the ManagedSettingsStore
         // when the app launches, so we need to check if there are any existing shields
-        if let applications = store.shield.applications, !applications.isEmpty {
+        let apps = store.shield.applications ?? []
+        let domains = store.shield.webDomains ?? []
+
+        if !apps.isEmpty || !domains.isEmpty {
             // Create a new selection with the existing tokens
             var newSelection = FamilyActivitySelection()
-            newSelection.applicationTokens = applications
+            newSelection.applicationTokens = apps
+            newSelection.webDomainTokens = domains
             
             if let categories = store.shield.applicationCategories {
                 switch categories {
@@ -91,12 +95,14 @@ class AppBlockerModel: ObservableObject {
         guard !selection.applicationTokens.isEmpty else { return }
         
         store.shield.applications = selection.applicationTokens
+        store.shield.webDomains = selection.webDomainTokens
         store.shield.applicationCategories = ShieldSettings.ActivityCategoryPolicy.specific(selection.categoryTokens)
         isBlocked = true
     }
     
     func disableBlocking() {
         store.shield.applications = nil
+        store.shield.webDomains = nil
         store.shield.applicationCategories = nil
         isBlocked = false
     }

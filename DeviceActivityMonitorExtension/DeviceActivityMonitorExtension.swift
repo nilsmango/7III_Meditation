@@ -25,12 +25,24 @@ class DeviceActivityMonitorExtension: DeviceActivityMonitor {
     override func eventDidReachThreshold(_ event: DeviceActivityEvent.Name, activity: DeviceActivityName) {
         super.eventDidReachThreshold(event, activity: activity)
         // Handle the event reaching its threshold.
-        // adding the application back to the shield
-        let base64String = activity.rawValue
-        if let data = Data(base64Encoded: base64String),
-           let token = try? JSONDecoder().decode(ApplicationToken.self, from: data) {
-            let store = ManagedSettingsStore()
-            store.shield.applications?.insert(token)
+        if event.rawValue.hasPrefix("webDomain") {
+            // adding the application back to the shield
+            let base64String = activity.rawValue
+            if let data = Data(base64Encoded: base64String),
+               let token = try? JSONDecoder().decode(WebDomainToken.self, from: data) {
+                let store = ManagedSettingsStore()
+                store.shield.webDomains?.insert(token)
+                
+            }
+        } else {
+            // adding the application back to the shield
+            let base64String = activity.rawValue
+            if let data = Data(base64Encoded: base64String),
+               let token = try? JSONDecoder().decode(ApplicationToken.self, from: data) {
+                let store = ManagedSettingsStore()
+                store.shield.applications?.insert(token)
+                
+            }
         }
     }
     
