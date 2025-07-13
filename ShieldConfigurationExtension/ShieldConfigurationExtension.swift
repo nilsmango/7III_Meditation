@@ -14,19 +14,18 @@ import UIKit
 // Make sure that your class name matches the NSExtensionPrincipalClass in your Info.plist.
 class ShieldConfigurationExtension: ShieldConfigurationDataSource {
     
-    private var hasTopUpTimeAvailable: Bool {
-        return UserDefaults(suiteName: "group.com.project7iii.life")?.bool(forKey: "topUpActive") ?? false
-    }
-    
     override func configuration(shielding application: Application) -> ShieldConfiguration {
+        let defaults = UserDefaults(suiteName: "group.com.project7iii.life")
+        let hasTopUpTimeAvailable = defaults?.bool(forKey: "topUpActive") ?? false
+
         let subtitle = hasTopUpTimeAvailable
             ? "This app is currently blocked."
             : "This app is currently blocked, if you need more time, go to 7III Life to unlock more time."
-        
+
         let secondaryButton = hasTopUpTimeAvailable
             ? ShieldConfiguration.Label(text: "Top up time", color: .systemBlue)
             : nil
-        
+
         return ShieldConfiguration(
             backgroundBlurStyle: .systemMaterial,
             backgroundColor: UIColor.systemBackground,
