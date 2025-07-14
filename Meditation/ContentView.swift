@@ -14,11 +14,11 @@ struct ContentView: View {
     var body: some View {
         NavigationStack(path: $model.navigationPath) {
             VStack(spacing: 20) {
-                HeaderView()
                 
                 if model.isAuthorized {
                     MainContentView(model: model)
                 } else {
+                    Spacer()
                     AuthorizationView(model: model)
                 }
                 
@@ -31,6 +31,8 @@ struct ContentView: View {
             .navigationDestination(for: String.self) { value in
                 if value == "meditation" {
                     MeditationView(meditationManager: model, audioManager: audioManager)
+                } else if value == "app-blocker" {
+                    AppBlockerView(model: model)
                 }
             }
         }

@@ -17,10 +17,23 @@ struct MeditationView: View {
     @State private var emoji = "🔥"
     
     var body: some View {
-        NavigationStack {
             ZStack {
                 VStack {
                     HStack {
+                        Button {
+                            meditationManager.navigateHome()
+                        } label: {
+                            Label("Home", systemImage: "house.circle.fill")
+                                .font(.title)
+                                .symbolRenderingMode(.palette)
+                                .foregroundStyle(.blackWhite, .accent)
+                                .labelStyle(.iconOnly)
+                                .padding(.leading)
+                                .padding(.leading, 4)
+                        }
+                        
+                        Spacer()
+                        
                         StreakButton(streakNumber: meditationManager.meditationTimer.statistics.currentStreak)
                             .padding(.horizontal)
                             .padding(.vertical, 4)
@@ -39,6 +52,8 @@ struct MeditationView: View {
                             .animation(.easeInOut(duration: 1.0), value: rotation)
                         
                         Spacer()
+                        
+                        
                         
                         NavigationLink(destination: BuddhaBoxLayout(meditationManager: meditationManager, audioManager: audioManager)) {
                             Label("Options", systemImage: "waveform.circle.fill")
@@ -78,9 +93,9 @@ struct MeditationView: View {
             .onAppear {
                 meditationManager.checkStatusOfTimer()
             }
+            .navigationBarBackButtonHidden(true)
         }
     }
-}
 
 #Preview {
     MeditationView(meditationManager: AppBlockerModel(), audioManager: AudioManager())

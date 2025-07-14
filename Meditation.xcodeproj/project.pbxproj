@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		780ED3BB2E23EFFA00FAF3FC /* TopUpTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780ED3BA2E23EFFA00FAF3FC /* TopUpTimeView.swift */; };
 		780ED3F82E24E9E500FAF3FC /* AppBlockerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A77D9D2E20FECD00B1872A /* AppBlockerModel.swift */; };
+		780ED4092E2580F400FAF3FC /* MainViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780ED4082E2580F400FAF3FC /* MainViewButton.swift */; };
+		780ED40B2E25872D00FAF3FC /* AppBlockerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780ED40A2E25872D00FAF3FC /* AppBlockerView.swift */; };
 		781D557C2CF606C900C56DE6 /* TricksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781D557B2CF606C900C56DE6 /* TricksView.swift */; };
 		7827880A2BF68B67004E7F77 /* TimerRunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782788092BF68B67004E7F77 /* TimerRunningView.swift */; };
 		7827880D2BFB3F45004E7F77 /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7827880C2BFB3F45004E7F77 /* OptionsView.swift */; };
@@ -196,6 +198,8 @@
 
 /* Begin PBXFileReference section */
 		780ED3BA2E23EFFA00FAF3FC /* TopUpTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopUpTimeView.swift; sourceTree = "<group>"; };
+		780ED4082E2580F400FAF3FC /* MainViewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewButton.swift; sourceTree = "<group>"; };
+		780ED40A2E25872D00FAF3FC /* AppBlockerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBlockerView.swift; sourceTree = "<group>"; };
 		781D557A2CF5DF3C00C56DE6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		781D557B2CF606C900C56DE6 /* TricksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricksView.swift; sourceTree = "<group>"; };
 		782788092BF68B67004E7F77 /* TimerRunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerRunningView.swift; sourceTree = "<group>"; };
@@ -388,6 +392,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		780ED40C2E25877E00FAF3FC /* Main View */ = {
+			isa = PBXGroup;
+			children = (
+				78A77DA62E20FFAF00B1872A /* MainContentView.swift */,
+				780ED4082E2580F400FAF3FC /* MainViewButton.swift */,
+			);
+			path = "Main View";
+			sourceTree = "<group>";
+		};
 		7827880B2BFB3F30004E7F77 /* Timer */ = {
 			isa = PBXGroup;
 			children = (
@@ -434,6 +447,7 @@
 				78EBA6D82CEB3DB100154226 /* 7III Meditation.storekit */,
 				78385D0A2BF3647300581057 /* MeditationApp.swift */,
 				78A77D9B2E20FE4700B1872A /* ContentView.swift */,
+				780ED40C2E25877E00FAF3FC /* Main View */,
 				78A77DA12E20FF5F00B1872A /* AppBlock */,
 				78A77DA02E20FF4F00B1872A /* Meditation */,
 				785D096C2C0C4B5300044AE9 /* Buddha Box */,
@@ -634,8 +648,8 @@
 			isa = PBXGroup;
 			children = (
 				78A77DA22E20FF6B00B1872A /* HeaderView.swift */,
+				780ED40A2E25872D00FAF3FC /* AppBlockerView.swift */,
 				78A77DA42E20FF8F00B1872A /* AuthorizationView.swift */,
-				78A77DA62E20FFAF00B1872A /* MainContentView.swift */,
 				780ED3BA2E23EFFA00FAF3FC /* TopUpTimeView.swift */,
 				78A77DA82E20FFD000B1872A /* SelectedAppsView.swift */,
 				78A77DAA2E20FFFB00B1872A /* AppSelectionButton.swift */,
@@ -945,6 +959,7 @@
 				7854736F2C090185009645BF /* WidgetButtonLabel.swift in Sources */,
 				78EBA6CD2CE924A900154226 /* Ad.swift in Sources */,
 				784ECA842CAFCCF2004C0CF6 /* Encoder.swift in Sources */,
+				780ED40B2E25872D00FAF3FC /* AppBlockerView.swift in Sources */,
 				789A0E202C05C35A009CB9E7 /* StatisticsButton.swift in Sources */,
 				7854736C2C090128009645BF /* WidgetLogoView.swift in Sources */,
 				785D09672C0BA00500044AE9 /* AttackOfTheEmojiView.swift in Sources */,
@@ -957,6 +972,7 @@
 				789A0E0B2C038C42009CB9E7 /* StatisticsView.swift in Sources */,
 				785473742C090281009645BF /* WidgetButtonState.swift in Sources */,
 				78A77DAB2E20FFFB00B1872A /* AppSelectionButton.swift in Sources */,
+				780ED4092E2580F400FAF3FC /* MainViewButton.swift in Sources */,
 				78713CD72CFC6221000A1B71 /* NoteView.swift in Sources */,
 				7827880D2BFB3F45004E7F77 /* OptionsView.swift in Sources */,
 				785D09492C09CFE100044AE9 /* PauseMeditation.swift in Sources */,

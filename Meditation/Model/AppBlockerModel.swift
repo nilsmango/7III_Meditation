@@ -162,6 +162,16 @@ class AppBlockerModel: NSObject, UNUserNotificationCenterDelegate, ObservableObj
         navigationPath = NavigationPath()
         navigationPath.append("meditation")
     }
+    
+    func navigateToAppBlocker() {
+        navigationPath = NavigationPath()
+        navigationPath.append("app-blocker")
+    }
+    
+    func navigateHome() {
+        navigationPath = NavigationPath()
+    }
+    
     // MARK: - Computed Properties
     var hasSelectedApps: Bool {
         !selection.applicationTokens.isEmpty
