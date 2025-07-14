@@ -395,6 +395,7 @@
 		780ED40C2E25877E00FAF3FC /* Main View */ = {
 			isa = PBXGroup;
 			children = (
+				78A77DA42E20FF8F00B1872A /* AuthorizationView.swift */,
 				78A77DA62E20FFAF00B1872A /* MainContentView.swift */,
 				780ED4082E2580F400FAF3FC /* MainViewButton.swift */,
 			);
@@ -649,7 +650,6 @@
 			children = (
 				78A77DA22E20FF6B00B1872A /* HeaderView.swift */,
 				780ED40A2E25872D00FAF3FC /* AppBlockerView.swift */,
-				78A77DA42E20FF8F00B1872A /* AuthorizationView.swift */,
 				780ED3BA2E23EFFA00FAF3FC /* TopUpTimeView.swift */,
 				78A77DA82E20FFD000B1872A /* SelectedAppsView.swift */,
 				78A77DAA2E20FFFB00B1872A /* AppSelectionButton.swift */,

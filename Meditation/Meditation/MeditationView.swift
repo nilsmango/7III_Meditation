@@ -23,7 +23,7 @@ struct MeditationView: View {
                         Button {
                             meditationManager.navigateHome()
                         } label: {
-                            Label("Home", systemImage: "house.circle.fill")
+                            Label("Home", systemImage: "arrow.left.circle.fill")
                                 .font(.title)
                                 .symbolRenderingMode(.palette)
                                 .foregroundStyle(.blackWhite, .accent)

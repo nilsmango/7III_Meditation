@@ -18,7 +18,7 @@ struct AppBlockerView: View {
                 Button {
                     model.navigateHome()
                 } label: {
-                    Label("Home", systemImage: "house.circle.fill")
+                    Label("Home", systemImage: "arrow.left.circle.fill")
                         .font(.title)
                         .symbolRenderingMode(.palette)
                         .foregroundStyle(.blackWhite, .greenAccent)
@@ -30,6 +30,8 @@ struct AppBlockerView: View {
             Spacer()
             
             HeaderView()
+            
+            Spacer()
             
             if model.hasSelectedApps {
                 Button {
