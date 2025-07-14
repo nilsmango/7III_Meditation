@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension DateComponents: Comparable {
+extension DateComponents: @retroactive Comparable {
     public static func < (lhs: DateComponents, rhs: DateComponents) -> Bool {
         // Compare each component in the following order: year, month, day, hour, minute, second
         if let lhsYear = lhs.year, let rhsYear = rhs.year {

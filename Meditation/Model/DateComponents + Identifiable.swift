@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension DateComponents: Identifiable {
+extension DateComponents: @retroactive Identifiable {
     public var id: String {
         var components = [String]()
         

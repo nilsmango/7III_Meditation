@@ -568,7 +568,9 @@ class AppBlockerModel: NSObject, UNUserNotificationCenterDelegate, ObservableObj
         // setting the timer status change
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: Double(meditationTimer.preparationTime) + Double(meditationTimer.timerInMinutes * 60) , repeats: false, block: { timer in
-            self.endMeditation()
+            Task { @MainActor in
+                    self.endMeditation()
+                }
         })
         
         startStatusTimer(updateInterval: updateInterval)
@@ -591,7 +593,9 @@ class AppBlockerModel: NSObject, UNUserNotificationCenterDelegate, ObservableObj
                 let timeInterval = meditationTimer.targetDate.timeIntervalSinceNow
                 timer = Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: false, block: { timer in
                     print("running the check and ending with timer")
-                    self.endMeditation()
+                    Task { @MainActor in
+                            self.endMeditation()
+                        }
                 })
             } else {
                 print("ending normal with check")
@@ -717,7 +721,7 @@ class AppBlockerModel: NSObject, UNUserNotificationCenterDelegate, ObservableObj
     ]
     
     // This method will be called when the app is in the foreground
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+    nonisolated func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         // Play a sound
         completionHandler([.sound])
     }
@@ -789,7 +793,7 @@ class AppBlockerModel: NSObject, UNUserNotificationCenterDelegate, ObservableObj
         }
     }
     
-    func userNotificationCenter(_ center: UNUserNotificationCenter,
+    nonisolated func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 didReceive response: UNNotificationResponse,
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
@@ -814,7 +818,9 @@ class AppBlockerModel: NSObject, UNUserNotificationCenterDelegate, ObservableObj
         updateProgress()
         
         statusTimer = Timer.scheduledTimer(withTimeInterval: updateInterval, repeats: true) { _ in
-            self.updateProgress()
+            Task { @MainActor in
+                self.updateProgress()
+                }
         }
     }
     
@@ -892,7 +898,10 @@ class AppBlockerModel: NSObject, UNUserNotificationCenterDelegate, ObservableObj
                         
                         if error != nil {
                             // something happened, let's just save to disk
-                            self.saveMeditationSessionsToDisk()
+                            Task { @MainActor in
+                                self.saveMeditationSessionsToDisk()
+                                }
+                            
                             return
                         }
                         
@@ -901,7 +910,9 @@ class AppBlockerModel: NSObject, UNUserNotificationCenterDelegate, ObservableObj
                             
                         } else {
                             // something happened again
-                            self.saveMeditationSessionsToDisk()
+                            Task { @MainActor in
+                                self.saveMeditationSessionsToDisk()
+                                }
                         }
                         
                     })
