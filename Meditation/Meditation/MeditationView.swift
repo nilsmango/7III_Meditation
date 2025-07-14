@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MeditationView: View {
-    @ObservedObject var meditationManager: MeditationManager
+    @ObservedObject var meditationManager: AppBlockerModel
     @ObservedObject var audioManager: AudioManager
     
     @State private var rotation = Angle(degrees: 0.0)
@@ -83,5 +83,5 @@ struct MeditationView: View {
 }
 
 #Preview {
-    MeditationView(meditationManager: MeditationManager(), audioManager: AudioManager())
+    MeditationView(meditationManager: AppBlockerModel(), audioManager: AudioManager())
 }

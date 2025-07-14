@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var meditationManager: MeditationManager
+    @ObservedObject var model: AppBlockerModel
     @ObservedObject var audioManager: AudioManager
-    @StateObject private var model = AppBlockerModel()
     
     var body: some View {
         NavigationStack(path: $model.navigationPath) {
@@ -29,10 +28,10 @@ struct ContentView: View {
             .onAppear {
                 model.checkAuthorizationStatus()
             }
-        }
-        .navigationDestination(for: String.self) { value in
-            if value == "meditation" {
-                MeditationView(meditationManager: meditationManager, audioManager: audioManager)
+            .navigationDestination(for: String.self) { value in
+                if value == "meditation" {
+                    MeditationView(meditationManager: model, audioManager: audioManager)
+                }
             }
         }
     }
@@ -40,5 +39,5 @@ struct ContentView: View {
 
 
 #Preview {
-    ContentView(meditationManager: MeditationManager(), audioManager: AudioManager())
+    ContentView(model: AppBlockerModel(), audioManager: AudioManager())
 }

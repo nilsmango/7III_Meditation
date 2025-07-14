@@ -9,7 +9,7 @@ import SwiftUI
 import Charts
 
 struct StatisticsView: View {
-    @ObservedObject var meditationManager: MeditationManager
+    @ObservedObject var meditationManager: AppBlockerModel
 
     let screenWidth = UIScreen.main.bounds.size.width
     let padding = 16.0
@@ -55,7 +55,7 @@ struct StatisticsView: View {
 }
 
 #Preview {
-    let meditationManager = MeditationManager()
+    let meditationManager = AppBlockerModel()
             
     // Sample meditation sessions
     meditationManager.meditationSessions = [

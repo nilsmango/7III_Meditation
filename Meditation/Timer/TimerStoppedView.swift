@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TimerStoppedView: View {
-    @ObservedObject var meditationManager: MeditationManager
+    @ObservedObject var meditationManager: AppBlockerModel
     
     let paddingPickerHorizontal = UIScreen.main.bounds.width / 6
     let halfHeightFrame = UIScreen.main.bounds.height / 8
@@ -54,7 +54,7 @@ struct TimerStoppedView: View {
 #Preview {
     VStack {
         Spacer()
-        TimerStoppedView(meditationManager: MeditationManager())
+        TimerStoppedView(meditationManager: AppBlockerModel())
         Spacer()
     }
 }

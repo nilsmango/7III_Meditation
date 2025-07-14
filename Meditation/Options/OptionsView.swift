@@ -10,7 +10,7 @@ import StoreKit
 
 
 struct OptionsView: View {
-    @ObservedObject var meditationManager: MeditationManager
+    @ObservedObject var meditationManager: AppBlockerModel
     
     @State private var showRedeemCode: Bool = false
     @State private var wasPurchased: Bool = false
@@ -235,6 +235,6 @@ struct OptionsView: View {
 
 #Preview {
     NavigationView {
-        OptionsView(meditationManager: MeditationManager())
+        OptionsView(meditationManager: AppBlockerModel())
     }
 }

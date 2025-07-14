@@ -28,15 +28,15 @@ struct MeditationApp: App {
     
     @StateObject private var audioManager = AudioManager()
     
-    @StateObject private var meditationManager = MeditationManager.shared
+    @StateObject private var model = AppBlockerModel.shared
     
     // Notifications
     private let notificationCenter = UNUserNotificationCenter.current()
     
     var body: some Scene {
         WindowGroup {
-            ContentView(meditationManager: meditationManager, audioManager: audioManager)
-                .onAppear {                    
+            ContentView(model: model, audioManager: audioManager)
+                .onAppear {
                     notificationCenter.requestAuthorization(options: [.alert, .sound]) { success, error in
                         if success {
                             // print("All set!")
@@ -44,8 +44,8 @@ struct MeditationApp: App {
                             print(error.localizedDescription)
                         }
                     }
-                    notificationCenter.delegate = meditationManager
-                    meditationManager.startupChecks()
+                    notificationCenter.delegate = model
+                    model.startupChecks()
                 }
         }
     }

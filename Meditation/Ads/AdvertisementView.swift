@@ -9,7 +9,7 @@ import SwiftUI
 import StoreKit
 
 struct AdvertisementView: View {
-    @ObservedObject var meditationManager: MeditationManager
+    @ObservedObject var meditationManager: AppBlockerModel
     
     @State private var dragOffset = CGSize.zero
     @State private var isDragging = false
@@ -197,5 +197,5 @@ struct AdvertisementView: View {
 }
 
 #Preview {
-    AdvertisementView(meditationManager: MeditationManager(), currentAd: meditationAds.randomElement()!)
+    AdvertisementView(meditationManager: AppBlockerModel(), currentAd: meditationAds.randomElement()!)
 }
