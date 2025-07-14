@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		780ED3BB2E23EFFA00FAF3FC /* TopUpTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780ED3BA2E23EFFA00FAF3FC /* TopUpTimeView.swift */; };
+		780ED3F82E24E9E500FAF3FC /* AppBlockerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A77D9D2E20FECD00B1872A /* AppBlockerModel.swift */; };
 		781D557C2CF606C900C56DE6 /* TricksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781D557B2CF606C900C56DE6 /* TricksView.swift */; };
 		7827880A2BF68B67004E7F77 /* TimerRunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782788092BF68B67004E7F77 /* TimerRunningView.swift */; };
 		7827880D2BFB3F45004E7F77 /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7827880C2BFB3F45004E7F77 /* OptionsView.swift */; };
@@ -994,6 +995,7 @@
 				785473642C07B5E4009645BF /* DateComponents + Comparable.swift in Sources */,
 				78EBA6CE2CE924A900154226 /* Ad.swift in Sources */,
 				78EBA6D02CE924C300154226 /* MeditationAds.swift in Sources */,
+				780ED3F82E24E9E500FAF3FC /* AppBlockerModel.swift in Sources */,
 				785D094D2C09CFE800044AE9 /* ResumeMeditation.swift in Sources */,
 				785473652C07B5E4009645BF /* MeditationTimer.swift in Sources */,
 				785D096B2C0C4ABD00044AE9 /* TimeStoppedView.swift in Sources */,
@@ -1186,9 +1188,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Meditation/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "7III Meditation";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
-				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = NO;
+				INFOPLIST_KEY_CFBundleDisplayName = "7III Life";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "We need access to Mindful Minutes so we can save and load your meditation sessions.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "We need access to Mindful Minutes so we can save and load your meditation sessions.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need access to your microphone to record your own tape loop.";
@@ -1235,9 +1236,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Meditation/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "7III Meditation";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
-				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = NO;
+				INFOPLIST_KEY_CFBundleDisplayName = "7III Life";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "We need access to Mindful Minutes so we can save and load your meditation sessions.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "We need access to Mindful Minutes so we can save and load your meditation sessions.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need access to your microphone to record your own tape loop.";

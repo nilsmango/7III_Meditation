@@ -2,18 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CFBundleDocumentTypes</key>
+	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
-			<key>CFBundleTypeName</key>
-			<string>Audio</string>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
-			<key>LSHandlerRank</key>
-			<string>Default</string>
-			<key>LSItemContentTypes</key>
+			<key>CFBundleURLName</key>
+			<string>com.project7III.meditation</string>
+			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>public.audio</string>
+				<string>7iiilife</string>
 			</array>
 		</dict>
 	</array>
@@ -22,20 +18,6 @@
 		<string>audio</string>
 	</array>
 	<key>UILaunchScreen</key>
-	<dict>
-		<key>UIColorName</key>
-		<string>AccentColor</string>
-	</dict>
-    <key>CFBundleURLTypes</key>
-    <array>
-        <dict>
-            <key>CFBundleURLName</key>
-            <string>com.project7III.meditation</string>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                <string>7iiilife</string>
-            </array>
-        </dict>
-    </array>
+	<dict/>
 </dict>
 </plist>

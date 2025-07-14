@@ -10,15 +10,14 @@ import SwiftUI
 struct HeaderView: View {
     var body: some View {
         VStack(spacing: 10) {
-            Image(systemName: "shield.fill")
+            Image(systemName: "circle")
                 .font(.system(size: 60))
-                .foregroundColor(.blue)
             
-            Text("App Blocker")
+            Text("7III Life")
                 .font(.largeTitle)
                 .fontWeight(.bold)
             
-            Text("Block distracting apps and redirect to this app")
+            Text("Get your Life back")
                 .font(.subheadline)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)

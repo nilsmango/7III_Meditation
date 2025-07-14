@@ -13,7 +13,7 @@ struct ContentView: View {
     @StateObject private var model = AppBlockerModel()
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $model.navigationPath) {
             VStack(spacing: 20) {
                 HeaderView()
                 
@@ -26,9 +26,13 @@ struct ContentView: View {
                 Spacer()
             }
             .padding()
-            .navigationTitle("App Blocker")
             .onAppear {
                 model.checkAuthorizationStatus()
+            }
+        }
+        .navigationDestination(for: String.self) { value in
+            if value == "meditation" {
+                MeditationView(meditationManager: meditationManager, audioManager: audioManager)
             }
         }
     }
