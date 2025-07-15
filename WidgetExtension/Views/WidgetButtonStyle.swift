@@ -15,7 +15,7 @@ struct WidgetButtonStyle: ViewModifier {
             .font(.title)
             .buttonStyle(.borderedProminent)
             .buttonBorderShape(.circle)
-            .tint(.accent)
+            .tint(.redAccent)
             .frame(width: frameWidth)
     }
 }

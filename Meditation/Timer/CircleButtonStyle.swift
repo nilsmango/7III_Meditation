@@ -18,7 +18,7 @@ struct CircleButtonStyle: ButtonStyle {
             .background(
                 ZStack {
                     Circle()
-                        .fill(.accent.opacity(configuration.isPressed ? 0.3 : 1.0))
+                        .fill(.redAccent.opacity(configuration.isPressed ? 0.3 : 1.0))
                 }
                     .shadow(color: .black.opacity(0.1), radius: 10)
 //                    .scaleEffect(configuration.isPressed ? hugeCircle ? 5 : 1 : 1)

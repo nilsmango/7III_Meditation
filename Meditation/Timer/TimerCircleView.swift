@@ -32,5 +32,5 @@ struct TimerCircleView: View {
 }
 
 #Preview {
-    TimerCircleView(progress: 0.4, accentColor: .accentColor, updateInterval: 5.0)
+    TimerCircleView(progress: 0.4, accentColor: .redAccent, updateInterval: 5.0)
 }

@@ -26,10 +26,9 @@ struct MeditationView: View {
                             Label("Home", systemImage: "arrow.left.circle.fill")
                                 .font(.title)
                                 .symbolRenderingMode(.palette)
-                                .foregroundStyle(.blackWhite, .accent)
+                                .foregroundStyle(.blackWhite, .redAccent)
                                 .labelStyle(.iconOnly)
                                 .padding(.leading)
-                                .padding(.leading, 4)
                         }
                         
                         Spacer()
@@ -59,7 +58,7 @@ struct MeditationView: View {
                             Label("Options", systemImage: "waveform.circle.fill")
                                 .font(.title)
                                 .symbolRenderingMode(.palette)
-                                .foregroundStyle(.blackWhite, .accent)
+                                .foregroundStyle(.blackWhite, .redAccent)
                                 .labelStyle(.iconOnly)
                                 .padding(.trailing, 8)
                         }
@@ -73,10 +72,9 @@ struct MeditationView: View {
                             Label("Options", systemImage: "ellipsis.circle.fill")
                                 .font(.title)
                                 .symbolRenderingMode(.palette)
-                                .foregroundStyle(.blackWhite, .accent)
+                                .foregroundStyle(.blackWhite, .redAccent)
                                 .labelStyle(.iconOnly)
                                 .padding(.trailing)
-                                .padding(.trailing, 4)
                         }
                     }
                     
@@ -89,7 +87,7 @@ struct MeditationView: View {
                 
                 AttackOfTheEmojiView(emojis: emojis, emoji: emoji)
             }
-            .background(meditationManager.gradientBackground ? LinearGradient(gradient: Gradient(colors: [.customGray2, .accent]), startPoint: .top, endPoint: .bottom) : LinearGradient(gradient: Gradient(colors: [.customGray2]), startPoint: .top, endPoint: .bottom))
+            .background(meditationManager.gradientBackground ? LinearGradient(gradient: Gradient(colors: [.customGray2, .redAccent]), startPoint: .top, endPoint: .bottom) : LinearGradient(gradient: Gradient(colors: [.customGray2]), startPoint: .top, endPoint: .bottom))
             .onAppear {
                 meditationManager.checkStatusOfTimer()
             }
@@ -98,5 +96,7 @@ struct MeditationView: View {
     }
 
 #Preview {
-    MeditationView(meditationManager: AppBlockerModel(), audioManager: AudioManager())
+    NavigationStack {
+        MeditationView(meditationManager: AppBlockerModel(), audioManager: AudioManager())
+    }
 }

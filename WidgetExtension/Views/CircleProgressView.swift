@@ -21,7 +21,7 @@ struct CircleProgressView: View {
                          } currentValueLabel: {
                              Text("")
                           }
-                .tint(.accent)
+                .tint(.redAccent)
                 .progressViewStyle(.circular)
                 
             } else {
@@ -30,7 +30,7 @@ struct CircleProgressView: View {
                          } currentValueLabel: {
                              Text("")
                           }
-                .tint(.accent)
+                .tint(.redAccent)
                 .progressViewStyle(.circular)
             }
             
@@ -41,7 +41,7 @@ struct CircleProgressView: View {
                          } currentValueLabel: {
                              Text("")
                           }
-                .tint(.accent)
+                .tint(.redAccent)
                 .progressViewStyle(.circular)
                 .frame(width: 25, height: 25)
             } else {
@@ -50,7 +50,7 @@ struct CircleProgressView: View {
                          } currentValueLabel: {
                              Text("")
                           }
-                .tint(.accent)
+                .tint(.redAccent)
                 .progressViewStyle(.circular)
                 .frame(width: 25, height: 25)
             }

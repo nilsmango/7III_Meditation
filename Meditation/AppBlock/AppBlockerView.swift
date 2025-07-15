@@ -13,7 +13,39 @@ struct AppBlockerView: View {
     @State private var showTopUpSheet = false
     
     var body: some View {
-        VStack(spacing: 20) {
+            ScrollView {
+                VStack(spacing: 20) {
+                    HowToButton()
+                                    
+                    if model.hasSelectedApps {
+                        Button {
+                            showTopUpSheet = true
+                        } label: {
+                            ButtonLabel(iconName: "clock.arrow.trianglehead.counterclockwise.rotate.90", labelText: "Top up Time", accentColor: .greenAccent)
+                        }
+                        
+                        SelectedAppsView(model: model)
+                    }
+                    
+                    AppSelectionButton(showingFamilyPicker: $showingFamilyPicker, model: model)
+                    
+                    if model.hasSelectedApps {
+                        BlockingToggleButton(model: model)
+                    }
+                    
+                    StatusView(model: model)
+                    
+                    Spacer()
+                }
+                
+            }
+        .padding()
+        .familyActivityPicker(isPresented: $showingFamilyPicker, selection: $model.selection)
+        .sheet(isPresented: $showTopUpSheet) {
+            TopUpTimeView(model: model, showSheet: $showTopUpSheet)
+        }
+        .navigationBarBackButtonHidden(true)
+        .safeAreaInset(edge: .top) {
             HStack {
                 Button {
                     model.navigateHome()
@@ -27,39 +59,8 @@ struct AppBlockerView: View {
                 
                 Spacer()
             }
-            Spacer()
-            
-            HeaderView()
-            
-            Spacer()
-            
-            if model.hasSelectedApps {
-                Button {
-                    showTopUpSheet = true
-                } label: {
-                    Label("Top up Time", systemImage: "clock.arrow.trianglehead.counterclockwise.rotate.90")
-                }
-                .buttonStyle(.bordered)
-                
-                SelectedAppsView(model: model)
-            }
-            
-            AppSelectionButton(showingFamilyPicker: $showingFamilyPicker, model: model)
-            
-            if model.hasSelectedApps {
-                BlockingToggleButton(model: model)
-            }
-            
-            StatusView(model: model)
-            
-            Spacer()
-        }
-        .padding()
-        .familyActivityPicker(isPresented: $showingFamilyPicker, selection: $model.selection)
-        .sheet(isPresented: $showTopUpSheet) {
-            TopUpTimeView(model: model, showSheet: $showTopUpSheet)
-        }
-        .navigationBarBackButtonHidden(true)
+            .padding(.horizontal)
+        }      
     }
 }
 

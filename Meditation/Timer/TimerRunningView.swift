@@ -19,7 +19,7 @@ struct TimerRunningView: View {
     var body: some View {
         ZStack {
             
-            TimerCircleView(progress: meditationManager.circleProgress, accentColor: .accent, updateInterval: updateInterval)
+            TimerCircleView(progress: meditationManager.circleProgress, accentColor: .redAccent, updateInterval: updateInterval)
                 .onAppear {
                     if isRunning {
                         meditationManager.startStatusTimer(updateInterval: updateInterval)

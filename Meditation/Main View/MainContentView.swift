@@ -16,7 +16,7 @@ struct MainContentView: View {
                 Spacer()
                 MainViewButton(label: "App Blocker", iconName: "shield.fill", labelColor: .greenAccent, action: model.navigateToAppBlocker)
                 Spacer()
-                MainViewButton(label: "Meditation", iconName: "circle.fill", labelColor: .accent, action: model.navigateToMeditation)
+                MainViewButton(label: "Meditation", iconName: "circle.fill", labelColor: .redAccent, action: model.navigateToMeditation)
                 Spacer()
             }
         }
@@ -25,5 +25,4 @@ struct MainContentView: View {
 
 #Preview {
     MainContentView(model: AppBlockerModel())
-        .padding()
 }

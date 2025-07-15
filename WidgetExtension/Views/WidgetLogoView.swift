@@ -13,10 +13,10 @@ struct WidgetLogoView: View {
     var body: some View {
         if expanded {
             Circle()
-                .fill(.accent)
+                .fill(.redAccent)
         } else {
             Circle()
-                .fill(.accent)
+                .fill(.redAccent)
                 .frame(width: 25, height: 25)
         }
         

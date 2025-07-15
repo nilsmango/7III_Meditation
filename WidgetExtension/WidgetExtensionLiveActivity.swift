@@ -36,7 +36,7 @@ struct WidgetExtensionLiveActivity: Widget {
             
             ActivityLockScreenView(timerStatus: context.state.timerStatus, targetDate: context.state.targetDate, timerInMinutes: context.state.timerInMinutes, welcomeBackText: context.state.welcomeBackText, koanText: context.state.koanText, showKoan: context.state.showKoan, frameWidth: frameWidth)
                 .activityBackgroundTint(nil)
-            //            .background(context.state.gradientBackground ? LinearGradient(gradient: Gradient(colors: [.customGray2, .accent]), startPoint: .top, endPoint: .bottom) : LinearGradient(gradient: Gradient(colors: [.customGray2]), startPoint: .top, endPoint: .bottom))
+            //            .background(context.state.gradientBackground ? LinearGradient(gradient: Gradient(colors: [.customGray2, .redAccent]), startPoint: .top, endPoint: .bottom) : LinearGradient(gradient: Gradient(colors: [.customGray2]), startPoint: .top, endPoint: .bottom))
             
         } dynamicIsland: { context in
             DynamicIsland {
@@ -71,7 +71,7 @@ struct WidgetExtensionLiveActivity: Widget {
                 CircleProgressView(timerStatus: context.state.timerStatus, targetDate: context.state.targetDate, timerInMinutes: context.state.timerInMinutes)
                 
             }
-            .keylineTint(.accent)
+            .keylineTint(.redAccent)
         }
     }
 }

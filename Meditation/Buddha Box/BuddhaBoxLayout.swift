@@ -51,17 +51,17 @@ struct BuddhaBoxLayout: View {
                 HStack {
                     Spacer()
                     
-                    Dial(value: .constant(0.0), dialColor: .accentColor, dialName: "Nothing", encoderText: "")
+                    Dial(value: .constant(0.0), dialColor: .redAccent, dialName: "Nothing", encoderText: "")
                         .opacity(0.0)
                     
                     Spacer()
                     
-                    Dial(value: .constant(0.0), dialColor: .accentColor, dialName: "Nothing", encoderText: "")
+                    Dial(value: .constant(0.0), dialColor: .redAccent, dialName: "Nothing", encoderText: "")
                         .opacity(0.0)
                     
                     Spacer()
                     
-                    Dial(value: .constant(0.0), dialColor: .accentColor, dialName: "Nothing", encoderText: "")
+                    Dial(value: .constant(0.0), dialColor: .redAccent, dialName: "Nothing", encoderText: "")
                         .opacity(0.0)
                     
                     Spacer()
@@ -97,7 +97,7 @@ struct BuddhaBoxLayout: View {
                 Spacer()
                 
                 Group {
-                    Dial(value: $brownNoiseAmplitude, dialColor: .accentColor, dialName: "Brown", encoderText: String(format: "%.2f", audioManager.soundData.brownianAmplitude))
+                    Dial(value: $brownNoiseAmplitude, dialColor: .redAccent, dialName: "Brown", encoderText: String(format: "%.2f", audioManager.soundData.brownianAmplitude))
                         .onChange(of: brownNoiseAmplitude) { _, _ in
                             audioManager.soundData.brownianAmplitude = Float(brownNoiseAmplitude / 100.0)
                         }
@@ -107,7 +107,7 @@ struct BuddhaBoxLayout: View {
                     
                     Spacer()
                     
-                    Dial(value: $pinkNoiseAmplitude, dialColor: .accentColor, dialName: "Pink", encoderText: String(format: "%.2f", audioManager.soundData.pinkAmplitude))
+                    Dial(value: $pinkNoiseAmplitude, dialColor: .redAccent, dialName: "Pink", encoderText: String(format: "%.2f", audioManager.soundData.pinkAmplitude))
                         .onChange(of: pinkNoiseAmplitude) { _, _ in
                             audioManager.soundData.pinkAmplitude = Float(pinkNoiseAmplitude / 100.0)
                         }
@@ -116,7 +116,7 @@ struct BuddhaBoxLayout: View {
                         }
                     Spacer()
                     
-                    Dial(value: $whiteNoiseAmplitude, dialColor: .accentColor, dialName: "White", encoderText: String(format: "%.2f", audioManager.soundData.whiteAmplitude))
+                    Dial(value: $whiteNoiseAmplitude, dialColor: .redAccent, dialName: "White", encoderText: String(format: "%.2f", audioManager.soundData.whiteAmplitude))
                         .onChange(of: whiteNoiseAmplitude) { _, _ in
                             audioManager.soundData.whiteAmplitude = Float(whiteNoiseAmplitude / 100.0)
                         }
@@ -155,7 +155,7 @@ struct BuddhaBoxLayout: View {
                 
                 Spacer()
                 
-                Dial(value: $buddhaLoopAmplitude, dialColor: .accentColor, dialName: "Volume", encoderText: String(format: "%.2f", audioManager.tapeMachineControls[loopPlaying].volume))
+                Dial(value: $buddhaLoopAmplitude, dialColor: .redAccent, dialName: "Volume", encoderText: String(format: "%.2f", audioManager.tapeMachineControls[loopPlaying].volume))
                     .onChange(of: buddhaLoopAmplitude) { _, _ in
                         audioManager.tapeMachineControls[loopPlaying].volume = Float(buddhaLoopAmplitude / 100.0)
                     }
@@ -165,7 +165,7 @@ struct BuddhaBoxLayout: View {
                 
                 Spacer()
                 
-                Dial(value: $buddhaLoopShift, resetValue: 50, dialColor: .accentColor, dialName: "Shift", encoderText: String(format: "%.1f", audioManager.tapeMachineControls[loopPlaying].pitchShift / 100.0))
+                Dial(value: $buddhaLoopShift, resetValue: 50, dialColor: .redAccent, dialName: "Shift", encoderText: String(format: "%.1f", audioManager.tapeMachineControls[loopPlaying].pitchShift / 100.0))
                     .onChange(of: buddhaLoopShift) { _, _ in
                         audioManager.tapeMachineControls[loopPlaying].pitchShift = Float(mapRange(value: buddhaLoopShift, fromRange: 0...100, toRange: -2400...2400))
                     }
@@ -175,7 +175,7 @@ struct BuddhaBoxLayout: View {
                 
                 Spacer()
                 
-                Dial(value: $buddhaLoopSpeed, resetValue: 20, dialColor: .accentColor, dialName: "VariSpeed", encoderText: String(format: "%.2f", audioManager.tapeMachineControls[loopPlaying].variSpeed))
+                Dial(value: $buddhaLoopSpeed, resetValue: 20, dialColor: .redAccent, dialName: "VariSpeed", encoderText: String(format: "%.2f", audioManager.tapeMachineControls[loopPlaying].variSpeed))
                     .onChange(of: buddhaLoopSpeed) { _, _ in
                         audioManager.tapeMachineControls[loopPlaying].variSpeed = Float(mapRange(value: buddhaLoopSpeed, fromRange: 0...100, toRange: 0.25...4))
                     }
@@ -204,7 +204,7 @@ struct BuddhaBoxLayout: View {
                     
                     Spacer()
                     
-                    Dial(value: $userLoopAmplitude, dialColor: .accentColor, dialName: "Volume", encoderText: String(format: "%.2f", audioManager.soundData.userVolume))
+                    Dial(value: $userLoopAmplitude, dialColor: .redAccent, dialName: "Volume", encoderText: String(format: "%.2f", audioManager.soundData.userVolume))
                         .onChange(of: userLoopAmplitude) { _, _ in
                             audioManager.soundData.userVolume = Float(userLoopAmplitude / 100.0)
                         }
@@ -214,7 +214,7 @@ struct BuddhaBoxLayout: View {
                     
                     Spacer()
                     
-                    Dial(value: $userLoopShift, resetValue: 50, dialColor: .accentColor, dialName: "Shift", encoderText: String(format: "%.1f", audioManager.soundData.userPitchShift / 100.0))
+                    Dial(value: $userLoopShift, resetValue: 50, dialColor: .redAccent, dialName: "Shift", encoderText: String(format: "%.1f", audioManager.soundData.userPitchShift / 100.0))
                         .onChange(of: userLoopShift) { _, _ in
                             audioManager.soundData.userPitchShift = Float(mapRange(value: userLoopShift, fromRange: 0...100, toRange: -2400...2400))
                         }
@@ -224,7 +224,7 @@ struct BuddhaBoxLayout: View {
                     
                     Spacer()
                     
-                    Dial(value: $userLoopSpeed, resetValue: 20, dialColor: .accentColor, dialName: "VariSpeed", encoderText: String(format: "%.2f", audioManager.soundData.userVariSpeed))
+                    Dial(value: $userLoopSpeed, resetValue: 20, dialColor: .redAccent, dialName: "VariSpeed", encoderText: String(format: "%.2f", audioManager.soundData.userVariSpeed))
                         .onChange(of: userLoopSpeed) { _, _ in
                             audioManager.soundData.userVariSpeed = Float(mapRange(value: userLoopSpeed, fromRange: 0...100, toRange: 0.25...4))
                         }
@@ -244,7 +244,7 @@ struct BuddhaBoxLayout: View {
                         
                     Spacer()
                     
-                    Dial(value: $buddhaVariSpeed, resetValue: 20, dialColor: .accentColor, dialName: "VariSpeed", encoderText: String(format: "%.2f", audioManager.effectsData.endVariRate))
+                    Dial(value: $buddhaVariSpeed, resetValue: 20, dialColor: .redAccent, dialName: "VariSpeed", encoderText: String(format: "%.2f", audioManager.effectsData.endVariRate))
                         .onChange(of: buddhaVariSpeed) { _, _ in
                             audioManager.effectsData.endVariRate = Float(mapRange(value: buddhaVariSpeed, fromRange: 0...100, toRange: 0.25...4))
                         }
@@ -254,7 +254,7 @@ struct BuddhaBoxLayout: View {
                     
                     Spacer()
                     
-                    Dial(value: $buddhaDistortion, dialColor: .accentColor, dialName: "Distortion", encoderText: String(format: "%.2f", audioManager.effectsData.distortionMix / 100.0))
+                    Dial(value: $buddhaDistortion, dialColor: .redAccent, dialName: "Distortion", encoderText: String(format: "%.2f", audioManager.effectsData.distortionMix / 100.0))
                         .onChange(of: buddhaDistortion) { _, _ in
                             audioManager.effectsData.distortionMix = Float(buddhaDistortion)
                         }
@@ -284,7 +284,7 @@ struct BuddhaBoxLayout: View {
                 
                 HStack {
                     Spacer()
-                    Dial(value: $buddhaLPFreq, resetValue: 100, dialColor: .accentColor, dialName: "LP Freq", encoderText: {
+                    Dial(value: $buddhaLPFreq, resetValue: 100, dialColor: .redAccent, dialName: "LP Freq", encoderText: {
                         let frequency = pow(10, Double(audioManager.effectsData.logMoogCutoff))
                         if frequency < 1000 {
                             return String(format: "%.0f", frequency)
@@ -303,7 +303,7 @@ struct BuddhaBoxLayout: View {
                     
                     Spacer()
                     
-                    Dial(value: $buddhaLPRes, dialColor: .accentColor, dialName: "LP Res", encoderText: String(format: "%.1f", audioManager.effectsData.moogResonance))
+                    Dial(value: $buddhaLPRes, dialColor: .redAccent, dialName: "LP Res", encoderText: String(format: "%.1f", audioManager.effectsData.moogResonance))
                         .onChange(of: buddhaLPRes) { _, _ in
                             // 0...40
                             audioManager.effectsData.moogResonance = Float(mapRange(value: buddhaLPRes, fromRange: 0...100, toRange: 0...40))
@@ -314,7 +314,7 @@ struct BuddhaBoxLayout: View {
                     
                     Spacer()
                     
-                    Dial(value: $buddhaHPFreq, resetValue: 0, dialColor: .accentColor, dialName: "HP Freq", encoderText: {
+                    Dial(value: $buddhaHPFreq, resetValue: 0, dialColor: .redAccent, dialName: "HP Freq", encoderText: {
                         let frequency = pow(10, Double(audioManager.effectsData.logHighPassCutoff))
                         if frequency < 1000 {
                             return String(format: "%.0f", frequency)
@@ -334,7 +334,7 @@ struct BuddhaBoxLayout: View {
                     
                     Spacer()
                     
-                    Dial(value: $buddhaHPRes, dialColor: .accentColor, dialName: "HP Res", encoderText: String(format: "%.1f", audioManager.effectsData.highPassResonance))
+                    Dial(value: $buddhaHPRes, dialColor: .redAccent, dialName: "HP Res", encoderText: String(format: "%.1f", audioManager.effectsData.highPassResonance))
                         .onChange(of: buddhaHPRes) { _, _ in
                             // 0...40
                             audioManager.effectsData.highPassResonance = Float(mapRange(value: buddhaHPRes, fromRange: 0...100, toRange: 0...40))
@@ -350,7 +350,7 @@ struct BuddhaBoxLayout: View {
                 HStack {
                     Spacer()
                     
-                    Dial(value: $buddhaDelayMix, dialColor: .accentColor, dialName: "Delay Mix", encoderText: String(format: "%.2f", audioManager.effectsData.delayDryWetMix))
+                    Dial(value: $buddhaDelayMix, dialColor: .redAccent, dialName: "Delay Mix", encoderText: String(format: "%.2f", audioManager.effectsData.delayDryWetMix))
                         .onChange(of: buddhaDelayMix) { _, _ in
                             audioManager.effectsData.delayDryWetMix = Float(buddhaDelayMix / 100.0)
                         }
@@ -363,7 +363,7 @@ struct BuddhaBoxLayout: View {
                     Dial(
                         value: $buddhaDelayTime,
                         resetValue: 37.17,
-                        dialColor: .accentColor,
+                        dialColor: .redAccent,
                         dialName: "Time",
                         encoderText: String(format: "%.3f", audioManager.effectsData.delayTime)
                     )
@@ -389,7 +389,7 @@ struct BuddhaBoxLayout: View {
                     
                     Spacer()
                     
-                    Dial(value: $buddhaDelayFeedback, dialColor: .accentColor, dialName: "Feedback", encoderText: String(format: "%.2f", audioManager.effectsData.delayFeedback))
+                    Dial(value: $buddhaDelayFeedback, dialColor: .redAccent, dialName: "Feedback", encoderText: String(format: "%.2f", audioManager.effectsData.delayFeedback))
                         .onChange(of: buddhaDelayFeedback) { _, _ in
                             audioManager.effectsData.delayFeedback = Float(buddhaDelayFeedback / 100.0)
                         }
@@ -399,7 +399,7 @@ struct BuddhaBoxLayout: View {
                     
                     Spacer()
                     
-                    Dial(value: $buddhaReverbMix, resetValue: 0, dialColor: .accentColor, dialName: "Reverb Mix", encoderText: String(format: "%.2f", audioManager.effectsData.reverbDryWetMix))
+                    Dial(value: $buddhaReverbMix, resetValue: 0, dialColor: .redAccent, dialName: "Reverb Mix", encoderText: String(format: "%.2f", audioManager.effectsData.reverbDryWetMix))
                         .onChange(of: buddhaReverbMix) { _, _ in
                             audioManager.effectsData.reverbDryWetMix = Float(buddhaReverbMix / 100.0)
                         }
@@ -417,7 +417,7 @@ struct BuddhaBoxLayout: View {
             Spacer()
         }
         .padding(.vertical)
-        .background(meditationManager.gradientBackground ? LinearGradient(gradient: Gradient(colors: [.customGray2, .accent]), startPoint: .top, endPoint: .bottom) : LinearGradient(gradient: Gradient(colors: [.customGray2]), startPoint: .top, endPoint: .bottom))
+        .background(meditationManager.gradientBackground ? LinearGradient(gradient: Gradient(colors: [.customGray2, .redAccent]), startPoint: .top, endPoint: .bottom) : LinearGradient(gradient: Gradient(colors: [.customGray2]), startPoint: .top, endPoint: .bottom))
         .defersSystemGestures(on: .all)
     }
     

@@ -57,6 +57,7 @@ struct MonthlyChart: View {
             }
             .chartScrollableAxes(.horizontal)
             .chartScrollPosition(x: .constant(startOfMonth))
+            .foregroundStyle(.redAccent)
             .chartXVisibleDomain(length: 366 / 2 * 24 * 60 * 60)
             .frame(height: 250)
         }

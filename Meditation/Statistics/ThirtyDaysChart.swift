@@ -46,6 +46,7 @@ struct ThirtyDaysChart: View {
             }
             .chartScrollableAxes(.horizontal)
             .chartScrollPosition(x: .constant(startOfDay))
+            .foregroundStyle(.redAccent)
             .chartXVisibleDomain(length: xWidth * 24 * 60 * 60)
             .frame(height: 250)
         }

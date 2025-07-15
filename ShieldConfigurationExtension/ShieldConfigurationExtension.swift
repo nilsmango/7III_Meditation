@@ -14,7 +14,7 @@ import UIKit
 // Make sure that your class name matches the NSExtensionPrincipalClass in your Info.plist.
 class ShieldConfigurationExtension: ShieldConfigurationDataSource {
     let defaults = UserDefaults(suiteName: "group.com.project7iii.life")
-    let icon = UIImage(systemName: "circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 60, weight: .regular))!.withTintColor(.label, renderingMode: .alwaysOriginal)
+    let icon = UIImage(systemName: "circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 60, weight: .regular))!.withTintColor(.label)
     
     override func configuration(shielding application: Application) -> ShieldConfiguration {
         let hasTopUpTimeAvailable = defaults?.bool(forKey: "topUpActive") ?? false
@@ -25,7 +25,7 @@ class ShieldConfigurationExtension: ShieldConfigurationDataSource {
             : "This app is currently blocked, if you need more time, go to 7III Life to unlock more time."
 
         let secondaryButton = hasTopUpTimeAvailable
-            ? ShieldConfiguration.Label(text: "Unlock for \(topUpMinutes) min", color: .systemBlue)
+            ? ShieldConfiguration.Label(text: "Unlock for \(topUpMinutes) min", color: .greenAccent)
             : nil
 
         return ShieldConfiguration(

@@ -11,6 +11,10 @@
 		780ED3F82E24E9E500FAF3FC /* AppBlockerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A77D9D2E20FECD00B1872A /* AppBlockerModel.swift */; };
 		780ED4092E2580F400FAF3FC /* MainViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780ED4082E2580F400FAF3FC /* MainViewButton.swift */; };
 		780ED40B2E25872D00FAF3FC /* AppBlockerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780ED40A2E25872D00FAF3FC /* AppBlockerView.swift */; };
+		780ED42C2E264A6A00FAF3FC /* HowToButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780ED42B2E264A6A00FAF3FC /* HowToButton.swift */; };
+		780ED42E2E264AF900FAF3FC /* ButtonLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780ED42D2E264AF900FAF3FC /* ButtonLabel.swift */; };
+		780ED4302E264B9D00FAF3FC /* HowToView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780ED42F2E264B9D00FAF3FC /* HowToView.swift */; };
+		780ED4312E265A5900FAF3FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78385D0E2BF3647500581057 /* Assets.xcassets */; };
 		781D557C2CF606C900C56DE6 /* TricksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781D557B2CF606C900C56DE6 /* TricksView.swift */; };
 		7827880A2BF68B67004E7F77 /* TimerRunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782788092BF68B67004E7F77 /* TimerRunningView.swift */; };
 		7827880D2BFB3F45004E7F77 /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7827880C2BFB3F45004E7F77 /* OptionsView.swift */; };
@@ -120,7 +124,6 @@
 		789A0E482C061ECE009CB9E7 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7879BDEF2BF4A43E001994D2 /* Helpers.swift */; };
 		78A77D9C2E20FE4700B1872A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A77D9B2E20FE4700B1872A /* ContentView.swift */; };
 		78A77D9E2E20FECD00B1872A /* AppBlockerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A77D9D2E20FECD00B1872A /* AppBlockerModel.swift */; };
-		78A77DA32E20FF6B00B1872A /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A77DA22E20FF6B00B1872A /* HeaderView.swift */; };
 		78A77DA52E20FF8F00B1872A /* AuthorizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A77DA42E20FF8F00B1872A /* AuthorizationView.swift */; };
 		78A77DA72E20FFAF00B1872A /* MainContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A77DA62E20FFAF00B1872A /* MainContentView.swift */; };
 		78A77DA92E20FFD000B1872A /* SelectedAppsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A77DA82E20FFD000B1872A /* SelectedAppsView.swift */; };
@@ -200,6 +203,9 @@
 		780ED3BA2E23EFFA00FAF3FC /* TopUpTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopUpTimeView.swift; sourceTree = "<group>"; };
 		780ED4082E2580F400FAF3FC /* MainViewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewButton.swift; sourceTree = "<group>"; };
 		780ED40A2E25872D00FAF3FC /* AppBlockerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBlockerView.swift; sourceTree = "<group>"; };
+		780ED42B2E264A6A00FAF3FC /* HowToButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToButton.swift; sourceTree = "<group>"; };
+		780ED42D2E264AF900FAF3FC /* ButtonLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonLabel.swift; sourceTree = "<group>"; };
+		780ED42F2E264B9D00FAF3FC /* HowToView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToView.swift; sourceTree = "<group>"; };
 		781D557A2CF5DF3C00C56DE6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		781D557B2CF606C900C56DE6 /* TricksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricksView.swift; sourceTree = "<group>"; };
 		782788092BF68B67004E7F77 /* TimerRunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerRunningView.swift; sourceTree = "<group>"; };
@@ -290,7 +296,6 @@
 		789A0E3E2C061570009CB9E7 /* TimerStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerStatus.swift; sourceTree = "<group>"; };
 		78A77D9B2E20FE4700B1872A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		78A77D9D2E20FECD00B1872A /* AppBlockerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBlockerModel.swift; sourceTree = "<group>"; };
-		78A77DA22E20FF6B00B1872A /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		78A77DA42E20FF8F00B1872A /* AuthorizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationView.swift; sourceTree = "<group>"; };
 		78A77DA62E20FFAF00B1872A /* MainContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContentView.swift; sourceTree = "<group>"; };
 		78A77DA82E20FFD000B1872A /* SelectedAppsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedAppsView.swift; sourceTree = "<group>"; };
@@ -648,11 +653,13 @@
 		78A77DA12E20FF5F00B1872A /* AppBlock */ = {
 			isa = PBXGroup;
 			children = (
-				78A77DA22E20FF6B00B1872A /* HeaderView.swift */,
 				780ED40A2E25872D00FAF3FC /* AppBlockerView.swift */,
 				780ED3BA2E23EFFA00FAF3FC /* TopUpTimeView.swift */,
 				78A77DA82E20FFD000B1872A /* SelectedAppsView.swift */,
 				78A77DAA2E20FFFB00B1872A /* AppSelectionButton.swift */,
+				780ED42B2E264A6A00FAF3FC /* HowToButton.swift */,
+				780ED42F2E264B9D00FAF3FC /* HowToView.swift */,
+				780ED42D2E264AF900FAF3FC /* ButtonLabel.swift */,
 				78A77DAC2E21002A00B1872A /* BlockingToggleButton.swift */,
 				78A77DAE2E21004400B1872A /* StatusView.swift */,
 			);
@@ -890,6 +897,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				780ED4312E265A5900FAF3FC /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -935,6 +943,7 @@
 				789A0E072C032377009CB9E7 /* KoansEditView.swift in Sources */,
 				780ED3BB2E23EFFA00FAF3FC /* TopUpTimeView.swift in Sources */,
 				784ECA862CAFCD90004C0CF6 /* Triangle.swift in Sources */,
+				780ED42C2E264A6A00FAF3FC /* HowToButton.swift in Sources */,
 				789A0E1C2C05B3EA009CB9E7 /* ThirtyDaysChart.swift in Sources */,
 				785D094F2C09F0D600044AE9 /* WidgetButtonStyle.swift in Sources */,
 				78A77DAD2E21002A00B1872A /* BlockingToggleButton.swift in Sources */,
@@ -959,10 +968,12 @@
 				7854736F2C090185009645BF /* WidgetButtonLabel.swift in Sources */,
 				78EBA6CD2CE924A900154226 /* Ad.swift in Sources */,
 				784ECA842CAFCCF2004C0CF6 /* Encoder.swift in Sources */,
+				780ED4302E264B9D00FAF3FC /* HowToView.swift in Sources */,
 				780ED40B2E25872D00FAF3FC /* AppBlockerView.swift in Sources */,
 				789A0E202C05C35A009CB9E7 /* StatisticsButton.swift in Sources */,
 				7854736C2C090128009645BF /* WidgetLogoView.swift in Sources */,
 				785D09672C0BA00500044AE9 /* AttackOfTheEmojiView.swift in Sources */,
+				780ED42E2E264AF900FAF3FC /* ButtonLabel.swift in Sources */,
 				78A77DA52E20FF8F00B1872A /* AuthorizationView.swift in Sources */,
 				785D095E2C0B114300044AE9 /* Reminders.swift in Sources */,
 				785473752C09028C009645BF /* WidgetExtensionLiveActivity.swift in Sources */,
@@ -977,7 +988,6 @@
 				7827880D2BFB3F45004E7F77 /* OptionsView.swift in Sources */,
 				785D09492C09CFE100044AE9 /* PauseMeditation.swift in Sources */,
 				785D09582C0A06EC00044AE9 /* TimerHackView.swift in Sources */,
-				78A77DA32E20FF6B00B1872A /* HeaderView.swift in Sources */,
 				78385D0B2BF3647300581057 /* MeditationApp.swift in Sources */,
 				78A77D9E2E20FECD00B1872A /* AppBlockerModel.swift in Sources */,
 				785473772C09056E009645BF /* CircleProgressView.swift in Sources */,

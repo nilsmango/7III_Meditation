@@ -27,7 +27,7 @@ struct AuthorizationView: View {
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(Color.blue)
+                    .background(.greenAccent)
                     .cornerRadius(10)
             }
         }

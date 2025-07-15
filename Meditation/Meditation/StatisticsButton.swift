@@ -18,7 +18,7 @@ struct StatisticsButton: View {
             .padding(padding)
             .background {
                 Circle()
-                    .foregroundStyle(.accent)
+                    .foregroundStyle(.redAccent)
             }
     }
 }

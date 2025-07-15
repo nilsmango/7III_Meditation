@@ -18,14 +18,16 @@ struct MainViewButton: View {
             VStack(spacing: 12) {
                 Image(systemName: iconName)
                     .font(.system(size: 48))
+                    .foregroundColor(labelColor)
                 Text(label)
+                    .foregroundColor(.primary)
             }
             .font(.title2)
             .fontWeight(.bold)
-            .foregroundColor(labelColor)
+            
             .frame(width: UIScreen.main.bounds.width/3)
             .padding()
-            .background(.customGray)
+            .background(.buttonGray)
             .cornerRadius(10)
         }
     }
@@ -36,7 +38,7 @@ struct MainViewButton: View {
         Spacer()
         MainViewButton(label: "App Blocker", iconName: "shield.fill", labelColor: .greenAccent, action: {})
         Spacer()
-        MainViewButton(label: "Meditation", iconName: "circle.fill", labelColor: .accent, action: {})
+        MainViewButton(label: "Meditation", iconName: "circle.fill", labelColor: .redAccent, action: {})
         Spacer()
     }
     

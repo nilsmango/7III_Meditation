@@ -31,7 +31,7 @@ struct OptionsView: View {
                     }
                     
                     Toggle("Show Koan", isOn: $meditationManager.meditationTimer.showKoan)
-                        .tint(.accentColor)
+                        .tint(.redAccent)
                     
                     if meditationManager.meditationTimer.showKoan {
                         NavigationLink("Edit Koans", destination: KoansEditView(meditationManager: meditationManager))
@@ -78,7 +78,7 @@ struct OptionsView: View {
                 
                 Section("Misc") {
                     Toggle("Activate Second End Sound", isOn: $meditationManager.meditationTimer.secondReminder)
-                        .tint(.accentColor)
+                        .tint(.redAccent)
                     
                     Picker("Preparation Time", selection: $meditationManager.meditationTimer.preparationTime) {
                         ForEach(1...60, id: \.self) { seconds in
@@ -88,12 +88,12 @@ struct OptionsView: View {
     //                .pickerStyle(.wheel)
                     
                     Toggle("Gradient Background", isOn: $meditationManager.gradientBackground)
-                        .tint(.accentColor)
+                        .tint(.redAccent)
                 }
                 
                 Section(content:  {
                     Toggle("Activate Reminders", isOn: $meditationManager.reminders.activateReminders)
-                        .tint(.accentColor)
+                        .tint(.redAccent)
                     
                     if meditationManager.reminders.activateReminders {
                         NavigationLink {
@@ -152,8 +152,9 @@ struct OptionsView: View {
                                 }
                             } label: {
                                 Label("Support Us & Remove Ads", systemImage: "sparkles")
+                                    .foregroundStyle(.primary, .redAccent, .redAccent)
                             }
-                            .fontWeight(.bold)
+                            .fontWeight(.semibold)
 
                     }
                 }, header: {
@@ -189,7 +190,7 @@ struct OptionsView: View {
                     Link(destination: URL(string: "https://apps.apple.com/app/id6738342562?action=write-review")!) {
                         Label("Help Us Out & Review this App!", systemImage: "star.fill")
                     }
-                    .fontWeight(.bold)
+                    .fontWeight(.semibold)
                     
                 }, header: {
                     Text("Help & More")

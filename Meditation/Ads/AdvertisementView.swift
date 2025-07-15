@@ -122,7 +122,7 @@ struct AdvertisementView: View {
                                 }) {
                                     Label("Check it out", systemImage: "checkmark.circle.fill")
                                 }
-                                .tint(.accentColor)
+                                .tint(.redAccent)
                                 .buttonStyle(.borderedProminent)
                                 .padding(.vertical)
                                 

@@ -13,18 +13,13 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack(path: $model.navigationPath) {
-            VStack(spacing: 20) {
-                
+            Group {
                 if model.isAuthorized {
                     MainContentView(model: model)
                 } else {
-                    Spacer()
                     AuthorizationView(model: model)
                 }
-                
-                Spacer()
             }
-            .padding()
             .onAppear {
                 model.checkAuthorizationStatus()
             }

@@ -20,7 +20,8 @@ struct AppSelectionButton: View {
             .font(.headline)
             .foregroundColor(.blue)
             .frame(maxWidth: .infinity)
-            .padding()
+            .frame(height: 58)
+            .padding(.horizontal)
             .background(Color.blue.opacity(0.1))
             .cornerRadius(10)
         }
