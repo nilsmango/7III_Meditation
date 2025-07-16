@@ -16,6 +16,7 @@ import DeviceActivity
 class ShieldActionExtension: ShieldActionDelegate {
     let deviceActivityCenter = DeviceActivityCenter()
     let store = ManagedSettingsStore()
+    private var isProcessingSecondaryAction = false
     
     override func handle(action: ShieldAction, for application: ApplicationToken, completionHandler: @escaping (ShieldActionResponse) -> Void) {
         // Handle the action as needed.
@@ -23,7 +24,18 @@ class ShieldActionExtension: ShieldActionDelegate {
         case .primaryButtonPressed:
             completionHandler(.close)
         case .secondaryButtonPressed:
+            guard !isProcessingSecondaryAction else {
+                completionHandler(.defer)
+                return
+            }
+            isProcessingSecondaryAction = true
+            
             let defaults = UserDefaults(suiteName: "group.com.project7iii.life")
+            let hasTopUpTimeAvailable = defaults?.bool(forKey: "topUpActive") ?? false
+            guard hasTopUpTimeAvailable else {
+                completionHandler(.close)
+                return
+            }
             defaults?.set(false, forKey: "topUpActive")
             let topUpMinutes = defaults?.integer(forKey: "topUpMinutes") ?? 1
             
@@ -60,6 +72,12 @@ class ShieldActionExtension: ShieldActionDelegate {
         case .primaryButtonPressed:
             completionHandler(.close)
         case .secondaryButtonPressed:
+            guard !isProcessingSecondaryAction else {
+                completionHandler(.none)
+                return
+            }
+            isProcessingSecondaryAction = true
+            
             let defaults = UserDefaults(suiteName: "group.com.project7iii.life")
             defaults?.set(false, forKey: "topUpActive")
             let topUpMinutes = defaults?.integer(forKey: "topUpMinutes") ?? 1
@@ -74,7 +92,7 @@ class ShieldActionExtension: ShieldActionDelegate {
             let tokenData = try! JSONEncoder().encode(webDomain)
             let base64String = tokenData.base64EncodedString()
             let activityName = DeviceActivityName(base64String)
-            let eventNameString = "webDomain" + UUID().uuidString
+            let eventNameString = "wEb" + UUID().uuidString
             let eventName = DeviceActivityEvent.Name(eventNameString)
             let schedule = DeviceActivitySchedule(
                 intervalStart: DateComponents(hour: 0, minute: 0, second: 0),
