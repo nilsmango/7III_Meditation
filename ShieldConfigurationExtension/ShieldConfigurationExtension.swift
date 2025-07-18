@@ -13,7 +13,6 @@ import UIKit
 // The system provides a default appearance for any methods that your subclass doesn't override.
 // Make sure that your class name matches the NSExtensionPrincipalClass in your Info.plist.
 class ShieldConfigurationExtension: ShieldConfigurationDataSource {
-    let icon = UIImage(systemName: "circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 60, weight: .regular))!.withTintColor(.label)
     
     private func getFreshDefaults() -> UserDefaults? {
         // Create a new instance each time to ensure fresh data
@@ -36,7 +35,7 @@ class ShieldConfigurationExtension: ShieldConfigurationDataSource {
         return ShieldConfiguration(
             backgroundBlurStyle: .systemMaterial,
             backgroundColor: UIColor.systemBackground,
-            icon: icon,
+            icon: UIImage(systemName: "circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 60, weight: .regular))!.withTintColor(.label),
             title: ShieldConfiguration.Label(text: "Blocked by 7III Life", color: .label),
             subtitle: ShieldConfiguration.Label(text: subtitle, color: .secondaryLabel),
             primaryButtonLabel: ShieldConfiguration.Label(text: "OK", color: .white),
@@ -61,7 +60,7 @@ class ShieldConfigurationExtension: ShieldConfigurationDataSource {
         return ShieldConfiguration(
             backgroundBlurStyle: .systemMaterial,
             backgroundColor: UIColor.systemBackground,
-            icon: icon,
+            icon: UIImage(systemName: "circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 60, weight: .regular))!.withTintColor(.label),
             title: ShieldConfiguration.Label(text: "Blocked by 7III Life", color: .label),
             subtitle: ShieldConfiguration.Label(text: subtitle, color: .secondaryLabel),
             primaryButtonLabel: ShieldConfiguration.Label(text: "OK", color: .white),
@@ -86,7 +85,7 @@ class ShieldConfigurationExtension: ShieldConfigurationDataSource {
         return ShieldConfiguration(
             backgroundBlurStyle: .systemMaterial,
             backgroundColor: UIColor.systemBackground,
-            icon: icon,
+            icon: UIImage(systemName: "circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 60, weight: .regular))!.withTintColor(.label),
             title: ShieldConfiguration.Label(text: "Blocked by 7III Life", color: .label),
             subtitle: ShieldConfiguration.Label(text: subtitle, color: .secondaryLabel),
             primaryButtonLabel: ShieldConfiguration.Label(text: "OK", color: .white),
@@ -111,7 +110,7 @@ class ShieldConfigurationExtension: ShieldConfigurationDataSource {
         return ShieldConfiguration(
             backgroundBlurStyle: .systemMaterial,
             backgroundColor: UIColor.systemBackground,
-            icon: icon,
+            icon: UIImage(systemName: "circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 60, weight: .regular))!.withTintColor(.label),
             title: ShieldConfiguration.Label(text: "Blocked by 7III Life", color: .label),
             subtitle: ShieldConfiguration.Label(text: subtitle, color: .secondaryLabel),
             primaryButtonLabel: ShieldConfiguration.Label(text: "OK", color: .white),

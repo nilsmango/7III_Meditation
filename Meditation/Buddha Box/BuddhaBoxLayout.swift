@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BuddhaBoxLayout: View {
-    @ObservedObject var meditationManager: AppBlockerModel
+    @ObservedObject var meditationManager: TheModel
     
     @ObservedObject var audioManager: AudioManager
     
@@ -434,5 +434,5 @@ struct BuddhaBoxLayout: View {
 }
 
 #Preview {
-    BuddhaBoxLayout(meditationManager: AppBlockerModel(), audioManager: AudioManager())
+    BuddhaBoxLayout(meditationManager: TheModel(), audioManager: AudioManager())
 }

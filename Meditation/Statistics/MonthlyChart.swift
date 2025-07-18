@@ -9,7 +9,7 @@ import SwiftUI
 import Charts
 
 struct MonthlyChart: View {
-    @ObservedObject var meditationManager: AppBlockerModel
+    @ObservedObject var meditationManager: TheModel
     
     let startOfMonth = getStartOfMonth(numberOfMonthsFromNow: 5)
     
@@ -66,7 +66,7 @@ struct MonthlyChart: View {
 }
 
 #Preview {
-    let meditationManager = AppBlockerModel()
+    let meditationManager = TheModel()
             
     // Sample meditation sessions
     meditationManager.meditationSessions = [

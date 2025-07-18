@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AuthorizationView: View {
-    @ObservedObject var model: AppBlockerModel
+    @ObservedObject var model: TheModel
     
     var body: some View {
         VStack(spacing: 16) {
@@ -42,5 +42,5 @@ struct AuthorizationView: View {
 }
 
 #Preview {
-    AuthorizationView(model: AppBlockerModel())
+    AuthorizationView(model: TheModel())
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MainContentView: View {
-    @ObservedObject var model: AppBlockerModel
+    @ObservedObject var model: TheModel
     
     var body: some View {
         VStack {
@@ -20,10 +20,18 @@ struct MainContentView: View {
                 Spacer()
             }
         }
-        .navigationTitle("")
+        .navigationTitle("○")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text("")
+            }
+        }
     }
 }
 
 #Preview {
-    MainContentView(model: AppBlockerModel())
+    NavigationStack {
+        MainContentView(model: TheModel())
+    }
 }

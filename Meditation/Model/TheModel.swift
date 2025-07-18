@@ -1,6 +1,6 @@
 //
-//  AppBlockerModel.swift
-//  Meditation
+//  TheModel.swift
+//  Meditation aka 7III Life
 //
 //  Created by Simon Lang on 11.07.2025.
 //
@@ -21,7 +21,7 @@ public enum StoreError: Error {
 }
 
 @MainActor
-class AppBlockerModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
+class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
     @Published var selection = FamilyActivitySelection() {
         didSet {
             saveSelection()
@@ -82,7 +82,7 @@ class AppBlockerModel: NSObject, UNUserNotificationCenterDelegate, ObservableObj
         updateListenerTask?.cancel()
     }
     
-    static let shared = AppBlockerModel()
+    static let shared = TheModel()
     
     
     // MARK: - App Selection
@@ -160,12 +160,12 @@ class AppBlockerModel: NSObject, UNUserNotificationCenterDelegate, ObservableObj
 
     func navigateToMeditation() {
         navigationPath = NavigationPath()
-        navigationPath.append("meditation")
+        navigationPath.append(AppDestination.meditation)
     }
     
     func navigateToAppBlocker() {
         navigationPath = NavigationPath()
-        navigationPath.append("app-blocker")
+        navigationPath.append(AppDestination.appBlocker)
     }
     
     func navigateHome() {
@@ -733,27 +733,21 @@ class AppBlockerModel: NSObject, UNUserNotificationCenterDelegate, ObservableObj
     // This method will be called when the app is in the foreground
     nonisolated func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         // Play a sound
-        completionHandler([.sound])
+        completionHandler([.banner, .sound])
     }
     
-    
-    
-    // Handle notification when the user taps on it
-    //    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-    //        // Handle user's response to the notification
-    //        let identifier = response.notification.request.identifier
-    //
-    //        // Extract information from the notification content and perform actions
-    //        if let recipeTitle = identifier.components(separatedBy: Constants.notificationSeparator).first {
-    //            // change path to the recipe of the notification
-    //            if let recipeIndex = recipes.firstIndex(where: { $0.title == recipeTitle }) {
-    //                path = NavigationPath()
-    //                path.append(recipes[recipeIndex])
-    //            }
-    //        }
-    //
-    //        completionHandler()
-    //    }
+    // Make things happen when user is tapping the notification
+    nonisolated func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+        let userInfo = response.notification.request.content.userInfo
+        if let destination = userInfo["navigateTo"] as? String, destination == "meditation" {
+            DispatchQueue.main.async {
+                self.navigateToMeditation()
+            }
+        }
+        completionHandler()
+    }
     
     // MARK: - Meditation Reminders
     @AppStorage("reminders") private var remindersData: Data = Data()
@@ -802,19 +796,7 @@ class AppBlockerModel: NSObject, UNUserNotificationCenterDelegate, ObservableObj
             }
         }
     }
-    
-    nonisolated func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                didReceive response: UNNotificationResponse,
-                                withCompletionHandler completionHandler: @escaping () -> Void) {
-        let userInfo = response.notification.request.content.userInfo
-        if let destination = userInfo["navigateTo"] as? String, destination == "meditation" {
-            DispatchQueue.main.async {
-                self.navigateToMeditation()
-            }
-        }
-        completionHandler()
-    }
-    
+
     // MARK: - Meditation Circle View
     
     var statusTimer: Timer?

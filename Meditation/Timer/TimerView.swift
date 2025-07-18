@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TimerView: View {
-    @ObservedObject var meditationManager: AppBlockerModel
+    @ObservedObject var meditationManager: TheModel
 
     var body: some View {
         VStack {
@@ -60,5 +60,5 @@ struct TimerView: View {
 }
 
 #Preview {
-    TimerView(meditationManager: AppBlockerModel())
+    TimerView(meditationManager: TheModel())
 }

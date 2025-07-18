@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AppSelectionButton: View {
     @Binding var showingFamilyPicker: Bool
-    @ObservedObject var model: AppBlockerModel
+    @ObservedObject var model: TheModel
     
     var body: some View {
         Button(action: { showingFamilyPicker = true }) {
@@ -33,5 +33,5 @@ struct AppSelectionButton: View {
 }
 
 #Preview {
-    AppSelectionButton(showingFamilyPicker: .constant(false), model: AppBlockerModel())
+    AppSelectionButton(showingFamilyPicker: .constant(false), model: TheModel())
 }

@@ -9,7 +9,7 @@ import SwiftUI
 import Charts
 
 struct ThirtyDaysChart: View {
-    @ObservedObject var meditationManager: AppBlockerModel
+    @ObservedObject var meditationManager: TheModel
     
     let xWidth = 6
     
@@ -54,7 +54,7 @@ struct ThirtyDaysChart: View {
 }
 
 #Preview {
-    let meditationManager = AppBlockerModel()
+    let meditationManager = TheModel()
             
     // Sample meditation sessions
     meditationManager.meditationSessions = [

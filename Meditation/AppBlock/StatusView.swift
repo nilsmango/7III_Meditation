@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct StatusView: View {
-    @ObservedObject var model: AppBlockerModel
+    @ObservedObject var model: TheModel
     
     var body: some View {
         VStack(spacing: 10) {
@@ -39,5 +39,5 @@ struct StatusView: View {
 
 
 #Preview {
-    StatusView(model: AppBlockerModel())
+    StatusView(model: TheModel())
 }

@@ -15,7 +15,7 @@ struct StopMeditationWithoutSaving: AppIntent {
     func perform() async throws -> some IntentResult {
         // Call the function from your app model
         DispatchQueue.main.async {
-            AppBlockerModel.shared.stopMeditation(withSaving: false)
+            TheModel.shared.stopMeditation(withSaving: false)
         }
         return .result()
     }

@@ -15,7 +15,7 @@ struct PauseMeditation: AppIntent {
     func perform() async throws -> some IntentResult {
         // Call the function from your app model
         DispatchQueue.main.async {
-            AppBlockerModel.shared.pauseMeditation()
+            TheModel.shared.pauseMeditation()
         }
         return .result()
     }

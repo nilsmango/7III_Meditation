@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BlockingToggleButton: View {
-    @ObservedObject var model: AppBlockerModel
+    @ObservedObject var model: TheModel
     
     var body: some View {
         Button(action: model.toggleBlocking) {
@@ -39,5 +39,5 @@ struct BlockingToggleButton: View {
 }
 
 #Preview {
-    BlockingToggleButton(model: AppBlockerModel())
+    BlockingToggleButton(model: TheModel())
 }

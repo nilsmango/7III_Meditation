@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MeditationView: View {
-    @ObservedObject var meditationManager: AppBlockerModel
+    @ObservedObject var meditationManager: TheModel
     @ObservedObject var audioManager: AudioManager
     
     @State private var rotation = Angle(degrees: 0.0)
@@ -33,7 +33,13 @@ struct MeditationView: View {
             .onAppear {
                 meditationManager.checkStatusOfTimer()
             }
+            .navigationTitle("Meditation")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
+                ToolbarItem(placement: .principal) {
+                        Text("")
+                    }
+                
                 ToolbarItemGroup(placement: .topBarTrailing) {
                     StreakButton(streakNumber: meditationManager.meditationTimer.statistics.currentStreak)
                         .padding(.horizontal)
@@ -55,7 +61,7 @@ struct MeditationView: View {
                     
                     NavigationLink(destination: BuddhaBoxLayout(meditationManager: meditationManager, audioManager: audioManager)) {
                         Image(systemName: "waveform.circle.fill")
-                            .font(.title2)
+                            .font(.title3)
                             .symbolRenderingMode(.palette)
                             .foregroundStyle(.blackWhite, .redAccent)
 
@@ -63,9 +69,9 @@ struct MeditationView: View {
                     
                     NavigationLink(destination: StatisticsView(meditationManager: meditationManager)) {
                         Image(systemName: "chart.bar.xaxis")
-                            .font(.caption)
+                            .font(.caption2)
                             .foregroundStyle(.blackWhite)
-                            .padding(6.2)
+                            .padding(5.2)
                             .background {
                                 Circle()
                                     .foregroundStyle(.redAccent)
@@ -74,18 +80,17 @@ struct MeditationView: View {
                     
                     NavigationLink(destination: OptionsView(meditationManager: meditationManager)) {
                         Image(systemName: "ellipsis.circle.fill")
-                            .font(.title2)
+                            .font(.title3)
                             .symbolRenderingMode(.palette)
                             .foregroundStyle(.blackWhite, .redAccent)
                     }
                 }
             }
-            .navigationTitle("")
         }
     }
 
 #Preview {
     NavigationStack {
-        MeditationView(meditationManager: AppBlockerModel(), audioManager: AudioManager())
+        MeditationView(meditationManager: TheModel(), audioManager: AudioManager())
     }
 }

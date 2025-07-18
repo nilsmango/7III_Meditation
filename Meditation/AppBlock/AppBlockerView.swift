@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AppBlockerView: View {
-    @ObservedObject var model: AppBlockerModel
+    @ObservedObject var model: TheModel
     @State private var showingFamilyPicker = false
     @State private var showTopUpSheet = false
     
@@ -50,7 +50,7 @@ struct AppBlockerView: View {
                     // TODO: options
                 } label: {
                     Image(systemName: "ellipsis.circle.fill")
-                        .font(.title2)
+                        .font(.title3)
                         .symbolRenderingMode(.palette)
                         .foregroundStyle(.blackWhite, .greenAccent)
                 }
@@ -64,6 +64,6 @@ struct AppBlockerView: View {
 
 #Preview {
     NavigationStack {
-        AppBlockerView(model: AppBlockerModel())
+        AppBlockerView(model: TheModel())
     }
 }

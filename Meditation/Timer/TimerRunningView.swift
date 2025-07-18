@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TimerRunningView: View {
-    @ObservedObject var meditationManager: AppBlockerModel
+    @ObservedObject var meditationManager: TheModel
     
     let isRunning: Bool
     
@@ -102,7 +102,7 @@ struct TimerRunningView: View {
 #Preview {
     VStack {
         Spacer()
-        TimerRunningView(meditationManager: AppBlockerModel(), isRunning: false)
+        TimerRunningView(meditationManager: TheModel(), isRunning: false)
         Spacer()
     }
 }

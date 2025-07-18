@@ -10,7 +10,7 @@ import SwiftUI
 import SwiftUI
 
 struct SelectedAppsView: View {
-    @ObservedObject var model: AppBlockerModel
+    @ObservedObject var model: TheModel
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -29,5 +29,5 @@ struct SelectedAppsView: View {
 }
 
 #Preview {
-    SelectedAppsView(model: AppBlockerModel())
+    SelectedAppsView(model: TheModel())
 }

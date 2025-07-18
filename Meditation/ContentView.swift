@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var model: AppBlockerModel
+    @ObservedObject var model: TheModel
     @ObservedObject var audioManager: AudioManager
     
     var body: some View {
@@ -23,10 +23,10 @@ struct ContentView: View {
             .onAppear {
                 model.checkAuthorizationStatus()
             }
-            .navigationDestination(for: String.self) { value in
-                if value == "meditation" {
+            .navigationDestination(for: AppDestination.self) { value in
+                if value == .meditation {
                     MeditationView(meditationManager: model, audioManager: audioManager)
-                } else if value == "app-blocker" {
+                } else if value == .appBlocker {
                     AppBlockerView(model: model)
                 }
             }
@@ -36,5 +36,5 @@ struct ContentView: View {
 
 
 #Preview {
-    ContentView(model: AppBlockerModel(), audioManager: AudioManager())
+    ContentView(model: TheModel(), audioManager: AudioManager())
 }

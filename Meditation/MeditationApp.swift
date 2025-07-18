@@ -28,7 +28,7 @@ struct MeditationApp: App {
     
     @StateObject private var audioManager = AudioManager()
     
-    @StateObject private var model = AppBlockerModel.shared
+    @StateObject private var model = TheModel.shared
     
     // Notifications
     private let notificationCenter = UNUserNotificationCenter.current()

@@ -9,7 +9,7 @@ import SwiftUI
 import StoreKit
 
 struct RefundView: View {
-    @ObservedObject var meditationManager: AppBlockerModel
+    @ObservedObject var meditationManager: TheModel
 
     @State private var transactions: [Transaction] = []
     @State private var isLoading = true
@@ -74,7 +74,7 @@ struct RefundView: View {
 }
 
 struct TransactionRow: View {
-    @ObservedObject var myData: AppBlockerModel
+    @ObservedObject var myData: TheModel
 
     let transaction: Transaction
     @State private var refundStatus: String?
@@ -139,5 +139,5 @@ struct TransactionRow: View {
 }
 
 #Preview {
-    RefundView(meditationManager: AppBlockerModel())
+    RefundView(meditationManager: TheModel())
 }

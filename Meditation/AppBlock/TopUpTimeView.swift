@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TopUpTimeView: View {
-    @ObservedObject var model: AppBlockerModel
+    @ObservedObject var model: TheModel
     @State private var showCheckmark = false
     @Binding var showSheet: Bool
 
@@ -62,5 +62,5 @@ struct TopUpTimeView: View {
 }
 
 #Preview {
-    TopUpTimeView(model: AppBlockerModel(), showSheet: .constant(true))
+    TopUpTimeView(model: TheModel(), showSheet: .constant(true))
 }

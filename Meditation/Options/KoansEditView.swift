@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct KoansEditView: View {
-    @ObservedObject var meditationManager: AppBlockerModel
+    @ObservedObject var meditationManager: TheModel
 
     @State private var newKoan = ""
     var body: some View {
@@ -32,5 +32,5 @@ struct KoansEditView: View {
 }
 
 #Preview {
-    KoansEditView(meditationManager: AppBlockerModel())
+    KoansEditView(meditationManager: TheModel())
 }
