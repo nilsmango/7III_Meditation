@@ -113,7 +113,6 @@
 		789A0E182C04FE57009CB9E7 /* DateComponents + Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E172C04FE57009CB9E7 /* DateComponents + Identifiable.swift */; };
 		789A0E1A2C04FEAB009CB9E7 /* DateComponents + Comparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E192C04FEAB009CB9E7 /* DateComponents + Comparable.swift */; };
 		789A0E1C2C05B3EA009CB9E7 /* ThirtyDaysChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E1B2C05B3EA009CB9E7 /* ThirtyDaysChart.swift */; };
-		789A0E202C05C35A009CB9E7 /* StatisticsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E1F2C05C35A009CB9E7 /* StatisticsButton.swift */; };
 		789A0E282C06131E009CB9E7 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 789A0E272C06131E009CB9E7 /* WidgetKit.framework */; };
 		789A0E2A2C06131E009CB9E7 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 789A0E292C06131E009CB9E7 /* SwiftUI.framework */; };
 		789A0E2D2C06131E009CB9E7 /* WidgetExtensionBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E2C2C06131E009CB9E7 /* WidgetExtensionBundle.swift */; };
@@ -284,7 +283,6 @@
 		789A0E172C04FE57009CB9E7 /* DateComponents + Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateComponents + Identifiable.swift"; sourceTree = "<group>"; };
 		789A0E192C04FEAB009CB9E7 /* DateComponents + Comparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateComponents + Comparable.swift"; sourceTree = "<group>"; };
 		789A0E1B2C05B3EA009CB9E7 /* ThirtyDaysChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirtyDaysChart.swift; sourceTree = "<group>"; };
-		789A0E1F2C05C35A009CB9E7 /* StatisticsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsButton.swift; sourceTree = "<group>"; };
 		789A0E252C06131E009CB9E7 /* WidgetExtensionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WidgetExtensionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		789A0E272C06131E009CB9E7 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		789A0E292C06131E009CB9E7 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -643,7 +641,6 @@
 			isa = PBXGroup;
 			children = (
 				78385D0C2BF3647300581057 /* MeditationView.swift */,
-				789A0E1F2C05C35A009CB9E7 /* StatisticsButton.swift */,
 				789A0E082C0388FE009CB9E7 /* StreakButton.swift */,
 				78713CD62CFC6221000A1B71 /* NoteView.swift */,
 			);
@@ -970,7 +967,6 @@
 				784ECA842CAFCCF2004C0CF6 /* Encoder.swift in Sources */,
 				780ED4302E264B9D00FAF3FC /* HowToView.swift in Sources */,
 				780ED40B2E25872D00FAF3FC /* AppBlockerView.swift in Sources */,
-				789A0E202C05C35A009CB9E7 /* StatisticsButton.swift in Sources */,
 				7854736C2C090128009645BF /* WidgetLogoView.swift in Sources */,
 				785D09672C0BA00500044AE9 /* AttackOfTheEmojiView.swift in Sources */,
 				780ED42E2E264AF900FAF3FC /* ButtonLabel.swift in Sources */,

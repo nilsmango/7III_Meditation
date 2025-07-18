@@ -20,6 +20,7 @@ struct MainContentView: View {
                 Spacer()
             }
         }
+        .navigationTitle("")
     }
 }
 

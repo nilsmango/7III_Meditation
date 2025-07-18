@@ -11,7 +11,7 @@ struct AuthorizationView: View {
     @ObservedObject var model: AppBlockerModel
     
     var body: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: 16) {
             Text("Screen Time Permission Required")
                 .font(.title2)
                 .fontWeight(.semibold)

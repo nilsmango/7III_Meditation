@@ -13,7 +13,7 @@ struct TopUpTimeView: View {
     @Binding var showSheet: Bool
 
     var body: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: 16) {
             
 
             if showCheckmark {
@@ -55,6 +55,9 @@ struct TopUpTimeView: View {
             }
         }
         .padding()
+        .onAppear {
+            model.topUpMinutes = 1
+        }
     }
 }
 

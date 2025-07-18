@@ -19,65 +19,7 @@ struct MeditationView: View {
     var body: some View {
             ZStack {
                 VStack {
-                    HStack {
-                        Button {
-                            meditationManager.navigateHome()
-                        } label: {
-                            Label("Home", systemImage: "arrow.left.circle.fill")
-                                .font(.title)
-                                .symbolRenderingMode(.palette)
-                                .foregroundStyle(.blackWhite, .redAccent)
-                                .labelStyle(.iconOnly)
-                                .padding(.leading)
-                        }
-                        
-                        Spacer()
-                        
-                        StreakButton(streakNumber: meditationManager.meditationTimer.statistics.currentStreak)
-                            .padding(.horizontal)
-                            .padding(.vertical, 4)
-                            .rotationEffect(rotation)
-                            .onTapGesture {
-                                rotation += Angle(degrees: 360)
-                                if meditationManager.meditationTimer.statistics.currentStreak < 1 {
-                                    emoji = "😐"
-                                } else {
-                                    emoji = "🔥"
-                                }
-                                for _ in 0..<18*6 {
-                                    emojis.append(UUID())
-                                }
-                            }
-                            .animation(.easeInOut(duration: 1.0), value: rotation)
-                        
-                        Spacer()
-                        
-                        
-                        
-                        NavigationLink(destination: BuddhaBoxLayout(meditationManager: meditationManager, audioManager: audioManager)) {
-                            Label("Options", systemImage: "waveform.circle.fill")
-                                .font(.title)
-                                .symbolRenderingMode(.palette)
-                                .foregroundStyle(.blackWhite, .redAccent)
-                                .labelStyle(.iconOnly)
-                                .padding(.trailing, 8)
-                        }
-                        
-                        NavigationLink(destination: StatisticsView(meditationManager: meditationManager)) {
-                            StatisticsButton(padding: 6.2)
-                                .padding(.trailing, 8)
-                        }
-                        
-                        NavigationLink(destination: OptionsView(meditationManager: meditationManager)) {
-                            Label("Options", systemImage: "ellipsis.circle.fill")
-                                .font(.title)
-                                .symbolRenderingMode(.palette)
-                                .foregroundStyle(.blackWhite, .redAccent)
-                                .labelStyle(.iconOnly)
-                                .padding(.trailing)
-                        }
-                    }
-                    
+                   
                     Spacer()
                     
                 }
@@ -91,7 +33,54 @@ struct MeditationView: View {
             .onAppear {
                 meditationManager.checkStatusOfTimer()
             }
-            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItemGroup(placement: .topBarTrailing) {
+                    StreakButton(streakNumber: meditationManager.meditationTimer.statistics.currentStreak)
+                        .padding(.horizontal)
+                        .rotationEffect(rotation)
+                        .onTapGesture {
+                            rotation += Angle(degrees: 360)
+                            if meditationManager.meditationTimer.statistics.currentStreak < 1 {
+                                emoji = "😐"
+                            } else {
+                                emoji = "🔥"
+                            }
+                            for _ in 0..<18*6 {
+                                emojis.append(UUID())
+                            }
+                        }
+                        .animation(.easeInOut(duration: 1.0), value: rotation)
+                        
+                    Spacer()
+                    
+                    NavigationLink(destination: BuddhaBoxLayout(meditationManager: meditationManager, audioManager: audioManager)) {
+                        Image(systemName: "waveform.circle.fill")
+                            .font(.title2)
+                            .symbolRenderingMode(.palette)
+                            .foregroundStyle(.blackWhite, .redAccent)
+
+                    }
+                    
+                    NavigationLink(destination: StatisticsView(meditationManager: meditationManager)) {
+                        Image(systemName: "chart.bar.xaxis")
+                            .font(.caption)
+                            .foregroundStyle(.blackWhite)
+                            .padding(6.2)
+                            .background {
+                                Circle()
+                                    .foregroundStyle(.redAccent)
+                            }
+                    }
+                    
+                    NavigationLink(destination: OptionsView(meditationManager: meditationManager)) {
+                        Image(systemName: "ellipsis.circle.fill")
+                            .font(.title2)
+                            .symbolRenderingMode(.palette)
+                            .foregroundStyle(.blackWhite, .redAccent)
+                    }
+                }
+            }
+            .navigationTitle("")
         }
     }
 

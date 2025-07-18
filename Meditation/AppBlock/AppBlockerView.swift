@@ -14,7 +14,7 @@ struct AppBlockerView: View {
     
     var body: some View {
             ScrollView {
-                VStack(spacing: 20) {
+                VStack(spacing: 16) {
                     HowToButton()
                                     
                     if model.hasSelectedApps {
@@ -44,23 +44,21 @@ struct AppBlockerView: View {
         .sheet(isPresented: $showTopUpSheet) {
             TopUpTimeView(model: model, showSheet: $showTopUpSheet)
         }
-        .navigationBarBackButtonHidden(true)
-        .safeAreaInset(edge: .top) {
-            HStack {
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    model.navigateHome()
+                    // TODO: options
                 } label: {
-                    Label("Home", systemImage: "arrow.left.circle.fill")
-                        .font(.title)
+                    Image(systemName: "ellipsis.circle.fill")
+                        .font(.title2)
                         .symbolRenderingMode(.palette)
                         .foregroundStyle(.blackWhite, .greenAccent)
-                        .labelStyle(.iconOnly)
                 }
                 
-                Spacer()
+
             }
-            .padding(.horizontal)
-        }      
+        }
+        .navigationTitle("App Blocker")
     }
 }
 
