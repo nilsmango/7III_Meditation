@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import FamilyControls
 
 struct AppBlockerView: View {
     @ObservedObject var model: TheModel
     @State private var showingFamilyPicker = false
     @State private var showTopUpSheet = false
+    @State private var selection = FamilyActivitySelection()
     
     var body: some View {
             ScrollView {
@@ -26,11 +28,19 @@ struct AppBlockerView: View {
                         
                         SelectedAppsView(model: model)
                     }
+                                        
+                    Button {
+                        showingFamilyPicker = true
+                    } label: {
+                        ButtonLabel(iconName: "plus.circle.fill", labelText: model.hasSelectedApps ? "Change Selected Apps" : "Select Apps to Block", accentColor: .blue)
+                    }
                     
-                    AppSelectionButton(showingFamilyPicker: $showingFamilyPicker, model: model)
-                    
-                    if model.hasSelectedApps {
-                        BlockingToggleButton(model: model)
+                    if model.hasSelectedApps {                        
+                        Button {
+                            model.toggleBlocking()
+                        } label: {
+                            ButtonLabel(iconName: model.isBlocked ? "shield.slash.fill" : "shield.fill", labelText: model.isBlocked ? "Disable Blocking" : "Enable Blocking", accentColor: model.isBlocked ? .red : .green, fullColorButton: true)
+                        }
                     }
                     
                     StatusView(model: model)
@@ -40,9 +50,39 @@ struct AppBlockerView: View {
                 
             }
         .padding()
-        .familyActivityPicker(isPresented: $showingFamilyPicker, selection: $model.selection)
+        .sheet(isPresented: $showingFamilyPicker) {
+                VStack(spacing: 0) {
+                    FamilyActivityPickerView(selection: $selection)
+                        
+                    HStack {
+                        Button {
+                            showingFamilyPicker = false
+                        } label: {
+                            Label("Cancel", systemImage: "xmark")
+                        }
+                        .tint(.red)
+                        .buttonStyle(.bordered)
+                        
+                        Spacer()
+                        
+                        Button {
+                            model.selection = selection
+                            showingFamilyPicker = false
+                        } label: {
+                            Label("Update", systemImage: "checkmark.circle.fill")
+                        }
+                        .tint(.greenAccent)
+                        .buttonStyle(.bordered)
+                    }
+                    .padding()
+                }
+                .background(.activityBackground)
+        }
         .sheet(isPresented: $showTopUpSheet) {
             TopUpTimeView(model: model, showSheet: $showTopUpSheet)
+        }
+        .onAppear {
+            selection = model.selection
         }
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {

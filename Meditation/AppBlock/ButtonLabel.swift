@@ -13,30 +13,37 @@ struct ButtonLabel: View {
     var accentColor: Color
     var backgroundColor: Color = .buttonGray
     var navigationLink: Bool = false
+    var fullColorButton: Bool = false
     
     var body: some View {
         HStack {
+            if !navigationLink {
+                Spacer()
+            }
             Image(systemName: iconName)
-                .foregroundStyle(accentColor)
+                .foregroundStyle(fullColorButton ? .white : accentColor)
                 
             Text(labelText)
-                .fontWeight(.medium)
                 .padding(.leading, 4)
+                .foregroundStyle(fullColorButton ? .white : navigationLink ? .primary : accentColor)
+            
             Spacer()
-            Image(systemName: "chevron.forward")
-                .opacity(navigationLink ? 1 : 0)
+            
+            if navigationLink {
+                Image(systemName: "chevron.forward")
+            }
         }
         .foregroundColor(.primary)
-        .fontWeight(.semibold)
+        .font(.headline)
         .frame(maxWidth: .infinity)
         .frame(height: 58)
         .padding(.horizontal)
-        .background(backgroundColor)
+        .background(fullColorButton ? accentColor : navigationLink ? backgroundColor : accentColor.opacity(0.1))
         .cornerRadius(10)
     }
 }
 
 #Preview {
-    ButtonLabel(iconName: "lightbulb.max.fill", labelText: "How To", accentColor: .yellow, navigationLink: true)
+    ButtonLabel(iconName: "lightbulb.max.fill", labelText: "How To", accentColor: .yellow, navigationLink: false, fullColorButton: true)
         .padding()
 }
