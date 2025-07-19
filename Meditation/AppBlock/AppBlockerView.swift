@@ -11,7 +11,6 @@ import FamilyControls
 struct AppBlockerView: View {
     @ObservedObject var model: TheModel
     @State private var showingFamilyPicker = false
-    @State private var showTopUpSheet = false
     @State private var selection = FamilyActivitySelection()
     
     var body: some View {
@@ -20,10 +19,10 @@ struct AppBlockerView: View {
                     HowToButton()
                                     
                     if model.hasSelectedApps {
-                        Button {
-                            showTopUpSheet = true
+                        NavigationLink {
+                            TopUpTimeView(model: model)
                         } label: {
-                            ButtonLabel(iconName: "clock.arrow.trianglehead.counterclockwise.rotate.90", labelText: "Top up Time", accentColor: .greenAccent)
+                            ButtonLabel(iconName: "plus.circle.fill", labelText: "Top up Time", accentColor: .greenAccent, navigationLink: true)
                         }
                         
                         SelectedAppsView(model: model)
@@ -32,7 +31,7 @@ struct AppBlockerView: View {
                     Button {
                         showingFamilyPicker = true
                     } label: {
-                        ButtonLabel(iconName: "plus.circle.fill", labelText: model.hasSelectedApps ? "Change Selected Apps" : "Select Apps to Block", accentColor: .blue)
+                        ButtonLabel(iconName: model.hasSelectedApps ? "arrow.2.squarepath" : "plus.app.fill", labelText: model.hasSelectedApps ? "Change Selected Apps" : "Select Apps to Block", accentColor: .blue)
                     }
                     
                     if model.hasSelectedApps {                        
@@ -77,9 +76,6 @@ struct AppBlockerView: View {
                     .padding()
                 }
                 .background(.activityBackground)
-        }
-        .sheet(isPresented: $showTopUpSheet) {
-            TopUpTimeView(model: model, showSheet: $showTopUpSheet)
         }
         .onAppear {
             selection = model.selection

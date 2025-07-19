@@ -38,12 +38,12 @@ struct ButtonLabel: View {
         .frame(maxWidth: .infinity)
         .frame(height: 58)
         .padding(.horizontal)
-        .background(fullColorButton ? accentColor : navigationLink ? backgroundColor : accentColor.opacity(0.1))
+        .background(fullColorButton ? accentColor : navigationLink ? backgroundColor : accentColor.opacity(0.16))
         .cornerRadius(10)
     }
 }
 
 #Preview {
-    ButtonLabel(iconName: "lightbulb.max.fill", labelText: "How To", accentColor: .yellow, navigationLink: false, fullColorButton: true)
+    ButtonLabel(iconName: "lightbulb.max.fill", labelText: "How To", accentColor: .green, navigationLink: false, fullColorButton: false)
         .padding()
 }

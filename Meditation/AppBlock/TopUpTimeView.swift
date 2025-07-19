@@ -10,12 +10,11 @@ import SwiftUI
 struct TopUpTimeView: View {
     @ObservedObject var model: TheModel
     @State private var showCheckmark = false
-    @Binding var showSheet: Bool
+    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         VStack(spacing: 16) {
             
-
             if showCheckmark {
                 Image(systemName: "checkmark.circle.fill")
                     .font(.system(size: 50))
@@ -33,25 +32,38 @@ struct TopUpTimeView: View {
                 }
                 .pickerStyle(.wheel)
                 
-                Button {
-                    model.topUpTime()
-                    withAnimation {
-                        showCheckmark = true
+                HStack {
+                    
+                    Spacer()
+                    
+                    Button {
+                        dismiss()
+                        
+                    } label: {
+                        Text("Cancel")
                     }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        showSheet = false
+                    .buttonStyle(.bordered)
+                    .tint(.red)
+                    
+                    Spacer()
+                    
+                    Button {
+                        model.topUpTime()
+                        withAnimation {
+                            showCheckmark = true
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            dismiss()
+                        }
+                    } label: {
+                        Label("Top Up", systemImage: "plus.circle.fill")
                     }
-                } label: {
-                    Label("Top Up", systemImage: "checkmark")
+                    .buttonStyle(.bordered)
+                    .tint(.greenAccent)
+                    
+                    Spacer()
                 }
-                .buttonStyle(.bordered)
                 
-                Button {
-                    showSheet = false
-                } label: {
-                    Label("Cancel", systemImage: "xmark")
-                }
-                .buttonStyle(.bordered)
             }
         }
         .padding()
@@ -62,5 +74,5 @@ struct TopUpTimeView: View {
 }
 
 #Preview {
-    TopUpTimeView(model: TheModel(), showSheet: .constant(true))
+    TopUpTimeView(model: TheModel())
 }
