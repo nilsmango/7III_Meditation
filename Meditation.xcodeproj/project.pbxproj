@@ -19,6 +19,8 @@
 		780ED4432E2A475800FAF3FC /* AppDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780ED4412E2A475800FAF3FC /* AppDestination.swift */; };
 		780ED4452E2A7D0500FAF3FC /* FamilyActivityPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780ED4442E2A7D0400FAF3FC /* FamilyActivityPickerView.swift */; };
 		780ED4712E2C1C4F00FAF3FC /* SafariExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 780ED4592E2C1C4F00FAF3FC /* SafariExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		780ED47C2E2C2AB800FAF3FC /* WebsiteSelectionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780ED47B2E2C2AB800FAF3FC /* WebsiteSelectionSheet.swift */; };
+		780ED47E2E2C2ACA00FAF3FC /* WebsiteRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780ED47D2E2C2ACA00FAF3FC /* WebsiteRow.swift */; };
 		781D557C2CF606C900C56DE6 /* TricksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781D557B2CF606C900C56DE6 /* TricksView.swift */; };
 		7827880A2BF68B67004E7F77 /* TimerRunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782788092BF68B67004E7F77 /* TimerRunningView.swift */; };
 		7827880D2BFB3F45004E7F77 /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7827880C2BFB3F45004E7F77 /* OptionsView.swift */; };
@@ -218,6 +220,8 @@
 		780ED4412E2A475800FAF3FC /* AppDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDestination.swift; sourceTree = "<group>"; };
 		780ED4442E2A7D0400FAF3FC /* FamilyActivityPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyActivityPickerView.swift; sourceTree = "<group>"; };
 		780ED4592E2C1C4F00FAF3FC /* SafariExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SafariExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		780ED47B2E2C2AB800FAF3FC /* WebsiteSelectionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebsiteSelectionSheet.swift; sourceTree = "<group>"; };
+		780ED47D2E2C2ACA00FAF3FC /* WebsiteRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebsiteRow.swift; sourceTree = "<group>"; };
 		781D557A2CF5DF3C00C56DE6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		781D557B2CF606C900C56DE6 /* TricksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricksView.swift; sourceTree = "<group>"; };
 		782788092BF68B67004E7F77 /* TimerRunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerRunningView.swift; sourceTree = "<group>"; };
@@ -682,6 +686,8 @@
 				780ED40A2E25872D00FAF3FC /* AppBlockerView.swift */,
 				780ED4442E2A7D0400FAF3FC /* FamilyActivityPickerView.swift */,
 				780ED3BA2E23EFFA00FAF3FC /* TopUpTimeView.swift */,
+				780ED47B2E2C2AB800FAF3FC /* WebsiteSelectionSheet.swift */,
+				780ED47D2E2C2ACA00FAF3FC /* WebsiteRow.swift */,
 				78A77DA82E20FFD000B1872A /* SelectedAppsView.swift */,
 				780ED42B2E264A6A00FAF3FC /* HowToButton.swift */,
 				780ED42F2E264B9D00FAF3FC /* HowToView.swift */,
@@ -988,6 +994,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				780ED47C2E2C2AB800FAF3FC /* WebsiteSelectionSheet.swift in Sources */,
 				78C862AF2C0F0866006235AB /* BuddhaBoxView.swift in Sources */,
 				7827880A2BF68B67004E7F77 /* TimerRunningView.swift in Sources */,
 				78A77DAF2E21004400B1872A /* StatusView.swift in Sources */,
@@ -1014,6 +1021,7 @@
 				785D094F2C09F0D600044AE9 /* WidgetButtonStyle.swift in Sources */,
 				78385D0D2BF3647300581057 /* MeditationView.swift in Sources */,
 				783426862BFFCFB20008F9F9 /* TimerCircleView.swift in Sources */,
+				780ED47E2E2C2ACA00FAF3FC /* WebsiteRow.swift in Sources */,
 				789A0E1A2C04FEAB009CB9E7 /* DateComponents + Comparable.swift in Sources */,
 				785D09552C09F27F00044AE9 /* ActivityLockScreenView.swift in Sources */,
 				789A0E3F2C061570009CB9E7 /* TimerStatus.swift in Sources */,

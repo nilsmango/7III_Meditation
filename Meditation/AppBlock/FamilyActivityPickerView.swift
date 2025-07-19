@@ -19,7 +19,7 @@ struct FamilyActivityPickerView: View {
             
             Group {
                 if showInfo {
-                    Text("Don't select both the app and website for the same service (e.g., YouTube + youtube.com).\nThis will prevent **Top up Time** from working properly.")
+                    Text("Don't select any websites here, use the website selection button instead.")
                 }
                 
                 Button {

@@ -50,6 +50,12 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
         }
     }
     
+    @Published var blockedWebsites: [String] = [] {
+        didSet {
+            UserDefaults(suiteName: appGroupID)?.set(blockedWebsites, forKey: "blockedWebsites")
+        }
+    }
+    
     private let store = ManagedSettingsStore()
     
     override init() {
@@ -75,6 +81,7 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
         
         checkAuthorizationStatus()
         loadSelection()
+        loadBlockedWebsites()
         self.topUpMinutes = UserDefaults(suiteName: appGroupID)?.integer(forKey: "topUpMinutes") ?? 1
     }
     
@@ -99,6 +106,12 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
         if let data = try? JSONEncoder().encode(selection) {
             UserDefaults.standard.set(data, forKey: selectionKey)
         }
+    }
+    
+    // MARK: - Website Selection
+    
+    func loadBlockedWebsites() {
+        blockedWebsites = UserDefaults(suiteName: appGroupID)?.stringArray(forKey: "blockedWebsites") ?? []
     }
     
     // MARK: - Authorization
@@ -177,12 +190,16 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
         !selection.applicationTokens.isEmpty
     }
     
+    var hasSelectedWebsites: Bool {
+        !blockedWebsites.isEmpty
+    }
+    
     var selectedAppsCount: Int {
         selection.applicationTokens.count
     }
     
     var selectedWebsitesCount: Int {
-        selection.webDomainTokens.count
+        selection.webDomainTokens.count + blockedWebsites.count
     }
     
     var isAuthorized: Bool {

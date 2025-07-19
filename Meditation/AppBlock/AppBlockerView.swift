@@ -12,13 +12,14 @@ struct AppBlockerView: View {
     @ObservedObject var model: TheModel
     @State private var showingFamilyPicker = false
     @State private var selection = FamilyActivitySelection()
+    @State private var showingWebsitePicker = false
     
     var body: some View {
             ScrollView {
                 VStack(spacing: 16) {
                     HowToButton()
                                     
-                    if model.hasSelectedApps {
+                    if model.hasSelectedApps || model.hasSelectedWebsites {
                         NavigationLink {
                             TopUpTimeView(model: model)
                         } label: {
@@ -33,6 +34,13 @@ struct AppBlockerView: View {
                     } label: {
                         ButtonLabel(iconName: model.hasSelectedApps ? "arrow.2.squarepath" : "plus.app.fill", labelText: model.hasSelectedApps ? "Change Selected Apps" : "Select Apps to Block", accentColor: .blue)
                     }
+                    
+                    Button {
+                        showingWebsitePicker = true
+                    } label: {
+                        ButtonLabel(iconName: model.hasSelectedWebsites ? "arrow.2.squarepath" : "plus.app.fill", labelText: model.hasSelectedWebsites ? "Change Selected Websites" : "Select Websites to Block", accentColor: .blue)
+                    }
+                    
                     
                     if model.hasSelectedApps {                        
                         Button {
@@ -77,6 +85,9 @@ struct AppBlockerView: View {
                 }
                 .background(.activityBackground)
         }
+        .sheet(isPresented: $showingWebsitePicker) {
+            WebsiteSelectionSheet(blockedWebsites: $model.blockedWebsites)
+                }
         .onAppear {
             selection = model.selection
         }

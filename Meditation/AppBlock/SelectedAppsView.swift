@@ -17,7 +17,7 @@ struct SelectedAppsView: View {
             Text("Selected Apps (\(model.selectedAppsCount)), Websites (\(model.selectedWebsitesCount))")
                 .font(.headline)
             
-            Text("Apps selected for blocking")
+            Text("You are amazing.")
                 .font(.caption)
                 .foregroundColor(.secondary)
         }
