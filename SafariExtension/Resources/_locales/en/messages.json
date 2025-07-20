@@ -1,10 +1,10 @@
 {
     "extension_name": {
-        "message": "SafariExtension",
+        "message": "7III Life Safari Shield",
         "description": "The display name for the extension."
     },
     "extension_description": {
-        "message": "This is SafariExtension. You should tell us what your extension does here.",
+        "message": "Safari Shield will block the websites you have selected in 7III Life.",
         "description": "Description of what the extension does."
     }
 }
