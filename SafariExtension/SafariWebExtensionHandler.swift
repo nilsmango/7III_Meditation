@@ -28,7 +28,15 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
                 // Read blocked websites from app group
                 if let sharedDefaults = UserDefaults(suiteName: "group.com.project7iii.life") {
                     let blockedWebsites = sharedDefaults.array(forKey: "blockedWebsites") as? [String] ?? []
-                    responseMessage = ["websites": blockedWebsites]
+                    let topUpActive = sharedDefaults.bool(forKey: "topUpActive")
+                    let topUpMinutes = sharedDefaults.integer(forKey: "topUpMinutes")
+                    
+                    responseMessage = [
+                                            "websites": blockedWebsites,
+                                            "topUpActive": topUpActive,
+                                            "topUpMinutes": topUpMinutes
+                                        ]
+                    
                 } else {
                     responseMessage = ["error": "Could not access app group"]
                 }
