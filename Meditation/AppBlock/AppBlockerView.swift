@@ -13,6 +13,7 @@ struct AppBlockerView: View {
     @State private var showingFamilyPicker = false
     @State private var selection = FamilyActivitySelection()
     @State private var showingWebsitePicker = false
+    @State private var blockedWebsites: [String] = []
     
     var body: some View {
             ScrollView {
@@ -63,9 +64,10 @@ struct AppBlockerView: View {
                         
                     HStack {
                         Button {
+                            selection = model.selection
                             showingFamilyPicker = false
                         } label: {
-                            Label("Cancel", systemImage: "xmark")
+                            Label("Cancel", systemImage: "xmark.circle.fill")
                         }
                         .tint(.red)
                         .buttonStyle(.bordered)
@@ -86,10 +88,38 @@ struct AppBlockerView: View {
                 .background(.activityBackground)
         }
         .sheet(isPresented: $showingWebsitePicker) {
-            WebsiteSelectionSheet(blockedWebsites: $model.blockedWebsites)
+            VStack(spacing: 0) {
+                WebsiteSelectionSheet(blockedWebsites: $blockedWebsites)
+                
+                HStack {
+                    
+                    Button {
+                        blockedWebsites = model.blockedWebsites
+                        showingWebsitePicker = false
+                    } label: {
+                        Label("Cancel", systemImage: "xmark.circle.fill")
+                    }
+                    .buttonStyle(.bordered)
+                    .tint(.red)
+                    
+                    Spacer()
+                    
+                    Button {
+                        model.blockedWebsites = blockedWebsites
+                        showingWebsitePicker = false
+                    } label: {
+                        Label("Update", systemImage: "checkmark.circle.fill")
+                    }
+                    .buttonStyle(.bordered)
+                    .tint(.greenAccent)
+                    
                 }
+                .padding()
+            }
+        }
         .onAppear {
             selection = model.selection
+            blockedWebsites = model.blockedWebsites
         }
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {

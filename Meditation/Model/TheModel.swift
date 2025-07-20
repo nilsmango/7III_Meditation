@@ -53,6 +53,7 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
     @Published var blockedWebsites: [String] = [] {
         didSet {
             UserDefaults(suiteName: appGroupID)?.set(blockedWebsites, forKey: "blockedWebsites")
+            print("blocked website: \(blockedWebsites)")
         }
     }
     

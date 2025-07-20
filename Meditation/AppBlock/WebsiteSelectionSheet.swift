@@ -12,13 +12,12 @@ struct WebsiteSelectionSheet: View {
     @State private var allWebsites: [String] = []
     @State private var newWebsiteText: String = ""
     @State private var showingAddAlert: Bool = false
-    @Environment(\.dismiss) private var dismiss
     
     // Default websites list
     private let defaultWebsites = [
         "facebook.com",
         "instagram.com",
-        "twitter.com",
+        "x.com",
         "youtube.com",
         "tiktok.com",
         "reddit.com",
@@ -83,35 +82,6 @@ struct WebsiteSelectionSheet: View {
                 .disabled(newWebsiteText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
             } message: {
                 Text("Enter the domain name of the website you want to add to your list.")
-            }
-            .safeAreaInset(edge: .bottom) {
-                // Bottom action buttons
-                HStack {
-                    Spacer()
-                    
-                    Button {
-                        dismiss()
-                    } label: {
-                        Label("Cancel", systemImage: "xmark.circle.fill")
-                    }
-                    .buttonStyle(.bordered)
-                    .tint(.red)
-                    
-                    Spacer()
-                    
-                    Button {
-                        saveWebsites()
-                        dismiss()
-                    } label: {
-                        Label("Update", systemImage: "checkmark.circle.fill")
-                    }
-                    .buttonStyle(.bordered)
-                    .tint(.greenAccent)
-                    
-                    Spacer()
-                }
-                .padding()
-                .background(Color(UIColor.systemBackground))
             }
         }
     }
