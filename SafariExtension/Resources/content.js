@@ -1,5 +1,5 @@
 
-function showWebsitesList(websites, topUpActive, topUpMinutes) {
+function showWebsiteShield(websites, topUpActive, topUpMinutes) {
     // Remove any existing overlay
     const existingOverlay = document.getElementById('7iii-life-overlay');
     if (existingOverlay) {
@@ -40,7 +40,9 @@ function showWebsitesList(websites, topUpActive, topUpMinutes) {
     Object.assign(circle.style, {
         fontSize: "150px",
         fontWeight: "300",
-        marginBottom: "75px",
+        height: "150px",
+        lineHeight: "150px",
+        marginBottom: "0px",
         color: isDarkMode ? "#ffffff" : "#000000"
     });
     
@@ -108,9 +110,10 @@ function showWebsitesList(websites, topUpActive, topUpMinutes) {
     // Create top-up button (only if available)
     let topUpButton = null;
     if (topUpActive !== undefined) {
-        topUpButton = document.createElement("button");
         
         if (topUpActive && topUpMinutes > 0) {
+        topUpButton = document.createElement("button");
+        
             topUpButton.textContent = `Unlock for ${topUpMinutes} min`;
             topUpButton.style.backgroundColor = "transparent";
             topUpButton.style.color = isDarkMode ? "#ffffff" : "#000000";
@@ -118,29 +121,20 @@ function showWebsitesList(websites, topUpActive, topUpMinutes) {
             
             // Top-up button hover effect
             topUpButton.addEventListener('mouseenter', () => {
-                if (!topUpActive || topUpMinutes <= 0) {
-                    topUpButton.style.color = "#4CAF50";
-                    topUpButton.style.transform = "scale(1.02)";
-                }
+                topUpButton.style.color = "#4CAF50";
+                topUpButton.style.transform = "scale(1.02)";
             });
             
             topUpButton.addEventListener('mouseleave', () => {
-                if (!topUpActive || topUpMinutes <= 0) {
-                    topUpButton.style.color = isDarkMode ? "#ffffff" : "#000000";
-                    topUpButton.style.transform = "scale(1)";
-                }
+                topUpButton.style.color = isDarkMode ? "#ffffff" : "#000000";
+                topUpButton.style.transform = "scale(1)";
             });
             
             // Top-up click handler
             topUpButton.addEventListener('click', () => {
-                if (!topUpActive || topUpMinutes <= 0) {
-                    // Implement your top-up logic here
-                    console.log('Top-up requested');
-                    // You can call your top-up function here
-                    // topUpLogic();
-                }
+                removeWebsite(topUpMinutes);
             });
-        }
+        
         
         Object.assign(topUpButton.style, {
             border: "none",
@@ -151,6 +145,7 @@ function showWebsitesList(websites, topUpActive, topUpMinutes) {
             minWidth: "300px",
             transition: "all 0.2s ease"
         });
+        }
     }
     
     // Assemble content
@@ -224,20 +219,6 @@ function showWebsitesList(websites, topUpActive, topUpMinutes) {
     // Store cleanup function on overlay for external access
     overlay._cleanup = cleanup;
     
-    // Enhanced overlay removal
-    const removeOverlay = () => {
-        const overlayElement = document.getElementById('7iii-life-overlay');
-        if (overlayElement) {
-            overlayElement.remove();
-            cleanup();
-        }
-    };
-    
-    // Auto-remove after 20 seconds if no interaction
-    setTimeout(() => {
-        removeOverlay();
-    }, 20000);
-    
     // Prevent any clicks from going through to the page behind
     overlay.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -259,6 +240,14 @@ function getHighestZIndex() {
     return highest;
 }
 
+function removeWebsite(topUpMinutes) {
+    browser.runtime.sendMessage({ action: "remove-top-up"});
+    // TODO: add the website and endDate (date now + topUpMinutes) to a local unshielded dict or array, then remove the websiteShield
+    
+    
+}
+
+// TODO: make isCurrentSiteBlocked if it finds current host in blockedWebsites also check the unshielded to see if it is in there, check if the date is in the past. if yes, remove the website from unshielded, return true, else false.
 function isCurrentSiteBlocked(blockedWebsites) {
     const currentDomain = window.location.hostname.replace(/^www\./, '');
     
@@ -273,13 +262,14 @@ function isCurrentSiteBlocked(blockedWebsites) {
     });
 }
 
+// TODO: every couple of seconds getBlockedWebsites or is there a better way?
 // Request blocked websites
 browser.runtime.sendMessage({ action: "getBlockedWebsites" }).then((response) => {
     console.log("Received response: ", response);
     if (response && response.websites) {
         // Only show overlay if current site is blocked
         if (isCurrentSiteBlocked(response.websites)) {
-            showWebsitesList(response.websites, response.topUpActive, response.topUpMinutes);
+            showWebsiteShield(response.websites, response.topUpActive, response.topUpMinutes);
         }
     } else if (response && response.error) {
         showOverlay("Error: " + response.error);

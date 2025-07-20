@@ -15,5 +15,8 @@ browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
         
     } else if (request.action === "close-tab" && sender.tab?.id) {
         browser.tabs.remove(sender.tab.id);
+    } else if (request.action === "remove-top-up") {
+        // Forward request to native app via Safari extension handler
+        browser.runtime.sendNativeMessage("application.id", { action: "remove-top-up" });
     }
 });

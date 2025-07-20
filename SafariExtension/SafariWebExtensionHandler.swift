@@ -24,27 +24,31 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
         var responseMessage: [String: Any] = [:]
         
         if let messageDict = message as? [String: Any] {
-            if let action = messageDict["action"] as? String, action == "getBlockedWebsites" {
-                // Read blocked websites from app group
-                if let sharedDefaults = UserDefaults(suiteName: "group.com.project7iii.life") {
-                    let blockedWebsites = sharedDefaults.array(forKey: "blockedWebsites") as? [String] ?? []
-                    let topUpActive = sharedDefaults.bool(forKey: "topUpActive")
-                    let topUpMinutes = sharedDefaults.integer(forKey: "topUpMinutes")
-                    
-                    responseMessage = [
-                                            "websites": blockedWebsites,
-                                            "topUpActive": topUpActive,
-                                            "topUpMinutes": topUpMinutes
-                                        ]
-                    
+            if let action = messageDict["action"] as? String {
+                if action == "getBlockedWebsites" {
+                    // Read blocked websites from app group
+                    if let sharedDefaults = UserDefaults(suiteName: "group.com.project7iii.life") {
+                        let blockedWebsites = sharedDefaults.array(forKey: "blockedWebsites") as? [String] ?? []
+                        let topUpActive = sharedDefaults.bool(forKey: "topUpActive")
+                        let topUpMinutes = sharedDefaults.integer(forKey: "topUpMinutes")
+                        
+                        responseMessage = [
+                            "websites": blockedWebsites,
+                            "topUpActive": topUpActive,
+                            "topUpMinutes": topUpMinutes
+                        ]
+                        
+                    } else {
+                        responseMessage = ["error": "Could not access app group"]
+                    }
+                } else if action == "remove-top-up" {
+                    UserDefaults(suiteName: "group.com.project7iii.life")?.set(false, forKey: "topUpActive")
                 } else {
-                    responseMessage = ["error": "Could not access app group"]
+                    responseMessage = ["echo": message ?? []]
                 }
             } else {
                 responseMessage = ["echo": message ?? []]
             }
-        } else {
-            responseMessage = ["echo": message ?? []]
         }
 
         let response = NSExtensionItem()
