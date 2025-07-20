@@ -12,5 +12,8 @@ browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
             });
         
         return true; // Indicates we will call sendResponse asynchronously
+        
+    } else if (request.action === "close-tab" && sender.tab?.id) {
+        browser.tabs.remove(sender.tab.id);
     }
 });
