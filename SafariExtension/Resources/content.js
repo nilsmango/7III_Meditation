@@ -240,38 +240,115 @@ function getHighestZIndex() {
     return highest;
 }
 
-function removeWebsite(topUpMinutes) {
-    browser.runtime.sendMessage({ action: "remove-top-up"});
-    // TODO: add the website and endDate (date now + topUpMinutes) to a local unshielded dict or array, then remove the websiteShield
-    
-    
+// Helper functions for managing unshielded websites
+function getUnshieldedWebsites() {
+    const stored = localStorage.getItem('7iii-unshielded-websites');
+    return stored ? JSON.parse(stored) : {};
 }
 
-// TODO: make isCurrentSiteBlocked if it finds current host in blockedWebsites also check the unshielded to see if it is in there, check if the date is in the past. if yes, remove the website from unshielded, return true, else false.
+function addUnshieldedWebsite(website, minutes) {
+    const unshielded = getUnshieldedWebsites();
+    const endDate = new Date(Date.now() + (minutes * 60 * 1000));
+    unshielded[website] = endDate.toISOString();
+    localStorage.setItem('7iii-unshielded-websites', JSON.stringify(unshielded));
+}
+
+function isWebsiteUnshielded(website) {
+    const unshielded = getUnshieldedWebsites();
+    if (!unshielded[website]) return false;
+    
+    const endDate = new Date(unshielded[website]);
+    const now = new Date();
+    
+    if (now > endDate) {
+        // Time expired, remove from unshielded
+        delete unshielded[website];
+        localStorage.setItem('7iii-unshielded-websites', JSON.stringify(unshielded));
+        return false;
+    }
+    
+    return true;
+}
+
+function removeWebsite(topUpMinutes) {
+    browser.runtime.sendMessage({ action: "remove-top-up"});
+    
+    // Add the current website to unshielded list with expiration time
+    const currentDomain = window.location.hostname.replace(/^www\./, '');
+    addUnshieldedWebsite(currentDomain, topUpMinutes);
+    
+    // Remove the website shield overlay
+    const existingOverlay = document.getElementById('7iii-life-overlay');
+    if (existingOverlay) {
+        if (existingOverlay._cleanup) {
+            existingOverlay._cleanup();
+        }
+        existingOverlay.remove();
+    }
+}
+
 function isCurrentSiteBlocked(blockedWebsites) {
     const currentDomain = window.location.hostname.replace(/^www\./, '');
     
+    // First check if the website is temporarily unshielded
+    if (isWebsiteUnshielded(currentDomain)) {
+        return false;
+    }
+    
+    // Check against blocked websites list
     return blockedWebsites.some(website => {
         // Remove protocol and www from blocked website
         const cleanWebsite = website.replace(/^https?:\/\/(www\.)?/, '');
         
         // Check for exact match or if current domain ends with the blocked domain
-        return currentDomain === cleanWebsite ||
-               currentDomain.endsWith('.' + cleanWebsite) ||
-               cleanWebsite.endsWith('.' + currentDomain);
+        const isBlocked = currentDomain === cleanWebsite ||
+                         currentDomain.endsWith('.' + cleanWebsite) ||
+                         cleanWebsite.endsWith('.' + currentDomain);
+        
+        // If blocked, also check if it's unshielded
+        if (isBlocked && isWebsiteUnshielded(cleanWebsite)) {
+            return false;
+        }
+        
+        return isBlocked;
     });
 }
 
-// TODO: every couple of seconds getBlockedWebsites or is there a better way?
-// Request blocked websites
-browser.runtime.sendMessage({ action: "getBlockedWebsites" }).then((response) => {
-    console.log("Received response: ", response);
-    if (response && response.websites) {
-        // Only show overlay if current site is blocked
-        if (isCurrentSiteBlocked(response.websites)) {
-            showWebsiteShield(response.websites, response.topUpActive, response.topUpMinutes);
+// Check blocked websites status
+async function checkBlockedStatus() {
+    try {
+        const response = await browser.runtime.sendMessage({ action: "getBlockedWebsites" });
+        console.log("Received response: ", response);
+        
+        if (response && response.websites) {
+            const isBlocked = isCurrentSiteBlocked(response.websites);
+            const overlayExists = document.getElementById('7iii-life-overlay');
+            
+            if (isBlocked) {
+                // Site is blocked but no overlay shown - show it
+                showWebsiteShield(response.websites, response.topUpActive, response.topUpMinutes);
+            } else if (!isBlocked && overlayExists) {
+                // Site is no longer blocked but overlay is shown - remove it
+                if (overlayExists._cleanup) {
+                    overlayExists._cleanup();
+                }
+                overlayExists.remove();
+            }
+        } else if (response && response.error) {
+            console.error("Error getting blocked websites:", response.error);
         }
-    } else if (response && response.error) {
-        showOverlay("Error: " + response.error);
+    } catch (error) {
+        console.error("Error checking blocked status:", error);
     }
+}
+
+// Initial check
+checkBlockedStatus();
+
+// Set up periodic checking every 6 seconds
+const statusCheckInterval = setInterval(checkBlockedStatus, 6000);
+
+// Clean up interval when page is about to unload
+window.addEventListener('beforeunload', () => {
+    clearInterval(statusCheckInterval);
 });
