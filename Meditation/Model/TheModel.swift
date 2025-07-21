@@ -147,18 +147,13 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
     // MARK: - Blocking Management
     func enableBlocking() {
         guard !selection.applicationTokens.isEmpty || !websitesSelection.isEmpty else { return }
-        
         store.shield.applications = selection.applicationTokens
-        store.shield.webDomains = selection.webDomainTokens
-        store.shield.applicationCategories = ShieldSettings.ActivityCategoryPolicy.specific(selection.categoryTokens)
         updateBlockedWebsites()
         isBlocked = true
     }
     
     func disableBlocking() {
         store.shield.applications = nil
-        store.shield.webDomains = nil
-        store.shield.applicationCategories = nil
         UserDefaults(suiteName: appGroupID)?.set([], forKey: "blockedWebsites")
         isBlocked = false
     }
