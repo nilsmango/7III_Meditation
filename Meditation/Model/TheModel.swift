@@ -30,9 +30,10 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
             }
         }
     }
-    @AppStorage("isBlocked") var isBlocked = false
-    @Published var authorizationStatus: AuthorizationStatus = .notDetermined
     
+    @AppStorage("isBlocked") var isBlocked = false
+    
+    @Published var authorizationStatus: AuthorizationStatus = .notDetermined
     
     private let appGroupID = "group.com.project7iii.life"
         
@@ -50,10 +51,12 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
         }
     }
     
-    @Published var blockedWebsites: [String] = [] {
+    @Published var websitesSelection : [String] = [] {
         didSet {
-            UserDefaults(suiteName: appGroupID)?.set(blockedWebsites, forKey: "blockedWebsites")
-            print("blocked website: \(blockedWebsites)")
+            UserDefaults(suiteName: appGroupID)?.set(websitesSelection, forKey: "websitesSelection")
+            if isBlocked {
+                updateBlockedWebsites()
+            }
         }
     }
     
@@ -82,7 +85,7 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
         
         checkAuthorizationStatus()
         loadSelection()
-        loadBlockedWebsites()
+        loadWebsitesSelection()
         self.topUpMinutes = UserDefaults(suiteName: appGroupID)?.integer(forKey: "topUpMinutes") ?? 1
     }
     
@@ -111,8 +114,12 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
     
     // MARK: - Website Selection
     
-    func loadBlockedWebsites() {
-        blockedWebsites = UserDefaults(suiteName: appGroupID)?.stringArray(forKey: "blockedWebsites") ?? []
+    func loadWebsitesSelection() {
+        websitesSelection = UserDefaults(suiteName: appGroupID)?.stringArray(forKey: "websitesSelection") ?? []
+    }
+    
+    func updateBlockedWebsites() {
+        UserDefaults(suiteName: appGroupID)?.set(websitesSelection, forKey: "blockedWebsites")
     }
     
     // MARK: - Authorization
@@ -139,11 +146,12 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
     
     // MARK: - Blocking Management
     func enableBlocking() {
-        guard !selection.applicationTokens.isEmpty else { return }
+        guard !selection.applicationTokens.isEmpty || !websitesSelection.isEmpty else { return }
         
         store.shield.applications = selection.applicationTokens
         store.shield.webDomains = selection.webDomainTokens
         store.shield.applicationCategories = ShieldSettings.ActivityCategoryPolicy.specific(selection.categoryTokens)
+        updateBlockedWebsites()
         isBlocked = true
     }
     
@@ -151,6 +159,7 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
         store.shield.applications = nil
         store.shield.webDomains = nil
         store.shield.applicationCategories = nil
+        UserDefaults(suiteName: appGroupID)?.set([], forKey: "blockedWebsites")
         isBlocked = false
     }
     
@@ -192,7 +201,7 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
     }
     
     var hasSelectedWebsites: Bool {
-        !blockedWebsites.isEmpty
+        !websitesSelection.isEmpty
     }
     
     var selectedAppsCount: Int {
@@ -200,7 +209,7 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
     }
     
     var selectedWebsitesCount: Int {
-        selection.webDomainTokens.count + blockedWebsites.count
+        websitesSelection.count
     }
     
     var isAuthorized: Bool {

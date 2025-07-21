@@ -94,7 +94,7 @@ struct AppBlockerView: View {
                 HStack {
                     
                     Button {
-                        blockedWebsites = model.blockedWebsites
+                        blockedWebsites = model.websitesSelection
                         showingWebsitePicker = false
                     } label: {
                         Label("Cancel", systemImage: "xmark.circle.fill")
@@ -105,7 +105,7 @@ struct AppBlockerView: View {
                     Spacer()
                     
                     Button {
-                        model.blockedWebsites = blockedWebsites
+                        model.websitesSelection = blockedWebsites
                         showingWebsitePicker = false
                     } label: {
                         Label("Update", systemImage: "checkmark.circle.fill")
@@ -119,7 +119,7 @@ struct AppBlockerView: View {
         }
         .onAppear {
             selection = model.selection
-            blockedWebsites = model.blockedWebsites
+            blockedWebsites = model.websitesSelection
         }
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
