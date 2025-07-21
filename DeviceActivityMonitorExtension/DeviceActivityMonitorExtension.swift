@@ -32,6 +32,8 @@ class DeviceActivityMonitorExtension: DeviceActivityMonitor {
                let token = try? JSONDecoder().decode(WebDomainToken.self, from: data) {
                 let store = ManagedSettingsStore()
                 store.shield.webDomains?.insert(token)
+                
+                DeviceActivityCenter().stopMonitoring([activity])
             }
         } else {
             // adding the application back to the shield
@@ -40,6 +42,8 @@ class DeviceActivityMonitorExtension: DeviceActivityMonitor {
                let token = try? JSONDecoder().decode(ApplicationToken.self, from: data) {
                 let store = ManagedSettingsStore()
                 store.shield.applications?.insert(token)
+                
+                DeviceActivityCenter().stopMonitoring([activity])
             }
         }
     }
