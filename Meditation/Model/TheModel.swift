@@ -22,6 +22,10 @@ public enum StoreError: Error {
 
 @MainActor
 class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
+    @Published var authorizationStatus: AuthorizationStatus = .notDetermined
+    
+    private let appGroupID = "group.com.project7iii.life"
+    
     @Published var selection = FamilyActivitySelection() {
         didSet {
             saveSelection()
@@ -30,13 +34,7 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
             }
         }
     }
-    
-    @AppStorage("isBlocked") var isBlocked = false
-    
-    @Published var authorizationStatus: AuthorizationStatus = .notDetermined
-    
-    private let appGroupID = "group.com.project7iii.life"
-        
+     
     @Published var topUpActive: Bool = false {
         didSet {
             // Automatically sync to UserDefaults whenever the value changes
@@ -86,6 +84,7 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
         checkAuthorizationStatus()
         loadSelection()
         loadWebsitesSelection()
+        loadIsBlocked()
         self.topUpMinutes = UserDefaults(suiteName: appGroupID)?.integer(forKey: "topUpMinutes") ?? 1
     }
     
@@ -98,9 +97,9 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
     
     // MARK: - App Selection
     private let selectionKey = "familyActivitySelection"
-    
+
     func loadSelection() {
-        if let data = UserDefaults.standard.data(forKey: selectionKey),
+        if let data = UserDefaults(suiteName: appGroupID)?.data(forKey: selectionKey),
            let decoded = try? JSONDecoder().decode(FamilyActivitySelection.self, from: data) {
             selection = decoded
         }
@@ -108,7 +107,7 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
 
     func saveSelection() {
         if let data = try? JSONEncoder().encode(selection) {
-            UserDefaults.standard.set(data, forKey: selectionKey)
+            UserDefaults(suiteName: appGroupID)?.set(data, forKey: selectionKey)
         }
     }
     
@@ -120,6 +119,18 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
     
     func updateBlockedWebsites() {
         UserDefaults(suiteName: appGroupID)?.set(websitesSelection, forKey: "blockedWebsites")
+    }
+    
+    // MARK: - App Block
+    
+    @Published var isBlocked: Bool = false {
+        didSet {
+            UserDefaults(suiteName: appGroupID)?.set(isBlocked, forKey: "isBlocked")
+        }
+    }
+
+    func loadIsBlocked() {
+        isBlocked = UserDefaults(suiteName: appGroupID)?.bool(forKey: "isBlocked") ?? false
     }
     
     // MARK: - Authorization

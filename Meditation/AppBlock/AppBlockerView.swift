@@ -119,6 +119,9 @@ struct AppBlockerView: View {
         .onAppear {
             selection = model.selection
             blockedWebsites = model.websitesSelection
+            model.loadIsBlocked()
+            model.loadWebsitesSelection()
+            model.loadSelection()
         }
 //        .toolbar {
 //            ToolbarItem(placement: .topBarTrailing) {
