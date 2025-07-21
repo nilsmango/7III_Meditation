@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct LifeMacApp: App {
+    @StateObject private var model = MacModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(model: model)
         }
     }
 }

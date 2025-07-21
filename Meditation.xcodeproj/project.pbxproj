@@ -21,6 +21,10 @@
 		780ED47C2E2C2AB800FAF3FC /* WebsiteSelectionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780ED47B2E2C2AB800FAF3FC /* WebsiteSelectionSheet.swift */; };
 		780ED47E2E2C2ACA00FAF3FC /* WebsiteRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780ED47D2E2C2ACA00FAF3FC /* WebsiteRow.swift */; };
 		780ED4C22E2CEA1900FAF3FC /* SafariExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 780ED4AA2E2CEA1900FAF3FC /* SafariExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		780ED51E2E2E392B00FAF3FC /* ButtonLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780ED42D2E264AF900FAF3FC /* ButtonLabel.swift */; };
+		780ED51F2E2E394600FAF3FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78385D0E2BF3647500581057 /* Assets.xcassets */; };
+		780ED5222E2E3E4400FAF3FC /* WebsiteSelectionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780ED47B2E2C2AB800FAF3FC /* WebsiteSelectionSheet.swift */; };
+		780ED5232E2E3E4900FAF3FC /* WebsiteRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780ED47D2E2C2ACA00FAF3FC /* WebsiteRow.swift */; };
 		781D557C2CF606C900C56DE6 /* TricksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781D557B2CF606C900C56DE6 /* TricksView.swift */; };
 		7827880A2BF68B67004E7F77 /* TimerRunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782788092BF68B67004E7F77 /* TimerRunningView.swift */; };
 		7827880D2BFB3F45004E7F77 /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7827880C2BFB3F45004E7F77 /* OptionsView.swift */; };
@@ -1044,6 +1048,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				780ED51F2E2E394600FAF3FC /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1141,6 +1146,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				780ED5222E2E3E4400FAF3FC /* WebsiteSelectionSheet.swift in Sources */,
+				780ED51E2E2E392B00FAF3FC /* ButtonLabel.swift in Sources */,
+				780ED5232E2E3E4900FAF3FC /* WebsiteRow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

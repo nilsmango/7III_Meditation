@@ -28,7 +28,7 @@ struct WebsiteSelectionSheet: View {
     ]
     
     var body: some View {
-        NavigationView {
+
             VStack(spacing: 0) {
                 // Header with add button
                 HStack {
@@ -45,6 +45,9 @@ struct WebsiteSelectionSheet: View {
                             .font(.title2)
                             .foregroundColor(.greenAccent)
                     }
+                    #if os(macOS)
+                    .buttonStyle(.plain)
+                    #endif
                 }
                 .padding()
                 
@@ -63,13 +66,14 @@ struct WebsiteSelectionSheet: View {
                 }
                 .listStyle(PlainListStyle())
             }
-            .navigationBarHidden(true)
             .onAppear {
                 loadWebsites()
             }
             .alert("Add Website", isPresented: $showingAddAlert) {
                 TextField("Enter website (e.g., example.com)", text: $newWebsiteText)
+                #if os(iOS)
                     .autocapitalization(.none)
+                #endif
                     .disableAutocorrection(true)
                 
                 Button("Cancel", role: .cancel) {
@@ -84,7 +88,6 @@ struct WebsiteSelectionSheet: View {
                 Text("Enter the domain name of the website you want to add to your list.")
             }
         }
-    }
     
     private func loadWebsites() {
         // Load all websites from UserDefaults

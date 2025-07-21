@@ -106,7 +106,7 @@ class MacModel: ObservableObject {
     
     
     var blockingStatusText: String {
-        isBlocked ? "Blocking Active" : "Blocking Inactive"
+        isBlocked ? "Blocking active" : "Blocking inactive"
     }
     
     var blockingStatusColor: Color {

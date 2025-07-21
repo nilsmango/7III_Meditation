@@ -8,17 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var model: MacModel
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
+        WebBlockerView(model: model)
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(model: MacModel())
 }

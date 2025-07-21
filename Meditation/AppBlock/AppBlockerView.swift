@@ -29,9 +29,8 @@ struct AppBlockerView: View {
                         } label: {
                             ButtonLabel(iconName: "plus.circle.fill", labelText: "Top up Time", accentColor: .greenAccent, navigationLink: true)
                         }
-                        
-                        SelectedAppsView(model: model)
                     }
+                    SelectedAppsView(model: model)
                                         
                     Button {
                         showingFamilyPicker = true
