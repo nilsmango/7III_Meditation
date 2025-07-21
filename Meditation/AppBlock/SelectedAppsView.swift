@@ -14,7 +14,7 @@ struct SelectedAppsView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("Selected Apps (\(model.selectedAppsCount)), Websites (\(model.selectedWebsitesCount))")
+            Text("\(model.selectedAppsCount) \(model.selectedAppsCount == 1 ? "App" : "Apps") & \(model.selectedWebsitesCount) \(model.selectedWebsitesCount == 1 ? "Website" : "Websites") selected")
                 .font(.headline)
             
             Text("You are amazing.")
