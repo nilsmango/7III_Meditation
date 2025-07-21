@@ -33,17 +33,17 @@ struct AppBlockerView: View {
                     Button {
                         showingFamilyPicker = true
                     } label: {
-                        ButtonLabel(iconName: model.hasSelectedApps ? "arrow.2.squarepath" : "plus.app.fill", labelText: model.hasSelectedApps ? "Change Selected Apps" : "Select Apps to Block", accentColor: .blue)
+                        ButtonLabel(iconName: model.hasSelectedApps ? "arrow.2.squarepath" : "plus.app.fill", labelText: model.hasSelectedApps ? "Change selected Apps" : "Select Apps to Block", accentColor: .blue)
                     }
                     
                     Button {
                         showingWebsitePicker = true
                     } label: {
-                        ButtonLabel(iconName: model.hasSelectedWebsites ? "arrow.2.squarepath" : "plus.app.fill", labelText: model.hasSelectedWebsites ? "Change Selected Websites" : "Select Websites to Block", accentColor: .blue)
+                        ButtonLabel(iconName: model.hasSelectedWebsites ? "arrow.2.squarepath" : "plus.app.fill", labelText: model.hasSelectedWebsites ? "Change selected Websites" : "Select Websites to Block", accentColor: .blue)
                     }
                     
                     
-                    if model.hasSelectedApps {                        
+                    if model.hasSelectedApps || model.hasSelectedWebsites {
                         Button {
                             model.toggleBlocking()
                         } label: {
@@ -51,7 +51,6 @@ struct AppBlockerView: View {
                         }
                     }
                     
-                    StatusView(model: model)
                     
                     Spacer()
                 }
@@ -121,21 +120,22 @@ struct AppBlockerView: View {
             selection = model.selection
             blockedWebsites = model.websitesSelection
         }
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    // TODO: options
-                } label: {
-                    Image(systemName: "ellipsis.circle.fill")
-                        .font(.title3)
-                        .symbolRenderingMode(.palette)
-                        .foregroundStyle(.blackWhite, .greenAccent)
-                }
-                
-
-            }
-        }
+//        .toolbar {
+//            ToolbarItem(placement: .topBarTrailing) {
+//                Button {
+//                    // TODO: options
+//                } label: {
+//                    Image(systemName: "ellipsis.circle.fill")
+//                        .font(.title3)
+//                        .symbolRenderingMode(.palette)
+//                        .foregroundStyle(.blackWhite, .greenAccent)
+//                }
+//                
+//
+//            }
+//        }
         .navigationTitle("App Blocker")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

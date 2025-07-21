@@ -17,9 +17,17 @@ struct SelectedAppsView: View {
             Text("\(model.selectedAppsCount) \(model.selectedAppsCount == 1 ? "App" : "Apps") & \(model.selectedWebsitesCount) \(model.selectedWebsitesCount == 1 ? "Website" : "Websites") selected")
                 .font(.headline)
             
-            Text("You are amazing.")
-                .font(.caption)
-                .foregroundColor(.secondary)
+            HStack {
+                Circle()
+                    .fill(model.blockingStatusColor)
+                    .frame(width: 12, height: 12)
+                
+                Text(model.blockingStatusText)
+                    .font(.subheadline)
+                    .fontWeight(.medium)
+                
+                Spacer()
+            }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()

@@ -132,7 +132,6 @@
 		78A77DA52E20FF8F00B1872A /* AuthorizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A77DA42E20FF8F00B1872A /* AuthorizationView.swift */; };
 		78A77DA72E20FFAF00B1872A /* MainContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A77DA62E20FFAF00B1872A /* MainContentView.swift */; };
 		78A77DA92E20FFD000B1872A /* SelectedAppsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A77DA82E20FFD000B1872A /* SelectedAppsView.swift */; };
-		78A77DAF2E21004400B1872A /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A77DAE2E21004400B1872A /* StatusView.swift */; };
 		78A77DBB2E21037100B1872A /* ManagedSettings.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78A77DBA2E21037100B1872A /* ManagedSettings.framework */; };
 		78A77DBD2E21037100B1872A /* ManagedSettingsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78A77DBC2E21037100B1872A /* ManagedSettingsUI.framework */; };
 		78A77DC52E21037100B1872A /* ShieldConfigurationExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 78A77DB92E21037100B1872A /* ShieldConfigurationExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -314,7 +313,6 @@
 		78A77DA42E20FF8F00B1872A /* AuthorizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationView.swift; sourceTree = "<group>"; };
 		78A77DA62E20FFAF00B1872A /* MainContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContentView.swift; sourceTree = "<group>"; };
 		78A77DA82E20FFD000B1872A /* SelectedAppsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedAppsView.swift; sourceTree = "<group>"; };
-		78A77DAE2E21004400B1872A /* StatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
 		78A77DB92E21037100B1872A /* ShieldConfigurationExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ShieldConfigurationExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		78A77DBA2E21037100B1872A /* ManagedSettings.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ManagedSettings.framework; path = System/Library/Frameworks/ManagedSettings.framework; sourceTree = SDKROOT; };
 		78A77DBC2E21037100B1872A /* ManagedSettingsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ManagedSettingsUI.framework; path = Library/Frameworks/ManagedSettingsUI.framework; sourceTree = DEVELOPER_DIR; };
@@ -692,7 +690,6 @@
 				780ED42B2E264A6A00FAF3FC /* HowToButton.swift */,
 				780ED42F2E264B9D00FAF3FC /* HowToView.swift */,
 				780ED42D2E264AF900FAF3FC /* ButtonLabel.swift */,
-				78A77DAE2E21004400B1872A /* StatusView.swift */,
 			);
 			path = AppBlock;
 			sourceTree = "<group>";
@@ -997,7 +994,6 @@
 				780ED47C2E2C2AB800FAF3FC /* WebsiteSelectionSheet.swift in Sources */,
 				78C862AF2C0F0866006235AB /* BuddhaBoxView.swift in Sources */,
 				7827880A2BF68B67004E7F77 /* TimerRunningView.swift in Sources */,
-				78A77DAF2E21004400B1872A /* StatusView.swift in Sources */,
 				785D094C2C09CFE800044AE9 /* ResumeMeditation.swift in Sources */,
 				783426402BFF6C7B0008F9F9 /* TimerSound.swift in Sources */,
 				785D09522C09F18D00044AE9 /* IslandExpandedBottomView.swift in Sources */,
