@@ -11,9 +11,7 @@ import SwiftUI
 
 @MainActor
 class MacModel: ObservableObject {
-    
-    @AppStorage("isBlocked") var isBlocked = false
-    
+        
     private let appGroupID = "group.com.project7iii.life"
     
     @Published var topUpActive: Bool = false {
@@ -45,6 +43,17 @@ class MacModel: ObservableObject {
         self.topUpMinutes = UserDefaults(suiteName: appGroupID)?.integer(forKey: "topUpMinutes") ?? 1
     }
     
+    // MARK: - App Block
+    
+    @Published var isBlocked: Bool = false {
+        didSet {
+            UserDefaults(suiteName: appGroupID)?.set(isBlocked, forKey: "isBlocked")
+        }
+    }
+
+    func loadIsBlocked() {
+        isBlocked = UserDefaults(suiteName: appGroupID)?.bool(forKey: "isBlocked") ?? false
+    }
     
     
     // MARK: - Website Selection
