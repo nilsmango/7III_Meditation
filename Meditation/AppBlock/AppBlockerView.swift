@@ -15,6 +15,9 @@ struct AppBlockerView: View {
     @State private var showingWebsitePicker = false
     @State private var blockedWebsites: [String] = []
     
+    // for some soft sync
+    @Environment(\.scenePhase) private var scenePhase
+    
     var body: some View {
             ScrollView {
                 VStack(spacing: 16) {
@@ -117,11 +120,21 @@ struct AppBlockerView: View {
             }
         }
         .onAppear {
-            selection = model.selection
-            blockedWebsites = model.websitesSelection
             model.loadIsBlocked()
             model.loadWebsitesSelection()
             model.loadSelection()
+            selection = model.selection
+            blockedWebsites = model.websitesSelection
+        }
+        // for some soft sync
+        .onChange(of: scenePhase) {
+            if scenePhase == .active {
+                model.loadIsBlocked()
+                model.loadWebsitesSelection()
+                model.loadSelection()
+                selection = model.selection
+                blockedWebsites = model.websitesSelection
+            }
         }
 //        .toolbar {
 //            ToolbarItem(placement: .topBarTrailing) {
