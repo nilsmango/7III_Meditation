@@ -775,7 +775,7 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
         if let destination = userInfo["navigateTo"] as? String, destination == "meditation" {
-            DispatchQueue.main.async {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
                 self.navigateToMeditation()
             }
         }
