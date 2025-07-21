@@ -97,14 +97,13 @@ function showWebsiteShield(websites, topUpActive, topUpMinutes) {
     });
     
     okButton.addEventListener('mouseleave', () => {
-        okButton.style.backgroundColor = "#4CAF50";
+        okButton.style.backgroundColor = isDarkMode ? "#62A453" : "#7BCB65";
         okButton.style.transform = "scale(1)";
     });
     
     // OK button click handler - close Safari/window
     okButton.addEventListener('click', () => {
-        browser.runtime.sendMessage({ action: 'close-tab'
-        });
+        browser.runtime.sendMessage({ action: 'close-tab' });
     });
     
     // Create top-up button (only if available)
@@ -121,13 +120,11 @@ function showWebsiteShield(websites, topUpActive, topUpMinutes) {
             
             // Top-up button hover effect
             topUpButton.addEventListener('mouseenter', () => {
-                topUpButton.style.color = "#4CAF50";
-                topUpButton.style.transform = "scale(1.02)";
+                topUpButton.style.color = isDarkMode ? "#62A453" : "#7BCB65";
             });
             
             topUpButton.addEventListener('mouseleave', () => {
                 topUpButton.style.color = isDarkMode ? "#ffffff" : "#000000";
-                topUpButton.style.transform = "scale(1)";
             });
             
             // Top-up click handler
