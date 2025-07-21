@@ -42,7 +42,7 @@ function showWebsiteShield(websites, topUpActive, topUpMinutes) {
         fontWeight: "300",
         height: "150px",
         lineHeight: "150px",
-        marginBottom: "0px",
+        marginBottom: "7px",
         color: isDarkMode ? "#ffffff" : "#000000"
     });
     
