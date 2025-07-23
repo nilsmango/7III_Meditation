@@ -23,7 +23,7 @@ struct WebBlockerView: View {
                 NavigationLink(destination: {
                     MacHowToView()
                 }) {
-                    ButtonLabel(iconName: "lightbulb.max.fill", labelText: "How To", accentColor: .yellow, navigationLink: true)
+                    ButtonLabel(iconName: "lightbulb.max.fill", labelText: "How To", accentColor: .yellow, backgroundColor: Color.gray.opacity(0.1), navigationLink: true)
                 }
                 .buttonStyle(.plain)
                 
