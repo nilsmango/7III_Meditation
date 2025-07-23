@@ -13,23 +13,19 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack(path: $model.navigationPath) {
-            Group {
-                if model.isAuthorized {
-                    MainContentView(model: model)
-                } else {
-                    AuthorizationView(model: model)
+            MainContentView(model: model)
+                .onAppear {
+                    model.checkAuthorizationStatus()
                 }
-            }
-            .onAppear {
-                model.checkAuthorizationStatus()
-            }
-            .navigationDestination(for: AppDestination.self) { value in
-                if value == .meditation {
-                    MeditationView(meditationManager: model, audioManager: audioManager)
-                } else if value == .appBlocker {
-                    AppBlockerView(model: model)
+                .navigationDestination(for: AppDestination.self) { value in
+                    if !model.isAuthorized {
+                        AuthorizationView(model: model)
+                    } else if value == .meditation {
+                        MeditationView(meditationManager: model, audioManager: audioManager)
+                    } else if value == .appBlocker {
+                        AppBlockerView(model: model)
+                    }
                 }
-            }
         }
     }
 }

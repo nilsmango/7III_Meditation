@@ -165,6 +165,8 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
     
     func disableBlocking() {
         store.shield.applications = nil
+        store.shield.applicationCategories = nil
+        store.shield.webDomains = nil
         UserDefaults(suiteName: appGroupID)?.set([], forKey: "blockedWebsites")
         isBlocked = false
     }
@@ -771,12 +773,12 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
     
     // Make things happen when user is tapping the notification
     nonisolated func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                didReceive response: UNNotificationResponse,
-                                withCompletionHandler completionHandler: @escaping () -> Void) {
+                                            didReceive response: UNNotificationResponse,
+                                            withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
         if let destination = userInfo["navigateTo"] as? String, destination == "meditation" {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
-                self.navigateToMeditation()
+            Task { @MainActor in
+                navigateToMeditation()
             }
         }
         completionHandler()
