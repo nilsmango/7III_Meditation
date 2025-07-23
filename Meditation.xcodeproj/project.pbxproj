@@ -112,9 +112,9 @@
 		7879BDF12BF4BDE4001994D2 /* Kitchen Timer Normal.caf in Resources */ = {isa = PBXBuildFile; fileRef = 78385D242BF3E4F100581057 /* Kitchen Timer Normal.caf */; };
 		7879BDF32BF68448001994D2 /* CircleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7879BDF22BF68448001994D2 /* CircleButtonStyle.swift */; };
 		7879BDF52BF684FD001994D2 /* TimerStoppedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7879BDF42BF684FD001994D2 /* TimerStoppedView.swift */; };
+		7898769D2E3150A700E41DF1 /* MacSafariExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 789876842E3150A700E41DF1 /* MacSafariExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		789939092E311D7C00E251AB /* WebsiteSelectionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780ED47B2E2C2AB800FAF3FC /* WebsiteSelectionSheet.swift */; };
 		7899390A2E311D8200E251AB /* WebsiteRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780ED47D2E2C2ACA00FAF3FC /* WebsiteRow.swift */; };
-		7899390B2E312EB700E251AB /* SafariExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 780ED4AA2E2CEA1900FAF3FC /* SafariExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		789A0E072C032377009CB9E7 /* KoansEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E062C032377009CB9E7 /* KoansEditView.swift */; };
 		789A0E092C0388FE009CB9E7 /* StreakButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E082C0388FE009CB9E7 /* StreakButton.swift */; };
 		789A0E0B2C038C42009CB9E7 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E0A2C038C42009CB9E7 /* StatisticsView.swift */; };
@@ -180,12 +180,12 @@
 			remoteGlobalIDString = 780ED4F02E2E2C3000FAF3FC;
 			remoteInfo = LifeMac;
 		};
-		7899390C2E312EB700E251AB /* PBXContainerItemProxy */ = {
+		7898769B2E3150A700E41DF1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 78385CFF2BF3647300581057 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 780ED4A92E2CEA1900FAF3FC;
-			remoteInfo = SafariExtension;
+			remoteGlobalIDString = 789876832E3150A700E41DF1;
+			remoteInfo = MacSafariExtension;
 		};
 		789A0E352C061320009CB9E7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -224,7 +224,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				7899390B2E312EB700E251AB /* SafariExtension.appex in Embed Foundation Extensions */,
+				7898769D2E3150A700E41DF1 /* MacSafariExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -330,6 +330,7 @@
 		7879BDEF2BF4A43E001994D2 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		7879BDF22BF68448001994D2 /* CircleButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButtonStyle.swift; sourceTree = "<group>"; };
 		7879BDF42BF684FD001994D2 /* TimerStoppedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerStoppedView.swift; sourceTree = "<group>"; };
+		789876842E3150A700E41DF1 /* MacSafariExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MacSafariExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		789A0E062C032377009CB9E7 /* KoansEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoansEditView.swift; sourceTree = "<group>"; };
 		789A0E082C0388FE009CB9E7 /* StreakButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakButton.swift; sourceTree = "<group>"; };
 		789A0E0A2C038C42009CB9E7 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
@@ -378,6 +379,13 @@
 			);
 			target = 780ED4A92E2CEA1900FAF3FC /* SafariExtension */;
 		};
+		7898769E2E3150A700E41DF1 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 789876832E3150A700E41DF1 /* MacSafariExtension */;
+		};
 		78A77DC62E21037100B1872A /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -406,6 +414,7 @@
 		780ED4F22E2E2C3000FAF3FC /* LifeMac */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = LifeMac; sourceTree = "<group>"; };
 		780ED5012E2E2C3200FAF3FC /* LifeMacTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = LifeMacTests; sourceTree = "<group>"; };
 		780ED50B2E2E2C3200FAF3FC /* LifeMacUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = LifeMacUITests; sourceTree = "<group>"; };
+		789876852E3150A700E41DF1 /* MacSafariExtension */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (7898769E2E3150A700E41DF1 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (Resources/_locales, Resources/images, ); path = MacSafariExtension; sourceTree = "<group>"; };
 		78A77DBE2E21037100B1872A /* ShieldConfigurationExtension */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (78A77DC62E21037100B1872A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = ShieldConfigurationExtension; sourceTree = "<group>"; };
 		78A77DD02E21040C00B1872A /* ShieldActionExtension */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (78A77DD82E21040C00B1872A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = ShieldActionExtension; sourceTree = "<group>"; };
 		78A77DEF2E224C9000B1872A /* DeviceActivityMonitorExtension */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (78A77DF72E224C9000B1872A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = DeviceActivityMonitorExtension; sourceTree = "<group>"; };
@@ -447,6 +456,13 @@
 				78EBA6D32CEA081B00154226 /* StoreKit.framework in Frameworks */,
 				78C862AB2C0C5A29006235AB /* SoundpipeAudioKit in Frameworks */,
 				78DAE2F32C0C58FA00F2CCB0 /* AudioKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		789876812E3150A700E41DF1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,6 +538,7 @@
 				780ED4F22E2E2C3000FAF3FC /* LifeMac */,
 				780ED5012E2E2C3200FAF3FC /* LifeMacTests */,
 				780ED50B2E2E2C3200FAF3FC /* LifeMacUITests */,
+				789876852E3150A700E41DF1 /* MacSafariExtension */,
 				789A0E262C06131E009CB9E7 /* Frameworks */,
 				78385D082BF3647300581057 /* Products */,
 			);
@@ -539,6 +556,7 @@
 				780ED4F12E2E2C3000FAF3FC /* 7III Life.app */,
 				780ED4FE2E2E2C3200FAF3FC /* LifeMacTests.xctest */,
 				780ED5082E2E2C3200FAF3FC /* LifeMacUITests.xctest */,
+				789876842E3150A700E41DF1 /* MacSafariExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -818,7 +836,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				7899390D2E312EB700E251AB /* PBXTargetDependency */,
+				7898769C2E3150A700E41DF1 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				780ED4F22E2E2C3000FAF3FC /* LifeMac */,
@@ -902,6 +920,28 @@
 			productName = Meditation;
 			productReference = 78385D072BF3647300581057 /* Meditation.app */;
 			productType = "com.apple.product-type.application";
+		};
+		789876832E3150A700E41DF1 /* MacSafariExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7898769F2E3150A700E41DF1 /* Build configuration list for PBXNativeTarget "MacSafariExtension" */;
+			buildPhases = (
+				789876802E3150A700E41DF1 /* Sources */,
+				789876812E3150A700E41DF1 /* Frameworks */,
+				789876822E3150A700E41DF1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				789876852E3150A700E41DF1 /* MacSafariExtension */,
+			);
+			name = MacSafariExtension;
+			packageProductDependencies = (
+			);
+			productName = MacSafariExtension;
+			productReference = 789876842E3150A700E41DF1 /* MacSafariExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 		789A0E242C06131E009CB9E7 /* WidgetExtensionExtension */ = {
 			isa = PBXNativeTarget;
@@ -1013,6 +1053,9 @@
 					78385D062BF3647300581057 = {
 						CreatedOnToolsVersion = 15.3;
 					};
+					789876832E3150A700E41DF1 = {
+						CreatedOnToolsVersion = 16.4;
+					};
 					789A0E242C06131E009CB9E7 = {
 						CreatedOnToolsVersion = 15.4;
 					};
@@ -1053,6 +1096,7 @@
 				780ED4F02E2E2C3000FAF3FC /* 7III Life */,
 				780ED4FD2E2E2C3200FAF3FC /* LifeMacTests */,
 				780ED5072E2E2C3200FAF3FC /* LifeMacUITests */,
+				789876832E3150A700E41DF1 /* MacSafariExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -1120,6 +1164,13 @@
 				783426792BFFBC7F0008F9F9 /* Chimes 3.caf in Resources */,
 				783426772BFFBC7F0008F9F9 /* Basic Bells 3.caf in Resources */,
 				783426822BFFBC7F0008F9F9 /* Singing Bowl 2.caf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		789876822E3150A700E41DF1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1264,6 +1315,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		789876802E3150A700E41DF1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		789A0E212C06131E009CB9E7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1339,10 +1397,10 @@
 			target = 780ED4F02E2E2C3000FAF3FC /* 7III Life */;
 			targetProxy = 780ED5092E2E2C3200FAF3FC /* PBXContainerItemProxy */;
 		};
-		7899390D2E312EB700E251AB /* PBXTargetDependency */ = {
+		7898769C2E3150A700E41DF1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 780ED4A92E2CEA1900FAF3FC /* SafariExtension */;
-			targetProxy = 7899390C2E312EB700E251AB /* PBXContainerItemProxy */;
+			target = 789876832E3150A700E41DF1 /* MacSafariExtension */;
+			targetProxy = 7898769B2E3150A700E41DF1 /* PBXContainerItemProxy */;
 		};
 		789A0E362C061320009CB9E7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1394,8 +1452,10 @@
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1429,8 +1489,10 @@
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1786,6 +1848,72 @@
 			};
 			name = Release;
 		};
+		789876A02E3150A700E41DF1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = MacSafariExtension/MacSafariExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = A9H57996U3;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MacSafariExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MacSafariExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 0.1;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.project7III.meditation.MacSafariExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		789876A12E3150A700E41DF1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = MacSafariExtension/MacSafariExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = A9H57996U3;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MacSafariExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MacSafariExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 0.1;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.project7III.meditation.MacSafariExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		789A0E392C061320009CB9E7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2069,6 +2197,15 @@
 			buildConfigurations = (
 				78385D172BF3647500581057 /* Debug */,
 				78385D182BF3647500581057 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7898769F2E3150A700E41DF1 /* Build configuration list for PBXNativeTarget "MacSafariExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				789876A02E3150A700E41DF1 /* Debug */,
+				789876A12E3150A700E41DF1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
