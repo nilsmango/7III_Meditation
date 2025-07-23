@@ -94,9 +94,16 @@ struct WebsiteSelectionSheet: View {
         if let savedWebsites = UserDefaults.standard.array(forKey: "AllWebsites") as? [String] {
             allWebsites = savedWebsites
         } else {
-            // If no websites saved, use defaults
+            // If no websites saved, use defaults, but always add the blocked ones
             allWebsites = defaultWebsites
             UserDefaults.standard.set(allWebsites, forKey: "AllWebsites")
+            
+            for website in blockedWebsites {
+                if !allWebsites.contains(website) {
+                    allWebsites.append(website)
+                }
+                UserDefaults.standard.set(allWebsites, forKey: "AllWebsites")
+            }
         }
     }
     
