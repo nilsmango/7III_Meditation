@@ -12,7 +12,9 @@ struct WebBlockerView: View {
     
     @State private var showingWebsitesPicker: Bool = false
     @State private var showingTopUpTimeView: Bool = false
+    
     // for some soft sync
+    @Environment(\.scenePhase) private var scenePhase
     
     var body: some View {
         
@@ -60,6 +62,18 @@ struct WebBlockerView: View {
             .sheet(isPresented: $showingTopUpTimeView) {
                 MacTopUpTimeView(model: model)
             }
+            .onAppear {
+                        // THIS FOR SYNC
+                        model.loadIsBlocked()
+                        model.loadWebsitesSelection()
+                    }
+                    
+            .onChange(of: scenePhase) {
+                        if scenePhase == .active {
+                            model.loadIsBlocked()
+                            model.loadWebsitesSelection()
+                        }
+                    }
         }
 }
 
