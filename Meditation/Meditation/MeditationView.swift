@@ -19,7 +19,9 @@ struct MeditationView: View {
     var body: some View {
             ZStack {
                 VStack {
-                   
+                    HStack {
+                        Spacer()
+                    }
                     Spacer()
                     
                 }
