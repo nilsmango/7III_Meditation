@@ -20,7 +20,7 @@ struct TopUpTimeView: View {
                     .font(.system(size: 50))
                     .foregroundColor(.green)
                     .transition(.scale)
-                Text("You can now unlock your app!")
+                Text("You can now unlock your app or website!")
                     .font(.title)
                     .fontWeight(.bold)
             } else {
