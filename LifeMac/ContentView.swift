@@ -11,7 +11,9 @@ struct ContentView: View {
     @ObservedObject var model: MacModel
     
     var body: some View {
-        WebBlockerView(model: model)
+        NavigationStack {
+            WebBlockerView(model: model)
+        }
     }
 }
 

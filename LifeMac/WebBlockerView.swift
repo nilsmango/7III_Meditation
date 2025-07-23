@@ -11,29 +11,33 @@ struct WebBlockerView: View {
     @ObservedObject var model: MacModel
     
     @State private var showingWebsitesPicker: Bool = false
-    @State private var blockedWebsites: [String] = []
+    @State private var showingTopUpTimeView: Bool = false
     // for some soft sync
     
     var body: some View {
         
             VStack(spacing: 16) {
-                // TODO:               HowToButton()
                 
-                
+                NavigationLink(destination: {
+                    MacHowToView()
+                }) {
+                    ButtonLabel(iconName: "lightbulb.max.fill", labelText: "How To", accentColor: .yellow, navigationLink: true)
+                }
+                .buttonStyle(.plain)
                 
                 if model.hasSelectedWebsites {
-                    NavigationLink {
-                        //                        TopUpTimeView(model: model)
+                    Button {
+                        showingTopUpTimeView = true
                     } label: {
-                        ButtonLabel(iconName: "plus.circle.fill", labelText: "Top up Time", accentColor: .greenAccent, navigationLink: true)
+                        ButtonLabel(iconName: "plus.circle.fill", labelText: "Top up Time", accentColor: .greenAccent, navigationLink: false, fullColorButton: true)
                     }
                     .buttonStyle(.plain)
                 }
                 
                 SelectedWebsitesView(model: model)
                 
-                Button {
-                    //                    showingWebsitePicker = true
+                NavigationLink {
+                    MacWebsiteSelection(model: model)
                 } label: {
                     ButtonLabel(iconName: model.hasSelectedWebsites ? "arrow.2.squarepath" : "plus.app.fill", labelText: model.hasSelectedWebsites ? "Change selected Websites" : "Select Websites to Block", accentColor: .blue)
                 }
@@ -53,14 +57,12 @@ struct WebBlockerView: View {
                 Spacer()
             }
             .padding()
-            .popover(isPresented: $showingWebsitesPicker) {
-                WebsiteSelectionSheet(blockedWebsites: $blockedWebsites)
-//                .frame(width: 300, height: 400)
+            .sheet(isPresented: $showingTopUpTimeView) {
+                MacTopUpTimeView(model: model)
             }
         }
-        
-    
 }
+
 #Preview {
     WebBlockerView(model: MacModel())
 }

@@ -40,6 +40,7 @@ class MacModel: ObservableObject {
     
     init() {
         loadWebsitesSelection()
+        loadIsBlocked()
         self.topUpMinutes = UserDefaults(suiteName: appGroupID)?.integer(forKey: "topUpMinutes") ?? 1
     }
     

@@ -23,8 +23,6 @@
 		780ED4C22E2CEA1900FAF3FC /* SafariExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 780ED4AA2E2CEA1900FAF3FC /* SafariExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		780ED51E2E2E392B00FAF3FC /* ButtonLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780ED42D2E264AF900FAF3FC /* ButtonLabel.swift */; };
 		780ED51F2E2E394600FAF3FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78385D0E2BF3647500581057 /* Assets.xcassets */; };
-		780ED5222E2E3E4400FAF3FC /* WebsiteSelectionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780ED47B2E2C2AB800FAF3FC /* WebsiteSelectionSheet.swift */; };
-		780ED5232E2E3E4900FAF3FC /* WebsiteRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780ED47D2E2C2ACA00FAF3FC /* WebsiteRow.swift */; };
 		781D557C2CF606C900C56DE6 /* TricksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781D557B2CF606C900C56DE6 /* TricksView.swift */; };
 		7827880A2BF68B67004E7F77 /* TimerRunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782788092BF68B67004E7F77 /* TimerRunningView.swift */; };
 		7827880D2BFB3F45004E7F77 /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7827880C2BFB3F45004E7F77 /* OptionsView.swift */; };
@@ -114,6 +112,9 @@
 		7879BDF12BF4BDE4001994D2 /* Kitchen Timer Normal.caf in Resources */ = {isa = PBXBuildFile; fileRef = 78385D242BF3E4F100581057 /* Kitchen Timer Normal.caf */; };
 		7879BDF32BF68448001994D2 /* CircleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7879BDF22BF68448001994D2 /* CircleButtonStyle.swift */; };
 		7879BDF52BF684FD001994D2 /* TimerStoppedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7879BDF42BF684FD001994D2 /* TimerStoppedView.swift */; };
+		789939092E311D7C00E251AB /* WebsiteSelectionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780ED47B2E2C2AB800FAF3FC /* WebsiteSelectionSheet.swift */; };
+		7899390A2E311D8200E251AB /* WebsiteRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780ED47D2E2C2ACA00FAF3FC /* WebsiteRow.swift */; };
+		7899390B2E312EB700E251AB /* SafariExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 780ED4AA2E2CEA1900FAF3FC /* SafariExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		789A0E072C032377009CB9E7 /* KoansEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E062C032377009CB9E7 /* KoansEditView.swift */; };
 		789A0E092C0388FE009CB9E7 /* StreakButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E082C0388FE009CB9E7 /* StreakButton.swift */; };
 		789A0E0B2C038C42009CB9E7 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E0A2C038C42009CB9E7 /* StatisticsView.swift */; };
@@ -179,6 +180,13 @@
 			remoteGlobalIDString = 780ED4F02E2E2C3000FAF3FC;
 			remoteInfo = LifeMac;
 		};
+		7899390C2E312EB700E251AB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 78385CFF2BF3647300581057 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 780ED4A92E2CEA1900FAF3FC;
+			remoteInfo = SafariExtension;
+		};
 		789A0E352C061320009CB9E7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 78385CFF2BF3647300581057 /* Project object */;
@@ -210,6 +218,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		7899390E2E312EB700E251AB /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				7899390B2E312EB700E251AB /* SafariExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		789A0E382C061320009CB9E7 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -239,7 +258,7 @@
 		780ED47B2E2C2AB800FAF3FC /* WebsiteSelectionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebsiteSelectionSheet.swift; sourceTree = "<group>"; };
 		780ED47D2E2C2ACA00FAF3FC /* WebsiteRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebsiteRow.swift; sourceTree = "<group>"; };
 		780ED4AA2E2CEA1900FAF3FC /* SafariExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SafariExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		780ED4F12E2E2C3000FAF3FC /* LifeMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifeMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		780ED4F12E2E2C3000FAF3FC /* 7III Life.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "7III Life.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		780ED4FE2E2E2C3200FAF3FC /* LifeMacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LifeMacTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		780ED5082E2E2C3200FAF3FC /* LifeMacUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LifeMacUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		781D557A2CF5DF3C00C56DE6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -517,7 +536,7 @@
 				78A77DCE2E21040C00B1872A /* ShieldActionExtension.appex */,
 				78A77DEC2E224C9000B1872A /* DeviceActivityMonitorExtension.appex */,
 				780ED4AA2E2CEA1900FAF3FC /* SafariExtension.appex */,
-				780ED4F12E2E2C3000FAF3FC /* LifeMac.app */,
+				780ED4F12E2E2C3000FAF3FC /* 7III Life.app */,
 				780ED4FE2E2E2C3200FAF3FC /* LifeMacTests.xctest */,
 				780ED5082E2E2C3200FAF3FC /* LifeMacUITests.xctest */,
 			);
@@ -787,26 +806,28 @@
 			productReference = 780ED4AA2E2CEA1900FAF3FC /* SafariExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		780ED4F02E2E2C3000FAF3FC /* LifeMac */ = {
+		780ED4F02E2E2C3000FAF3FC /* 7III Life */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 780ED5102E2E2C3200FAF3FC /* Build configuration list for PBXNativeTarget "LifeMac" */;
+			buildConfigurationList = 780ED5102E2E2C3200FAF3FC /* Build configuration list for PBXNativeTarget "7III Life" */;
 			buildPhases = (
 				780ED4ED2E2E2C3000FAF3FC /* Sources */,
 				780ED4EE2E2E2C3000FAF3FC /* Frameworks */,
 				780ED4EF2E2E2C3000FAF3FC /* Resources */,
+				7899390E2E312EB700E251AB /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				7899390D2E312EB700E251AB /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				780ED4F22E2E2C3000FAF3FC /* LifeMac */,
 			);
-			name = LifeMac;
+			name = "7III Life";
 			packageProductDependencies = (
 			);
 			productName = LifeMac;
-			productReference = 780ED4F12E2E2C3000FAF3FC /* LifeMac.app */;
+			productReference = 780ED4F12E2E2C3000FAF3FC /* 7III Life.app */;
 			productType = "com.apple.product-type.application";
 		};
 		780ED4FD2E2E2C3200FAF3FC /* LifeMacTests */ = {
@@ -1029,7 +1050,7 @@
 				78A77DCD2E21040C00B1872A /* ShieldActionExtension */,
 				78A77DEB2E224C9000B1872A /* DeviceActivityMonitorExtension */,
 				780ED4A92E2CEA1900FAF3FC /* SafariExtension */,
-				780ED4F02E2E2C3000FAF3FC /* LifeMac */,
+				780ED4F02E2E2C3000FAF3FC /* 7III Life */,
 				780ED4FD2E2E2C3200FAF3FC /* LifeMacTests */,
 				780ED5072E2E2C3200FAF3FC /* LifeMacUITests */,
 			);
@@ -1146,9 +1167,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				780ED5222E2E3E4400FAF3FC /* WebsiteSelectionSheet.swift in Sources */,
+				789939092E311D7C00E251AB /* WebsiteSelectionSheet.swift in Sources */,
 				780ED51E2E2E392B00FAF3FC /* ButtonLabel.swift in Sources */,
-				780ED5232E2E3E4900FAF3FC /* WebsiteRow.swift in Sources */,
+				7899390A2E311D8200E251AB /* WebsiteRow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1310,13 +1331,18 @@
 		};
 		780ED5002E2E2C3200FAF3FC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 780ED4F02E2E2C3000FAF3FC /* LifeMac */;
+			target = 780ED4F02E2E2C3000FAF3FC /* 7III Life */;
 			targetProxy = 780ED4FF2E2E2C3200FAF3FC /* PBXContainerItemProxy */;
 		};
 		780ED50A2E2E2C3200FAF3FC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 780ED4F02E2E2C3000FAF3FC /* LifeMac */;
+			target = 780ED4F02E2E2C3000FAF3FC /* 7III Life */;
 			targetProxy = 780ED5092E2E2C3200FAF3FC /* PBXContainerItemProxy */;
+		};
+		7899390D2E312EB700E251AB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 780ED4A92E2CEA1900FAF3FC /* SafariExtension */;
+			targetProxy = 7899390C2E312EB700E251AB /* PBXContainerItemProxy */;
 		};
 		789A0E362C061320009CB9E7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1365,8 +1391,11 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.project7III.meditation.SafariExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1397,8 +1426,11 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.project7III.meditation.SafariExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1414,7 +1446,7 @@
 				CODE_SIGN_ENTITLEMENTS = LifeMac/LifeMac.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = A9H57996U3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1428,7 +1460,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.project7III.meditation.LifeMac;
+				PRODUCT_BUNDLE_IDENTIFIER = com.project7III.meditation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = macosx;
@@ -1445,7 +1477,7 @@
 				CODE_SIGN_ENTITLEMENTS = LifeMac/LifeMac.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = A9H57996U3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1459,7 +1491,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.project7III.meditation.LifeMac;
+				PRODUCT_BUNDLE_IDENTIFIER = com.project7III.meditation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = macosx;
@@ -1996,7 +2028,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		780ED5102E2E2C3200FAF3FC /* Build configuration list for PBXNativeTarget "LifeMac" */ = {
+		780ED5102E2E2C3200FAF3FC /* Build configuration list for PBXNativeTarget "7III Life" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				780ED5112E2E2C3200FAF3FC /* Debug */,
