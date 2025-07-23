@@ -35,7 +35,7 @@ class ShieldConfigurationExtension: ShieldConfigurationDataSource {
         return ShieldConfiguration(
             backgroundBlurStyle: .systemMaterial,
             backgroundColor: UIColor.systemBackground,
-            icon: UIImage(systemName: "circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 60, weight: .regular))!.withTintColor(.label),
+            icon: UIImage(systemName: "circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 60, weight: .regular))!.withTintColor(UIColor { _ in UIColor.label }),
             title: ShieldConfiguration.Label(text: "Blocked by 7III Life", color: .label),
             subtitle: ShieldConfiguration.Label(text: subtitle, color: .secondaryLabel),
             primaryButtonLabel: ShieldConfiguration.Label(text: "OK", color: .white),
@@ -60,7 +60,7 @@ class ShieldConfigurationExtension: ShieldConfigurationDataSource {
         return ShieldConfiguration(
             backgroundBlurStyle: .systemMaterial,
             backgroundColor: UIColor.systemBackground,
-            icon: UIImage(systemName: "circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 60, weight: .regular))!.withTintColor(.label),
+            icon: UIImage(systemName: "circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 60, weight: .regular))!.withTintColor(UIColor { _ in UIColor.label }),
             title: ShieldConfiguration.Label(text: "Blocked by 7III Life", color: .label),
             subtitle: ShieldConfiguration.Label(text: subtitle, color: .secondaryLabel),
             primaryButtonLabel: ShieldConfiguration.Label(text: "OK", color: .white),
@@ -85,7 +85,7 @@ class ShieldConfigurationExtension: ShieldConfigurationDataSource {
         return ShieldConfiguration(
             backgroundBlurStyle: .systemMaterial,
             backgroundColor: UIColor.systemBackground,
-            icon: UIImage(systemName: "circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 60, weight: .regular))!.withTintColor(.label),
+            icon: UIImage(systemName: "circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 60, weight: .regular))!.withTintColor(UIColor { _ in UIColor.label }),
             title: ShieldConfiguration.Label(text: "Blocked by 7III Life", color: .label),
             subtitle: ShieldConfiguration.Label(text: subtitle, color: .secondaryLabel),
             primaryButtonLabel: ShieldConfiguration.Label(text: "OK", color: .white),
@@ -110,7 +110,7 @@ class ShieldConfigurationExtension: ShieldConfigurationDataSource {
         return ShieldConfiguration(
             backgroundBlurStyle: .systemMaterial,
             backgroundColor: UIColor.systemBackground,
-            icon: UIImage(systemName: "circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 60, weight: .regular))!.withTintColor(.label),
+            icon: UIImage(systemName: "circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 60, weight: .regular))!.withTintColor(UIColor { _ in UIColor.label }),
             title: ShieldConfiguration.Label(text: "Blocked by 7III Life", color: .label),
             subtitle: ShieldConfiguration.Label(text: subtitle, color: .secondaryLabel),
             primaryButtonLabel: ShieldConfiguration.Label(text: "OK", color: .white),
