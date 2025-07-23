@@ -32,9 +32,9 @@ class ShieldConfigurationExtension: ShieldConfigurationDataSource {
             ? ShieldConfiguration.Label(text: "Unlock for \(topUpMinutes) min", color: .label)
             : nil
 
-        let outerConfig = UIImage.SymbolConfiguration(pointSize: 61, weight: .regular)
-        let middleConfig = UIImage.SymbolConfiguration(pointSize: 59, weight: .regular)
-        let innerConfig = UIImage.SymbolConfiguration(pointSize: 60, weight: .regular)
+        let outerConfig = UIImage.SymbolConfiguration(pointSize: 76, weight: .regular)
+        let middleConfig = UIImage.SymbolConfiguration(pointSize: 74, weight: .regular)
+        let innerConfig = UIImage.SymbolConfiguration(pointSize: 75, weight: .regular)
 
         let outerCircle = UIImage(systemName: "circle", withConfiguration: outerConfig)!.withTintColor(.white)
         let middleCircle = UIImage(systemName: "circle", withConfiguration: middleConfig)!.withTintColor(.white)
@@ -55,9 +55,9 @@ class ShieldConfigurationExtension: ShieldConfigurationDataSource {
         }
 
         // Draw all centered
-        drawCentered(outerCircle, pointSize: 61)
-        drawCentered(middleCircle, pointSize: 59)
-        drawCentered(innerCircle, pointSize: 60)
+        drawCentered(outerCircle, pointSize: 76)
+        drawCentered(middleCircle, pointSize: 74)
+        drawCentered(innerCircle, pointSize: 75)
 
         let finalImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
