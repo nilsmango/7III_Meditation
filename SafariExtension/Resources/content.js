@@ -191,26 +191,33 @@ function showWebsiteShield(websites, topUpActive, topUpMinutes) {
     overlay.appendChild(content);
     
     // Force body and html styles to ensure full coverage
-    const originalBodyOverflow = document.body.style.overflow;
-    const originalHtmlOverflow = document.documentElement.style.overflow;
-    const originalBodyHeight = document.body.style.height;
-    const originalHtmlHeight = document.documentElement.style.height;
+//    const originalBodyOverflow = document.body.style.overflow;
+//    const originalHtmlOverflow = document.documentElement.style.overflow;
+//    const originalBodyHeight = document.body.style.height;
+//    const originalHtmlHeight = document.documentElement.style.height;
     
     // Apply styles to prevent scrolling and ensure full height
-    document.body.style.overflow = 'hidden';
-    document.documentElement.style.overflow = 'hidden';
-    document.body.style.height = '100vh';
-    document.documentElement.style.height = '100vh';
+//    document.body.style.overflow = 'hidden';
+//    document.documentElement.style.overflow = 'hidden';
+//    document.body.style.height = '100vh';
+//    document.documentElement.style.height = '100vh';
     
     // Insert overlay as the very last element in body
     document.body.appendChild(overlay);
     
     // Cleanup function
     const cleanup = () => {
-        document.body.style.overflow = originalBodyOverflow;
-        document.documentElement.style.overflow = originalHtmlOverflow;
-        document.body.style.height = originalBodyHeight;
-        document.documentElement.style.height = originalHtmlHeight;
+//        document.body.style.overflow = originalBodyOverflow;
+//        document.documentElement.style.overflow = originalHtmlOverflow;
+//        document.body.style.height = originalBodyHeight;
+//        document.documentElement.style.height = originalHtmlHeight;
+        
+        document.querySelectorAll('video, audio').forEach(media => {
+            if (!media._7iii_wasPaused) {
+                media.play().catch(() => {});
+            }
+            delete media._7iii_wasPaused;
+        });
     };
     
     // Store cleanup function on overlay for external access
@@ -219,6 +226,11 @@ function showWebsiteShield(websites, topUpActive, topUpMinutes) {
     // Prevent any clicks from going through to the page behind
     overlay.addEventListener('click', (e) => {
         e.stopPropagation();
+    });
+    
+    document.querySelectorAll('video, audio').forEach(media => {
+        media._7iii_wasPaused = media.paused;
+        media.pause();
     });
     
     return overlay; // Return overlay reference for external control
