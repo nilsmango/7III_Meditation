@@ -32,11 +32,41 @@ class ShieldConfigurationExtension: ShieldConfigurationDataSource {
             ? ShieldConfiguration.Label(text: "Unlock for \(topUpMinutes) min", color: .label)
             : nil
 
+        let outerConfig = UIImage.SymbolConfiguration(pointSize: 61, weight: .regular)
+        let middleConfig = UIImage.SymbolConfiguration(pointSize: 59, weight: .regular)
+        let innerConfig = UIImage.SymbolConfiguration(pointSize: 60, weight: .regular)
+
+        let outerCircle = UIImage(systemName: "circle", withConfiguration: outerConfig)!.withTintColor(.white)
+        let middleCircle = UIImage(systemName: "circle", withConfiguration: middleConfig)!.withTintColor(.white)
+        let innerCircle = UIImage(systemName: "circle", withConfiguration: innerConfig)!.withTintColor(.black)
+
+        let size = outerCircle.size
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+
+        let center = CGPoint(x: size.width / 2, y: size.height / 2)
+
+        func drawCentered(_ image: UIImage, pointSize: CGFloat) {
+            let drawSize = image.size
+            let origin = CGPoint(
+                x: center.x - drawSize.width / 2,
+                y: center.y - drawSize.height / 2
+            )
+            image.draw(at: origin)
+        }
+
+        // Draw all centered
+        drawCentered(outerCircle, pointSize: 61)
+        drawCentered(middleCircle, pointSize: 59)
+        drawCentered(innerCircle, pointSize: 60)
+
+        let finalImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+
         return ShieldConfiguration(
             backgroundBlurStyle: .systemMaterial,
             backgroundColor: UIColor.systemBackground,
-            icon: UIImage(systemName: "circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 60, weight: .regular))!.withTintColor(UIColor { _ in UIColor.label }),
-            title: ShieldConfiguration.Label(text: "Blocked by 7III Life", color: .label),
+            icon: finalImage,
             subtitle: ShieldConfiguration.Label(text: subtitle, color: .secondaryLabel),
             primaryButtonLabel: ShieldConfiguration.Label(text: "OK", color: .white),
             primaryButtonBackgroundColor: .greenAccent,
