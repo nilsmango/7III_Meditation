@@ -26,21 +26,21 @@ class ShieldConfigurationExtension: ShieldConfigurationDataSource {
 
         let subtitle = hasTopUpTimeAvailable
             ? "This app is currently blocked."
-            : "This app is currently blocked, if you need more time, go to 7III Life to unlock more time."
+            : "This app is currently blocked. If you need more time, go to 7III Life to unlock more time."
 
         let secondaryButton = hasTopUpTimeAvailable
             ? ShieldConfiguration.Label(text: "Unlock for \(topUpMinutes) min", color: .label)
             : nil
 
-        let outerConfig = UIImage.SymbolConfiguration(pointSize: 76, weight: .regular)
-        let middleConfig = UIImage.SymbolConfiguration(pointSize: 74, weight: .regular)
+//        let outerConfig = UIImage.SymbolConfiguration(pointSize: 76, weight: .regular)
+//        let middleConfig = UIImage.SymbolConfiguration(pointSize: 74, weight: .regular)
         let innerConfig = UIImage.SymbolConfiguration(pointSize: 75, weight: .regular)
 
-        let outerCircle = UIImage(systemName: "circle", withConfiguration: outerConfig)!.withTintColor(.white)
-        let middleCircle = UIImage(systemName: "circle", withConfiguration: middleConfig)!.withTintColor(.white)
-        let innerCircle = UIImage(systemName: "circle", withConfiguration: innerConfig)!.withTintColor(.black)
+//        let outerCircle = UIImage(systemName: "circle", withConfiguration: outerConfig)!.withTintColor(UIColor.systemBackground)
+//        let middleCircle = UIImage(systemName: "circle", withConfiguration: middleConfig)!.withTintColor(UIColor.systemBackground)
+        let innerCircle = UIImage(systemName: "circle", withConfiguration: innerConfig)!.withTintColor(UIColor.blackAndWhite)
 
-        let size = outerCircle.size
+        let size = CGSize(width: 76.0, height: 76.0) // outerCircle.size
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
 
         let center = CGPoint(x: size.width / 2, y: size.height / 2)
@@ -55,8 +55,8 @@ class ShieldConfigurationExtension: ShieldConfigurationDataSource {
         }
 
         // Draw all centered
-        drawCentered(outerCircle, pointSize: 76)
-        drawCentered(middleCircle, pointSize: 74)
+//        drawCentered(outerCircle, pointSize: 76)
+//        drawCentered(middleCircle, pointSize: 74)
         drawCentered(innerCircle, pointSize: 75)
 
         let finalImage = UIGraphicsGetImageFromCurrentImageContext()
@@ -81,7 +81,7 @@ class ShieldConfigurationExtension: ShieldConfigurationDataSource {
 
         let subtitle = hasTopUpTimeAvailable
             ? "This app is currently blocked."
-            : "This app is currently blocked, if you need more time, go to 7III Life to unlock more time."
+            : "This app is currently blocked. If you need more time, go to 7III Life to unlock more time."
 
         let secondaryButton = hasTopUpTimeAvailable
             ? ShieldConfiguration.Label(text: "Unlock for \(topUpMinutes) min", color: .label)
@@ -106,7 +106,7 @@ class ShieldConfigurationExtension: ShieldConfigurationDataSource {
 
         let subtitle = hasTopUpTimeAvailable
             ? "This website is currently blocked."
-            : "This website is currently blocked, if you need more time, go to 7III Life to unlock more time."
+            : "This website is currently blocked. If you need more time, go to 7III Life to unlock more time."
 
         let secondaryButton = hasTopUpTimeAvailable
             ? ShieldConfiguration.Label(text: "Unlock for \(topUpMinutes) min", color: .label)

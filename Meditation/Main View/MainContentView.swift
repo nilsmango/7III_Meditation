@@ -21,12 +21,12 @@ struct MainContentView: View {
             }
         }
         .navigationTitle("○")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .principal) {
-                Text("")
-            }
-        }
+//        .navigationBarTitleDisplayMode(.inline)
+//        .toolbar {
+//            ToolbarItem(placement: .principal) {
+//                Text("")
+//            }
+//        }
     }
 }
 

@@ -59,6 +59,7 @@ struct WebBlockerView: View {
                 Spacer()
             }
             .padding()
+            .navigationTitle("○")
             .sheet(isPresented: $showingTopUpTimeView) {
                 MacTopUpTimeView(model: model)
             }
@@ -78,5 +79,7 @@ struct WebBlockerView: View {
 }
 
 #Preview {
-    WebBlockerView(model: MacModel())
+    NavigationStack {
+        WebBlockerView(model: MacModel())
+    }
 }

@@ -62,7 +62,7 @@ function showWebsiteShield(websites, topUpActive, topUpMinutes) {
         if (topUpActive) {
             subtitle.textContent = "This app is currently blocked.";
         } else {
-            subtitle.textContent = "This app is currently blocked, if you need more time, go to 7Ill Life to unlock more time.";
+            subtitle.textContent = "This app is currently blocked. If you need more time, go to 7Ill Life to unlock more time.";
         }
     }
     

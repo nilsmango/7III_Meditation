@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "Meditation Icon Dark.png",
+      "filename" : "7III Life Icon.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
@@ -52,7 +52,7 @@
       "size" : "512x512"
     },
     {
-      "filename" : "Meditation Icon Dark 1.png",
+      "filename" : "7III Life Icon 1.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "512x512"
