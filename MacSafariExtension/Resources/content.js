@@ -43,7 +43,10 @@ function showWebsiteShield(websites, topUpActive, topUpMinutes) {
         height: "150px",
         lineHeight: "150px",
         marginBottom: "7px",
-        color: isDarkMode ? "#ffffff" : "#000000"
+        color: isDarkMode ? "#ffffff" : "#000000",
+        // Reddit-specific fixes
+        boxSizing: "border-box",
+        display: "block"
     });
     
     // Create title
@@ -53,7 +56,11 @@ function showWebsiteShield(websites, topUpActive, topUpMinutes) {
         fontSize: "28px",
         fontWeight: "600",
         margin: "0 0 15px 0",
-        color: isDarkMode ? "#ffffff" : "#000000"
+        color: isDarkMode ? "#ffffff" : "#000000",
+        // Reddit-specific fixes
+        boxSizing: "border-box",
+        display: "block",
+        lineHeight: "1.2"
     });
     
     // Create subtitle
@@ -68,9 +75,24 @@ function showWebsiteShield(websites, topUpActive, topUpMinutes) {
     
     Object.assign(subtitle.style, {
         fontSize: "16px",
-        margin: "0 0 120px 0",
+        margin: "0 0 40px 0", // Reduced from 120px for better button spacing
         color: isDarkMode ? "#b0b0b0" : "#666666",
-        fontWeight: "400"
+        fontWeight: "400",
+        // Reddit-specific fixes
+        boxSizing: "border-box",
+        display: "block",
+        lineHeight: "1.4"
+    });
+    
+    // Create button container for better control
+    const buttonContainer = document.createElement("div");
+    Object.assign(buttonContainer.style, {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: "15px",
+        width: "100%",
+        boxSizing: "border-box"
     });
     
     // Create OK button
@@ -83,22 +105,34 @@ function showWebsiteShield(websites, topUpActive, topUpMinutes) {
         borderRadius: "25px",
         padding: "15px 40px",
         fontSize: "16px",
-        fontWeight: "500",
+        fontWeight: "450",
         cursor: "pointer",
-        marginBottom: "0px",
         minWidth: "150px",
-        transition: "all 0.2s ease"
+        height: "43px", // Fixed height
+        transition: "all 0.2s ease",
+        // Reddit-specific fixes
+        boxSizing: "border-box",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        outline: "none",
+        appearance: "none",
+        webkitAppearance: "none",
+        mozAppearance: "none",
+        lineHeight: "1",
+        verticalAlign: "baseline",
+        textAlign: "center",
+        whiteSpace: "nowrap",
+        overflow: "hidden"
     });
     
     // OK button hover effect
     okButton.addEventListener('mouseenter', () => {
         okButton.style.backgroundColor = "#45a049";
-        okButton.style.transform = "scale(1.02)";
     });
     
     okButton.addEventListener('mouseleave', () => {
         okButton.style.backgroundColor = isDarkMode ? "#62A453" : "#7BCB65";
-        okButton.style.transform = "scale(1)";
     });
     
     // OK button click handler - close Safari/window
@@ -111,12 +145,36 @@ function showWebsiteShield(websites, topUpActive, topUpMinutes) {
     if (topUpActive !== undefined) {
         
         if (topUpActive && topUpMinutes > 0) {
-        topUpButton = document.createElement("button");
-        
+            topUpButton = document.createElement("button");
+            
             topUpButton.textContent = `Unlock for ${topUpMinutes} min`;
-            topUpButton.style.backgroundColor = "transparent";
-            topUpButton.style.color = isDarkMode ? "#ffffff" : "#000000";
-            topUpButton.style.cursor = "pointer";
+            Object.assign(topUpButton.style, {
+                backgroundColor: "transparent",
+                color: isDarkMode ? "#ffffff" : "#000000",
+                cursor: "pointer",
+                border: "none",
+                borderRadius: "25px",
+                padding: "12px 12px",
+                fontSize: "16px",
+                fontWeight: "400",
+                minWidth: "300px",
+                height: "20px", // Fixed height
+                transition: "all 0.2s ease",
+                // Reddit-specific fixes
+                boxSizing: "border-box",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                outline: "none",
+                appearance: "none",
+                webkitAppearance: "none",
+                mozAppearance: "none",
+                lineHeight: "1",
+                verticalAlign: "baseline",
+                textAlign: "center",
+                whiteSpace: "nowrap",
+                overflow: "hidden"
+            });
             
             // Top-up button hover effect
             topUpButton.addEventListener('mouseenter', () => {
@@ -131,17 +189,6 @@ function showWebsiteShield(websites, topUpActive, topUpMinutes) {
             topUpButton.addEventListener('click', () => {
                 removeWebsite(topUpMinutes);
             });
-        
-        
-        Object.assign(topUpButton.style, {
-            border: "none",
-            borderRadius: "25px",
-            padding: "12px 12px",
-            fontSize: "16px",
-            fontWeight: "400",
-            minWidth: "300px",
-            transition: "all 0.2s ease"
-        });
         }
     }
     
@@ -149,24 +196,39 @@ function showWebsiteShield(websites, topUpActive, topUpMinutes) {
     content.appendChild(circle);
     content.appendChild(title);
     content.appendChild(subtitle);
-    content.appendChild(okButton);
     
+    // Add buttons to container
+    buttonContainer.appendChild(okButton);
     if (topUpButton) {
-        content.appendChild(topUpButton);
+        buttonContainer.appendChild(topUpButton);
     }
     
-    // Style content container (no background - backdrop handles it)
+    // Add button container to content
+    content.appendChild(buttonContainer);
+    
+    // Style content container with Reddit-specific fixes
     Object.assign(content.style, {
         textAlign: "center",
         padding: "40px",
         maxWidth: "400px",
-        margin: "0 20px", // Add some margin for mobile
+        margin: "0 20px",
         position: "relative",
         zIndex: "2147483647",
-        backgroundColor: "transparent" // Remove the old background
+        backgroundColor: "transparent",
+        // Reddit-specific fixes
+        boxSizing: "border-box",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: "auto",
+        width: "auto",
+        transform: "none", // Reset any inherited transforms
+        filter: "none", // Reset any inherited filters
+        fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
     });
     
-    // Style main overlay container
+    // Style main overlay container with Reddit-specific fixes
     Object.assign(overlay.style, {
         position: "fixed",
         top: "0",
@@ -182,7 +244,14 @@ function showWebsiteShield(websites, topUpActive, topUpMinutes) {
         alignItems: "center",
         fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
         zIndex: "2147483647",
-        pointerEvents: "auto" // Ensure it captures all clicks
+        pointerEvents: "auto",
+        // Reddit-specific fixes
+        boxSizing: "border-box",
+        transform: "none", // Reset any inherited transforms
+        filter: "none", // Reset any inherited filters
+        clipPath: "none", // Reset any inherited clipping
+        overflow: "hidden", // Prevent any overflow issues
+        isolation: "isolate" // Create new stacking context
     });
     
     // Add backdrop to overlay first
@@ -190,28 +259,18 @@ function showWebsiteShield(websites, topUpActive, topUpMinutes) {
     // Then add content on top
     overlay.appendChild(content);
     
-    // Force body and html styles to ensure full coverage
-//    const originalBodyOverflow = document.body.style.overflow;
-//    const originalHtmlOverflow = document.documentElement.style.overflow;
-//    const originalBodyHeight = document.body.style.height;
-//    const originalHtmlHeight = document.documentElement.style.height;
-    
-    // Apply styles to prevent scrolling and ensure full height
-//    document.body.style.overflow = 'hidden';
-//    document.documentElement.style.overflow = 'hidden';
-//    document.body.style.height = '100vh';
-//    document.documentElement.style.height = '100vh';
-    
-    // Insert overlay as the very last element in body
+    // Insert overlay as the very last element in body with Reddit-specific handling
     document.body.appendChild(overlay);
+    
+    // Reddit-specific: Force overlay to front and reset any conflicting styles
+    setTimeout(() => {
+        overlay.style.zIndex = "2147483647";
+        overlay.style.position = "fixed";
+        overlay.style.display = "flex";
+    }, 0);
     
     // Cleanup function
     const cleanup = () => {
-//        document.body.style.overflow = originalBodyOverflow;
-//        document.documentElement.style.overflow = originalHtmlOverflow;
-//        document.body.style.height = originalBodyHeight;
-//        document.documentElement.style.height = originalHtmlHeight;
-        
         document.querySelectorAll('video, audio').forEach(media => {
             if (!media._7iii_wasPaused) {
                 media.play().catch(() => {});
