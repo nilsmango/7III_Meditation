@@ -25,10 +25,17 @@ struct TopUpTimeView: View {
                     .fontWeight(.bold)
             } else {
                 
-                Picker("Minutes", selection: $model.topUpMinutes) {
-                    ForEach(1...180, id: \.self) { minute in
-                        Text("\(minute) min")
+                Picker("Time", selection: $model.topUpMinutes) {
+                    // 1-90 minutes
+                    ForEach(1...90, id: \.self) { minute in
+                        Text("\(minute) min").tag(minute)
                     }
+                    
+                    // Hours converted to minutes
+                    Text("2 h").tag(120)  // 2 hours = 120 minutes
+                    Text("3 h").tag(180)  // 3 hours = 180 minutes
+                    Text("4 h").tag(240)  // 4 hours = 240 minutes
+                    Text("8 h").tag(480)  // 8 hours = 480 minutes
                 }
                 .pickerStyle(.wheel)
                 
