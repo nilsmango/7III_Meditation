@@ -37,11 +37,32 @@ class MacModel: ObservableObject {
         }
     }
     
+    @Published var alternativesSelection: [AlternativeActivity] = [] {
+        didSet {
+            if let data = try? JSONEncoder().encode(alternativesSelection) {
+                UserDefaults(suiteName: appGroupID)?.set(data, forKey: "alternativesSelection")
+            }
+        }
+    }
     
-    init() {
+    func loadAlternatives() {
+        if let data = UserDefaults(suiteName: appGroupID)?.data(forKey: "alternativesSelection"),
+           let decoded = try? JSONDecoder().decode([AlternativeActivity].self, from: data) {
+            alternativesSelection = decoded
+        }
+    }
+    
+    func loadUserDefaults() {
         loadWebsitesSelection()
         loadIsBlocked()
+        loadOptions()
+        loadAlternatives()
         self.topUpMinutes = UserDefaults(suiteName: appGroupID)?.integer(forKey: "topUpMinutes") ?? 1
+    }
+    
+    
+    init() {
+        loadUserDefaults()
     }
     
     // MARK: - App Block
@@ -67,6 +88,24 @@ class MacModel: ObservableObject {
         UserDefaults(suiteName: appGroupID)?.set(websitesSelection, forKey: "blockedWebsites")
     }
     
+    // MARK: - Options
+    
+    @Published var howToButton: Bool = true {
+        didSet {
+            UserDefaults(suiteName: appGroupID)?.set(howToButton, forKey: "howToButton")
+        }
+    }
+    
+    @Published var useAlternativeActivities: Bool = true {
+        didSet {
+            UserDefaults(suiteName: appGroupID)?.set(useAlternativeActivities, forKey: "useAlternativeActivities")
+        }
+    }
+    
+    func loadOptions() {
+        howToButton = UserDefaults(suiteName: appGroupID)?.bool(forKey: "howToButton") ?? true
+        useAlternativeActivities = UserDefaults(suiteName: appGroupID)?.bool(forKey: "useAlternativeActivities") ?? true
+    }
     
     // MARK: - Blocking Management
     func enableBlocking() {
@@ -100,6 +139,9 @@ class MacModel: ObservableObject {
         !websitesSelection.isEmpty
     }
     
+    var hasSelectedAlternatives: Bool {
+        !alternativesSelection.isEmpty
+    }
     
     var selectedWebsitesCount: Int {
         websitesSelection.count

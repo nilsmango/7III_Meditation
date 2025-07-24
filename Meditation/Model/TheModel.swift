@@ -58,6 +58,30 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
         }
     }
     
+    @Published var alternativesSelection: [AlternativeActivity] = [] {
+        didSet {
+            if let data = try? JSONEncoder().encode(alternativesSelection) {
+                UserDefaults(suiteName: appGroupID)?.set(data, forKey: "alternativesSelection")
+            }
+        }
+    }
+    
+    func loadAlternatives() {
+        if let data = UserDefaults(suiteName: appGroupID)?.data(forKey: "alternativesSelection"),
+           let decoded = try? JSONDecoder().decode([AlternativeActivity].self, from: data) {
+            alternativesSelection = decoded
+        }
+    }
+    
+    func loadUserDefaults() {
+        loadSelection()
+        loadWebsitesSelection()
+        loadIsBlocked()
+        loadOptions()
+        loadAlternatives()
+        self.topUpMinutes = UserDefaults(suiteName: appGroupID)?.integer(forKey: "topUpMinutes") ?? 1
+    }
+    
     private let store = ManagedSettingsStore()
     
     override init() {
@@ -82,10 +106,7 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
         }
         
         checkAuthorizationStatus()
-        loadSelection()
-        loadWebsitesSelection()
-        loadIsBlocked()
-        self.topUpMinutes = UserDefaults(suiteName: appGroupID)?.integer(forKey: "topUpMinutes") ?? 1
+        loadUserDefaults()
     }
     
     deinit {
@@ -185,6 +206,25 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
         topUpActive = true
     }
     
+    // MARK: - Options
+    
+    @Published var howToButton: Bool = true {
+        didSet {
+            UserDefaults(suiteName: appGroupID)?.set(howToButton, forKey: "howToButton")
+        }
+    }
+    
+    @Published var useAlternativeActivities: Bool = true {
+        didSet {
+            UserDefaults(suiteName: appGroupID)?.set(useAlternativeActivities, forKey: "useAlternativeActivities")
+        }
+    }
+    
+    func loadOptions() {
+        howToButton = UserDefaults(suiteName: appGroupID)?.bool(forKey: "howToButton") ?? true
+        useAlternativeActivities = UserDefaults(suiteName: appGroupID)?.bool(forKey: "useAlternativeActivities") ?? true
+    }
+
     // MARK: - Navigation
     
     @Published var navigationPath = NavigationPath()
@@ -210,6 +250,10 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
     
     var hasSelectedWebsites: Bool {
         !websitesSelection.isEmpty
+    }
+    
+    var hasSelectedAlternatives: Bool {
+        !alternativesSelection.isEmpty
     }
     
     var selectedAppsCount: Int {

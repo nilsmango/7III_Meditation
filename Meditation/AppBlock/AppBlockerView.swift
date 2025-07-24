@@ -21,7 +21,11 @@ struct AppBlockerView: View {
     var body: some View {
             ScrollView {
                 VStack(spacing: 16) {
-                    HowToButton()
+                    
+                    if model.howToButton {
+                        HowToButton()
+                    }
+                    
                                     
                     if model.hasSelectedApps || model.hasSelectedWebsites {
                         NavigationLink {
@@ -44,6 +48,14 @@ struct AppBlockerView: View {
                         ButtonLabel(iconName: model.hasSelectedWebsites ? "arrow.2.squarepath" : "plus.app.fill", labelText: model.hasSelectedWebsites ? "Change selected Websites" : "Select Websites to Block", accentColor: .blue)
                     }
                     
+                    if model.useAlternativeActivities {
+                        Button {
+                            // showingAlternativesPicker = true
+                        } label: {
+                            ButtonLabel(iconName: model.hasSelectedAlternatives ? "arrow.2.squarepath" : "plus.app.fill", labelText: model.hasSelectedAlternatives ? "Change selected Alternatives" : "Select Alternatives", accentColor: .blue)
+                        }
+                    }
+                    
                     
                     if model.hasSelectedApps || model.hasSelectedWebsites {
                         Button {
@@ -52,7 +64,6 @@ struct AppBlockerView: View {
                             ButtonLabel(iconName: model.isBlocked ? "shield.slash.fill" : "shield.fill", labelText: model.isBlocked ? "Disable Blocking" : "Enable Blocking", accentColor: model.isBlocked ? .red : .green, fullColorButton: true)
                         }
                     }
-                    
                     
                     Spacer()
                 }
@@ -119,18 +130,14 @@ struct AppBlockerView: View {
             }
         }
         .onAppear {
-            model.loadIsBlocked()
-            model.loadWebsitesSelection()
-            model.loadSelection()
+            model.loadUserDefaults()
             selection = model.selection
             blockedWebsites = model.websitesSelection
         }
         // for some soft sync
         .onChange(of: scenePhase) {
             if scenePhase == .active {
-                model.loadIsBlocked()
-                model.loadWebsitesSelection()
-                model.loadSelection()
+                model.loadUserDefaults()
                 selection = model.selection
                 blockedWebsites = model.websitesSelection
             }

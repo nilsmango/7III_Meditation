@@ -29,12 +29,6 @@ struct WebsiteRow: View {
                 
                 VStack(alignment: .leading, spacing: 2) {
                     Text(website)
-//                        .font(.system(size: 16, weight: .medium))
-//                        .foregroundColor(.primary)
-//                    
-//                    Text("Tap to \(isSelected ? "unblock" : "block")")
-//                        .font(.system(size: 12))
-//                        .foregroundColor(.secondary)
                 }
                 
                 Spacer()

@@ -64,18 +64,16 @@ struct WebBlockerView: View {
                 MacTopUpTimeView(model: model)
             }
             .onAppear {
-                        // THIS FOR SYNC
-                        model.loadIsBlocked()
-                        model.loadWebsitesSelection()
-                    }
-                    
+                // THIS FOR SYNC
+                model.loadUserDefaults()
+            }
+        
             .onChange(of: scenePhase) {
-                        if scenePhase == .active {
-                            model.loadIsBlocked()
-                            model.loadWebsitesSelection()
-                        }
-                    }
-        }
+                if scenePhase == .active {
+                    model.loadUserDefaults()
+                }
+            }
+    }
 }
 
 #Preview {

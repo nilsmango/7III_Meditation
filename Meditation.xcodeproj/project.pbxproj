@@ -132,6 +132,12 @@
 		789A0E372C061320009CB9E7 /* WidgetExtensionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 789A0E252C06131E009CB9E7 /* WidgetExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		789A0E3F2C061570009CB9E7 /* TimerStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A0E3E2C061570009CB9E7 /* TimerStatus.swift */; };
 		789A0E482C061ECE009CB9E7 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7879BDEF2BF4A43E001994D2 /* Helpers.swift */; };
+		78A1A6F72E32708D004E1A36 /* AlternativeActivity+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A1A6F62E32708D004E1A36 /* AlternativeActivity+Action.swift */; };
+		78A1A6F82E32708D004E1A36 /* AlternativeActivity+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A1A6F62E32708D004E1A36 /* AlternativeActivity+Action.swift */; };
+		78A1A6FA2E327157004E1A36 /* ActivitySelectionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A1A6F92E327157004E1A36 /* ActivitySelectionSheet.swift */; };
+		78A1A6FC2E327173004E1A36 /* ActivityRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A1A6FB2E327173004E1A36 /* ActivityRow.swift */; };
+		78A1A6FD2E32761A004E1A36 /* AlternativeActivity+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A1A6F62E32708D004E1A36 /* AlternativeActivity+Action.swift */; };
+		78A1A6FF2E32B456004E1A36 /* AddActivitySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A1A6FE2E32B456004E1A36 /* AddActivitySheet.swift */; };
 		78A77D9C2E20FE4700B1872A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A77D9B2E20FE4700B1872A /* ContentView.swift */; };
 		78A77D9E2E20FECD00B1872A /* TheModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A77D9D2E20FECD00B1872A /* TheModel.swift */; };
 		78A77DA52E20FF8F00B1872A /* AuthorizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A77DA42E20FF8F00B1872A /* AuthorizationView.swift */; };
@@ -349,6 +355,10 @@
 		789A0E342C061320009CB9E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		789A0E3C2C061412009CB9E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		789A0E3E2C061570009CB9E7 /* TimerStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerStatus.swift; sourceTree = "<group>"; };
+		78A1A6F62E32708D004E1A36 /* AlternativeActivity+Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AlternativeActivity+Action.swift"; sourceTree = "<group>"; };
+		78A1A6F92E327157004E1A36 /* ActivitySelectionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitySelectionSheet.swift; sourceTree = "<group>"; };
+		78A1A6FB2E327173004E1A36 /* ActivityRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRow.swift; sourceTree = "<group>"; };
+		78A1A6FE2E32B456004E1A36 /* AddActivitySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddActivitySheet.swift; sourceTree = "<group>"; };
 		78A77D9B2E20FE4700B1872A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		78A77D9D2E20FECD00B1872A /* TheModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheModel.swift; sourceTree = "<group>"; };
 		78A77DA42E20FF8F00B1872A /* AuthorizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationView.swift; sourceTree = "<group>"; };
@@ -613,6 +623,7 @@
 				78EBA6CC2CE924A900154226 /* Ad.swift */,
 				78EBA6CF2CE924C300154226 /* MeditationAds.swift */,
 				78A77D9D2E20FECD00B1872A /* TheModel.swift */,
+				78A1A6F62E32708D004E1A36 /* AlternativeActivity+Action.swift */,
 				780ED4412E2A475800FAF3FC /* AppDestination.swift */,
 			);
 			path = Model;
@@ -774,6 +785,9 @@
 				780ED3BA2E23EFFA00FAF3FC /* TopUpTimeView.swift */,
 				780ED47B2E2C2AB800FAF3FC /* WebsiteSelectionSheet.swift */,
 				780ED47D2E2C2ACA00FAF3FC /* WebsiteRow.swift */,
+				78A1A6F92E327157004E1A36 /* ActivitySelectionSheet.swift */,
+				78A1A6FE2E32B456004E1A36 /* AddActivitySheet.swift */,
+				78A1A6FB2E327173004E1A36 /* ActivityRow.swift */,
 				78A77DA82E20FFD000B1872A /* SelectedAppsView.swift */,
 				780ED42B2E264A6A00FAF3FC /* HowToButton.swift */,
 				780ED42F2E264B9D00FAF3FC /* HowToView.swift */,
@@ -1218,6 +1232,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78A1A6FD2E32761A004E1A36 /* AlternativeActivity+Action.swift in Sources */,
 				789939092E311D7C00E251AB /* WebsiteSelectionSheet.swift in Sources */,
 				780ED51E2E2E392B00FAF3FC /* ButtonLabel.swift in Sources */,
 				7899390A2E311D8200E251AB /* WebsiteRow.swift in Sources */,
@@ -1266,6 +1281,7 @@
 				780ED42C2E264A6A00FAF3FC /* HowToButton.swift in Sources */,
 				789A0E1C2C05B3EA009CB9E7 /* ThirtyDaysChart.swift in Sources */,
 				785D094F2C09F0D600044AE9 /* WidgetButtonStyle.swift in Sources */,
+				78A1A6FF2E32B456004E1A36 /* AddActivitySheet.swift in Sources */,
 				78385D0D2BF3647300581057 /* MeditationView.swift in Sources */,
 				783426862BFFCFB20008F9F9 /* TimerCircleView.swift in Sources */,
 				780ED47E2E2C2ACA00FAF3FC /* WebsiteRow.swift in Sources */,
@@ -1277,6 +1293,7 @@
 				78A77D9C2E20FE4700B1872A /* ContentView.swift in Sources */,
 				787000D52CE4EC2400542E3B /* Dial.swift in Sources */,
 				789A0E142C04FCCA009CB9E7 /* MonthlyChart.swift in Sources */,
+				78A1A6FA2E327157004E1A36 /* ActivitySelectionSheet.swift in Sources */,
 				787000D92CE7D0FD00542E3B /* AppStorageAUValue.swift in Sources */,
 				7854735F2C07B359009645BF /* StopMeditation.swift in Sources */,
 				781D557C2CF606C900C56DE6 /* TricksView.swift in Sources */,
@@ -1298,12 +1315,14 @@
 				78A77DA52E20FF8F00B1872A /* AuthorizationView.swift in Sources */,
 				785D095E2C0B114300044AE9 /* Reminders.swift in Sources */,
 				785473752C09028C009645BF /* WidgetExtensionLiveActivity.swift in Sources */,
+				78A1A6FC2E327173004E1A36 /* ActivityRow.swift in Sources */,
 				789A0E122C04D965009CB9E7 /* StreakTile.swift in Sources */,
 				78385D1F2BF3674800581057 /* TimerView.swift in Sources */,
 				784ECA822CAFCCB3004C0CF6 /* BuddhaBoxLayout.swift in Sources */,
 				789A0E0B2C038C42009CB9E7 /* StatisticsView.swift in Sources */,
 				785473742C090281009645BF /* WidgetButtonState.swift in Sources */,
 				780ED4092E2580F400FAF3FC /* MainViewButton.swift in Sources */,
+				78A1A6F82E32708D004E1A36 /* AlternativeActivity+Action.swift in Sources */,
 				78713CD72CFC6221000A1B71 /* NoteView.swift in Sources */,
 				7827880D2BFB3F45004E7F77 /* OptionsView.swift in Sources */,
 				785D09492C09CFE100044AE9 /* PauseMeditation.swift in Sources */,
@@ -1326,6 +1345,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78A1A6F72E32708D004E1A36 /* AlternativeActivity+Action.swift in Sources */,
 				7854735D2C07ABFD009645BF /* StopMeditation.swift in Sources */,
 				789A0E2F2C06131E009CB9E7 /* WidgetExtensionLiveActivity.swift in Sources */,
 				789A0E482C061ECE009CB9E7 /* Helpers.swift in Sources */,
