@@ -17,6 +17,11 @@ struct SelectedAppsView: View {
             Text("\(model.selectedAppsCount) \(model.selectedAppsCount == 1 ? "App" : "Apps") & \(model.selectedWebsitesCount) \(model.selectedWebsitesCount == 1 ? "Website" : "Websites") selected")
                 .font(.headline)
             
+            if model.useAlternativeActivities {
+                Text("\(model.selectedAlternativesCount) \(model.selectedAlternativesCount == 1 ? "Alternative" : "Alternatives") defined")
+                    .font(.headline)
+            }
+            
             HStack {
                 Circle()
                     .fill(model.blockingStatusColor)

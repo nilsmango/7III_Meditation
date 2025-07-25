@@ -14,15 +14,16 @@ struct ActivitySelectionSheet: View {
     @State private var newName = ""
     @State private var selectedType: AlternativeActionType = .closeApp
     @State private var stringValue = ""
+    @State private var symbol: String? = nil
 
     private let predefinedActivities: [AlternativeActivity] = [
-        .init(name: "Meditate", action: .openInApp(identifier: "meditation")),
-        .init(name: "Read a Book", action: .openApp(bundleID: "com.apple.books")),
-        .init(name: "Take a Nap", action: .openApp(bundleID: "com.apple.mobiletimer")),
-        .init(name: "Talk to Someone", action: .openApp(bundleID: "net.whatsapp.WhatsApp")),
-        .init(name: "Watch a Movie", action: .closeApp(message: "Enjoy the movie!")),
-        .init(name: "Make Music", action: .closeApp(message: "Time to jam!")),
-        .init(name: "Work on To-Do's", action: .openApp(bundleID: "com.apple.reminders"))
+        .init(name: "Meditate", action: .openInApp(identifier: "meditation"), symbol: "🕉️"),
+        .init(name: "Read a Book", action: .openApp(appLink: "ibooks://"), symbol: "📚"),
+        .init(name: "Take a Nap", action: .openApp(appLink: "com.apple.mobiletimer"), symbol: "😴"),
+        .init(name: "Talk to Someone", action: .openApp(appLink: "contacts://"), symbol: "☎️"),
+        .init(name: "Watch a Movie", action: .closeApp(message: "Enjoy the movie!"), symbol: "🍿"),
+        .init(name: "Make Music", action: .closeApp(message: "Time to jam!"), symbol: "🎶"),
+        .init(name: "Work on To-Do's", action: .openApp(appLink: "x-apple-reminder://"), symbol: "📋")
     ]
 
     var body: some View {
@@ -64,8 +65,8 @@ struct ActivitySelectionSheet: View {
         }
         .onAppear(perform: loadActivities)
         .sheet(isPresented: $showingAddSheet) {
-            NavigationStack {
-                AddActivitySheet(newName: $newName, selectedType: $selectedType, stringValue: $stringValue)
+            NavigationView {
+                AddActivitySheet(newName: $newName, selectedType: $selectedType, stringValue: $stringValue, symbol: $symbol)
                     .navigationTitle("New Activity")
                     .toolbar {
                         ToolbarItem(placement: .confirmationAction) {
@@ -75,6 +76,7 @@ struct ActivitySelectionSheet: View {
                             }
                             .disabled(newName.trimmingCharacters(in: .whitespaces).isEmpty ||
                                       stringValue.trimmingCharacters(in: .whitespaces).isEmpty)
+                            .tint(.greenAccent)
                         }
                         
                         ToolbarItem(placement: .cancellationAction) {
@@ -108,6 +110,7 @@ struct ActivitySelectionSheet: View {
         newName = ""
         selectedType = .closeApp
         stringValue = ""
+        symbol = nil
     }
 
     private func addCustomActivity() {
@@ -117,7 +120,7 @@ struct ActivitySelectionSheet: View {
         let action: AlternativeAction
         switch selectedType {
         case .openApp:
-            action = .openApp(bundleID: trimmedValue)
+            action = .openApp(appLink: trimmedValue)
         case .openWebsite:
             action = .openWebsite(URL: trimmedValue)
         case .openInApp:
@@ -126,7 +129,7 @@ struct ActivitySelectionSheet: View {
             action = .closeApp(message: trimmedValue)
         }
 
-        let activity = AlternativeActivity(name: trimmedName, action: action)
+        let activity = AlternativeActivity(name: trimmedName, action: action, symbol: symbol)
         allActivities.append(activity)
         selectedActivities.append(activity)
     }

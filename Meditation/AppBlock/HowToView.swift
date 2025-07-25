@@ -12,9 +12,13 @@ struct HowToView: View {
         ScrollView {
             Text("How To")
         }
+        .navigationTitle("How To")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 #Preview {
-    HowToView()
+    NavigationStack {
+        HowToView()
+    }
 }

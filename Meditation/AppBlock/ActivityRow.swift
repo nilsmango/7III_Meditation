@@ -15,6 +15,10 @@ struct ActivityRow: View {
 
     var body: some View {
         HStack {
+            Text(activity.symbol ?? "○")
+                .font(.title)
+                .fontWeight(.bold)
+            
             VStack(alignment: .leading, spacing: 2) {
                 Text(activity.name)
                 Text(description(for: activity.action))
@@ -44,17 +48,17 @@ struct ActivityRow: View {
     private func description(for action: AlternativeAction) -> String {
         switch action {
         case .openApp(let bundleID):
-            return "Open app: \(bundleID)"
+            return "Opens app: \(bundleID)"
         case .openInApp(let identifier):
-            return "Open in 7III Life: \(identifier)"
+            return "Opens in 7III Life: \(identifier)"
         case .closeApp(let message):
-            return "Close app with message: \(message)"
+            return "Closes app with message: \(message)"
         case .openWebsite(URL: let URL):
-            return "Open website: \(URL)"
+            return "Opens website: \(URL)"
         }
     }
 }
 
 #Preview {
-    ActivityRow(activity: AlternativeActivity(name: "Testing", action: .closeApp(message: "Hasta la Vista")), isSelected: true, onToggle: {}, onDelete: {})
+    ActivityRow(activity: AlternativeActivity(name: "Testing", action: .closeApp(message: "Hasta la Vista"), symbol: "👋"), isSelected: true, onToggle: {}, onDelete: {})
 }

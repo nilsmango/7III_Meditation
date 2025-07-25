@@ -221,8 +221,18 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
     }
     
     func loadOptions() {
-        howToButton = UserDefaults(suiteName: appGroupID)?.bool(forKey: "howToButton") ?? true
-        useAlternativeActivities = UserDefaults(suiteName: appGroupID)?.bool(forKey: "useAlternativeActivities") ?? true
+        // we need to check if the object exists, otherwise it will be false
+        if UserDefaults(suiteName: appGroupID)?.object(forKey: "howToButton") == nil {
+            howToButton = true
+        } else {
+            howToButton = UserDefaults(suiteName: appGroupID)?.bool(forKey: "howToButton") ?? true
+        }
+        
+        if UserDefaults(suiteName: appGroupID)?.object(forKey: "useAlternativeActivities") == nil {
+            useAlternativeActivities = true
+        } else {
+            useAlternativeActivities = UserDefaults(suiteName: appGroupID)?.bool(forKey: "useAlternativeActivities") ?? true
+        }
     }
 
     // MARK: - Navigation
@@ -262,6 +272,10 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
     
     var selectedWebsitesCount: Int {
         websitesSelection.count
+    }
+    
+    var selectedAlternativesCount: Int {
+        alternativesSelection.count
     }
     
     var isAuthorized: Bool {

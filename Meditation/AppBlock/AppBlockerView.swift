@@ -14,6 +14,8 @@ struct AppBlockerView: View {
     @State private var selection = FamilyActivitySelection()
     @State private var showingWebsitePicker = false
     @State private var blockedWebsites: [String] = []
+    @State private var showingAlternativesPicker = false
+    @State private var alternativesSelection: [AlternativeActivity] = []
     
     // for some soft sync
     @Environment(\.scenePhase) private var scenePhase
@@ -50,7 +52,7 @@ struct AppBlockerView: View {
                     
                     if model.useAlternativeActivities {
                         Button {
-                            // showingAlternativesPicker = true
+                             showingAlternativesPicker = true
                         } label: {
                             ButtonLabel(iconName: model.hasSelectedAlternatives ? "arrow.2.squarepath" : "plus.app.fill", labelText: model.hasSelectedAlternatives ? "Change selected Alternatives" : "Select Alternatives", accentColor: .blue)
                         }
@@ -129,10 +131,41 @@ struct AppBlockerView: View {
                 .padding()
             }
         }
+        .sheet(isPresented: $showingAlternativesPicker) {
+            VStack(spacing: 0) {
+                ActivitySelectionSheet(selectedActivities: $alternativesSelection)
+                
+                HStack {
+                    
+                    Button {
+                        alternativesSelection = model.alternativesSelection
+                        showingAlternativesPicker = false
+                    } label: {
+                        Label("Cancel", systemImage: "xmark.circle.fill")
+                    }
+                    .buttonStyle(.bordered)
+                    .tint(.red)
+                    
+                    Spacer()
+                    
+                    Button {
+                        model.alternativesSelection = alternativesSelection
+                        showingAlternativesPicker = false
+                    } label: {
+                        Label("Update", systemImage: "checkmark.circle.fill")
+                    }
+                    .buttonStyle(.bordered)
+                    .tint(.greenAccent)
+                    
+                }
+                .padding()
+            }
+        }
         .onAppear {
             model.loadUserDefaults()
             selection = model.selection
             blockedWebsites = model.websitesSelection
+            alternativesSelection = model.alternativesSelection
         }
         // for some soft sync
         .onChange(of: scenePhase) {
@@ -140,22 +173,23 @@ struct AppBlockerView: View {
                 model.loadUserDefaults()
                 selection = model.selection
                 blockedWebsites = model.websitesSelection
+                alternativesSelection = model.alternativesSelection
             }
         }
-//        .toolbar {
-//            ToolbarItem(placement: .topBarTrailing) {
-//                Button {
-//                    // TODO: options
-//                } label: {
-//                    Image(systemName: "ellipsis.circle.fill")
-//                        .font(.title3)
-//                        .symbolRenderingMode(.palette)
-//                        .foregroundStyle(.blackWhite, .greenAccent)
-//                }
-//                
-//
-//            }
-//        }
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                NavigationLink {
+                    SettingsView(model: model)
+                } label: {
+                    Image(systemName: "ellipsis.circle.fill")
+                        .font(.title3)
+                        .symbolRenderingMode(.palette)
+                        .foregroundStyle(.blackWhite, .greenAccent)
+                }
+                
+
+            }
+        }
         .navigationTitle("App Blocker")
         .navigationBarTitleDisplayMode(.inline)
     }

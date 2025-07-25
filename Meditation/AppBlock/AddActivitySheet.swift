@@ -11,6 +11,11 @@ struct AddActivitySheet: View {
     @Binding var newName: String
     @Binding var selectedType: AlternativeActionType
     @Binding var stringValue: String
+    @Binding var symbol: String?
+    
+    @State private var selectedEmoji = ""
+    
+    @State private var displayEmojiPicker: Bool = false
     
     var body: some View {
         Form {
@@ -18,7 +23,23 @@ struct AddActivitySheet: View {
                 TextField("Activity name", text: $newName)
             }
             
-            Section(header: Text("Type")) {
+            Section("Symbol") {
+                TextField("Add any Symbol or Letter", text: $selectedEmoji)
+                                                            
+                }
+            .onChange(of: selectedEmoji) {
+                if selectedEmoji.count > 1 {
+                    selectedEmoji = String(selectedEmoji.prefix(1))
+                }
+                if selectedEmoji != "" {
+                    symbol = selectedEmoji
+                } else {
+                    symbol = nil
+                }
+            }
+            
+            
+            Section(header: Text("")) {
                 Picker("Action", selection: $selectedType) {
                     ForEach(AlternativeActionType.allCases) { type in
                         Text(type.beautifulString).tag(type)
@@ -27,32 +48,39 @@ struct AddActivitySheet: View {
                 .pickerStyle(.menu)
             }
             
-            Section(header: Text(detailsHeader)) {
+            Section {
                 switch selectedType {
                 case .openApp:
-                    TextField("Bundle ID (e.g. com.apple.books)", text: $stringValue)
+                    TextField(detailsHeader, text: $stringValue)
                         .autocapitalization(.none)
                 case .openWebsite:
-                    TextField("URL (e.g. https://example.com)", text: $stringValue)
+                    TextField(detailsHeader, text: $stringValue)
                         .keyboardType(.URL)
                         .autocapitalization(.none)
                 case .openInApp:
-                    Picker("Destination", selection: $stringValue) {
+                    Picker(detailsHeader, selection: $stringValue) {
                         Text("Meditation").tag("meditation")
                     }
                 case .closeApp:
-                    TextField("Motivational message", text: $stringValue)
+                    TextField(detailsHeader, text: $stringValue)
+                }
+            } header: {
+                Text(detailsHeader)
+            } footer: {
+                if selectedType == .openApp {
+                    Text("Find a list of app links here: https://github.com/bhagyas/app-urls")
                 }
             }
+            
         }
     }
-    
+        
     private var detailsHeader: String {
         switch selectedType {
-        case .openApp: return "Bundle ID (e.g. com.apple.books)"
+        case .openApp: return "App/Universal Link (e.g. ibooks://)"
         case .openWebsite: return "URL (e.g. https://example.com)"
-        case .openInApp: return "In-App Destination"
-        case .closeApp: return "Motivational Message"
+        case .openInApp: return "7III Life destination"
+        case .closeApp: return "Motivational message"
         }
     }
 }
@@ -60,5 +88,8 @@ struct AddActivitySheet: View {
 
 
 #Preview {
-    AddActivitySheet(newName: .constant("test"), selectedType: .constant(.closeApp), stringValue: .constant("testinge"))
+    NavigationStack {
+        AddActivitySheet(newName: .constant("test"), selectedType: .constant(.closeApp), stringValue: .constant("testinge"), symbol: .constant(nil))
+    }
+    
 }

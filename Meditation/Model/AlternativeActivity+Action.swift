@@ -10,10 +10,11 @@ import Foundation
 struct AlternativeActivity: Codable {
     var name: String
     var action: AlternativeAction
+    var symbol: String?
 }
 
 enum AlternativeAction: Codable {
-    case openApp(bundleID: String)
+    case openApp(appLink: String)
     case openWebsite(URL: String)
     case openInApp(identifier: String)
     case closeApp(message: String)
