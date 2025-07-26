@@ -20,6 +20,7 @@ struct AppBlockerView: View {
     
     @State private var group1Activities: [AlternativeActivity] = []
     @State private var group2Activities: [AlternativeActivity] = []
+    @State private var lilMessage: String? = nil
     
     // for some soft sync
     @Environment(\.scenePhase) private var scenePhase
@@ -69,12 +70,40 @@ struct AppBlockerView: View {
                     }
                     
                     
-                    if model.hasSelectedApps || model.hasSelectedWebsites {
+                    if (model.hasSelectedApps || model.hasSelectedWebsites) && model.isBlocked == false {
                         Button {
                             model.toggleBlocking()
+                            
+                            withAnimation {
+                                lilMessage = "Want to stop blocking? Just head to Settings (top right corner)."
+                            }
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+                                withAnimation {
+                                    lilMessage = nil
+                                }
+                            }
                         } label: {
-                            ButtonLabel(iconName: model.isBlocked ? "shield.slash.fill" : "shield.fill", labelText: model.isBlocked ? "Disable Blocking" : "Enable Blocking", accentColor: model.isBlocked ? .red : .green, fullColorButton: true)
+                            ButtonLabel(iconName: "power", labelText: "Start Blocking", accentColor: .greenAccent, fullColorButton: true)
                         }
+                    } else if lilMessage != nil {
+                        
+                        HStack {
+                            Image(systemName: "info.circle")
+                            Text(lilMessage!)
+                        }
+                        .foregroundStyle(.primary)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(.buttonGray)
+                        .cornerRadius(10)
+                        .font(.headline)
+                        .transition(.slide)
+                        .onTapGesture {
+                            withAnimation {
+                                lilMessage = nil
+                            }
+                        }
+                        
                     }
                     
                     Spacer()
@@ -229,8 +258,6 @@ struct AppBlockerView: View {
                         .symbolRenderingMode(.palette)
                         .foregroundStyle(.blackWhite, .greenAccent)
                 }
-                
-
             }
         }
         .navigationTitle("App Blocker")

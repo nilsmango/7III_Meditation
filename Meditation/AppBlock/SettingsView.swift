@@ -19,6 +19,19 @@ struct SettingsView: View {
                 Toggle("Easy Top Up Button", isOn: $model.easyTopUpButton)
                     .tint(.greenAccent)
             }
+            Section {
+                Button {
+                    model.toggleBlocking()
+                } label: {
+                    HStack {
+                        Spacer()
+                        Label(model.isBlocked ? "Disable Blocking" : "Enable Blocking", systemImage: model.isBlocked ? "shield.slash.fill" : "shield.fill")
+                        Spacer()
+                    }
+                    .foregroundStyle(.white)
+                }
+                .listRowBackground(model.isBlocked ? Color.red : Color.greenAccent)
+            }
             .navigationTitle(Text("Settings"))
         }
     }

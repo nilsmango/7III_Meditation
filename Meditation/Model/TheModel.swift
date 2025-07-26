@@ -145,14 +145,18 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
     
     // MARK: - App Block & Top Up
     
-    @Published var isBlocked: Bool = false {
+    @Published var isBlocked: Bool = true {
         didSet {
             UserDefaults(suiteName: appGroupID)?.set(isBlocked, forKey: "isBlocked")
         }
     }
 
     func loadIsBlocked() {
-        isBlocked = UserDefaults(suiteName: appGroupID)?.bool(forKey: "isBlocked") ?? false
+        if UserDefaults(suiteName: appGroupID)?.object(forKey: "isBlocked") == nil {
+            isBlocked = true
+        } else {
+            isBlocked = UserDefaults(suiteName: appGroupID)?.bool(forKey: "isBlocked") ?? true
+        }
     }
     
     @Published var topUpActive: Bool = false {
