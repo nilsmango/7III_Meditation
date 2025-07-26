@@ -45,6 +45,7 @@ struct MeditationView: View {
                 ToolbarItemGroup(placement: .topBarTrailing) {
                     StreakButton(streakNumber: meditationManager.meditationTimer.statistics.currentStreak)
                         .padding(.horizontal)
+                        .accessibilityLabel("Meditation streak: \(meditationManager.meditationTimer.statistics.currentStreak) days")
                         .rotationEffect(rotation)
                         .onTapGesture {
                             rotation += Angle(degrees: 360)
@@ -66,6 +67,7 @@ struct MeditationView: View {
                             .font(.title3)
                             .symbolRenderingMode(.palette)
                             .foregroundStyle(.blackWhite, .redAccent)
+                            .accessibilityLabel("Buddha Machine")
 
                     }
                     
@@ -78,6 +80,7 @@ struct MeditationView: View {
                                 Circle()
                                     .foregroundStyle(.redAccent)
                             }
+                            .accessibilityLabel("Statistics")
                     }
                     
                     NavigationLink(destination: OptionsView(meditationManager: meditationManager)) {
@@ -85,6 +88,8 @@ struct MeditationView: View {
                             .font(.title3)
                             .symbolRenderingMode(.palette)
                             .foregroundStyle(.blackWhite, .redAccent)
+                            .accessibilityLabel("Settings")
+
                     }
                 }
             }
