@@ -92,6 +92,7 @@ struct AppBlockerView: View {
                         HStack {
                             Image(systemName: "info.circle")
                             Text(lilMessage!)
+                                .padding(.leading, 4)
                         }
                         .foregroundStyle(.primary)
                         .frame(maxWidth: .infinity)
