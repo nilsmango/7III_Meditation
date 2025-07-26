@@ -37,7 +37,11 @@ struct AddActivitySheet: View {
                     symbol = nil
                 }
             }
-            
+            .onAppear {
+                if symbol != nil {
+                    selectedEmoji = symbol!
+                }
+            }
             
             Section(header: Text("")) {
                 Picker("Action", selection: $selectedType) {
@@ -68,7 +72,7 @@ struct AddActivitySheet: View {
                 Text(detailsHeader)
             } footer: {
                 if selectedType == .openApp {
-                    Text("Find a list of app links here: https://github.com/bhagyas/app-urls")
+                    Text("Ask your local AI for app URL schemes.")
                 }
             }
             
@@ -78,7 +82,7 @@ struct AddActivitySheet: View {
     private var detailsHeader: String {
         switch selectedType {
         case .openApp: return "App/Universal Link (e.g. ibooks://)"
-        case .openWebsite: return "URL (e.g. https://example.com)"
+        case .openWebsite: return "URL (e.g. project7iii.com)"
         case .openInApp: return "7III Life destination"
         case .closeApp: return "Motivational message"
         }

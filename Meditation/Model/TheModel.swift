@@ -13,6 +13,7 @@ import SwiftUI
 import HealthKit
 import ActivityKit
 import StoreKit
+import UIKit
 
 typealias Transaction = StoreKit.Transaction
 
@@ -66,10 +67,38 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
         }
     }
     
+    let defaultAlternatives: [AlternativeActivity] = [
+        .init(name: "Meditate", action: .openInApp(identifier: "meditation"), symbol: "🕉️"),
+        .init(name: "Read a Book", action: .openApp(appLink: "ibooks://"), symbol: "📚"),
+        .init(name: "Take a Nap", action: .closeApp(message: "Don't forget to set a timer!"), symbol: "😴"),
+        .init(name: "Talk to Someone", action: .openApp(appLink: "whatsapp://"), symbol: "☎️"),
+        .init(name: "Watch a Movie", action: .closeApp(message: "Enjoy the movie!"), symbol: "🍿"),
+        .init(name: "Make Music", action: .closeApp(message: "Time to jam!"), symbol: "🎶"),
+        .init(name: "Work on To-Do's", action: .closeApp(message: "Go get them tiger!"), symbol: "📋")
+    ]
+    
+    @Published var allAlternatives: [AlternativeActivity] = [] {
+        didSet {
+            if let data = try? JSONEncoder().encode(allAlternatives) {
+                UserDefaults(suiteName: appGroupID)?.set(data, forKey: "allAlternatives")
+            }
+        }
+    }
+    
     func loadAlternatives() {
         if let data = UserDefaults(suiteName: appGroupID)?.data(forKey: "alternativesSelection"),
            let decoded = try? JSONDecoder().decode([AlternativeActivity].self, from: data) {
             alternativesSelection = decoded
+        }
+        if let data = UserDefaults(suiteName: appGroupID)?.data(forKey: "allAlternatives"),
+           let decoded = try? JSONDecoder().decode([AlternativeActivity].self, from: data) {
+            allAlternatives = decoded
+        }
+        if allAlternatives.isEmpty {
+            allAlternatives = defaultAlternatives
+        }
+        for activity in alternativesSelection where !allAlternatives.contains(where: { $0.id == activity.id }) {
+            allAlternatives.append(activity)
         }
     }
     
@@ -114,9 +143,10 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
     }
     
     static let shared = TheModel()
-    
+    let messageTime = 1.6
     
     // MARK: - App Selection
+    
     private let selectionKey = "familyActivitySelection"
 
     func loadSelection() {
@@ -153,6 +183,103 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
     func loadIsBlocked() {
         isBlocked = UserDefaults(suiteName: appGroupID)?.bool(forKey: "isBlocked") ?? false
     }
+    
+    // MARK: - Alternative Activity Actions
+    
+    @Published var flashMessage: String? = nil
+    @Published var messageEmoji = "○"
+    
+    private var isAppExtension: Bool {
+        return Bundle.main.bundlePath.hasSuffix(".appex")
+    }
+    
+    func makeRandomAlternativeGroups() -> ([AlternativeActivity], [AlternativeActivity]) {
+        let group1Count = Int.random(in: 0...selectedAlternativesCount)
+        let group2Count = selectedAlternativesCount - group1Count
+        let randomizedSelection = alternativesSelection.shuffled()
+
+        let group1Activities = Array(randomizedSelection.prefix(group1Count))
+        let group2Activities = Array(randomizedSelection.suffix(group2Count))
+        
+        return (group1Activities, group2Activities)
+    }
+    
+#if !APPEXTENSION
+
+    func run(activity: AlternativeActivity) {
+        switch activity.action {
+        case .openApp(let appLink):
+            // Open app link or universal link
+            if let url = URL(string: appLink) {
+                UIApplication.shared.open(url, options: [:]) { success in
+                    if !success {
+                        self.messageEmoji = "⚠️"
+                        self.flashMessage = "Failed to open app link: \(appLink)"
+                    }
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + messageTime) {
+                    self.navigateHome()
+                    self.flashMessage = nil
+                    self.messageEmoji = "○"
+                }
+            }
+            return
+            
+        case .openInApp(let identifier):
+            if identifier == "meditation" {
+                messageEmoji = activity.symbol ?? "○"
+                withAnimation {
+                    flashMessage = "Awesome!"
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + messageTime) {
+                    self.navigateToMeditation()
+                    self.flashMessage = nil
+                    self.messageEmoji = "○"
+                }
+            }
+            
+        case .openWebsite(URL: let url):
+            navigateHome()
+            // Ensure URL has proper scheme
+            if let url = URL(string: url) {
+                var urlToOpen = url
+                if !url.absoluteString.hasPrefix("http://") && !url.absoluteString.hasPrefix("https://") {
+                    if let httpsUrl = URL(string: "https://\(url.absoluteString)") {
+                        urlToOpen = httpsUrl
+                    }
+                }
+                
+                // Open the website URL
+                UIApplication.shared.open(urlToOpen, options: [:]) { success in
+                    if !success {
+                        self.messageEmoji = "⚠️"
+                        self.flashMessage = "Failed to open website: \(urlToOpen)"
+                    }
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + messageTime) {
+                    self.navigateHome()
+                    self.flashMessage = nil
+                    self.messageEmoji = "○"
+                }
+            }
+            
+        case .closeApp(let message):
+            messageEmoji = activity.symbol ?? "○"
+            withAnimation {
+                flashMessage = message
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + messageTime) {
+                self.navigateHome()
+                self.flashMessage = nil
+                self.messageEmoji = "○"
+                // Send app to background
+                UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
+            }
+        }
+    }
+    #endif
+    
     
     // MARK: - Authorization
     func checkAuthorizationStatus() {
@@ -220,6 +347,12 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
         }
     }
     
+    @Published var easyTopUpButton: Bool = false {
+        didSet {
+            UserDefaults(suiteName: appGroupID)?.set(easyTopUpButton, forKey: "easyTopUp")
+        }
+    }
+    
     func loadOptions() {
         // we need to check if the object exists, otherwise it will be false
         if UserDefaults(suiteName: appGroupID)?.object(forKey: "howToButton") == nil {
@@ -233,6 +366,8 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
         } else {
             useAlternativeActivities = UserDefaults(suiteName: appGroupID)?.bool(forKey: "useAlternativeActivities") ?? true
         }
+        
+        easyTopUpButton = UserDefaults(suiteName: appGroupID)?.bool(forKey: "easyTopUp") ?? false
     }
 
     // MARK: - Navigation

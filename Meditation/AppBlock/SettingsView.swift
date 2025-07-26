@@ -16,6 +16,8 @@ struct SettingsView: View {
                     .tint(.greenAccent)
                 Toggle("Use Alternative Activities", isOn: $model.useAlternativeActivities)
                     .tint(.greenAccent)
+                Toggle("Easy Top Up Button", isOn: $model.easyTopUpButton)
+                    .tint(.greenAccent)
             }
             .navigationTitle(Text("Settings"))
         }

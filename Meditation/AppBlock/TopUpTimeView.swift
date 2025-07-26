@@ -18,7 +18,7 @@ struct TopUpTimeView: View {
             if showCheckmark {
                 Image(systemName: "checkmark.circle.fill")
                     .font(.system(size: 50))
-                    .foregroundColor(.green)
+                    .foregroundColor(.greenAccent)
                     .transition(.scale)
                 Text("You can now unlock your app or website!")
                     .font(.title)
@@ -59,8 +59,8 @@ struct TopUpTimeView: View {
                         withAnimation {
                             showCheckmark = true
                         }
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                            dismiss()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + model.messageTime) {
+                            model.navigateHome()
                         }
                     } label: {
                         Label("Top Up", systemImage: "plus.circle.fill")

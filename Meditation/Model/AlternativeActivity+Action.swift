@@ -7,13 +7,28 @@
 
 import Foundation
 
-struct AlternativeActivity: Codable {
+struct AlternativeActivity: Codable, Identifiable, Equatable {
+    var id: UUID
     var name: String
     var action: AlternativeAction
     var symbol: String?
+    
+    init(name: String, action: AlternativeAction, symbol: String?) {
+        self.id = UUID()
+        self.name = name
+        self.action = action
+        self.symbol = symbol
+    }
+    
+    init(id: UUID, name: String, action: AlternativeAction, symbol: String?) {
+        self.id = id
+        self.name = name
+        self.action = action
+        self.symbol = symbol
+    }
 }
 
-enum AlternativeAction: Codable {
+enum AlternativeAction: Codable, Equatable {
     case openApp(appLink: String)
     case openWebsite(URL: String)
     case openInApp(identifier: String)

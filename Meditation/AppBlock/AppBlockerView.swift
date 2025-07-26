@@ -16,6 +16,10 @@ struct AppBlockerView: View {
     @State private var blockedWebsites: [String] = []
     @State private var showingAlternativesPicker = false
     @State private var alternativesSelection: [AlternativeActivity] = []
+    @State private var activityEditMode = false
+    
+    @State private var group1Activities: [AlternativeActivity] = []
+    @State private var group2Activities: [AlternativeActivity] = []
     
     // for some soft sync
     @Environment(\.scenePhase) private var scenePhase
@@ -31,7 +35,13 @@ struct AppBlockerView: View {
                                     
                     if model.hasSelectedApps || model.hasSelectedWebsites {
                         NavigationLink {
-                            TopUpTimeView(model: model)
+                            if model.useAlternativeActivities {
+                                
+                                AlternativeActionView(model: model, group1Activities: group1Activities, group2Activities: group2Activities)
+                            } else {
+                                TopUpTimeView(model: model)
+                            }
+                            
                         } label: {
                             ButtonLabel(iconName: "plus.circle.fill", labelText: "Top up Time", accentColor: .greenAccent, navigationLink: true)
                         }
@@ -111,7 +121,7 @@ struct AppBlockerView: View {
                         blockedWebsites = model.websitesSelection
                         showingWebsitePicker = false
                     } label: {
-                        Label("Cancel", systemImage: "xmark.circle.fill")
+                        Text("Cancel")
                     }
                     .buttonStyle(.bordered)
                     .tint(.red)
@@ -122,7 +132,7 @@ struct AppBlockerView: View {
                         model.websitesSelection = blockedWebsites
                         showingWebsitePicker = false
                     } label: {
-                        Label("Update", systemImage: "checkmark.circle.fill")
+                        Text("Update")
                     }
                     .buttonStyle(.bordered)
                     .tint(.greenAccent)
@@ -133,7 +143,7 @@ struct AppBlockerView: View {
         }
         .sheet(isPresented: $showingAlternativesPicker) {
             VStack(spacing: 0) {
-                ActivitySelectionSheet(selectedActivities: $alternativesSelection)
+                ActivitySelectionSheet(model: model, selectedActivities: $alternativesSelection, isEditMode: $activityEditMode)
                 
                 HStack {
                     
@@ -141,7 +151,7 @@ struct AppBlockerView: View {
                         alternativesSelection = model.alternativesSelection
                         showingAlternativesPicker = false
                     } label: {
-                        Label("Cancel", systemImage: "xmark.circle.fill")
+                        Text("Cancel")
                     }
                     .buttonStyle(.bordered)
                     .tint(.red)
@@ -149,10 +159,20 @@ struct AppBlockerView: View {
                     Spacer()
                     
                     Button {
+                        activityEditMode.toggle()
+                    } label: {
+                        Text(activityEditMode ? "Done" : "Edit Mode")
+                    }
+                    .buttonStyle(.bordered)
+                    .tint(.blue)
+                    
+                    Spacer()
+                    
+                    Button {
                         model.alternativesSelection = alternativesSelection
                         showingAlternativesPicker = false
                     } label: {
-                        Label("Update", systemImage: "checkmark.circle.fill")
+                        Text("Update")
                     }
                     .buttonStyle(.bordered)
                     .tint(.greenAccent)
@@ -166,7 +186,20 @@ struct AppBlockerView: View {
             selection = model.selection
             blockedWebsites = model.websitesSelection
             alternativesSelection = model.alternativesSelection
+            
+            if model.useAlternativeActivities {
+                let AlternativeGroups = model.makeRandomAlternativeGroups()
+                group1Activities = AlternativeGroups.0
+                group2Activities = AlternativeGroups.1
+            }
+            
         }
+        .onChange(of: model.alternativesSelection) {
+            let AlternativeGroups = model.makeRandomAlternativeGroups()
+            group1Activities = AlternativeGroups.0
+            group2Activities = AlternativeGroups.1
+        }
+        
         // for some soft sync
         .onChange(of: scenePhase) {
             if scenePhase == .active {

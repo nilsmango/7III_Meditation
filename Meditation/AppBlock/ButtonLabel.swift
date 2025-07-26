@@ -14,14 +14,22 @@ struct ButtonLabel: View {
     var backgroundColor: Color = .buttonGray
     var navigationLink: Bool = false
     var fullColorButton: Bool = false
+    var iconIsEmoji: Bool = false
     
     var body: some View {
         HStack {
             if !navigationLink {
                 Spacer()
             }
-            Image(systemName: iconName)
-                .foregroundStyle(fullColorButton ? .white : accentColor)
+            if iconIsEmoji {
+                Text(iconName)
+                    .font(.title)
+                    .fontWeight(.bold)
+            } else {
+                Image(systemName: iconName)
+                    .foregroundStyle(fullColorButton ? .white : accentColor)
+            }
+            
                 
             Text(labelText)
                 .padding(.leading, 4)

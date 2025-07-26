@@ -8,28 +8,21 @@
 import SwiftUI
 
 struct ActivitySelectionSheet: View {
+    @ObservedObject var model: TheModel
     @Binding var selectedActivities: [AlternativeActivity]
-    @State private var allActivities: [AlternativeActivity] = []
     @State private var showingAddSheet = false
+    @State private var showingEditSheet = false
+    @State private var editingActivity: AlternativeActivity?
     @State private var newName = ""
     @State private var selectedType: AlternativeActionType = .closeApp
     @State private var stringValue = ""
     @State private var symbol: String? = nil
-
-    private let predefinedActivities: [AlternativeActivity] = [
-        .init(name: "Meditate", action: .openInApp(identifier: "meditation"), symbol: "🕉️"),
-        .init(name: "Read a Book", action: .openApp(appLink: "ibooks://"), symbol: "📚"),
-        .init(name: "Take a Nap", action: .openApp(appLink: "com.apple.mobiletimer"), symbol: "😴"),
-        .init(name: "Talk to Someone", action: .openApp(appLink: "contacts://"), symbol: "☎️"),
-        .init(name: "Watch a Movie", action: .closeApp(message: "Enjoy the movie!"), symbol: "🍿"),
-        .init(name: "Make Music", action: .closeApp(message: "Time to jam!"), symbol: "🎶"),
-        .init(name: "Work on To-Do's", action: .openApp(appLink: "x-apple-reminder://"), symbol: "📋")
-    ]
+    @Binding var isEditMode: Bool
 
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-                Text("Select Alternative Activities")
+                Text("Select Alternatives")
                     .font(.title2)
                     .fontWeight(.semibold)
 
@@ -37,6 +30,7 @@ struct ActivitySelectionSheet: View {
 
                 Button {
                     resetSheetInputs()
+                    editingActivity = nil
                     showingAddSheet = true
                 } label: {
                     Image(systemName: "plus.circle.fill")
@@ -52,30 +46,55 @@ struct ActivitySelectionSheet: View {
             Divider()
 
             List {
-                ForEach(allActivities, id: \.name) { activity in
+                ForEach(model.allAlternatives) { activity in
                     ActivityRow(
                         activity: activity,
                         isSelected: selectedActivities.contains(where: { $0.name == activity.name }),
+                        isEditMode: isEditMode,
                         onToggle: { toggleActivity(activity) },
-                        onDelete: { deleteActivity(activity) }
+                        onDelete: { deleteActivity(activity) },
+                        onEdit: { editActivity(activity) }
                     )
                 }
             }
             .listStyle(.plain)
         }
-        .onAppear(perform: loadActivities)
+        .sheet(isPresented: $showingEditSheet) {
+            NavigationView {
+                AddActivitySheet(newName: $newName, selectedType: $selectedType, stringValue: $stringValue, symbol: $symbol)
+                    .navigationTitle("Edit Activity")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        ToolbarItem(placement: .confirmationAction) {
+                            Button("Save") {
+                                updateActivity()
+                                showingEditSheet = false
+                                isEditMode = false
+                            }
+                            .tint(.greenAccent)
+                        }
+                        
+                        ToolbarItem(placement: .cancellationAction) {
+                            Button("Cancel") {
+                                showingEditSheet = false
+                                isEditMode = false
+                            }
+                        }
+                    }
+            }
+        }
+        
         .sheet(isPresented: $showingAddSheet) {
             NavigationView {
                 AddActivitySheet(newName: $newName, selectedType: $selectedType, stringValue: $stringValue, symbol: $symbol)
                     .navigationTitle("New Activity")
+                    .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
                         ToolbarItem(placement: .confirmationAction) {
                             Button("Add") {
                                 addCustomActivity()
                                 showingAddSheet = false
                             }
-                            .disabled(newName.trimmingCharacters(in: .whitespaces).isEmpty ||
-                                      stringValue.trimmingCharacters(in: .whitespaces).isEmpty)
                             .tint(.greenAccent)
                         }
                         
@@ -86,20 +105,11 @@ struct ActivitySelectionSheet: View {
                         }
                     }
             }
-            
-        }
-    }
-
-    private func loadActivities() {
-        allActivities = predefinedActivities
-
-        for activity in selectedActivities where !allActivities.contains(where: { $0.name == activity.name }) {
-            allActivities.append(activity)
         }
     }
 
     private func toggleActivity(_ activity: AlternativeActivity) {
-        if let index = selectedActivities.firstIndex(where: { $0.name == activity.name }) {
+        if let index = selectedActivities.firstIndex(where: { $0.id == activity.id }) {
             selectedActivities.remove(at: index)
         } else {
             selectedActivities.append(activity)
@@ -111,6 +121,30 @@ struct ActivitySelectionSheet: View {
         selectedType = .closeApp
         stringValue = ""
         symbol = nil
+    }
+
+    private func editActivity(_ activity: AlternativeActivity) {
+        editingActivity = activity
+        newName = activity.name
+        symbol = activity.symbol
+        
+        // Set the type and string value based on the action
+        switch activity.action {
+        case .openApp(let appLink):
+            selectedType = .openApp
+            stringValue = appLink
+        case .openWebsite(let URL):
+            selectedType = .openWebsite
+            stringValue = URL
+        case .openInApp(let identifier):
+            selectedType = .openInApp
+            stringValue = identifier
+        case .closeApp(let message):
+            selectedType = .closeApp
+            stringValue = message
+        }
+        
+        showingEditSheet = true
     }
 
     private func addCustomActivity() {
@@ -130,16 +164,55 @@ struct ActivitySelectionSheet: View {
         }
 
         let activity = AlternativeActivity(name: trimmedName, action: action, symbol: symbol)
-        allActivities.append(activity)
+        model.allAlternatives.append(activity)
         selectedActivities.append(activity)
     }
 
+    private func updateActivity() {
+        guard let editingActivity = editingActivity else { return }
+        
+        let trimmedName = newName.trimmingCharacters(in: .whitespaces)
+        let trimmedValue = stringValue.trimmingCharacters(in: .whitespaces)
+
+        let action: AlternativeAction
+        switch selectedType {
+        case .openApp:
+            action = .openApp(appLink: trimmedValue)
+        case .openWebsite:
+            action = .openWebsite(URL: trimmedValue)
+        case .openInApp:
+            action = .openInApp(identifier: trimmedValue)
+        case .closeApp:
+            action = .closeApp(message: trimmedValue)
+        }
+
+        let updatedActivity = AlternativeActivity(id: editingActivity.id, name: trimmedName, action: action, symbol: symbol)
+        
+        // Update in allActivities
+        if let index = model.allAlternatives.firstIndex(where: { $0.id == editingActivity.id }) {
+            model.allAlternatives[index] = updatedActivity
+        }
+        
+        // Update in selectedActivities if it was selected
+        if let index = selectedActivities.firstIndex(where: { $0.id == editingActivity.id }) {
+            selectedActivities[index] = updatedActivity
+            
+            // Also update the real selection then
+            if let index = model.alternativesSelection.firstIndex(where: { $0.id == editingActivity.id }) {
+                model.alternativesSelection[index] = updatedActivity
+            }
+        }
+        
+        self.editingActivity = nil
+    }
+
     private func deleteActivity(_ activity: AlternativeActivity) {
-        allActivities.removeAll { $0.name == activity.name }
-        selectedActivities.removeAll { $0.name == activity.name }
+        model.allAlternatives.removeAll { $0.id == activity.id }
+        selectedActivities.removeAll { $0.id == activity.id }
+        model.alternativesSelection.removeAll { $0.id == activity.id }
     }
 }
 
 #Preview {
-    ActivitySelectionSheet(selectedActivities: .constant([]))
+    ActivitySelectionSheet(model: TheModel(), selectedActivities: .constant([]), isEditMode: .constant(false))
 }

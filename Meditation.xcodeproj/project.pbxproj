@@ -139,6 +139,7 @@
 		78A1A6FD2E32761A004E1A36 /* AlternativeActivity+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A1A6F62E32708D004E1A36 /* AlternativeActivity+Action.swift */; };
 		78A1A6FF2E32B456004E1A36 /* AddActivitySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A1A6FE2E32B456004E1A36 /* AddActivitySheet.swift */; };
 		78A1A7592E3375F5004E1A36 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A1A7582E3375F5004E1A36 /* SettingsView.swift */; };
+		78A1A7602E338878004E1A36 /* AlternativeActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A1A75F2E338878004E1A36 /* AlternativeActionView.swift */; };
 		78A77D9C2E20FE4700B1872A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A77D9B2E20FE4700B1872A /* ContentView.swift */; };
 		78A77D9E2E20FECD00B1872A /* TheModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A77D9D2E20FECD00B1872A /* TheModel.swift */; };
 		78A77DA52E20FF8F00B1872A /* AuthorizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A77DA42E20FF8F00B1872A /* AuthorizationView.swift */; };
@@ -361,6 +362,7 @@
 		78A1A6FB2E327173004E1A36 /* ActivityRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRow.swift; sourceTree = "<group>"; };
 		78A1A6FE2E32B456004E1A36 /* AddActivitySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddActivitySheet.swift; sourceTree = "<group>"; };
 		78A1A7582E3375F5004E1A36 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		78A1A75F2E338878004E1A36 /* AlternativeActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeActionView.swift; sourceTree = "<group>"; };
 		78A77D9B2E20FE4700B1872A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		78A77D9D2E20FECD00B1872A /* TheModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheModel.swift; sourceTree = "<group>"; };
 		78A77DA42E20FF8F00B1872A /* AuthorizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationView.swift; sourceTree = "<group>"; };
@@ -783,6 +785,7 @@
 			isa = PBXGroup;
 			children = (
 				780ED40A2E25872D00FAF3FC /* AppBlockerView.swift */,
+				78A1A75F2E338878004E1A36 /* AlternativeActionView.swift */,
 				78A1A7582E3375F5004E1A36 /* SettingsView.swift */,
 				780ED4442E2A7D0400FAF3FC /* FamilyActivityPickerView.swift */,
 				780ED3BA2E23EFFA00FAF3FC /* TopUpTimeView.swift */,
@@ -1278,6 +1281,7 @@
 				78A1A7592E3375F5004E1A36 /* SettingsView.swift in Sources */,
 				789A0E102C0392F5009CB9E7 /* MeditationStatistics.swift in Sources */,
 				787000D72CE750AE00542E3B /* BuddhaBoxButton.swift in Sources */,
+				78A1A7602E338878004E1A36 /* AlternativeActionView.swift in Sources */,
 				785D095B2C0A48BC00044AE9 /* StopMeditationWithoutSaving.swift in Sources */,
 				789A0E072C032377009CB9E7 /* KoansEditView.swift in Sources */,
 				780ED3BB2E23EFFA00FAF3FC /* TopUpTimeView.swift in Sources */,
@@ -1957,6 +1961,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 0.1;
+				"OTHER_SWIFT_FLAGS[arch=*]" = "-DAPPEXTENSION";
 				PRODUCT_BUNDLE_IDENTIFIER = com.project7III.meditation.WidgetExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1986,6 +1991,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 0.1;
+				"OTHER_SWIFT_FLAGS[arch=*]" = "-DAPPEXTENSION";
 				PRODUCT_BUNDLE_IDENTIFIER = com.project7III.meditation.WidgetExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
