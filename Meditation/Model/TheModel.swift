@@ -68,7 +68,7 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
     }
     
     static let shared = TheModel()
-    let messageTime = 1.6
+    let messageTime = 3
     
     // MARK: - App Selection
     
@@ -190,7 +190,8 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
         .init(name: "Talk to Someone", action: .openApp(appLink: "whatsapp://"), symbol: "☎️"),
         .init(name: "Watch a Movie", action: .closeApp(message: "Enjoy the movie!"), symbol: "🍿"),
         .init(name: "Make Music", action: .closeApp(message: "Time to jam!"), symbol: "🎶"),
-        .init(name: "Work on To-Do's", action: .closeApp(message: "Go get them tiger!"), symbol: "📋")
+        .init(name: "Work on To-Do's", action: .closeApp(message: "Go get them tiger!"), symbol: "📋"),
+        .init(name: "Breathe & Be Bored", action: .closeApp(message: "Breathe, Be Bored, See your Surroundings!"), symbol: "☯")
     ]
     
     @Published var allAlternatives: [AlternativeActivity] = [] {
