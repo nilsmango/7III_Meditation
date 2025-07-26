@@ -26,85 +26,10 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
     @Published var authorizationStatus: AuthorizationStatus = .notDetermined
     
     private let appGroupID = "group.com.project7iii.life"
-    
-    @Published var selection = FamilyActivitySelection() {
-        didSet {
-            saveSelection()
-            if isBlocked {
-                enableBlocking()
-            }
-        }
-    }
-     
-    @Published var topUpActive: Bool = false {
-        didSet {
-            // Automatically sync to UserDefaults whenever the value changes
-            UserDefaults(suiteName: appGroupID)?.set(topUpActive, forKey: "topUpActive")
-        }
-    }
-    
-    @Published var topUpMinutes: Int = 1 {
-        didSet {
-            // Automatically sync to UserDefaults whenever the value changes
-            UserDefaults(suiteName: appGroupID)?.set(topUpMinutes, forKey: "topUpMinutes")
-        }
-    }
-    
-    @Published var websitesSelection : [String] = [] {
-        didSet {
-            UserDefaults(suiteName: appGroupID)?.set(websitesSelection, forKey: "websitesSelection")
-            if isBlocked {
-                updateBlockedWebsites()
-            }
-        }
-    }
-    
-    @Published var alternativesSelection: [AlternativeActivity] = [] {
-        didSet {
-            if let data = try? JSONEncoder().encode(alternativesSelection) {
-                UserDefaults(suiteName: appGroupID)?.set(data, forKey: "alternativesSelection")
-            }
-        }
-    }
-    
-    let defaultAlternatives: [AlternativeActivity] = [
-        .init(name: "Meditate", action: .openInApp(identifier: "meditation"), symbol: "🕉️"),
-        .init(name: "Read a Book", action: .openApp(appLink: "ibooks://"), symbol: "📚"),
-        .init(name: "Take a Nap", action: .closeApp(message: "Don't forget to set a timer!"), symbol: "😴"),
-        .init(name: "Talk to Someone", action: .openApp(appLink: "whatsapp://"), symbol: "☎️"),
-        .init(name: "Watch a Movie", action: .closeApp(message: "Enjoy the movie!"), symbol: "🍿"),
-        .init(name: "Make Music", action: .closeApp(message: "Time to jam!"), symbol: "🎶"),
-        .init(name: "Work on To-Do's", action: .closeApp(message: "Go get them tiger!"), symbol: "📋")
-    ]
-    
-    @Published var allAlternatives: [AlternativeActivity] = [] {
-        didSet {
-            if let data = try? JSONEncoder().encode(allAlternatives) {
-                UserDefaults(suiteName: appGroupID)?.set(data, forKey: "allAlternatives")
-            }
-        }
-    }
-    
-    func loadAlternatives() {
-        if let data = UserDefaults(suiteName: appGroupID)?.data(forKey: "alternativesSelection"),
-           let decoded = try? JSONDecoder().decode([AlternativeActivity].self, from: data) {
-            alternativesSelection = decoded
-        }
-        if let data = UserDefaults(suiteName: appGroupID)?.data(forKey: "allAlternatives"),
-           let decoded = try? JSONDecoder().decode([AlternativeActivity].self, from: data) {
-            allAlternatives = decoded
-        }
-        if allAlternatives.isEmpty {
-            allAlternatives = defaultAlternatives
-        }
-        for activity in alternativesSelection where !allAlternatives.contains(where: { $0.id == activity.id }) {
-            allAlternatives.append(activity)
-        }
-    }
-    
+         
     func loadUserDefaults() {
         loadSelection()
-        loadWebsitesSelection()
+        loadWebsites()
         loadIsBlocked()
         loadOptions()
         loadAlternatives()
@@ -147,6 +72,15 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
     
     // MARK: - App Selection
     
+    @Published var selection = FamilyActivitySelection() {
+        didSet {
+            saveSelection()
+            if isBlocked {
+                enableBlocking()
+            }
+        }
+    }
+    
     private let selectionKey = "familyActivitySelection"
 
     func loadSelection() {
@@ -162,17 +96,54 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
         }
     }
     
-    // MARK: - Website Selection
+    // MARK: - Websites Selection
     
-    func loadWebsitesSelection() {
+    @Published var websitesSelection : [String] = [] {
+        didSet {
+            UserDefaults(suiteName: appGroupID)?.set(websitesSelection, forKey: "websitesSelection")
+            if isBlocked {
+                updateBlockedWebsites()
+            }
+        }
+    }
+    
+    private let defaultWebsites = [
+        "facebook.com",
+        "instagram.com",
+        "x.com",
+        "youtube.com",
+        "tiktok.com",
+        "reddit.com",
+        "netflix.com",
+        "twitch.tv",
+        "snapchat.com",
+        "linkedin.com"
+    ]
+    
+    @Published var allWebsites: [String] = [] {
+        didSet {
+            UserDefaults(suiteName: appGroupID)?.set(allWebsites, forKey: "allWebsites")
+        }
+    }
+    
+    private func loadWebsites() {
         websitesSelection = UserDefaults(suiteName: appGroupID)?.stringArray(forKey: "websitesSelection") ?? []
+        
+        allWebsites = UserDefaults(suiteName: appGroupID)?.stringArray(forKey: "allWebsites") ?? []
+        
+        if allWebsites.isEmpty {
+            allWebsites = defaultWebsites.sorted()
+        }
+        for website in websitesSelection where !allWebsites.contains(where: { $0 == website }) {
+            allWebsites.append(website)
+        }
     }
     
     func updateBlockedWebsites() {
         UserDefaults(suiteName: appGroupID)?.set(websitesSelection, forKey: "blockedWebsites")
     }
     
-    // MARK: - App Block
+    // MARK: - App Block & Top Up
     
     @Published var isBlocked: Bool = false {
         didSet {
@@ -184,7 +155,64 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
         isBlocked = UserDefaults(suiteName: appGroupID)?.bool(forKey: "isBlocked") ?? false
     }
     
-    // MARK: - Alternative Activity Actions
+    @Published var topUpActive: Bool = false {
+        didSet {
+            // Automatically sync to UserDefaults whenever the value changes
+            UserDefaults(suiteName: appGroupID)?.set(topUpActive, forKey: "topUpActive")
+        }
+    }
+    
+    @Published var topUpMinutes: Int = 1 {
+        didSet {
+            // Automatically sync to UserDefaults whenever the value changes
+            UserDefaults(suiteName: appGroupID)?.set(topUpMinutes, forKey: "topUpMinutes")
+        }
+    }
+    
+    // MARK: - Alternative Activities Selection
+    
+    @Published var alternativesSelection: [AlternativeActivity] = [] {
+        didSet {
+            if let data = try? JSONEncoder().encode(alternativesSelection) {
+                UserDefaults(suiteName: appGroupID)?.set(data, forKey: "alternativesSelection")
+            }
+        }
+    }
+    
+    private let defaultAlternatives: [AlternativeActivity] = [
+        .init(name: "Meditate", action: .openInApp(identifier: "meditation"), symbol: "🕉️"),
+        .init(name: "Read a Book", action: .openApp(appLink: "ibooks://"), symbol: "📚"),
+        .init(name: "Take a Nap", action: .closeApp(message: "Don't forget to set a timer!"), symbol: "😴"),
+        .init(name: "Talk to Someone", action: .openApp(appLink: "whatsapp://"), symbol: "☎️"),
+        .init(name: "Watch a Movie", action: .closeApp(message: "Enjoy the movie!"), symbol: "🍿"),
+        .init(name: "Make Music", action: .closeApp(message: "Time to jam!"), symbol: "🎶"),
+        .init(name: "Work on To-Do's", action: .closeApp(message: "Go get them tiger!"), symbol: "📋")
+    ]
+    
+    @Published var allAlternatives: [AlternativeActivity] = [] {
+        didSet {
+            if let data = try? JSONEncoder().encode(allAlternatives) {
+                UserDefaults(suiteName: appGroupID)?.set(data, forKey: "allAlternatives")
+            }
+        }
+    }
+    
+    private func loadAlternatives() {
+        if let data = UserDefaults(suiteName: appGroupID)?.data(forKey: "alternativesSelection"),
+           let decoded = try? JSONDecoder().decode([AlternativeActivity].self, from: data) {
+            alternativesSelection = decoded
+        }
+        if let data = UserDefaults(suiteName: appGroupID)?.data(forKey: "allAlternatives"),
+           let decoded = try? JSONDecoder().decode([AlternativeActivity].self, from: data) {
+            allAlternatives = decoded
+        }
+        if allAlternatives.isEmpty {
+            allAlternatives = defaultAlternatives
+        }
+        for activity in alternativesSelection where !allAlternatives.contains(where: { $0.id == activity.id }) {
+            allAlternatives.append(activity)
+        }
+    }
     
     @Published var flashMessage: String? = nil
     @Published var messageEmoji = "○"

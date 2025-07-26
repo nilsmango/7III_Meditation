@@ -8,24 +8,10 @@
 import SwiftUI
 
 struct WebsiteSelectionSheet: View {
+    @ObservedObject var model: TheModel
     @Binding var blockedWebsites: [String]
-    @State private var allWebsites: [String] = []
     @State private var newWebsiteText: String = ""
     @State private var showingAddAlert: Bool = false
-    
-    // Default websites list
-    private let defaultWebsites = [
-        "facebook.com",
-        "instagram.com",
-        "x.com",
-        "youtube.com",
-        "tiktok.com",
-        "reddit.com",
-        "netflix.com",
-        "twitch.tv",
-        "snapchat.com",
-        "linkedin.com"
-    ]
     
     var body: some View {
 
@@ -55,7 +41,7 @@ struct WebsiteSelectionSheet: View {
                 
                 // Website list
                 List {
-                    ForEach(allWebsites, id: \.self) { website in
+                    ForEach(model.allWebsites, id: \.self) { website in
                         WebsiteRow(
                             website: website,
                             isSelected: blockedWebsites.contains(website),
@@ -66,13 +52,11 @@ struct WebsiteSelectionSheet: View {
                 }
                 .listStyle(PlainListStyle())
             }
-            .onAppear {
-                loadWebsites()
-            }
             .alert("Add Website", isPresented: $showingAddAlert) {
                 TextField("Enter website (e.g., example.com)", text: $newWebsiteText)
                 #if os(iOS)
                     .autocapitalization(.none)
+                    .keyboardType(.URL)
                 #endif
                     .disableAutocorrection(true)
                 
@@ -89,24 +73,6 @@ struct WebsiteSelectionSheet: View {
             }
         }
     
-    private func loadWebsites() {
-        // Load all websites from UserDefaults
-        if let savedWebsites = UserDefaults.standard.array(forKey: "AllWebsites") as? [String] {
-            allWebsites = savedWebsites
-        } else {
-            // If no websites saved, use defaults, but always add the blocked ones
-            allWebsites = defaultWebsites
-            UserDefaults.standard.set(allWebsites, forKey: "AllWebsites")
-            
-            for website in blockedWebsites {
-                if !allWebsites.contains(website) {
-                    allWebsites.append(website)
-                }
-                UserDefaults.standard.set(allWebsites, forKey: "AllWebsites")
-            }
-        }
-    }
-    
     private func toggleWebsite(_ website: String) {
         if blockedWebsites.contains(website) {
             blockedWebsites.removeAll { $0 == website }
@@ -118,17 +84,15 @@ struct WebsiteSelectionSheet: View {
     private func addNewWebsite() {
         let cleanedWebsite = cleanWebsiteURL(newWebsiteText.trimmingCharacters(in: .whitespacesAndNewlines))
         
-        if !cleanedWebsite.isEmpty && !allWebsites.contains(cleanedWebsite) {
-            allWebsites.append(cleanedWebsite)
-            allWebsites.sort() // Keep alphabetically sorted
+        if !cleanedWebsite.isEmpty && !model.allWebsites.contains(cleanedWebsite) {
+            model.allWebsites.append(cleanedWebsite)
+            model.allWebsites.sort() // Keep alphabetically sorted
             
             // Auto-select the newly added website
             if !blockedWebsites.contains(cleanedWebsite) {
                 blockedWebsites.append(cleanedWebsite)
             }
             
-            // Save to UserDefaults immediately
-            UserDefaults.standard.set(allWebsites, forKey: "AllWebsites")
         }
         
         newWebsiteText = ""
@@ -136,13 +100,13 @@ struct WebsiteSelectionSheet: View {
     
     private func deleteWebsite(_ website: String) {
         // Remove from all websites list
-        allWebsites.removeAll { $0 == website }
+        model.allWebsites.removeAll { $0 == website }
         
         // Remove from blocked websites if it was selected
         blockedWebsites.removeAll { $0 == website }
         
-        // Update UserDefaults
-        UserDefaults.standard.set(allWebsites, forKey: "AllWebsites")
+        // Also remove from blocked websites in model
+        model.websitesSelection.removeAll { $0 == website }
     }
     
     private func cleanWebsiteURL(_ input: String) -> String {
@@ -166,13 +130,8 @@ struct WebsiteSelectionSheet: View {
         
         return cleaned
     }
-    
-    private func saveWebsites() {
-        // Save all websites to UserDefaults
-        UserDefaults.standard.set(allWebsites, forKey: "AllWebsites")
-    }
 }
 
 #Preview {
-    WebsiteSelectionSheet(blockedWebsites: .constant([]))
+    WebsiteSelectionSheet(model: TheModel(), blockedWebsites: .constant([]))
 }

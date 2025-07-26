@@ -88,10 +88,9 @@ struct AppBlockerView: View {
                         
                     HStack {
                         Button {
-                            selection = model.selection
                             showingFamilyPicker = false
                         } label: {
-                            Label("Cancel", systemImage: "xmark.circle.fill")
+                            Text("Cancel")
                         }
                         .tint(.red)
                         .buttonStyle(.bordered)
@@ -102,7 +101,7 @@ struct AppBlockerView: View {
                             model.selection = selection
                             showingFamilyPicker = false
                         } label: {
-                            Label("Update", systemImage: "checkmark.circle.fill")
+                            Text("Update")
                         }
                         .tint(.greenAccent)
                         .buttonStyle(.bordered)
@@ -110,15 +109,18 @@ struct AppBlockerView: View {
                     .padding()
                 }
                 .background(.activityBackground)
+                .onDisappear {
+                    if showingFamilyPicker == false {
+                        selection = model.selection
+                    }
+                }
         }
         .sheet(isPresented: $showingWebsitePicker) {
             VStack(spacing: 0) {
-                WebsiteSelectionSheet(blockedWebsites: $blockedWebsites)
+                WebsiteSelectionSheet(model: model, blockedWebsites: $blockedWebsites)
                 
                 HStack {
-                    
                     Button {
-                        blockedWebsites = model.websitesSelection
                         showingWebsitePicker = false
                     } label: {
                         Text("Cancel")
@@ -140,15 +142,18 @@ struct AppBlockerView: View {
                 }
                 .padding()
             }
+            .onDisappear {
+                if showingWebsitePicker == false {
+                    blockedWebsites = model.websitesSelection
+                }
+            }
         }
         .sheet(isPresented: $showingAlternativesPicker) {
             VStack(spacing: 0) {
                 ActivitySelectionSheet(model: model, selectedActivities: $alternativesSelection, isEditMode: $activityEditMode)
                 
                 HStack {
-                    
                     Button {
-                        alternativesSelection = model.alternativesSelection
                         showingAlternativesPicker = false
                     } label: {
                         Text("Cancel")
@@ -179,6 +184,11 @@ struct AppBlockerView: View {
                     
                 }
                 .padding()
+            }
+            .onDisappear {
+                if showingAlternativesPicker == false {
+                    alternativesSelection = model.alternativesSelection
+                }
             }
         }
         .onAppear {
