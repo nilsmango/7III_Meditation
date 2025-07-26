@@ -48,24 +48,26 @@ struct AppBlockerView: View {
                         }
                     }
                     SelectedAppsView(model: model)
-                                        
-                    Button {
-                        showingFamilyPicker = true
-                    } label: {
-                        ButtonLabel(iconName: model.hasSelectedApps ? "arrow.2.squarepath" : "plus.app.fill", labelText: model.hasSelectedApps ? "Change selected Apps" : "Select Apps to Block", accentColor: .blue)
-                    }
                     
-                    Button {
-                        showingWebsitePicker = true
-                    } label: {
-                        ButtonLabel(iconName: model.hasSelectedWebsites ? "arrow.2.squarepath" : "plus.app.fill", labelText: model.hasSelectedWebsites ? "Change selected Websites" : "Select Websites to Block", accentColor: .blue)
+                    HStack {
+                        Button {
+                            showingFamilyPicker = true
+                        } label: {
+                            ButtonLabel(iconName: model.hasSelectedApps ? "arrow.2.squarepath" : "plus.app.fill", labelText: "Apps", accentColor: .blue)
+                        }
+                        
+                        Button {
+                            showingWebsitePicker = true
+                        } label: {
+                            ButtonLabel(iconName: model.hasSelectedWebsites ? "arrow.2.squarepath" : "plus.app.fill", labelText: "Websites", accentColor: .blue)
+                        }
                     }
                     
                     if model.useAlternativeActivities {
                         Button {
                              showingAlternativesPicker = true
                         } label: {
-                            ButtonLabel(iconName: model.hasSelectedAlternatives ? "arrow.2.squarepath" : "plus.app.fill", labelText: model.hasSelectedAlternatives ? "Change selected Alternatives" : "Select Alternatives", accentColor: .blue)
+                            ButtonLabel(iconName: model.hasSelectedAlternatives ? "arrow.2.squarepath" : "plus.app.fill", labelText: "Alternatives", accentColor: .indigo)
                         }
                     }
                     
