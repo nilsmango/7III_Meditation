@@ -256,8 +256,9 @@ struct AppBlockerView: View {
                 NavigationLink {
                     SettingsView(model: model)
                 } label: {
-                    Image(systemName: "ellipsis.circle.fill")
-                        .font(.title3)
+//                    Image(systemName: "ellipsis.circle.fill")
+//                        .font(.title3)
+                    Label("Settings", systemImage: "ellipsis.circle.fill")
                         .symbolRenderingMode(.palette)
                         .foregroundStyle(.blackWhite, .greenAccent)
                 }

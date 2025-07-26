@@ -202,7 +202,7 @@ struct OptionsView: View {
             }
             .scrollContentBackground(.hidden)
             .background(.customGray)
-            .navigationTitle("Options")
+            .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
             .offerCodeRedemption(isPresented: $showRedeemCode, onCompletion: { result in
                             switch result {
