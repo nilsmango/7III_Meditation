@@ -28,12 +28,31 @@ class MacModel: ObservableObject {
         }
     }
     
-    @Published var websitesSelection : [String] = [] {
+    @Published var websitesSelection: [String] = [] {
         didSet {
             UserDefaults(suiteName: appGroupID)?.set(websitesSelection, forKey: "websitesSelection")
             if isBlocked {
                 updateBlockedWebsites()
             }
+        }
+    }
+    
+    private let defaultWebsites = [
+        "facebook.com",
+        "instagram.com",
+        "x.com",
+        "youtube.com",
+        "tiktok.com",
+        "reddit.com",
+        "netflix.com",
+        "twitch.tv",
+        "snapchat.com",
+        "linkedin.com"
+    ]
+    
+    @Published var allWebsites: [String] = [] {
+        didSet {
+            UserDefaults(suiteName: appGroupID)?.set(allWebsites, forKey: "allWebsites")
         }
     }
     
@@ -63,6 +82,9 @@ class MacModel: ObservableObject {
     
     init() {
         loadUserDefaults()
+        if let container = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.project7iii.life") {
+            print("App Group container: \(container)")
+        }
     }
     
     // MARK: - App Block
@@ -86,6 +108,14 @@ class MacModel: ObservableObject {
     
     func loadWebsitesSelection() {
         websitesSelection = UserDefaults(suiteName: appGroupID)?.stringArray(forKey: "websitesSelection") ?? []
+        allWebsites = UserDefaults(suiteName: appGroupID)?.stringArray(forKey: "allWebsites") ?? []
+        
+        if allWebsites.isEmpty {
+            allWebsites = defaultWebsites.sorted()
+        }
+        for website in websitesSelection where !allWebsites.contains(where: { $0 == website }) {
+            allWebsites.append(website)
+        }
     }
     
     func updateBlockedWebsites() {

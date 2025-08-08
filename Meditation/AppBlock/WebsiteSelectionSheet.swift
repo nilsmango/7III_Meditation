@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct WebsiteSelectionSheet: View {
+#if os(macOS)
+    @ObservedObject var model: MacModel
+    #else
     @ObservedObject var model: TheModel
+    #endif
     @Binding var blockedWebsites: [String]
     @State private var newWebsiteText: String = ""
     @State private var showingAddAlert: Bool = false
@@ -133,5 +137,10 @@ struct WebsiteSelectionSheet: View {
 }
 
 #Preview {
+#if os(macOS)
+    WebsiteSelectionSheet(model: MacModel(), blockedWebsites: .constant([]))
+    #else
     WebsiteSelectionSheet(model: TheModel(), blockedWebsites: .constant([]))
+    #endif
+    
 }

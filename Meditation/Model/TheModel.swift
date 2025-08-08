@@ -68,7 +68,7 @@ class TheModel: NSObject, UNUserNotificationCenterDelegate, ObservableObject {
     }
     
     static let shared = TheModel()
-    let messageTime = 3
+    let messageTime = 3.0
     
     // MARK: - App Selection
     

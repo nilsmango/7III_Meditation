@@ -15,7 +15,7 @@ struct MacWebsiteSelection: View {
 
     var body: some View {
         VStack {
-            WebsiteSelectionSheet(blockedWebsites: $blockedWebsites)
+            WebsiteSelectionSheet(model: model, blockedWebsites: $blockedWebsites)
 
             HStack {
                 Spacer()
